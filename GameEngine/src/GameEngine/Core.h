@@ -9,3 +9,5 @@
 #else
 	#error GameEngine only support Windows 
 #endif // GE_PLATEFORM_WINDOWS
+
+#define BIT(x) (1 << x)
