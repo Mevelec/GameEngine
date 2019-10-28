@@ -1,0 +1,123 @@
+\hypertarget{class_game_engine_1_1_event}{}\doxysection{Game\+Engine\+::Event Class Reference}
+\label{class_game_engine_1_1_event}\index{GameEngine::Event@{GameEngine::Event}}
+
+
+\mbox{\hyperlink{class_game_engine_1_1_event}{Event}} class.  
+
+
+
+
+{\ttfamily \#include $<$Event.\+h$>$}
+
+Inheritance diagram for Game\+Engine\+::Event\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=10.000000cm]{class_game_engine_1_1_event}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{namespace_game_engine_a5f8e2f4e492418b474a31ebb609e4e78}{Event\+Type}} \mbox{\hyperlink{class_game_engine_1_1_event_a4a831b208cac72b1df81c72e5e1889fd}{Get\+Event\+Type}} () const =0
+\item 
+virtual const char $\ast$ \mbox{\hyperlink{class_game_engine_1_1_event_a031de45eab26d1ea78e9d942a33261b2}{Get\+Name}} () const =0
+\item 
+virtual int \mbox{\hyperlink{class_game_engine_1_1_event_a1b8398de63b1b09d715c2132d152d5fc}{Get\+Category\+Flags}} () const =0
+\item 
+virtual std\+::string \mbox{\hyperlink{class_game_engine_1_1_event_a4c5e394e2e4c2e7539e42d6127ee897e}{To\+String}} () const
+\item 
+bool \mbox{\hyperlink{class_game_engine_1_1_event_a169407ab181ae15ca4a5d68957407343}{Is\+In\+Category}} (\mbox{\hyperlink{namespace_game_engine_a9bac2143a3bd3007754ca26d6208fbc7}{Event\+Category}} category)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_game_engine_1_1_event_a294b3ab029e88b3211e5cf2b47483b5e}{handled}} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_game_engine_1_1_event_aad5f38ccd490ea17008460423f52325a}{Event\+Dispatcher}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_game_engine_1_1_event}{Event}} class. 
+
+Definition at line 48 of file Event.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_engine_1_1_event_a1b8398de63b1b09d715c2132d152d5fc}\label{class_game_engine_1_1_event_a1b8398de63b1b09d715c2132d152d5fc}} 
+\index{GameEngine::Event@{GameEngine::Event}!GetCategoryFlags@{GetCategoryFlags}}
+\index{GetCategoryFlags@{GetCategoryFlags}!GameEngine::Event@{GameEngine::Event}}
+\doxysubsubsection{\texorpdfstring{GetCategoryFlags()}{GetCategoryFlags()}}
+{\footnotesize\ttfamily virtual int Game\+Engine\+::\+Event\+::\+Get\+Category\+Flags (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\mbox{\Hypertarget{class_game_engine_1_1_event_a4a831b208cac72b1df81c72e5e1889fd}\label{class_game_engine_1_1_event_a4a831b208cac72b1df81c72e5e1889fd}} 
+\index{GameEngine::Event@{GameEngine::Event}!GetEventType@{GetEventType}}
+\index{GetEventType@{GetEventType}!GameEngine::Event@{GameEngine::Event}}
+\doxysubsubsection{\texorpdfstring{GetEventType()}{GetEventType()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespace_game_engine_a5f8e2f4e492418b474a31ebb609e4e78}{Event\+Type}} Game\+Engine\+::\+Event\+::\+Get\+Event\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\mbox{\Hypertarget{class_game_engine_1_1_event_a031de45eab26d1ea78e9d942a33261b2}\label{class_game_engine_1_1_event_a031de45eab26d1ea78e9d942a33261b2}} 
+\index{GameEngine::Event@{GameEngine::Event}!GetName@{GetName}}
+\index{GetName@{GetName}!GameEngine::Event@{GameEngine::Event}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily virtual const char$\ast$ Game\+Engine\+::\+Event\+::\+Get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\mbox{\Hypertarget{class_game_engine_1_1_event_a169407ab181ae15ca4a5d68957407343}\label{class_game_engine_1_1_event_a169407ab181ae15ca4a5d68957407343}} 
+\index{GameEngine::Event@{GameEngine::Event}!IsInCategory@{IsInCategory}}
+\index{IsInCategory@{IsInCategory}!GameEngine::Event@{GameEngine::Event}}
+\doxysubsubsection{\texorpdfstring{IsInCategory()}{IsInCategory()}}
+{\footnotesize\ttfamily bool Game\+Engine\+::\+Event\+::\+Is\+In\+Category (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_game_engine_a9bac2143a3bd3007754ca26d6208fbc7}{Event\+Category}}}]{category }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 56 of file Event.\+h.
+
+\mbox{\Hypertarget{class_game_engine_1_1_event_a4c5e394e2e4c2e7539e42d6127ee897e}\label{class_game_engine_1_1_event_a4c5e394e2e4c2e7539e42d6127ee897e}} 
+\index{GameEngine::Event@{GameEngine::Event}!ToString@{ToString}}
+\index{ToString@{ToString}!GameEngine::Event@{GameEngine::Event}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily virtual std\+::string Game\+Engine\+::\+Event\+::\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_game_engine_1_1_mouse_button_released_event_a7ffe9fbeb6489d8c714a06eb23901012}{Game\+Engine\+::\+Mouse\+Button\+Released\+Event}}, \mbox{\hyperlink{class_game_engine_1_1_mouse_button_pressed_event_a55c9b955ea25fa6124a469c5122fa050}{Game\+Engine\+::\+Mouse\+Button\+Pressed\+Event}}, \mbox{\hyperlink{class_game_engine_1_1_key_release_event_a4bd490dd4c22adae1af02d13b633ab56}{Game\+Engine\+::\+Key\+Release\+Event}}, \mbox{\hyperlink{class_game_engine_1_1_mouse_scroll_event_a06e0a1b1d43eec24a19dbae9d0194924}{Game\+Engine\+::\+Mouse\+Scroll\+Event}}, \mbox{\hyperlink{class_game_engine_1_1_key_pressed_event_ae5ad4168b8a75f72579915093b05bf98}{Game\+Engine\+::\+Key\+Pressed\+Event}}, \mbox{\hyperlink{class_game_engine_1_1_window_resize_event_a99c797a6afb563b878f28909eb951eb8}{Game\+Engine\+::\+Window\+Resize\+Event}}, and \mbox{\hyperlink{class_game_engine_1_1_mouse_moved_event_a0421973439097f304d54f670ef114cc3}{Game\+Engine\+::\+Mouse\+Moved\+Event}}.
+
+
+
+Definition at line 54 of file Event.\+h.
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_game_engine_1_1_event_aad5f38ccd490ea17008460423f52325a}\label{class_game_engine_1_1_event_aad5f38ccd490ea17008460423f52325a}} 
+\index{GameEngine::Event@{GameEngine::Event}!EventDispatcher@{EventDispatcher}}
+\index{EventDispatcher@{EventDispatcher}!GameEngine::Event@{GameEngine::Event}}
+\doxysubsubsection{\texorpdfstring{EventDispatcher}{EventDispatcher}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{class_game_engine_1_1_event_dispatcher}{Event\+Dispatcher}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 49 of file Event.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_game_engine_1_1_event_a294b3ab029e88b3211e5cf2b47483b5e}\label{class_game_engine_1_1_event_a294b3ab029e88b3211e5cf2b47483b5e}} 
+\index{GameEngine::Event@{GameEngine::Event}!handled@{handled}}
+\index{handled@{handled}!GameEngine::Event@{GameEngine::Event}}
+\doxysubsubsection{\texorpdfstring{handled}{handled}}
+{\footnotesize\ttfamily bool Game\+Engine\+::\+Event\+::handled = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 62 of file Event.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Game\+Engine/src/\+Game\+Engine/\+Events/\mbox{\hyperlink{_event_8h}{Event.\+h}}\end{DoxyCompactItemize}

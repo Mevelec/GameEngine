@@ -1,0 +1,142 @@
+\hypertarget{_log_8h}{}\doxysection{Game\+Engine/src/\+Game\+Engine/\+Log.h File Reference}
+\label{_log_8h}\index{GameEngine/src/GameEngine/Log.h@{GameEngine/src/GameEngine/Log.h}}
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include \char`\"{}Core.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}spdlog/spdlog.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}spdlog/fmt/ostr.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_game_engine_1_1_log}{Game\+Engine\+::\+Log}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_game_engine}{Game\+Engine}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_log_8h_a786bf9aa2329790180bf78d7e0f37baa}{G\+E\+\_\+\+C\+O\+R\+E\+\_\+\+T\+R\+A\+CE}}(...)~\+::\mbox{\hyperlink{class_game_engine_1_1_log_af5f6bd4f489800f5e23aeb8b8e4bdbeb}{Game\+Engine\+::\+Log\+::\+Get\+Core\+Logger}}()-\/$>$trace(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
+\item 
+\#define \mbox{\hyperlink{_log_8h_a9255de8bb31c3f20b3e65544571fdffd}{G\+E\+\_\+\+C\+O\+R\+E\+\_\+\+I\+N\+FO}}(...)~\+::\mbox{\hyperlink{class_game_engine_1_1_log_af5f6bd4f489800f5e23aeb8b8e4bdbeb}{Game\+Engine\+::\+Log\+::\+Get\+Core\+Logger}}()-\/$>$info(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
+\item 
+\#define \mbox{\hyperlink{_log_8h_a32283143720c4a05fa99332d8501584a}{G\+E\+\_\+\+C\+O\+R\+E\+\_\+\+W\+A\+RN}}(...)~\+::\mbox{\hyperlink{class_game_engine_1_1_log_af5f6bd4f489800f5e23aeb8b8e4bdbeb}{Game\+Engine\+::\+Log\+::\+Get\+Core\+Logger}}()-\/$>$warn(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
+\item 
+\#define \mbox{\hyperlink{_log_8h_a0a129fb8cdf1e33a45fda94f6d7ad6c9}{G\+E\+\_\+\+C\+O\+R\+E\+\_\+\+E\+R\+R\+OR}}(...)~\+::\mbox{\hyperlink{class_game_engine_1_1_log_af5f6bd4f489800f5e23aeb8b8e4bdbeb}{Game\+Engine\+::\+Log\+::\+Get\+Core\+Logger}}()-\/$>$error(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
+\item 
+\#define \mbox{\hyperlink{_log_8h_a4b7977931ad2ab2b9005173203d23152}{G\+E\+\_\+\+C\+O\+R\+E\+\_\+\+F\+A\+T\+AL}}(...)~\+::\mbox{\hyperlink{class_game_engine_1_1_log_af5f6bd4f489800f5e23aeb8b8e4bdbeb}{Game\+Engine\+::\+Log\+::\+Get\+Core\+Logger}}()-\/$>$fatal(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
+\item 
+\#define \mbox{\hyperlink{_log_8h_ae6a72f32a4fa7cdca106a980d3c05749}{G\+E\+\_\+\+T\+R\+A\+CE}}(...)~\+::\mbox{\hyperlink{class_game_engine_1_1_log_a952f48cd395e5154d8702c6cf6b59c9d}{Game\+Engine\+::\+Log\+::\+Get\+Client\+Logger}}()-\/$>$trace(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
+\item 
+\#define \mbox{\hyperlink{_log_8h_a03a22f04f5216c3c31392967606da1b6}{G\+E\+\_\+\+I\+N\+FO}}(...)~\+::\mbox{\hyperlink{class_game_engine_1_1_log_a952f48cd395e5154d8702c6cf6b59c9d}{Game\+Engine\+::\+Log\+::\+Get\+Client\+Logger}}()-\/$>$info(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
+\item 
+\#define \mbox{\hyperlink{_log_8h_ad7f6c0a6c514ad72f2316d8a0217b614}{G\+E\+\_\+\+W\+A\+RN}}(...)~\+::\mbox{\hyperlink{class_game_engine_1_1_log_a952f48cd395e5154d8702c6cf6b59c9d}{Game\+Engine\+::\+Log\+::\+Get\+Client\+Logger}}()-\/$>$warn(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
+\item 
+\#define \mbox{\hyperlink{_log_8h_a4cfb3703fca95f2942c5ffc7879aaa62}{G\+E\+\_\+\+E\+R\+R\+OR}}(...)~\+::\mbox{\hyperlink{class_game_engine_1_1_log_a952f48cd395e5154d8702c6cf6b59c9d}{Game\+Engine\+::\+Log\+::\+Get\+Client\+Logger}}()-\/$>$error(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
+\item 
+\#define \mbox{\hyperlink{_log_8h_ab0af793c62bcd64a1c2e237463443a9a}{G\+E\+\_\+\+F\+A\+T\+AL}}(...)~\+::\mbox{\hyperlink{class_game_engine_1_1_log_a952f48cd395e5154d8702c6cf6b59c9d}{Game\+Engine\+::\+Log\+::\+Get\+Client\+Logger}}()-\/$>$fatal(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_log_8h_a0a129fb8cdf1e33a45fda94f6d7ad6c9}\label{_log_8h_a0a129fb8cdf1e33a45fda94f6d7ad6c9}} 
+\index{Log.h@{Log.h}!GE\_CORE\_ERROR@{GE\_CORE\_ERROR}}
+\index{GE\_CORE\_ERROR@{GE\_CORE\_ERROR}!Log.h@{Log.h}}
+\doxysubsubsection{\texorpdfstring{GE\_CORE\_ERROR}{GE\_CORE\_ERROR}}
+{\footnotesize\ttfamily \#define G\+E\+\_\+\+C\+O\+R\+E\+\_\+\+E\+R\+R\+OR(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~\+::\mbox{\hyperlink{class_game_engine_1_1_log_af5f6bd4f489800f5e23aeb8b8e4bdbeb}{Game\+Engine\+::\+Log\+::\+Get\+Core\+Logger}}()-\/$>$error(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)}
+
+
+
+Definition at line 30 of file Log.\+h.
+
+\mbox{\Hypertarget{_log_8h_a4b7977931ad2ab2b9005173203d23152}\label{_log_8h_a4b7977931ad2ab2b9005173203d23152}} 
+\index{Log.h@{Log.h}!GE\_CORE\_FATAL@{GE\_CORE\_FATAL}}
+\index{GE\_CORE\_FATAL@{GE\_CORE\_FATAL}!Log.h@{Log.h}}
+\doxysubsubsection{\texorpdfstring{GE\_CORE\_FATAL}{GE\_CORE\_FATAL}}
+{\footnotesize\ttfamily \#define G\+E\+\_\+\+C\+O\+R\+E\+\_\+\+F\+A\+T\+AL(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~\+::\mbox{\hyperlink{class_game_engine_1_1_log_af5f6bd4f489800f5e23aeb8b8e4bdbeb}{Game\+Engine\+::\+Log\+::\+Get\+Core\+Logger}}()-\/$>$fatal(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)}
+
+
+
+Definition at line 31 of file Log.\+h.
+
+\mbox{\Hypertarget{_log_8h_a9255de8bb31c3f20b3e65544571fdffd}\label{_log_8h_a9255de8bb31c3f20b3e65544571fdffd}} 
+\index{Log.h@{Log.h}!GE\_CORE\_INFO@{GE\_CORE\_INFO}}
+\index{GE\_CORE\_INFO@{GE\_CORE\_INFO}!Log.h@{Log.h}}
+\doxysubsubsection{\texorpdfstring{GE\_CORE\_INFO}{GE\_CORE\_INFO}}
+{\footnotesize\ttfamily \#define G\+E\+\_\+\+C\+O\+R\+E\+\_\+\+I\+N\+FO(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~\+::\mbox{\hyperlink{class_game_engine_1_1_log_af5f6bd4f489800f5e23aeb8b8e4bdbeb}{Game\+Engine\+::\+Log\+::\+Get\+Core\+Logger}}()-\/$>$info(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)}
+
+
+
+Definition at line 28 of file Log.\+h.
+
+\mbox{\Hypertarget{_log_8h_a786bf9aa2329790180bf78d7e0f37baa}\label{_log_8h_a786bf9aa2329790180bf78d7e0f37baa}} 
+\index{Log.h@{Log.h}!GE\_CORE\_TRACE@{GE\_CORE\_TRACE}}
+\index{GE\_CORE\_TRACE@{GE\_CORE\_TRACE}!Log.h@{Log.h}}
+\doxysubsubsection{\texorpdfstring{GE\_CORE\_TRACE}{GE\_CORE\_TRACE}}
+{\footnotesize\ttfamily \#define G\+E\+\_\+\+C\+O\+R\+E\+\_\+\+T\+R\+A\+CE(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~\+::\mbox{\hyperlink{class_game_engine_1_1_log_af5f6bd4f489800f5e23aeb8b8e4bdbeb}{Game\+Engine\+::\+Log\+::\+Get\+Core\+Logger}}()-\/$>$trace(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)}
+
+
+
+Definition at line 27 of file Log.\+h.
+
+\mbox{\Hypertarget{_log_8h_a32283143720c4a05fa99332d8501584a}\label{_log_8h_a32283143720c4a05fa99332d8501584a}} 
+\index{Log.h@{Log.h}!GE\_CORE\_WARN@{GE\_CORE\_WARN}}
+\index{GE\_CORE\_WARN@{GE\_CORE\_WARN}!Log.h@{Log.h}}
+\doxysubsubsection{\texorpdfstring{GE\_CORE\_WARN}{GE\_CORE\_WARN}}
+{\footnotesize\ttfamily \#define G\+E\+\_\+\+C\+O\+R\+E\+\_\+\+W\+A\+RN(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~\+::\mbox{\hyperlink{class_game_engine_1_1_log_af5f6bd4f489800f5e23aeb8b8e4bdbeb}{Game\+Engine\+::\+Log\+::\+Get\+Core\+Logger}}()-\/$>$warn(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)}
+
+
+
+Definition at line 29 of file Log.\+h.
+
+\mbox{\Hypertarget{_log_8h_a4cfb3703fca95f2942c5ffc7879aaa62}\label{_log_8h_a4cfb3703fca95f2942c5ffc7879aaa62}} 
+\index{Log.h@{Log.h}!GE\_ERROR@{GE\_ERROR}}
+\index{GE\_ERROR@{GE\_ERROR}!Log.h@{Log.h}}
+\doxysubsubsection{\texorpdfstring{GE\_ERROR}{GE\_ERROR}}
+{\footnotesize\ttfamily \#define G\+E\+\_\+\+E\+R\+R\+OR(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~\+::\mbox{\hyperlink{class_game_engine_1_1_log_a952f48cd395e5154d8702c6cf6b59c9d}{Game\+Engine\+::\+Log\+::\+Get\+Client\+Logger}}()-\/$>$error(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)}
+
+
+
+Definition at line 37 of file Log.\+h.
+
+\mbox{\Hypertarget{_log_8h_ab0af793c62bcd64a1c2e237463443a9a}\label{_log_8h_ab0af793c62bcd64a1c2e237463443a9a}} 
+\index{Log.h@{Log.h}!GE\_FATAL@{GE\_FATAL}}
+\index{GE\_FATAL@{GE\_FATAL}!Log.h@{Log.h}}
+\doxysubsubsection{\texorpdfstring{GE\_FATAL}{GE\_FATAL}}
+{\footnotesize\ttfamily \#define G\+E\+\_\+\+F\+A\+T\+AL(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~\+::\mbox{\hyperlink{class_game_engine_1_1_log_a952f48cd395e5154d8702c6cf6b59c9d}{Game\+Engine\+::\+Log\+::\+Get\+Client\+Logger}}()-\/$>$fatal(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)}
+
+
+
+Definition at line 38 of file Log.\+h.
+
+\mbox{\Hypertarget{_log_8h_a03a22f04f5216c3c31392967606da1b6}\label{_log_8h_a03a22f04f5216c3c31392967606da1b6}} 
+\index{Log.h@{Log.h}!GE\_INFO@{GE\_INFO}}
+\index{GE\_INFO@{GE\_INFO}!Log.h@{Log.h}}
+\doxysubsubsection{\texorpdfstring{GE\_INFO}{GE\_INFO}}
+{\footnotesize\ttfamily \#define G\+E\+\_\+\+I\+N\+FO(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~\+::\mbox{\hyperlink{class_game_engine_1_1_log_a952f48cd395e5154d8702c6cf6b59c9d}{Game\+Engine\+::\+Log\+::\+Get\+Client\+Logger}}()-\/$>$info(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)}
+
+
+
+Definition at line 35 of file Log.\+h.
+
+\mbox{\Hypertarget{_log_8h_ae6a72f32a4fa7cdca106a980d3c05749}\label{_log_8h_ae6a72f32a4fa7cdca106a980d3c05749}} 
+\index{Log.h@{Log.h}!GE\_TRACE@{GE\_TRACE}}
+\index{GE\_TRACE@{GE\_TRACE}!Log.h@{Log.h}}
+\doxysubsubsection{\texorpdfstring{GE\_TRACE}{GE\_TRACE}}
+{\footnotesize\ttfamily \#define G\+E\+\_\+\+T\+R\+A\+CE(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~\+::\mbox{\hyperlink{class_game_engine_1_1_log_a952f48cd395e5154d8702c6cf6b59c9d}{Game\+Engine\+::\+Log\+::\+Get\+Client\+Logger}}()-\/$>$trace(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)}
+
+
+
+Definition at line 34 of file Log.\+h.
+
+\mbox{\Hypertarget{_log_8h_ad7f6c0a6c514ad72f2316d8a0217b614}\label{_log_8h_ad7f6c0a6c514ad72f2316d8a0217b614}} 
+\index{Log.h@{Log.h}!GE\_WARN@{GE\_WARN}}
+\index{GE\_WARN@{GE\_WARN}!Log.h@{Log.h}}
+\doxysubsubsection{\texorpdfstring{GE\_WARN}{GE\_WARN}}
+{\footnotesize\ttfamily \#define G\+E\+\_\+\+W\+A\+RN(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~\+::\mbox{\hyperlink{class_game_engine_1_1_log_a952f48cd395e5154d8702c6cf6b59c9d}{Game\+Engine\+::\+Log\+::\+Get\+Client\+Logger}}()-\/$>$warn(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)}
+
+
+
+Definition at line 36 of file Log.\+h.
+
