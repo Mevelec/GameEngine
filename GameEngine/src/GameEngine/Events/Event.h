@@ -11,15 +11,21 @@ namespace GameEngine {
 	// For the future, a better strategy might be to buffer events in an event
 	// bus and process them during the 'event' part of the update stage
 
+	/// Enum of EventTypes
+	/// is used to distinct differents events
+	/// by filters
 	enum  class EventType
 	{
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
-		ApppTick, AppUpdate, AppRender,
+		AppTick, AppUpdate, AppRender,
 		KeyPressed, KeyReleased,
 		MouseButtonPressed,  MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
+	/// Enum of Eventscategories
+	/// is used to distinct different events
+	/// by event source
 	enum EventCategory
 	{
 		None = 0,
@@ -37,6 +43,8 @@ namespace GameEngine {
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
+	/// Event class 
+	/// used as base for others events
 	class GE_API Event {
 		friend class EventDispatcher;
 	public:
@@ -54,10 +62,11 @@ namespace GameEngine {
 		bool handled = false;
 	};
 
+	/// EventDispatcher class 
 	class EventDispatcher
 	{
 		template<typename T>
-		using EventFn = std::function<bool>
+		using EventFn = std::function<bool(T&)>;
 	public:
 		EventDispatcher(Event & event)
 			: event(event)
@@ -67,9 +76,9 @@ namespace GameEngine {
 		template<typename T>
 		bool Dispatch(EventFn<T> func)
 		{
-			if (event.GetEventType() == T::GetStaticType())
+			if (this->event.GetEventType() == T::GetStaticType())
 			{
-				event.handled = func(*(T*)&m_Event);
+				this->event.handled = func(*(T*)&this->Event);
 				return true;
 			}
 			return false;
@@ -77,4 +86,9 @@ namespace GameEngine {
 	private:
 		Event& event;
 	};
+
+	inline std::ostream& operator<<(std::ostream& os, const Event& e)
+	{
+		return os << e.ToString();
+	}
 }
