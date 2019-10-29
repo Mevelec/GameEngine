@@ -1,3 +1,4 @@
+#include "hzpch.h"
 #include "Application.h"
 
 #include "GameEngine/Events/ApplicationEvent.h"
@@ -20,13 +21,10 @@ namespace GameEngine {
 			GE_TRACE(e);
 		}
 		if (e.IsInCategory(EventCategoryInput)) {
-		{
 			GE_TRACE(e);
 		}
-		while (true)
-		{
+		while (true) {
 
 		}
 	}
-
 }
