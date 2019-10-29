@@ -14,7 +14,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludDir = {}
 IncludDir["GLFW"] = "GameEngine/vendor/GLFW/include"
 
-include "GameEngine/vendor/GLFW"
+include "GameEngine/vendor/GLFW" -- copy GLFW premake config
 
 project "GameEngine"
 	location "GameEngine"
@@ -25,7 +25,7 @@ project "GameEngine"
 	objdir ("bin-intermediates/" .. outputdir .. "/%{prj.name}")
 
 	pchheader "hzpch.h"
-	pchsource "GameEngine/src/hzpch.cpp"  -- copy GLFW premake config
+	pchsource "GameEngine/src/hzpch.cpp" 
 
 	files
 	{
