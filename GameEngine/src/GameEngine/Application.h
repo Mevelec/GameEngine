@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Events/Event.h"
+#include "IWindow.h"
 
 namespace GameEngine
 {
@@ -13,7 +14,8 @@ namespace GameEngine
 
 		void Run();
 	private:
-
+		std::unique_ptr<IWindow> window;
+		bool running = true;
 	};
 
 	//To be defined in Client

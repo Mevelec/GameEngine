@@ -7,6 +7,12 @@
     <Filter Include="GameEngine\Events">
       <UniqueIdentifier>{193A4684-8550-441A-CEC7-CF3B3A1D15A2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plateform">
+      <UniqueIdentifier>{4099f277-7144-45e8-a8d7-b8a67dd9cc84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plateform\Windows">
+      <UniqueIdentifier>{3160d5ee-f8ee-4efa-bcab-2ceb3c6b47f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameEngine.h" />
@@ -35,6 +41,12 @@
       <Filter>GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\hzpch.h" />
+    <ClInclude Include="src\Plateform\Windows\WindowsWindow.h">
+      <Filter>Plateform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\IWindow.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
@@ -44,5 +56,8 @@
       <Filter>GameEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="src\Plateform\Windows\WindowsWindow.cpp">
+      <Filter>Plateform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
