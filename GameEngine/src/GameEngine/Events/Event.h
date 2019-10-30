@@ -75,7 +75,7 @@ namespace GameEngine {
 		{
 			if (this->event.GetEventType() == T::GetStaticType())
 			{
-				this->event.handled = func(*(T*)&this->Event);
+				this->event.handled = func(*(T*)&this->event);
 				return true;
 			}
 			return false;

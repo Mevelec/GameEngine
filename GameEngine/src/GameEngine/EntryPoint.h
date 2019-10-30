@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
 
 
 	auto app = GameEngine::CreateApplication();
-	app->Run();
+	app->run();
 	delete app;
 }
 
