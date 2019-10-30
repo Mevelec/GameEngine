@@ -43,6 +43,9 @@
     <ClInclude Include="src\GameEngine\IWindow.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEngine\Layer\ILayer.h">
+      <Filter>GameEngine\Layer</Filter>
+    </ClInclude>
     <ClInclude Include="src\GameEngine\Layer\LayerStack.h">
       <Filter>GameEngine\Layer</Filter>
     </ClInclude>
@@ -53,13 +56,13 @@
       <Filter>Plateform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\hzpch.h" />
-    <ClInclude Include="src\GameEngine\Layer\ILayer.h">
-      <Filter>GameEngine\Layer</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
       <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Layer\ILayer.cpp">
+      <Filter>GameEngine\Layer</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEngine\Layer\LayerStack.cpp">
       <Filter>GameEngine\Layer</Filter>
@@ -71,8 +74,5 @@
       <Filter>Plateform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
-    <ClCompile Include="src\GameEngine\Layer\ILayer.cpp">
-      <Filter>GameEngine\Layer</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

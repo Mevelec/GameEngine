@@ -13,8 +13,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludDir = {}
 IncludDir["GLFW"] = "GameEngine/vendor/GLFW/include"
+IncludDir["Glad"] = "GameEngine/vendor/Glad/include"
 
 include "GameEngine/vendor/GLFW" -- copy GLFW premake config
+include "GameEngine/vendor/Glad" -- copy GLAD premake config
+
+
 
 project "GameEngine"
 	location "GameEngine"
@@ -37,12 +41,15 @@ project "GameEngine"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludDir.GLFW}"
+		"%{IncludDir.GLFW}",
+		"%{IncludDir.Glad}"
+
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -54,7 +61,8 @@ project "GameEngine"
 		defines
 		{
 			"GE_PLATEFORM_WINDOWS",
-			"GE_BUILD_DLL"
+			"GE_BUILD_DLL",
+			"GLFW_INCLUDE_NONE",
 		}
 
 		postbuildcommands
