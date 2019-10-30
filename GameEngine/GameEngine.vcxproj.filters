@@ -7,11 +7,14 @@
     <Filter Include="GameEngine\Events">
       <UniqueIdentifier>{193A4684-8550-441A-CEC7-CF3B3A1D15A2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Layer">
+      <UniqueIdentifier>{611866C6-4D11-8518-7643-6A9D629B6424}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Plateform">
-      <UniqueIdentifier>{4099f277-7144-45e8-a8d7-b8a67dd9cc84}</UniqueIdentifier>
+      <UniqueIdentifier>{CF988A45-3B03-3FBC-8441-F061F0EA1C11}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plateform\Windows">
-      <UniqueIdentifier>{3160d5ee-f8ee-4efa-bcab-2ceb3c6b47f4}</UniqueIdentifier>
+      <UniqueIdentifier>{09A24FC9-75B8-4D5F-BE2F-D9802A851EE7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -37,27 +40,39 @@
     <ClInclude Include="src\GameEngine\Events\MouseEvent.h">
       <Filter>GameEngine\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEngine\IWindow.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Layer\LayerStack.h">
+      <Filter>GameEngine\Layer</Filter>
+    </ClInclude>
     <ClInclude Include="src\GameEngine\Log.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="src\hzpch.h" />
     <ClInclude Include="src\Plateform\Windows\WindowsWindow.h">
       <Filter>Plateform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameEngine\IWindow.h">
-      <Filter>GameEngine</Filter>
+    <ClInclude Include="src\hzpch.h" />
+    <ClInclude Include="src\GameEngine\Layer\ILayer.h">
+      <Filter>GameEngine\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameEngine\Layer\LayerStack.cpp">
+      <Filter>GameEngine\Layer</Filter>
+    </ClCompile>
     <ClCompile Include="src\GameEngine\Log.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="src\hzpch.cpp" />
     <ClCompile Include="src\Plateform\Windows\WindowsWindow.cpp">
       <Filter>Plateform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="src\GameEngine\Layer\ILayer.cpp">
+      <Filter>GameEngine\Layer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

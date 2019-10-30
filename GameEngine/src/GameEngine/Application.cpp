@@ -14,16 +14,30 @@ namespace GameEngine {
 		this->window = std::unique_ptr<IWindow>(IWindow::create());
 		this->window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
 	}
-
 	Application::~Application()
 	{
+	}
+
+	void Application::pushLayer(ILayer* layer)
+	{
+		this->layerStack.pushLayer(layer);
+	}
+	void Application::pushOverlay(ILayer* overlay)
+	{
+		this->layerStack.popOverlay(overlay);
 	}
 
 	void Application::onEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::onWindowClose));
-		GE_CORE_TRACE("{0}", e);
+
+		for (auto it = this->layerStack.end(); it != this->layerStack.begin();)
+		{
+			(*--it)->onEvent(e);
+			if (e.isHandled())
+				break;
+		}
 	}
 
 	void Application::run()
@@ -32,6 +46,12 @@ namespace GameEngine {
 		while (this->running) {
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			for (ILayer* layer : this->layerStack) 
+			{
+				layer->onUpdate();
+			}
+
 			this->window->onUpdate();
 		}
 	}
