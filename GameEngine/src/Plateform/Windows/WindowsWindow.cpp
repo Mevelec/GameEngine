@@ -1,5 +1,6 @@
 #include "hzpch.h"
 #include "WindowsWindow.h"
+#include "GameEngine/Log.h"
 
 namespace GameEngine {
 	static bool s_GLFWInitialized = false;
@@ -21,7 +22,7 @@ namespace GameEngine {
 		this->data.width = props.width;
 		this->data.height = props.height;
 
-		GE_CORE_INFO("Creating window {0} ({1}, {2})", props.title, props.width, props.height);
+		GE_CORE_INFO("Creating window '{0}' ({1}, {2})", props.title, props.width, props.height);
 
 		if (!s_GLFWInitialized)
 		{
