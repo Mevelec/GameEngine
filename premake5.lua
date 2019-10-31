@@ -21,12 +21,15 @@ include "GameEngine/vendor/GLFW" -- copy GLFW premake config
 include "GameEngine/vendor/Glad" -- copy GLAD premake config
 include "GameEngine/vendor/imgui" -- copy imgui premake config
 
+startproject "Sandbox"
+
 
 
 project "GameEngine"
 	location "GameEngine"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-intermediates/" .. outputdir .. "/%{prj.name}")
@@ -59,7 +62,6 @@ project "GameEngine"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -76,23 +78,25 @@ project "GameEngine"
 
 	filter "configurations:Debug"
 		defines "GE_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "GE_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		symbols "On"
 
 	filter "configurations:Dist"
 		defines "GE_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		symbols "On"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
+
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-intermediates/" .. outputdir .. "/%{prj.name}")
@@ -116,7 +120,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -126,15 +129,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "GE_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "GE_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		symbols "On"
 
 	filter "configurations:Dist"
 		defines "GE_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		symbols "On"
