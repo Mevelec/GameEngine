@@ -16,11 +16,11 @@ namespace GameEngine {
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyReleased,
+		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed,  MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
-	/// Enum of Eventscategories
+	/// Enum of Events categories
 	/// is used to distinct different events
 	/// by event source
 	enum EventCategory

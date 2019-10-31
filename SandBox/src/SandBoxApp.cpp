@@ -7,7 +7,6 @@ public:
 
 	void onUpdate()
 	{
-		GE_INFO("ExampleLayer::Update");
 	}
 	void onEvent(GameEngine::Event& event) override
 	{

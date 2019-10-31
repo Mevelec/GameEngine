@@ -7,8 +7,6 @@
 
 namespace GameEngine {
 
-#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
-
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
@@ -17,7 +15,7 @@ namespace GameEngine {
 		s_Instance = this;
 
 		this->window = std::unique_ptr<IWindow>(IWindow::create());
-		this->window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
+		this->window->setEventCallback(GE_BIND_EVENT_FN(Application::onEvent));
 	}
 	Application::~Application()
 	{
@@ -37,7 +35,7 @@ namespace GameEngine {
 	void Application::onEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::onWindowClose));
+		dispatcher.Dispatch<WindowCloseEvent>(GE_BIND_EVENT_FN(Application::onWindowClose));
 
 		for (auto it = this->layerStack.end(); it != this->layerStack.begin();)
 		{
