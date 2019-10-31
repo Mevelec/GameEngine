@@ -87,7 +87,7 @@ namespace GameEngine {
 	{
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<MouseMovedEvent>(GE_BIND_EVENT_FN(ImGuiLayer::onMouseMovedEvent));
-		dispatcher.Dispatch<MouseScrollEvent>(GE_BIND_EVENT_FN(ImGuiLayer::onMouseScrollEvent));
+		dispatcher.Dispatch<MouseScrolledEvent>(GE_BIND_EVENT_FN(ImGuiLayer::onMouseScrollEvent));
 		dispatcher.Dispatch<MouseButtonPressedEvent>(GE_BIND_EVENT_FN(ImGuiLayer::onMouseButtonPressedEvent));
 		dispatcher.Dispatch<MouseButtonReleasedEvent>(GE_BIND_EVENT_FN(ImGuiLayer::onMouseButtonReleasedEvent));
 		dispatcher.Dispatch<KeyPressedEvent>(GE_BIND_EVENT_FN(ImGuiLayer::onKeyPressedEvent));
@@ -106,7 +106,7 @@ namespace GameEngine {
 		return false;
 	}
 
-	bool ImGuiLayer::onMouseScrollEvent(MouseScrollEvent& event)
+	bool ImGuiLayer::onMouseScrollEvent(MouseScrolledEvent& event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.MouseWheelH += (float)event.GetOffsetX();

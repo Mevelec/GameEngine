@@ -129,7 +129,7 @@ namespace GameEngine {
 		glfwSetScrollCallback(this->window, [](GLFWwindow* window, double xOffset, double yOffset)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				MouseScrollEvent event((float)xOffset, (float)yOffset);
+				MouseScrolledEvent event((float)xOffset, (float)yOffset);
 				data.eventCallback(event);
 			}
 		);

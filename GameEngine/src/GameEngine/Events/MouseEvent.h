@@ -26,10 +26,10 @@ namespace GameEngine
 		float mouseX, mouseY;
 	};
 
-	class GE_API MouseScrollEvent : public Event
+	class GE_API MouseScrolledEvent : public Event
 	{
 	public:
-		MouseScrollEvent(float offsetX, float offsetY)
+		MouseScrolledEvent(float offsetX, float offsetY)
 			: offsetX(offsetX), offsetY(offsetY){}
 
 		inline float GetOffsetX() const { return offsetX; }

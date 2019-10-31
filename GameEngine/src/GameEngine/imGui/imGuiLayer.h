@@ -20,7 +20,7 @@ namespace GameEngine {
 		void onEvent(Event& event);
 	private:
 		bool onMouseMovedEvent(MouseMovedEvent& event);
-		bool onMouseScrollEvent(MouseScrollEvent& event);
+		bool onMouseScrollEvent(MouseScrolledEvent& event);
 		bool onMouseButtonPressedEvent(MouseButtonPressedEvent& event);
 		bool onMouseButtonReleasedEvent(MouseButtonReleasedEvent& event);
 
