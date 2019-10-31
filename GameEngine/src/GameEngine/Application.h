@@ -22,12 +22,17 @@ namespace GameEngine
 
 		void pushLayer(ILayer* layer);
 		void pushOverlay(ILayer* overlay);
+
+		inline static Application& get() { return *s_Instance; }
+		inline IWindow& GetWindow() { return *this->window;  }
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<IWindow> window;
 		bool running = true;
 		LayerStack layerStack;
+	private:
+		static Application* s_Instance;
 	};
 
 	//To be defined in Client

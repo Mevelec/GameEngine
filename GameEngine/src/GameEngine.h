@@ -5,6 +5,7 @@
 #include "GameEngine/Application.h"
 #include "GameEngine/Layer/ILayer.h"
 #include "GameEngine/Log.h"
+#include "GameEngine/imGui/imGuiLayer.h"
 
 // --Entry Point-----------------------
 #include "GameEngine/EntryPoint.h"

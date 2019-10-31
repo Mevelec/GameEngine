@@ -9,8 +9,13 @@ namespace GameEngine {
 
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
+	Application* Application::s_Instance = nullptr;
+
 	Application::Application()
 	{
+		GE_CORE_ASSERT(!s_Instance, "Application already exists!")
+		s_Instance = this;
+
 		this->window = std::unique_ptr<IWindow>(IWindow::create());
 		this->window->setEventCallback(BIND_EVENT_FN(Application::onEvent));
 	}
@@ -21,10 +26,12 @@ namespace GameEngine {
 	void Application::pushLayer(ILayer* layer)
 	{
 		this->layerStack.pushLayer(layer);
+		layer->onAttach();
 	}
 	void Application::pushOverlay(ILayer* overlay)
 	{
-		this->layerStack.popOverlay(overlay);
+		this->layerStack.pushOverlay(overlay);
+		overlay->onAttach();
 	}
 
 	void Application::onEvent(Event& e)

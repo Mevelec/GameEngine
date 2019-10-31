@@ -14,9 +14,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludDir = {}
 IncludDir["GLFW"] = "GameEngine/vendor/GLFW/include"
 IncludDir["Glad"] = "GameEngine/vendor/Glad/include"
+IncludDir["imgui"] = "GameEngine/vendor/imgui"
+
 
 include "GameEngine/vendor/GLFW" -- copy GLFW premake config
 include "GameEngine/vendor/Glad" -- copy GLAD premake config
+include "GameEngine/vendor/imgui" -- copy imgui premake config
 
 
 
@@ -42,14 +45,15 @@ project "GameEngine"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludDir.GLFW}",
-		"%{IncludDir.Glad}"
-
+		"%{IncludDir.Glad}",
+		"%{IncludDir.imgui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
+		"imgui",
 		"opengl32.lib"
 	}
 
