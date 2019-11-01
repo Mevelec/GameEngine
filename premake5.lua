@@ -1,5 +1,6 @@
 workspace "GameEngine"
 	architecture "x64"
+	startproject "Sandbox"
 
 	configurations
 	{
@@ -16,14 +17,12 @@ IncludDir["GLFW"] = "GameEngine/vendor/GLFW/include"
 IncludDir["Glad"] = "GameEngine/vendor/Glad/include"
 IncludDir["imgui"] = "GameEngine/vendor/imgui"
 
+group "Dependencies"
+	include "GameEngine/vendor/GLFW" -- copy GLFW premake config
+	include "GameEngine/vendor/Glad" -- copy GLAD premake config
+	include "GameEngine/vendor/imgui" -- copy imgui premake config
 
-include "GameEngine/vendor/GLFW" -- copy GLFW premake config
-include "GameEngine/vendor/Glad" -- copy GLAD premake config
-include "GameEngine/vendor/imgui" -- copy imgui premake config
-
-startproject "Sandbox"
-
-
+group ""
 
 project "GameEngine"
 	location "GameEngine"
@@ -73,7 +72,7 @@ project "GameEngine"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \" ../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 	filter "configurations:Debug"
