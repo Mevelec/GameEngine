@@ -52,6 +52,9 @@
     <ClInclude Include="src\GameEngine\IWindow.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEngine\KeyCodes.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
     <ClInclude Include="src\GameEngine\Layer\ILayer.h">
       <Filter>GameEngine\Layer</Filter>
     </ClInclude>
@@ -59,6 +62,9 @@
       <Filter>GameEngine\Layer</Filter>
     </ClInclude>
     <ClInclude Include="src\GameEngine\Log.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\MouseButtonCodes.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\GameEngine\imGui\imGuiLayer.h">

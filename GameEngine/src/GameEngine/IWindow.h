@@ -33,6 +33,7 @@ namespace GameEngine {
 
 		virtual unsigned int getWidth()  = 0;
 		virtual unsigned int getHeight() = 0;
+		inline virtual void* getNativeWindow()  const = 0;
 
 		// window attributes
 		virtual void setEventCallback(const EventCallbackFn& callback) = 0;
