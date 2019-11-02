@@ -8,7 +8,7 @@ public:
 	void onUpdate()
 	{
 		if (GameEngine::IInput::IsKeyPressed(GE_KEY_TAB))
-			GE_INFO("tab pressed!");
+			GE_TRACE("tab pressed!");
 	}
 	void onEvent(GameEngine::Event& event) override
 	{
