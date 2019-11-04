@@ -12,10 +12,12 @@ workspace "GameEngine"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
-IncludDir = {}
-IncludDir["GLFW"] = "GameEngine/vendor/GLFW/include"
-IncludDir["Glad"] = "GameEngine/vendor/Glad/include"
-IncludDir["imgui"] = "GameEngine/vendor/imgui"
+IncludeDir = {}
+IncludeDir["GLFW"] = "GameEngine/vendor/GLFW/include"
+IncludeDir["Glad"] = "GameEngine/vendor/Glad/include"
+IncludeDir["imgui"] = "GameEngine/vendor/imgui"
+IncludeDir["glm"] = "GameEngine/vendor/glm"
+
 
 group "Dependencies"
 	include "GameEngine/vendor/GLFW" -- copy GLFW premake config
@@ -39,16 +41,21 @@ project "GameEngine"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
+
+
 	}
 
 	includedirs
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludDir.GLFW}",
-		"%{IncludDir.Glad}",
-		"%{IncludDir.imgui}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.imgui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -109,7 +116,8 @@ project "Sandbox"
 	includedirs
 	{
 		"GameEngine/vendor/spdlog/include",
-		"GameEngine/src"
+		"GameEngine/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links

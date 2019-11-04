@@ -3,7 +3,8 @@
 class ExampleLayer : public GameEngine::ILayer
 {
 public:
-	ExampleLayer() : ILayer("Example"){}
+	ExampleLayer() : ILayer("Example"){
+	}
 
 	void onUpdate()
 	{
