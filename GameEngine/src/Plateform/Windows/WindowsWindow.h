@@ -15,7 +15,7 @@ namespace GameEngine {
 
 		inline unsigned int getWidth() { return this->data.width; }
 		inline unsigned int getHeight() { return this->data.height; }
-
+		inline virtual void* getNativeWindow() const { return this->window; }
 		// Window attributes
 		inline void setEventCallback(const EventCallbackFn& callback) override { this->data.eventCallback = callback; }
 		void setVSync(bool enabled) override;

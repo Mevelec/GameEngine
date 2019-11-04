@@ -7,10 +7,12 @@ public:
 
 	void onUpdate()
 	{
+		if (GameEngine::IInput::IsKeyPressed(GE_KEY_TAB))
+			GE_TRACE("tab pressed!");
 	}
 	void onEvent(GameEngine::Event& event) override
 	{
-		GE_TRACE("{0}", event);
+		//	GE_TRACE("{0}", event);
 	}
 private:
 };
