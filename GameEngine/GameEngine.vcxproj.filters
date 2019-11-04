@@ -19,9 +19,6 @@
     <Filter Include="src\Plateform">
       <UniqueIdentifier>{A6FA4485-12BB-C0BB-DBF5-093947750598}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Plateform\OpenGL">
-      <UniqueIdentifier>{1A6DB4CF-06FC-3D99-AF1A-52949B884E3F}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Plateform\Windows">
       <UniqueIdentifier>{E0EA5D1E-4C57-1919-154B-B17681763B81}</UniqueIdentifier>
     </Filter>
@@ -95,9 +92,6 @@
     </ClInclude>
     <ClInclude Include="src\GameEngine\imGui\imGuiLayer.h">
       <Filter>src\GameEngine\imGui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Plateform\OpenGL\ImGuiOpenGLRenderer.h">
-      <Filter>src\Plateform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Plateform\Windows\WindowsInput.h">
       <Filter>src\Plateform\Windows</Filter>
@@ -1226,11 +1220,11 @@
     <ClCompile Include="src\GameEngine\Log.cpp">
       <Filter>src\GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameEngine\imGui\imGuiLayer.cpp">
+    <ClCompile Include="src\GameEngine\imGui\ImGuiBuild.cpp">
       <Filter>src\GameEngine\imGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Plateform\OpenGL\ImGuiOpenGLRenderer.cpp">
-      <Filter>src\Plateform\OpenGL</Filter>
+    <ClCompile Include="src\GameEngine\imGui\imGuiLayer.cpp">
+      <Filter>src\GameEngine\imGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Plateform\Windows\WindowsInput.cpp">
       <Filter>src\Plateform\Windows</Filter>

@@ -7,6 +7,7 @@
 #include "GameEngine/Events/Event.h"
 #include "GameEngine/Events/ApplicationEvent.h"
 
+#include "GameEngine/imGui/imGuiLayer.h"
 
 namespace GameEngine
 {
@@ -28,6 +29,7 @@ namespace GameEngine
 		bool onWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<IWindow> window;
+		ImGuiLayer* imGuiLayer;
 		bool running = true;
 		LayerStack layerStack;
 	private:

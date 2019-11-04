@@ -16,6 +16,9 @@ namespace GameEngine {
 
 		this->window = std::unique_ptr<IWindow>(IWindow::create());
 		this->window->setEventCallback(GE_BIND_EVENT_FN(Application::onEvent));
+
+		this->imGuiLayer = new ImGuiLayer();
+		pushOverlay(this->imGuiLayer);
 	}
 	Application::~Application()
 	{
@@ -24,12 +27,10 @@ namespace GameEngine {
 	void Application::pushLayer(ILayer* layer)
 	{
 		this->layerStack.pushLayer(layer);
-		layer->onAttach();
 	}
 	void Application::pushOverlay(ILayer* overlay)
 	{
 		this->layerStack.pushOverlay(overlay);
-		overlay->onAttach();
 	}
 
 	void Application::onEvent(Event& e)
@@ -56,6 +57,14 @@ namespace GameEngine {
 			{
 				layer->onUpdate();
 			}
+
+			this->imGuiLayer->begin();
+			for (ILayer* layer : this->layerStack)
+			{
+				layer->onImGuiRender();
+			}
+			this->imGuiLayer->end();
+
 
 			this->window->onUpdate();
 		}

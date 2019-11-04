@@ -14,21 +14,12 @@ namespace GameEngine {
 		ImGuiLayer();
 		~ImGuiLayer();
 
-		void onAttach();
-		void onDetach();
-		void onUpdate();
-		void onEvent(Event& event);
-	private:
-		bool onMouseMovedEvent(MouseMovedEvent& event);
-		bool onMouseScrollEvent(MouseScrolledEvent& event);
-		bool onMouseButtonPressedEvent(MouseButtonPressedEvent& event);
-		bool onMouseButtonReleasedEvent(MouseButtonReleasedEvent& event);
+		virtual void onAttach() override;
+		virtual void onDetach() override;
+		virtual void onImGuiRender() override;
 
-		bool onKeyPressedEvent(KeyPressedEvent& event);
-		bool onKeyReleasedEvent(KeyReleasedEvent& event);
-
-		bool onKeyTypedEvent(KeyTypedEvent& event);
-		bool onWindowResizeEvent(WindowResizeEvent& event);
+		void begin();
+		void end();
 	private:
 		float time = 0.0f;
 	};
