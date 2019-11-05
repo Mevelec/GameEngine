@@ -12,7 +12,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#ifdef GE_PLATEFORM_WINDOWS
-	#include <Windows.h>
-#endif // GE_PLATEFORM_WINDOWS
+#include "GameEngine/Log.h"
 
+#ifdef HZ_PLATFORM_WINDOWS
+	#include <Windows.h>
+#endif

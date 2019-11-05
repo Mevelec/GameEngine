@@ -43,6 +43,12 @@
     <Filter Include="vendor\glm\glm\gtx">
       <UniqueIdentifier>{B3A6A76B-9F8A-68C1-08EB-6214F4ED5243}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\GameEngine\Renderer">
+      <UniqueIdentifier>{8bd42afa-9f6f-41fa-98c2-afaf0eeea97f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Plateform\OpenGL">
+      <UniqueIdentifier>{c1380398-6af8-4917-87cb-e38c6c52ef52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameEngine.h">
@@ -1206,6 +1212,9 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="src\Plateform\OpenGl\OpenGLContext.h">
+      <Filter>src\Plateform\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
@@ -1234,6 +1243,12 @@
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plateform\OpenGl\OpenGLContext.cpp">
+      <Filter>src\Plateform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\IGraphicsContext.h">
+      <Filter>src\GameEngine\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
