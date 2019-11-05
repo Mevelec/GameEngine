@@ -1,5 +1,7 @@
 #include <GameEngine.h>
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public GameEngine::ILayer
 {
 public:
@@ -10,6 +12,11 @@ public:
 	{
 		if (GameEngine::IInput::IsKeyPressed(GE_KEY_TAB))
 			GE_TRACE("tab pressed!");
+	}
+	void onImGuiRender() {
+		ImGui::Begin("Test");
+		ImGui::Text("Hello world !");
+		ImGui::End();
 	}
 	void onEvent(GameEngine::Event& event) override
 	{
@@ -22,7 +29,6 @@ class Sandbox : public GameEngine::Application
 public:
 	Sandbox(){
 		pushLayer(new ExampleLayer());
-		pushOverlay(new GameEngine::ImGuiLayer());
 	}
 	~Sandbox(){}
 private:

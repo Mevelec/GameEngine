@@ -27,7 +27,7 @@ namespace GameEngine {
 		[layers, ..., layerInsert, overlays, ...]
 		*/
 		std::vector<ILayer*> layers;
-		std::vector<ILayer*>::iterator layerInsert;
+		unsigned int layerInsertIndex = 0;
 	};
 }
 
