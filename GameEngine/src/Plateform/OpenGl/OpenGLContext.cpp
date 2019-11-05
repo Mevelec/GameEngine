@@ -19,6 +19,12 @@ namespace GameEngine {
 		glfwMakeContextCurrent(this->windowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		GE_CORE_ASSERT(status, "Failed to init GLlad!");
+
+		GE_CORE_INFO("OpenGl Info:");
+		GE_CORE_INFO("  Vendor: {0}", glGetString(GL_VENDOR));
+		GE_CORE_INFO("  Renderer: {0}", glGetString(GL_RENDERER));
+		GE_CORE_INFO("  Version: {0}", glGetString(GL_VERSION));
+
 	}
 
 	void OpenGLContext::swapBuffers()

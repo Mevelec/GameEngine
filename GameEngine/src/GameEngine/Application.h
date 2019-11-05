@@ -32,6 +32,8 @@ namespace GameEngine
 		ImGuiLayer* imGuiLayer;
 		bool running = true;
 		LayerStack layerStack;
+
+		unsigned int vertexArray, vertexBuffer, indexBuffer;
 	private:
 		static Application* s_Instance;
 	};
