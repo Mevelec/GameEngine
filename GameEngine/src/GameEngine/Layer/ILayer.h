@@ -8,7 +8,7 @@ namespace GameEngine {
 	{
 	public:
 		ILayer(const std::string& debugName = "Layer");
-		virtual ~ILayer();
+		virtual ~ILayer() = default;
 
 		virtual void onAttach() {};
 		virtual void onDetach() {};

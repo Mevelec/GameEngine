@@ -69,9 +69,6 @@ namespace GameEngine {
 
 		this->shader = std::make_unique<Shader>(vertexSrc, fragmentSrc);
 	}
-	Application::~Application()
-	{
-	}
 
 	void Application::pushLayer(ILayer* layer)
 	{

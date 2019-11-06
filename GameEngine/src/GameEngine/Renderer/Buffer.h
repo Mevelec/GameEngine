@@ -5,7 +5,7 @@ namespace GameEngine {
 	class IVertexBuffer
 	{
 	public:
-		virtual ~IVertexBuffer() {};
+		virtual ~IVertexBuffer() = default;
 
 		virtual void bind() const = 0;
 		virtual void unbind() const  = 0;
@@ -16,7 +16,7 @@ namespace GameEngine {
 	class IIndexBuffer
 	{
 	public:
-		virtual ~IIndexBuffer() {};
+		virtual ~IIndexBuffer() = default;
 
 		virtual void bind() const  = 0;
 		virtual void unbind() const = 0;

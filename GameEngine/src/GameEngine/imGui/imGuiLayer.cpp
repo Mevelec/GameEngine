@@ -21,10 +21,6 @@ namespace GameEngine {
 
 	}
 
-	ImGuiLayer::~ImGuiLayer()
-	{
-	}
-
 	void ImGuiLayer::onAttach()
 	{
 		// Setup ImGui context

@@ -18,7 +18,7 @@ namespace GameEngine
 	{
 	public:
 		Application();
-		~Application();
+		~Application() = default;
 
 		void run();
 		void onEvent(Event& e);
