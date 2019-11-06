@@ -1215,7 +1215,18 @@
     <ClInclude Include="src\Plateform\OpenGl\OpenGLContext.h">
       <Filter>src\Plateform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\Shader.h" />
+    <ClInclude Include="src\Plateform\OpenGl\OpenGlBuffer.h">
+      <Filter>src\Plateform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Shader.h">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Buffer.h">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Renderer.h">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
@@ -1251,6 +1262,17 @@
     <ClCompile Include="src\GameEngine\Renderer\IGraphicsContext.h">
       <Filter>src\GameEngine\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Plateform\OpenGl\OpenGlBuffer.cpp">
+      <Filter>src\Plateform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Shader.cpp">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Buffer.cpp">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Renderer.cpp">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
