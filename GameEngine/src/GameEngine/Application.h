@@ -10,6 +10,7 @@
 #include "GameEngine/imGui/imGuiLayer.h"
 
 #include "GameEngine/Renderer/Shader.h"
+#include "GameEngine/Renderer/Buffer.h"
 
 namespace GameEngine
 {
@@ -35,9 +36,12 @@ namespace GameEngine
 		bool running = true;
 		LayerStack layerStack;
 
-		unsigned int vertexArray, vertexBuffer, indexBuffer;
+		unsigned int vertexArray;
 
 		std::unique_ptr<Shader> shader;
+		std::unique_ptr<IVertexBuffer> vertexBuffer;
+		std::unique_ptr<IIndexBuffer> indexBuffer;
+
 	private:
 		static Application* s_Instance;
 	};

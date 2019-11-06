@@ -25,26 +25,20 @@ namespace GameEngine {
 		glGenVertexArrays(1, &this->vertexArray);
 		glBindVertexArray(this->vertexArray);
 
-		glGenBuffers(1, &this->vertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuffer);
-
 		float vertices[3 * 3] = {
 			-0.5f, -0.5f, 0.0f,
 			 0.5f, -0.5f, 0.0f,
 			 0.0f,  0.5f, 0.0f
 		};
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-		//Vertex Buffer
+		this->vertexBuffer = std::unique_ptr<IVertexBuffer>(IVertexBuffer::Create(vertices, sizeof(vertices)));
+
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 
 		//Index Buffer
-		glGenBuffers(1, &this->indexBuffer);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuffer);
-
 		unsigned int indices[3] = { 0, 1, 2 };
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		this->indexBuffer = std::unique_ptr<IIndexBuffer>(IIndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t)));
 
 		std::string vertexSrc = R"(
 			#version 330 core
@@ -110,7 +104,7 @@ namespace GameEngine {
 
 			this->shader->bind();
 			glBindVertexArray(this->vertexArray);
-			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+			glDrawElements(GL_TRIANGLES, this->indexBuffer->getCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (ILayer* layer : this->layerStack) 
 			{
