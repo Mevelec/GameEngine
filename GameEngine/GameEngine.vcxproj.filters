@@ -1215,6 +1215,7 @@
     <ClInclude Include="src\Plateform\OpenGl\OpenGLContext.h">
       <Filter>src\Plateform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
@@ -1250,5 +1251,6 @@
     <ClCompile Include="src\GameEngine\Renderer\IGraphicsContext.h">
       <Filter>src\GameEngine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Shader.cpp" />
   </ItemGroup>
 </Project>
