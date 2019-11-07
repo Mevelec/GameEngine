@@ -13,8 +13,12 @@ namespace GameEngine {
 		virtual void bind() const override;
 		virtual void unbind() const override;
 
+		virtual const BufferLayout& getLayout() const override { return this->layout; }
+		virtual void setLayout(const BufferLayout& layout) override { this->layout = layout; }
+
 	private:
 		uint32_t rendererID;
+		BufferLayout layout;
 	};
 
 	class OpenGlIndexBuffer : public IIndexBuffer
