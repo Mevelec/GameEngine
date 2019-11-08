@@ -2,44 +2,12 @@
 #include "Application.h"
 
 #include "GameEngine/Log.h"
-
-#include <glad/glad.h>
+#include "GameEngine/Renderer/Renderer.h"
 
 namespace GameEngine {
 
 	Application* Application::s_Instance = nullptr;
 
-	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
-	{
-		switch (type)
-		{
-		case GameEngine::ShaderDataType::Float:
-			return GL_FLOAT;
-		case GameEngine::ShaderDataType::Float2:
-			return GL_FLOAT;
-		case GameEngine::ShaderDataType::Float3:
-			return GL_FLOAT;
-		case GameEngine::ShaderDataType::Float4:
-			return GL_FLOAT;
-		case GameEngine::ShaderDataType::Mat3:
-			return GL_FLOAT;
-		case GameEngine::ShaderDataType::Mat4:
-			return GL_FLOAT;
-		case GameEngine::ShaderDataType::Int:
-			return GL_INT;
-		case GameEngine::ShaderDataType::Int2:
-			return GL_INT;
-		case GameEngine::ShaderDataType::Int3:
-			return GL_INT;
-		case GameEngine::ShaderDataType::Int4:
-			return GL_INT;
-		case GameEngine::ShaderDataType::Bool:
-			return GL_BOOL;
-		}
-
-		GE_CORE_ASSERT(false, "Unknow ShaderDataType!");
-		return 0;
-	}
 	Application::Application()
 	{
 		GE_CORE_ASSERT(!s_Instance, "Application already exists!")
@@ -94,7 +62,7 @@ namespace GameEngine {
 		this->squareVA->addVertexBuffer(squareVB);
 
 		//Index Buffer
-		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 0};
+		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 1};
 		std::shared_ptr<IIndexBuffer> squareIB;
 		squareIB.reset(IIndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		this->squareVA->setIndexBuffer(squareIB);
@@ -190,16 +158,20 @@ namespace GameEngine {
 	{
 
 		while (this->running) {
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
 
-			this->blueShader->bind();
-			this->squareVA->bind();
-			glDrawElements(GL_TRIANGLES, this->squareVA->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
+			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+			RenderCommand::Clear();
 
-			this->shader->bind();
-			this->vertexArray->bind();
-			glDrawElements(GL_TRIANGLES, this->vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
+			IRenderer::BeginScene();
+			{
+				this->blueShader->bind();
+				IRenderer::Submit(this->squareVA);
+				this->shader->bind();
+				IRenderer::Submit(this->vertexArray);
+			}
+			IRenderer::EndScene();
+
+			// Renderer::Flush();
 
 			for (ILayer* layer : this->layerStack) 
 			{

@@ -9,10 +9,10 @@ namespace GameEngine {
 	IVertexArray* IVertexArray::Create() {
 		switch (IRenderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case IRendererAPI::API::None:
 			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
-		case RendererAPI::OpengGL:
+		case IRendererAPI::API::OpengGL:
 			return new OpenGLVertexArray();
 		default:
 			GE_CORE_ASSERT(false, "RendererAPI::Unknow renderAPI")
