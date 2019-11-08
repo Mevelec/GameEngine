@@ -140,6 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Plateform\OpenGl\OpenGLVertexArray.h" />
     <ClInclude Include="src\GameEngine.h" />
     <ClInclude Include="src\GameEngine\Application.h" />
     <ClInclude Include="src\GameEngine\Core.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="src\GameEngine\Renderer\Buffer.h" />
     <ClInclude Include="src\GameEngine\Renderer\Renderer.h" />
     <ClInclude Include="src\GameEngine\Renderer\Shader.h" />
+    <ClInclude Include="src\GameEngine\Renderer\IVertexArray.h" />
     <ClInclude Include="src\Plateform\OpenGl\OpenGlBuffer.h" />
     <ClInclude Include="src\Plateform\OpenGl\OpenGLContext.h" />
     <ClInclude Include="src\Plateform\Windows\WindowsInput.h" />
@@ -534,6 +536,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Plateform\OpenGl\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\GameEngine\Application.cpp" />
     <ClCompile Include="src\GameEngine\Layer\ILayer.cpp" />
     <ClCompile Include="src\GameEngine\Layer\LayerStack.cpp" />
@@ -544,6 +547,7 @@
     <ClCompile Include="src\GameEngine\Renderer\IGraphicsContext.h" />
     <ClCompile Include="src\GameEngine\Renderer\Renderer.cpp" />
     <ClCompile Include="src\GameEngine\Renderer\Shader.cpp" />
+    <ClCompile Include="src\GameEngine\Renderer\IVertexArray.cpp" />
     <ClCompile Include="src\Plateform\OpenGl\OpenGlBuffer.cpp" />
     <ClCompile Include="src\Plateform\OpenGl\OpenGLContext.cpp" />
     <ClCompile Include="src\Plateform\Windows\WindowsInput.cpp" />
