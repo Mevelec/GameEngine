@@ -52,48 +52,53 @@ namespace GameEngine {
 		pushOverlay(this->imGuiLayer);
 
 		//Vertex Array
-
-		glGenVertexArrays(1, &this->vertexArray);
-		glBindVertexArray(this->vertexArray);
+		this->vertexArray.reset(IVertexArray::Create());
 
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
 			 0.5f, -0.5f, 0.0f, 0.2f, 0.2f, 0.8f, 1.0f,
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
 		};
+		std::shared_ptr<IVertexBuffer> vertexBuffer;
+		vertexBuffer.reset(IVertexBuffer::Create(vertices, sizeof(vertices)));
+		BufferLayout layout = {
+			{ ShaderDataType::Float3, "a_Position"},
+			{ ShaderDataType::Float4, "a_Color"},
 
-		this->vertexBuffer = std::unique_ptr<IVertexBuffer>(IVertexBuffer::Create(vertices, sizeof(vertices)));
+		};
+		vertexBuffer->setLayout(layout);
+		this->vertexArray->addVertexBuffer(vertexBuffer);
 
-		{
-			BufferLayout layout = {
-				{ ShaderDataType::Float3, "a_Position"},
-				{ ShaderDataType::Float4, "a_Color"},
-
-			};
-			vertexBuffer->setLayout(layout);
-		}
-		uint32_t index = 0;
-		const auto& layout = vertexBuffer->getLayout();
-		for (const auto& element : layout)
-		{
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(
-				index, 
-				element.getComponentCount(), 
-				ShaderDataTypeToOpenGLBaseType(element.type), 
-				element.normalized ? GL_TRUE : GL_FALSE, 
-				layout.getStride(),
-				(const void*)element.offset
-			);
-			index++;
-		}
-
-		
 
 		//Index Buffer
 		unsigned int indices[3] = { 0, 1, 2 };
-		this->indexBuffer = std::unique_ptr<IIndexBuffer>(IIndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t)));
+		std::shared_ptr<IIndexBuffer> indexBuffer;
+		indexBuffer.reset(IIndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t)));
+		this->vertexArray->setIndexBuffer(indexBuffer);
+		
+		//////// SQUARE ////////
+		//Vertex Array
+		this->squareVA.reset(IVertexArray::Create());
+		float squareVertices[3 * 4] = {
+			 0.75, -0.75f, 0.0f,
+			-0.75, -0.75f, 0.0f,
+			 0.75,  0.75f, 0.0f,
+			-0.75,  0.75f, 0.0f,
+		};
+		std::shared_ptr<IVertexBuffer> squareVB;
+		squareVB.reset(IVertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		BufferLayout squareLayout = {
+			{ ShaderDataType::Float3, "a_Position"},
+		};
+		squareVB->setLayout(squareLayout);
+		this->squareVA->addVertexBuffer(squareVB);
 
+		//Index Buffer
+		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 0};
+		std::shared_ptr<IIndexBuffer> squareIB;
+		squareIB.reset(IIndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		this->squareVA->setIndexBuffer(squareIB);
+		
 		std::string vertexSrc = R"(
 			#version 330 core
 
@@ -125,9 +130,38 @@ namespace GameEngine {
 			}			
 
 		)";
+		this->shader = std::make_shared<Shader>(vertexSrc, fragmentSrc);
+
+		std::string blueShaderVertexSrc = R"(
+			#version 330 core
+
+			layout(location = 0) in vec3 a_Position;
+
+			out vec3 v_Position;
+
+			void main()
+			{
+				v_Position = a_Position;
+				gl_Position = vec4(a_Position, 1.0);
+			}			
+
+		)";
+		std::string blueShaderFragmentSrc = R"(
+			#version 330 core
+
+			layout(location = 0) out vec4 color;
+			in vec3 v_Position;
+			in vec4 v_Color;
+
+			void main()
+			{
+				color = vec4(0.2f, 0.2f, 0.8f, 1.0f);
+			}			
+
+		)";
 
 
-		this->shader = std::make_unique<Shader>(vertexSrc, fragmentSrc);
+		this->blueShader = std::make_shared<Shader>(blueShaderVertexSrc, blueShaderFragmentSrc);
 	}
 
 	void Application::pushLayer(ILayer* layer)
@@ -159,9 +193,13 @@ namespace GameEngine {
 			glClearColor(0.1f, 0.1f, 0.1f, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
+			this->blueShader->bind();
+			this->squareVA->bind();
+			glDrawElements(GL_TRIANGLES, this->squareVA->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
+
 			this->shader->bind();
-			glBindVertexArray(this->vertexArray);
-			glDrawElements(GL_TRIANGLES, this->indexBuffer->getCount(), GL_UNSIGNED_INT, nullptr);
+			this->vertexArray->bind();
+			glDrawElements(GL_TRIANGLES, this->vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (ILayer* layer : this->layerStack) 
 			{

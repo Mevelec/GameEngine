@@ -1227,6 +1227,12 @@
     <ClInclude Include="src\GameEngine\Renderer\Renderer.h">
       <Filter>src\GameEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\IVertexArray.h">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Plateform\OpenGl\OpenGLVertexArray.h">
+      <Filter>src\Plateform\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
@@ -1273,6 +1279,12 @@
     </ClCompile>
     <ClCompile Include="src\GameEngine\Renderer\Renderer.cpp">
       <Filter>src\GameEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\IVertexArray.cpp">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plateform\OpenGl\OpenGLVertexArray.cpp">
+      <Filter>src\Plateform\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
