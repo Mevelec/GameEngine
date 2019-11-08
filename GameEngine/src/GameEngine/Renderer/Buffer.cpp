@@ -9,10 +9,10 @@ namespace GameEngine {
 	IVertexBuffer* IVertexBuffer::Create(float* vertices, uint32_t size) {
 		switch (IRenderer::GetAPI())
 		{
-		case RendererAPI::None: 
+		case IRendererAPI::API::None:
 			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
-		case RendererAPI::OpengGL:
+		case IRendererAPI::API::OpengGL:
 			return new OpenGlVertexBuffer(vertices, size);
 		default:
 			GE_CORE_ASSERT(false, "RendererAPI::Unknow renderAPI")
@@ -26,10 +26,10 @@ namespace GameEngine {
 	IIndexBuffer* IIndexBuffer::Create(uint32_t* indices, uint32_t count) {
 		switch (IRenderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case IRendererAPI::API::None:
 			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
-		case RendererAPI::OpengGL:
+		case IRendererAPI::API::OpengGL:
 			return new OpenGlIndexBuffer(indices, count);
 		default:
 			GE_CORE_ASSERT(false, "RendererAPI::Unknow renderAPI")

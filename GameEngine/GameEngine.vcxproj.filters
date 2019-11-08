@@ -13,11 +13,17 @@
     <Filter Include="src\GameEngine\Layer">
       <UniqueIdentifier>{5822D32D-44B1-5CF7-EDCF-70F2D93D6D9D}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\GameEngine\Renderer">
+      <UniqueIdentifier>{B20D7C77-1E45-C40E-274F-28329305EB07}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\GameEngine\imGui">
       <UniqueIdentifier>{D6AAE52F-C239-6FF9-6B58-83F457C67F9F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Plateform">
       <UniqueIdentifier>{A6FA4485-12BB-C0BB-DBF5-093947750598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Plateform\OpenGl">
+      <UniqueIdentifier>{3A6DB4CF-26FC-3D99-CF1A-5294BB884E3F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Plateform\Windows">
       <UniqueIdentifier>{E0EA5D1E-4C57-1919-154B-B17681763B81}</UniqueIdentifier>
@@ -42,12 +48,6 @@
     </Filter>
     <Filter Include="vendor\glm\glm\gtx">
       <UniqueIdentifier>{B3A6A76B-9F8A-68C1-08EB-6214F4ED5243}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\GameEngine\Renderer">
-      <UniqueIdentifier>{8bd42afa-9f6f-41fa-98c2-afaf0eeea97f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Plateform\OpenGL">
-      <UniqueIdentifier>{c1380398-6af8-4917-87cb-e38c6c52ef52}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,8 +96,32 @@
     <ClInclude Include="src\GameEngine\MouseButtonCodes.h">
       <Filter>src\GameEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Buffer.h">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\IGraphicsContext.h">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\IVertexArray.h">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Renderer.h">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Shader.h">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\GameEngine\imGui\imGuiLayer.h">
       <Filter>src\GameEngine\imGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Plateform\OpenGl\OpenGLContext.h">
+      <Filter>src\Plateform\OpenGl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Plateform\OpenGl\OpenGLVertexArray.h">
+      <Filter>src\Plateform\OpenGl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Plateform\OpenGl\OpenGlBuffer.h">
+      <Filter>src\Plateform\OpenGl</Filter>
     </ClInclude>
     <ClInclude Include="src\Plateform\Windows\WindowsInput.h">
       <Filter>src\Plateform\Windows</Filter>
@@ -1212,27 +1236,9 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Plateform\OpenGl\OpenGLContext.h">
-      <Filter>src\Plateform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Plateform\OpenGl\OpenGlBuffer.h">
-      <Filter>src\Plateform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\Shader.h">
-      <Filter>src\GameEngine\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\Buffer.h">
-      <Filter>src\GameEngine\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\Renderer.h">
-      <Filter>src\GameEngine\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\IVertexArray.h">
-      <Filter>src\GameEngine\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Plateform\OpenGl\OpenGLVertexArray.h">
-      <Filter>src\Plateform\OpenGL</Filter>
-    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\IRendererAPI.h" />
+    <ClInclude Include="src\GameEngine\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\Plateform\OpenGl\OpenGLRendererAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
@@ -1247,11 +1253,32 @@
     <ClCompile Include="src\GameEngine\Log.cpp">
       <Filter>src\GameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Buffer.cpp">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\IVertexArray.cpp">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Renderer.cpp">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Shader.cpp">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\GameEngine\imGui\ImGuiBuild.cpp">
       <Filter>src\GameEngine\imGui</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEngine\imGui\imGuiLayer.cpp">
       <Filter>src\GameEngine\imGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plateform\OpenGl\OpenGLContext.cpp">
+      <Filter>src\Plateform\OpenGl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plateform\OpenGl\OpenGLVertexArray.cpp">
+      <Filter>src\Plateform\OpenGl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plateform\OpenGl\OpenGlBuffer.cpp">
+      <Filter>src\Plateform\OpenGl</Filter>
     </ClCompile>
     <ClCompile Include="src\Plateform\Windows\WindowsInput.cpp">
       <Filter>src\Plateform\Windows</Filter>
@@ -1262,29 +1289,10 @@
     <ClCompile Include="src\hzpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Plateform\OpenGl\OpenGLContext.cpp">
-      <Filter>src\Plateform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\IGraphicsContext.h">
+    <ClCompile Include="src\GameEngine\Renderer\IRendererAPI.cpp">
       <Filter>src\GameEngine\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Plateform\OpenGl\OpenGlBuffer.cpp">
-      <Filter>src\Plateform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\Shader.cpp">
-      <Filter>src\GameEngine\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\Buffer.cpp">
-      <Filter>src\GameEngine\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\Renderer.cpp">
-      <Filter>src\GameEngine\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\IVertexArray.cpp">
-      <Filter>src\GameEngine\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Plateform\OpenGl\OpenGLVertexArray.cpp">
-      <Filter>src\Plateform\OpenGL</Filter>
-    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\Plateform\OpenGl\OpenGLRendererAPI.cpp" />
   </ItemGroup>
 </Project>

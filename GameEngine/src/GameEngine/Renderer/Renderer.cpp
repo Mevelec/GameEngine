@@ -2,5 +2,17 @@
 #include "Renderer.h"
 
 namespace GameEngine {
-	RendererAPI IRenderer::rendererAPI = RendererAPI::OpengGL;
+	void IRenderer::BeginScene()
+	{
+	}
+
+	void IRenderer::EndScene()
+	{
+	}
+
+	void IRenderer::Submit(const std::shared_ptr<IVertexArray>& vertexArray)
+	{
+		vertexArray->bind();
+		RenderCommand::DrawIndexed(vertexArray);
+	}
 }
