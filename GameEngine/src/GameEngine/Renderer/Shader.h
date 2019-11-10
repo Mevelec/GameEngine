@@ -15,7 +15,7 @@ namespace GameEngine {
 		void bind() const;
 		void unbind() const;
 
-		void setUniformMat4(const std::string& name, const glm::vec4& matrix);
+		void setUniformMat4(const std::string& name, const glm::mat4& matrix);
 	private:
 		uint32_t rendererID;
 	};

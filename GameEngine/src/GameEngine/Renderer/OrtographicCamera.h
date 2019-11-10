@@ -17,7 +17,7 @@ namespace GameEngine {
 
 		const glm::mat4& getProjectionMat() const { return this->projectionMat; };
 		const glm::mat4& getViewMat() const { return this->viewMat; };
-		const glm::mat4& getViewProjectionMat() const { return this->getViewProjectionMat; };
+		const glm::mat4& getViewProjectionMat() const { return this->viewProjectionMat; };
 	private:
 		void update();
 	private:

@@ -170,8 +170,10 @@ namespace GameEngine {
 			IRenderer::BeginScene();
 			{
 				this->blueShader->bind();
+				this->blueShader->setUniformMat4("u_ViewProjectionMatrix", this->camera.getViewProjectionMat());
 				IRenderer::Submit(this->squareVA);
 				this->shader->bind();
+				this->shader->setUniformMat4("u_ViewProjectionMatrix", this->camera.getViewProjectionMat());
 				IRenderer::Submit(this->vertexArray);
 			}
 			IRenderer::EndScene();
