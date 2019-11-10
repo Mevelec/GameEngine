@@ -9,6 +9,7 @@ namespace GameEngine {
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
+		: camera(-1.0f, 1.0f, -1.0f, 1.0f)
 	{
 		GE_CORE_ASSERT(!s_Instance, "Application already exists!")
 		s_Instance = this;
@@ -73,13 +74,15 @@ namespace GameEngine {
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 
+			uniform mat4 u_ViewProjectionMatrix;
+
 			out vec3 v_Position;
 			out vec4 v_Color;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjectionMatrix * vec4(a_Position, 1.0);
 				v_Color = a_Color;
 			}			
 
@@ -105,12 +108,14 @@ namespace GameEngine {
 
 			layout(location = 0) in vec3 a_Position;
 
+			uniform mat4 u_ViewProjectionMatrix;
+
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjectionMatrix * vec4(a_Position, 1.0);
 			}			
 
 		)";
