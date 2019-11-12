@@ -21,7 +21,6 @@ namespace GameEngine {
 		uint32_t rendererID;
 		std::vector<std::shared_ptr<IVertexBuffer>> vertexBuffers;
 		std::shared_ptr<IIndexBuffer> indexBuffer;
-
 	};
 }
 

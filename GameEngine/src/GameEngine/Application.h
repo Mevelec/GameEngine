@@ -12,6 +12,8 @@
 #include "GameEngine/Renderer/Shader.h"
 #include "GameEngine/Renderer/Buffer.h"
 #include "GameEngine/Renderer/IVertexArray.h"
+#include "GameEngine/Renderer/OrtographicCamera.h"
+
 
 namespace GameEngine
 {
@@ -41,9 +43,9 @@ namespace GameEngine
 		std::shared_ptr<Shader> blueShader;
 
 		std::shared_ptr<IVertexArray> vertexArray;
-
 		std::shared_ptr<IVertexArray> squareVA;
 
+		OrtographicCamera camera;
 	private:
 		static Application* s_Instance;
 	};

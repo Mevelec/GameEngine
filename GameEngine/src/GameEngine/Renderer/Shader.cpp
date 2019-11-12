@@ -128,4 +128,10 @@ namespace GameEngine {
 	{
 		glUseProgram(0);
 	}
+
+	void Shader::setUniformMat4(const std::string& name, const glm::mat4& matrix)
+	{
+		GLint location = glGetUniformLocation(this->rendererID, name.c_str());
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+	}
 }
