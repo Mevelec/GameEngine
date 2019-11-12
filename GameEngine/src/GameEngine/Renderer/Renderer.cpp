@@ -5,7 +5,7 @@ namespace GameEngine {
 	
 	IRenderer::SceneData* IRenderer::sceneData = new IRenderer::SceneData;
 
-	void IRenderer::BeginScene(OrtographicCamera& camera)
+	void IRenderer::BeginScene(ICamera& camera)
 	{
 		sceneData->viewProjectionMat = camera.getViewProjectionMat();
 	}
@@ -17,7 +17,7 @@ namespace GameEngine {
 	void IRenderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<IVertexArray>& vertexArray)
 	{
 		shader->bind();
-		shader->setUniformMat4("u_ViewProjection", sceneData->viewProjectionMat);
+		shader->setUniformMat4("u_ViewProjectionMatrix", sceneData->viewProjectionMat);
 
 		vertexArray->bind();
 		RenderCommand::DrawIndexed(vertexArray);

@@ -12,7 +12,9 @@
 #include "GameEngine/Renderer/Shader.h"
 #include "GameEngine/Renderer/Buffer.h"
 #include "GameEngine/Renderer/IVertexArray.h"
-#include "GameEngine/Renderer/OrtographicCamera.h"
+#include "GameEngine/Renderer/Camera/OrtographicCamera.h"
+#include "GameEngine/Renderer/Camera/PerspectiveCamera.h"
+
 
 
 namespace GameEngine
@@ -21,7 +23,7 @@ namespace GameEngine
 	{
 	public:
 		Application();
-		~Application() = default;
+		~Application();
 
 		void run();
 		void onEvent(Event& e);
@@ -45,7 +47,7 @@ namespace GameEngine
 		std::shared_ptr<IVertexArray> vertexArray;
 		std::shared_ptr<IVertexArray> squareVA;
 
-		OrtographicCamera camera;
+		PerspectiveCamera* camera;
 	private:
 		static Application* s_Instance;
 	};

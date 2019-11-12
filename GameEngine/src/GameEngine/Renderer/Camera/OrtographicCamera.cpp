@@ -5,8 +5,9 @@
 
 namespace GameEngine {
 	OrtographicCamera::OrtographicCamera(float left, float right, float bottom, float top)
-		: projectionMat(glm::ortho(left, right, bottom, top, -1.0f, 0.0f)), viewMat(1.0f)
 	{
+		this->projectionMat = glm::ortho(left, right, bottom, top, -1.0f, 0.0f);
+		this->viewMat = glm::mat4(1.0f);
 		this->viewProjectionMat = this->projectionMat * this->viewMat;
 	}
 
