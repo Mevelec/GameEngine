@@ -1,7 +1,7 @@
 #pragma once
 
 #include "RenderCommand.h"
-#include "GameEngine/Renderer/OrtographicCamera.h"
+#include "GameEngine/Renderer/Camera/ICamera.h"
 #include "GameEngine/Renderer/Shader.h"
 
 namespace GameEngine {
@@ -9,7 +9,7 @@ namespace GameEngine {
 	class IRenderer
 	{
 	public:
-		static void BeginScene(OrtographicCamera& camera);
+		static void BeginScene(ICamera& camera);
 		static void EndScene();
 
 		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<IVertexArray>& vertexArray);

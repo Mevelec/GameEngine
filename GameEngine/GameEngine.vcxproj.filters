@@ -25,6 +25,9 @@
     <Filter Include="Plateform\Windows">
       <UniqueIdentifier>{09A24FC9-75B8-4D5F-BE2F-D9802A851EE7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Renderer\Camera">
+      <UniqueIdentifier>{9b04e9d3-e4e9-4823-a088-c096488eab73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameEngine.h" />
@@ -82,9 +85,6 @@
     <ClInclude Include="src\GameEngine\Renderer\IVertexArray.h">
       <Filter>GameEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\OrtographicCamera.h">
-      <Filter>GameEngine\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameEngine\Renderer\RenderCommand.h">
       <Filter>GameEngine\Renderer</Filter>
     </ClInclude>
@@ -116,6 +116,13 @@
       <Filter>Plateform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\hzpch.h" />
+    <ClInclude Include="src\GameEngine\Renderer\Camera\OrtographicCamera.h">
+      <Filter>GameEngine\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Camera\ICamera.h">
+      <Filter>GameEngine\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Camera\PerspectiveCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
@@ -137,9 +144,6 @@
       <Filter>GameEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEngine\Renderer\IVertexArray.cpp">
-      <Filter>GameEngine\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\OrtographicCamera.cpp">
       <Filter>GameEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEngine\Renderer\RenderCommand.cpp">
@@ -176,5 +180,9 @@
       <Filter>Plateform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="src\GameEngine\Renderer\Camera\OrtographicCamera.cpp">
+      <Filter>GameEngine\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Camera\PerspectiveCamera.cpp" />
   </ItemGroup>
 </Project>

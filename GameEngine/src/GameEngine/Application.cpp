@@ -9,13 +9,14 @@ namespace GameEngine {
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
-		: camera(-1.0f, 1.0f, -1.0f, 1.0f)
 	{
 		GE_CORE_ASSERT(!s_Instance, "Application already exists!")
 		s_Instance = this;
 
 		this->window = std::unique_ptr<IWindow>(IWindow::create());
 		this->window->setEventCallback(GE_BIND_EVENT_FN(Application::onEvent));
+
+		this->camera = new PerspectiveCamera(70.0f, (float)this->window->getWidth() / (float)this->window->getHeight(), 0.01f, 1000.0f);
 
 		this->imGuiLayer = new ImGuiLayer();
 		pushOverlay(this->imGuiLayer);
@@ -49,10 +50,10 @@ namespace GameEngine {
 		//Vertex Array
 		this->squareVA.reset(IVertexArray::Create());
 		float squareVertices[3 * 4] = {
-			 0.75, -0.75f, 0.0f,
-			-0.75, -0.75f, 0.0f,
-			 0.75,  0.75f, 0.0f,
-			-0.75,  0.75f, 0.0f,
+			 0.75, -0.75f, 2.5f,
+			-0.75, -0.75f, 2.5f,
+			 0.75,  0.75f, 2.5f,
+			-0.75,  0.75f, 2.5f,
 		};
 		std::shared_ptr<IVertexBuffer> squareVB;
 		squareVB.reset(IVertexBuffer::Create(squareVertices, sizeof(squareVertices)));
@@ -137,6 +138,11 @@ namespace GameEngine {
 		this->blueShader = std::make_shared<Shader>(blueShaderVertexSrc, blueShaderFragmentSrc);
 	}
 
+	Application::~Application()
+	{
+		delete this->camera;
+	}
+
 	void Application::pushLayer(ILayer* layer)
 	{
 		this->layerStack.pushLayer(layer);
@@ -167,7 +173,7 @@ namespace GameEngine {
 			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 			RenderCommand::Clear();
 
-			IRenderer::BeginScene(this->camera);
+			IRenderer::BeginScene(*this->camera);
 			{
 				IRenderer::Submit(this->blueShader, this->squareVA);
 				IRenderer::Submit(this->shader, this->vertexArray);
