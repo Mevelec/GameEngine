@@ -1,6 +1,6 @@
 #pragma once
 
-#include "glm.hpp"
+#include <glm/glm.hpp>
 
 namespace GameEngine {
 	class GE_API OrtographicCamera
@@ -25,7 +25,7 @@ namespace GameEngine {
 		glm::mat4 viewMat;;
 		glm::mat4 viewProjectionMat;
 
-		glm::vec3 position;
+		glm::vec3 position = {0.0f, 0.0f, 0.0f};
 		float rotation;
 	};
 }

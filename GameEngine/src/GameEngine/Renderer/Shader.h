@@ -1,8 +1,8 @@
 #pragma once
 
 #include <string.h>
-#include "glm.hpp"
-#include "gtc/type_ptr.hpp"
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace GameEngine {
 

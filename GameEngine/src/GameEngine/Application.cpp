@@ -167,14 +167,10 @@ namespace GameEngine {
 			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 			RenderCommand::Clear();
 
-			IRenderer::BeginScene();
+			IRenderer::BeginScene(this->camera);
 			{
-				this->blueShader->bind();
-				this->blueShader->setUniformMat4("u_ViewProjectionMatrix", this->camera.getViewProjectionMat());
-				IRenderer::Submit(this->squareVA);
-				this->shader->bind();
-				this->shader->setUniformMat4("u_ViewProjectionMatrix", this->camera.getViewProjectionMat());
-				IRenderer::Submit(this->vertexArray);
+				IRenderer::Submit(this->blueShader, this->squareVA);
+				IRenderer::Submit(this->shader, this->vertexArray);
 			}
 			IRenderer::EndScene();
 

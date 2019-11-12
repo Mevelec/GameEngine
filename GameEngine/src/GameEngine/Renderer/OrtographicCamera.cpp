@@ -1,7 +1,7 @@
 #include "hzpch.h"
 #include "OrtographicCamera.h"
 
-#include "gtc/matrix_transform.hpp"
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace GameEngine {
 	OrtographicCamera::OrtographicCamera(float left, float right, float bottom, float top)
@@ -18,10 +18,9 @@ namespace GameEngine {
 	void OrtographicCamera::update()
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), this->position) * 
-			glm::rotate(glm::mat4(1.0f), this->rotation, glm::vec3(0, 0, 1 ));
+			glm::rotate(glm::mat4(1.0f), glm::radians(this->rotation), glm::vec3(0, 0, 1 ));
 		
 		this->viewMat = glm::inverse(transform);
-
 		this->viewProjectionMat = this->projectionMat * this->viewMat;
 	}
 
