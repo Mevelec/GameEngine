@@ -9,17 +9,9 @@
 
 #include "GameEngine/imGui/imGuiLayer.h"
 
-#include "GameEngine/Renderer/Shader.h"
-#include "GameEngine/Renderer/Buffer.h"
-#include "GameEngine/Renderer/IVertexArray.h"
-#include "GameEngine/Renderer/Camera/OrtographicCamera.h"
-#include "GameEngine/Renderer/Camera/PerspectiveCamera.h"
-
-
-
 namespace GameEngine
 {
-	class  GE_API Application
+	class  Application
 	{
 	public:
 		Application();
@@ -41,13 +33,6 @@ namespace GameEngine
 		bool running = true;
 		LayerStack layerStack;
 
-		std::shared_ptr<Shader> shader;
-		std::shared_ptr<Shader> blueShader;
-
-		std::shared_ptr<IVertexArray> vertexArray;
-		std::shared_ptr<IVertexArray> squareVA;
-
-		PerspectiveCamera* camera;
 	private:
 		static Application* s_Instance;
 	};
