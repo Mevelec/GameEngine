@@ -12,6 +12,9 @@
 
 #include "GameEngine/imGui/imGuiLayer.h"
 
+// -- Time -----------------------------
+#include "GameEngine/Core/TimeStep.h"
+
 // -- Renderer -------------------------
 #include "GameEngine/Renderer/Renderer.h"
 #include "GameEngine/Renderer/RenderCommand.h"

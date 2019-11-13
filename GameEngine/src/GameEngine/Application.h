@@ -6,6 +6,7 @@
 #include "GameEngine/Layer/LayerStack.h"
 #include "GameEngine/Events/Event.h"
 #include "GameEngine/Events/ApplicationEvent.h"
+#include "GameEngine/Core/TimeStep.h"
 
 #include "GameEngine/imGui/imGuiLayer.h"
 
@@ -27,11 +28,12 @@ namespace GameEngine
 		inline IWindow& GetWindow() { return *this->window;  }
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
-
+	private:
 		std::unique_ptr<IWindow> window;
 		ImGuiLayer* imGuiLayer;
 		bool running = true;
 		LayerStack layerStack;
+		float lastFrameTime = 0.0f;
 
 	private:
 		static Application* s_Instance;

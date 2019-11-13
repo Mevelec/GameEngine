@@ -4,6 +4,8 @@
 #include "GameEngine/Log.h"
 #include "GameEngine/Renderer/Renderer.h"
 
+#include "GLFW/glfw3.h"
+
 namespace GameEngine {
 
 	Application* Application::s_Instance = nullptr;
@@ -51,9 +53,13 @@ namespace GameEngine {
 
 		while (this->running) {
 
+			float time = glfwGetTime();
+			TimeStep timeStep = time - this->lastFrameTime;
+			this->lastFrameTime = time;
+
 			for (ILayer* layer : this->layerStack) 
 			{
-				layer->onUpdate();
+				layer->onUpdate(timeStep);
 			}
 
 			this->imGuiLayer->begin();
