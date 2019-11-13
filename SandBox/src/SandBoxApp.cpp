@@ -139,46 +139,47 @@ public:
 		delete this->camera;
 	}
 
-	void onUpdate()
+	void onUpdate(GameEngine::TimeStep ts)
 	{
+		GE_TRACE("Delta time : {0}s ({1}ms)", ts.getTime(), ts.getMs());
 
 		// MOVE
 		if (GameEngine::IInput::IsKeyPressed(GE_KEY_LEFT)) {
-			this->cameraPos.x += this->cameraMoveSpeed;
+			this->cameraPos.x += this->cameraMoveSpeed * ts;
 		}
 		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_RIGHT)) {
-			this->cameraPos.x -= this->cameraMoveSpeed;
+			this->cameraPos.x -= this->cameraMoveSpeed * ts;
 		}
 		if (GameEngine::IInput::IsKeyPressed(GE_KEY_UP)) {
-			this->cameraPos.z += this->cameraMoveSpeed;
+			this->cameraPos.z += this->cameraMoveSpeed * ts;
 		}
 		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_DOWN)) {
-			this->cameraPos.z -= this->cameraMoveSpeed;
+			this->cameraPos.z -= this->cameraMoveSpeed * ts;
 		}
 		if (GameEngine::IInput::IsKeyPressed(GE_KEY_PAGE_UP)) {
-			this->cameraPos.y += this->cameraMoveSpeed;
+			this->cameraPos.y += this->cameraMoveSpeed * ts;
 		}
 		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_PAGE_DOWN)) {
-			this->cameraPos.y -= this->cameraMoveSpeed;
+			this->cameraPos.y -= this->cameraMoveSpeed * ts;
 		}
 		// ROTATE
 		if (GameEngine::IInput::IsKeyPressed(GE_KEY_A)) {
-			this->cameraRot.y += this->cmaraRotateSpeed;
+			this->cameraRot.y += this->cmaraRotateSpeed * ts;
 		}
 		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_E)) {
-			this->cameraRot.y -= this->cmaraRotateSpeed;
+			this->cameraRot.y -= this->cmaraRotateSpeed * ts;
 		}
 		if (GameEngine::IInput::IsKeyPressed(GE_KEY_Z)) {
-			this->cameraRot.x += this->cmaraRotateSpeed;
+			this->cameraRot.x += this->cmaraRotateSpeed * ts;
 		}
 		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_S)) {
-			this->cameraRot.x -= this->cmaraRotateSpeed;
+			this->cameraRot.x -= this->cmaraRotateSpeed * ts;
 		}
 		if (GameEngine::IInput::IsKeyPressed(GE_KEY_Q)) {
-			this->cameraRot.z += this->cmaraRotateSpeed;
+			this->cameraRot.z += this->cmaraRotateSpeed * ts;
 		}
 		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_D)) {
-			this->cameraRot.z -= this->cmaraRotateSpeed;
+			this->cameraRot.z -= this->cmaraRotateSpeed * ts;
 		}
 
 
@@ -186,7 +187,7 @@ public:
 		GameEngine::RenderCommand::Clear();
 
 		this->camera->setPostion(this->cameraPos);
-		this->camera->setRotation(this->cameraRot);
+		//this->camera->setRotation(this->cameraRot);
 
 
 		GameEngine::IRenderer::BeginScene(*this->camera);
@@ -222,8 +223,8 @@ private:
 	GameEngine::PerspectiveCamera* camera;
 	glm::vec3 cameraPos;
 	glm::vec3 cameraRot;
-	float cameraMoveSpeed = 0.1f;
-	float cmaraRotateSpeed = 0.1f;
+	float cameraMoveSpeed = 1.0f;
+	float cmaraRotateSpeed = 5.0f;
 
 };
 class Sandbox : public GameEngine::Application
