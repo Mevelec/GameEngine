@@ -5,7 +5,9 @@
 class ExampleLayer : public GameEngine::ILayer
 {
 public:
-	ExampleLayer() : ILayer("Example"){
+	ExampleLayer() 
+		: ILayer("Example")
+	{
 		int width = GameEngine::Application::get().GetWindow().getWidth();
 		int height = GameEngine::Application::get().GetWindow().getHeight();
 
@@ -44,6 +46,7 @@ public:
 		this->vertexArray->setIndexBuffer(indexBuffer);
 
 		//////// SQUARE ////////
+		this->squareTrans = GameEngine::Transform();
 		//Vertex Array
 		this->squareVA.reset(GameEngine::IVertexArray::Create());
 		float squareVertices[3 * 4] = {
@@ -73,6 +76,7 @@ public:
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjectionMatrix;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -80,7 +84,7 @@ public:
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ViewProjectionMatrix * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjectionMatrix  * u_Transform * vec4(a_Position, 1.0);
 				v_Color = a_Color;
 			}			
 
@@ -107,13 +111,14 @@ public:
 			layout(location = 0) in vec3 a_Position;
 
 			uniform mat4 u_ViewProjectionMatrix;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ViewProjectionMatrix * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjectionMatrix * u_Transform * vec4(a_Position, 1.0);
 			}			
 
 		)";
@@ -192,7 +197,8 @@ public:
 
 		GameEngine::IRenderer::BeginScene(*this->camera);
 		{
-			GameEngine::IRenderer::Submit(this->blueShader, this->squareVA);
+			GameEngine::IRenderer::Submit(this->blueShader, this->squareVA, this->squareTrans.getTransform());
+			this->squareTrans.translate(glm::vec3(0.01f, 0.01f, 0.01f));
 			GameEngine::IRenderer::Submit(this->shader, this->vertexArray);
 		}
 		GameEngine::IRenderer::EndScene();
@@ -225,6 +231,8 @@ private:
 	glm::vec3 cameraRot;
 	float cameraMoveSpeed = 1.0f;
 	float cmaraRotateSpeed = 5.0f;
+
+	GameEngine::Transform squareTrans = GameEngine::Transform();
 
 };
 class Sandbox : public GameEngine::Application
