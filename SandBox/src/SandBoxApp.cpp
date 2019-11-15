@@ -47,13 +47,14 @@ public:
 
 		//////// SQUARE ////////
 		this->squareTrans = GameEngine::Transform();
+		this->squareTrans.translate(glm::vec3(0.f, 0.f, 1.f));
 		//Vertex Array
 		this->squareVA.reset(GameEngine::IVertexArray::Create());
 		float squareVertices[3 * 4] = {
-			 0.75, -0.75f, 2.5f,
-			-0.75, -0.75f, 2.5f,
-			 0.75,  0.75f, 2.5f,
-			-0.75,  0.75f, 2.5f,
+			 0.75, -0.75f, 0.0f,
+			-0.75, -0.75f, 0.0f,
+			 0.75,  0.75f, 0.0f,
+			-0.75,  0.75f, 0.0f,
 		};
 		std::shared_ptr<GameEngine::IVertexBuffer> squareVB;
 		squareVB.reset(GameEngine::IVertexBuffer::Create(squareVertices, sizeof(squareVertices)));
@@ -198,7 +199,9 @@ public:
 		GameEngine::IRenderer::BeginScene(*this->camera);
 		{
 			GameEngine::IRenderer::Submit(this->blueShader, this->squareVA, this->squareTrans.getTransform());
-			this->squareTrans.translate(glm::vec3(0.01f, 0.01f, 0.01f));
+			//this->squareTrans.translate(glm::vec3(0.01f, 0.00f, 0.01f));
+			//this->squareTrans.rotate(glm::vec3(0.0f, 1.0f, 0.0f));
+			//this->squareTrans.lookAt(glm::vec3(1.f, 0.0f, 1.0f));
 			GameEngine::IRenderer::Submit(this->shader, this->vertexArray);
 		}
 		GameEngine::IRenderer::EndScene();
