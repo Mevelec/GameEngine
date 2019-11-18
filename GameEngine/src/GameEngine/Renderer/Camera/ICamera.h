@@ -1,19 +1,14 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include "GameEngine/Components/ITransform.h"
 
 namespace GameEngine {
 
-	class  ICamera
+	class  ICamera : public ITransform
 	{
 	public:
-		virtual void update() = 0;
-
-		inline const glm::vec3& getPositon() const { return this->position; };
-		inline float getRotation() const { return this->rotation; };
-
-		virtual void setPostion(const glm::vec3& position) = 0;
-		virtual void setRotation(const float rotation) = 0;
+		virtual void update() { ITransform::update(); };
 
 		const glm::mat4& getProjectionMat() const { return this->projectionMat; };
 		const glm::mat4& getViewMat() const { return this->viewMat; };
@@ -23,8 +18,5 @@ namespace GameEngine {
 		glm::mat4 projectionMat;
 		glm::mat4 viewMat;;
 		glm::mat4 viewProjectionMat;
-
-		glm::vec3 position = { 0.0f, 0.0f, 0.0f };
-		float rotation = 0.0f;
 	};
 }

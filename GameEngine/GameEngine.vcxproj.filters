@@ -134,7 +134,7 @@
     <ClInclude Include="src\GameEngine\Renderer\Camera\PerspectiveCamera.h">
       <Filter>GameEngine\Renderer\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameEngine\Components\Transform.h">
+    <ClInclude Include="src\GameEngine\Components\ITransform.h">
       <Filter>GameEngine\Components</Filter>
     </ClInclude>
   </ItemGroup>
@@ -200,7 +200,7 @@
     <ClCompile Include="src\GameEngine\Renderer\Camera\PerspectiveCamera.cpp">
       <Filter>GameEngine\Renderer\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameEngine\Components\Transform.cpp">
+    <ClCompile Include="src\GameEngine\Components\ITransform.cpp">
       <Filter>GameEngine\Components</Filter>
     </ClCompile>
   </ItemGroup>

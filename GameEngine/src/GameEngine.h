@@ -13,7 +13,7 @@
 #include "GameEngine/imGui/imGuiLayer.h"
 
 // -- Components -----------------------
-#include "GameEngine/Components/Transform.h"
+#include "GameEngine/Components/ITransform.h"
 // -- Time -----------------------------
 #include "GameEngine/Core/TimeStep.h"
 
