@@ -5,11 +5,12 @@
 class ExampleLayer : public GameEngine::ILayer
 {
 public:
-	ExampleLayer() : ILayer("Example"){
+	ExampleLayer() 
+		: ILayer("Example")
+	{
 		int width = GameEngine::Application::get().GetWindow().getWidth();
 		int height = GameEngine::Application::get().GetWindow().getHeight();
 
-		this->cameraPos = glm::vec3(0.0f, 0.0f, -0.5f);
 		this->camera = new GameEngine::PerspectiveCamera(
 			70.0f, 
 			(float)width / (float)height,
@@ -44,13 +45,15 @@ public:
 		this->vertexArray->setIndexBuffer(indexBuffer);
 
 		//////// SQUARE ////////
+		//this->squareTrans = GameEngine::Transform();
+		//this->squareTrans.translate(glm::vec3(0.f, 0.f, 1.f));
 		//Vertex Array
 		this->squareVA.reset(GameEngine::IVertexArray::Create());
 		float squareVertices[3 * 4] = {
-			 0.75, -0.75f, 2.5f,
-			-0.75, -0.75f, 2.5f,
-			 0.75,  0.75f, 2.5f,
-			-0.75,  0.75f, 2.5f,
+			 0.75, -0.75f, 0.0f,
+			-0.75, -0.75f, 0.0f,
+			 0.75,  0.75f, 0.0f,
+			-0.75,  0.75f, 0.0f,
 		};
 		std::shared_ptr<GameEngine::IVertexBuffer> squareVB;
 		squareVB.reset(GameEngine::IVertexBuffer::Create(squareVertices, sizeof(squareVertices)));
@@ -73,6 +76,7 @@ public:
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjectionMatrix;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -80,7 +84,7 @@ public:
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ViewProjectionMatrix * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjectionMatrix  * u_Transform * vec4(a_Position, 1.0);
 				v_Color = a_Color;
 			}			
 
@@ -107,13 +111,14 @@ public:
 			layout(location = 0) in vec3 a_Position;
 
 			uniform mat4 u_ViewProjectionMatrix;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ViewProjectionMatrix * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjectionMatrix * u_Transform * vec4(a_Position, 1.0);
 			}			
 
 		)";
@@ -141,53 +146,51 @@ public:
 
 	void onUpdate(GameEngine::TimeStep ts)
 	{
-		GE_TRACE("Delta time : {0}s ({1}ms)", ts.getTime(), ts.getMs());
+		GE_TRACE("Camera rotation {0}, {1}, {2}, {3}", this->camera->getRotation().x, this->camera->getRotation().y, this->camera->getRotation().z);
+		//GE_TRACE("Camera position {0}, {1}, {2}", this->camera->getPosition().x, this->camera->getPosition().y, this->camera->getPosition().z);
 
 		// MOVE
-		if (GameEngine::IInput::IsKeyPressed(GE_KEY_LEFT)) {
-			this->cameraPos.x += this->cameraMoveSpeed * ts;
-		}
-		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_RIGHT)) {
-			this->cameraPos.x -= this->cameraMoveSpeed * ts;
-		}
-		if (GameEngine::IInput::IsKeyPressed(GE_KEY_UP)) {
-			this->cameraPos.z += this->cameraMoveSpeed * ts;
-		}
-		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_DOWN)) {
-			this->cameraPos.z -= this->cameraMoveSpeed * ts;
-		}
-		if (GameEngine::IInput::IsKeyPressed(GE_KEY_PAGE_UP)) {
-			this->cameraPos.y += this->cameraMoveSpeed * ts;
-		}
-		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_PAGE_DOWN)) {
-			this->cameraPos.y -= this->cameraMoveSpeed * ts;
-		}
-		// ROTATE
 		if (GameEngine::IInput::IsKeyPressed(GE_KEY_A)) {
-			this->cameraRot.y += this->cmaraRotateSpeed * ts;
-		}
-		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_E)) {
-			this->cameraRot.y -= this->cmaraRotateSpeed * ts;
-		}
-		if (GameEngine::IInput::IsKeyPressed(GE_KEY_Z)) {
-			this->cameraRot.x += this->cmaraRotateSpeed * ts;
-		}
-		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_S)) {
-			this->cameraRot.x -= this->cmaraRotateSpeed * ts;
-		}
-		if (GameEngine::IInput::IsKeyPressed(GE_KEY_Q)) {
-			this->cameraRot.z += this->cmaraRotateSpeed * ts;
+			this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0});
 		}
 		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_D)) {
-			this->cameraRot.z -= this->cmaraRotateSpeed * ts;
+			this->camera->translate({ this->cameraMoveSpeed * ts * -1, 0, 0 });
+		}
+		if (GameEngine::IInput::IsKeyPressed(GE_KEY_W)) {
+			this->camera->translate({ 0, 0, this->cameraMoveSpeed * ts });
+		}
+		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_S)) {
+			this->camera->translate({ 0, 0, this->cameraMoveSpeed * ts * -1 });
+		}
+		if (GameEngine::IInput::IsKeyPressed(GE_KEY_LEFT_SHIFT)) {
+			this->camera->translate({ 0, this->cameraMoveSpeed * ts, 0 });
+		}
+		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_LEFT_CONTROL)) {
+			this->camera->translate({ 0, this->cameraMoveSpeed * ts * -1, 0 });
+		}
+		// ROTATE
+		if (GameEngine::IInput::IsKeyPressed(GE_KEY_Q)) {
+			this->camera->rotate({0, this->cmaraRotateSpeed * ts , 0});
+		}
+		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_E)) {
+			this->camera->rotate({ 0, this->cmaraRotateSpeed * ts * -1 , 0 });
+		}
+		if (GameEngine::IInput::IsKeyPressed(GE_KEY_UP)) {
+			this->camera->rotate({ this->cmaraRotateSpeed * ts, 0 , 0 });
+		}
+		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_DOWN)) {
+			this->camera->rotate({ this->cmaraRotateSpeed * ts * -1, 0 , 0 });
+		}
+		if (GameEngine::IInput::IsKeyPressed(GE_KEY_LEFT)) {
+			this->camera->rotate({ 0, 0, this->cmaraRotateSpeed * ts});
+		}
+		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_RIGHT)) {
+			this->camera->rotate({ 0, 0, this->cmaraRotateSpeed * ts * -1 });
 		}
 
 
 		GameEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		GameEngine::RenderCommand::Clear();
-
-		this->camera->setPostion(this->cameraPos);
-		//this->camera->setRotation(this->cameraRot);
 
 
 		GameEngine::IRenderer::BeginScene(*this->camera);
@@ -220,11 +223,11 @@ private:
 	std::shared_ptr<GameEngine::IVertexArray> vertexArray;
 	std::shared_ptr<GameEngine::IVertexArray> squareVA;
 
-	GameEngine::PerspectiveCamera* camera;
-	glm::vec3 cameraPos;
-	glm::vec3 cameraRot;
+	GameEngine::ICamera* camera;
 	float cameraMoveSpeed = 1.0f;
-	float cmaraRotateSpeed = 5.0f;
+	float cmaraRotateSpeed = 1.0f;
+
+	//GameEngine::Transform squareTrans = GameEngine::Transform();
 
 };
 class Sandbox : public GameEngine::Application

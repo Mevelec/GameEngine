@@ -31,6 +31,9 @@
     <Filter Include="GameEngine\Core">
       <UniqueIdentifier>{06b698e2-3516-45cb-9529-a26a7de6e9b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Components">
+      <UniqueIdentifier>{0046fb78-e40f-49ea-94b2-49f6ad975626}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameEngine.h" />
@@ -131,6 +134,9 @@
     <ClInclude Include="src\GameEngine\Renderer\Camera\PerspectiveCamera.h">
       <Filter>GameEngine\Renderer\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEngine\Components\ITransform.h">
+      <Filter>GameEngine\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
@@ -193,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="src\GameEngine\Renderer\Camera\PerspectiveCamera.cpp">
       <Filter>GameEngine\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Components\ITransform.cpp">
+      <Filter>GameEngine\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
