@@ -192,15 +192,10 @@ public:
 		GameEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		GameEngine::RenderCommand::Clear();
 
-		//this->camera->setRotation(this->cameraRot);
-
 
 		GameEngine::IRenderer::BeginScene(*this->camera);
 		{
 			GameEngine::IRenderer::Submit(this->blueShader, this->squareVA);
-			//this->squareTrans.translate(glm::vec3(0.01f, 0.00f, 0.01f));
-			//this->squareTrans.rotate(glm::vec3(0.0f, 1.0f, 0.0f));
-			//this->squareTrans.lookAt(glm::vec3(1.f, 0.0f, 1.0f));
 			GameEngine::IRenderer::Submit(this->shader, this->vertexArray);
 		}
 		GameEngine::IRenderer::EndScene();
@@ -228,7 +223,7 @@ private:
 	std::shared_ptr<GameEngine::IVertexArray> vertexArray;
 	std::shared_ptr<GameEngine::IVertexArray> squareVA;
 
-	GameEngine::PerspectiveCamera* camera;
+	GameEngine::ICamera* camera;
 	float cameraMoveSpeed = 1.0f;
 	float cmaraRotateSpeed = 1.0f;
 
