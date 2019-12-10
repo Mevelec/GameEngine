@@ -8,7 +8,7 @@ namespace GameEngine {
 		: fov(fov), clipNear(clipNear), clipFar(clipFar)
 	{
 		this->projectionMat = glm::perspective(fov, aspect, clipNear, clipFar);
-		this->viewMat = glm::lookAt(this->position, this->position + this->forward, this->up);
+		this->viewMat = this->getTransform();
 		this->viewProjectionMat = this->projectionMat * this->viewMat;
 	}
 
@@ -19,9 +19,10 @@ namespace GameEngine {
 
 	void PerspectiveCamera::update()
 	{
+		ICamera::update();
+
 		this->viewMat = this->getTransform();
 		this->viewProjectionMat = this->projectionMat * this->viewMat;
-		ICamera::update();
 	}
 
 

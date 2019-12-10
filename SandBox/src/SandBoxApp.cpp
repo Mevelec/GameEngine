@@ -146,8 +146,9 @@ public:
 
 	void onUpdate(GameEngine::TimeStep ts)
 	{
-		GE_TRACE("Camera rotation {0}, {1}, {2}", this->camera->getRotation().x, this->camera->getRotation().y, this->camera->getRotation().z);
-		
+		GE_TRACE("Camera rotation {0}, {1}, {2}, {3}", this->camera->getRotation().x, this->camera->getRotation().y, this->camera->getRotation().z);
+		//GE_TRACE("Camera position {0}, {1}, {2}", this->camera->getPosition().x, this->camera->getPosition().y, this->camera->getPosition().z);
+
 		// MOVE
 		if (GameEngine::IInput::IsKeyPressed(GE_KEY_A)) {
 			this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0});

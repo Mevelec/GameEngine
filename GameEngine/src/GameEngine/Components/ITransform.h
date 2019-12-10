@@ -2,6 +2,8 @@
 #include <glm/glm.hpp>
 
 #include <glm/gtc/quaternion.hpp> 
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 namespace GameEngine {
 
@@ -10,26 +12,23 @@ namespace GameEngine {
 	public:
 		ITransform();
 
-		const glm::vec3 getRotation() const;
-		void rotate(const glm::vec3& angles);
-		void rotate(const glm::quat& rotation);
-		void lookAt(const glm::vec3& position);
-		void lookAt(const glm::vec3& position, const glm::vec3&  up);
+		//GETTERS
+		inline glm::mat4 getTransform() { return this->transform; };
+		inline glm::vec3 getPosition() { return this->position; };
+		inline glm::vec3 getRotation() { return glm::eulerAngles(this->rotation) * 3.14159f / 180.f; };
 
-		void scale();
+		//TRANSFORM
+		void translate(glm::vec3 direction);
 
-		void translate(const glm::vec3& translate);
-		void translateForward();
+		//ROTATE
+		void rotate(glm::vec3 rotation);
 
-		const glm::mat4& getTransform() const;
-		const inline glm::vec3& getPosition() const { return this->position; };
 	protected:
 		glm::fquat rotation;
 		glm::vec3 dimensions;
 		glm::vec3 position;
 
 		glm::vec3 forward;
-		glm::vec3 right;
 		glm::vec3 up;
 
 	protected:
