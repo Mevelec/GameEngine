@@ -15,7 +15,11 @@ namespace GameEngine {
 		//GETTERS
 		inline glm::mat4 getTransform() { return this->transform; };
 		inline glm::vec3 getPosition() { return this->position; };
-		inline glm::vec3 getRotation() { return glm::eulerAngles(this->rotation) * 3.14159f / 180.f; };
+		//Rotation getters
+		inline glm::vec3 getRotation() {return glm::degrees(glm::eulerAngles(this->rotation)); };
+		inline glm::vec3 getEulerAngles() { return glm::eulerAngles(this->rotation); };
+		inline glm::fquat getQuaternions() { return this->rotation; };
+
 
 		//TRANSFORM
 		void translate(glm::vec3 direction);

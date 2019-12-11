@@ -15,13 +15,13 @@ public:
 		int width = GameEngine::Application::get().GetWindow().getWidth();
 		int height = GameEngine::Application::get().GetWindow().getHeight();
 
-		/*this->camera = new GameEngine::PerspectiveCamera(
+		this->camera = new GameEngine::PerspectiveCamera(
 			70.0f, 
 			(float)width / (float)height,
 			0.01f, 
 			1000.0f
-		);*/
-		this->camera = new GameEngine::OrtographicCamera(-1.6f, 1.6f, -0.9f, 0.9f);
+		);
+		//this->camera = new GameEngine::OrtographicCamera(-1.6f, 1.6f, -0.9f, 0.9f);
 
 		//Vertex Array
 		this->vertexArray.reset(GameEngine::IVertexArray::Create());
@@ -49,8 +49,6 @@ public:
 		this->vertexArray->setIndexBuffer(indexBuffer);
 
 		//////// SQUARE ////////
-		//this->squareTrans = GameEngine::Transform();
-		//this->squareTrans.translate(glm::vec3(0.f, 0.f, 1.f));
 		//Vertex Array
 		this->squareVA.reset(GameEngine::IVertexArray::Create());
 		float squareVertices[3 * 4] = {
@@ -151,9 +149,6 @@ public:
 
 	void onUpdate(GameEngine::TimeStep ts)
 	{
-		//GE_TRACE("Camera rotation {0}, {1}, {2}, {3}", this->camera->getRotation().x, this->camera->getRotation().y, this->camera->getRotation().z);
-		GE_TRACE("Camera position {0}, {1}, {2}", this->camera->getPosition().x, this->camera->getPosition().y, this->camera->getPosition().z);
-
 		// MOVE
 		if (GameEngine::IInput::IsKeyPressed(GE_KEY_A)) {
 			this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0});
@@ -210,10 +205,54 @@ public:
 
 		// Renderer::Flush();
 	}
-	void onImGuiRender() 
+	void onImGuiRender()
 	{
 		ImGui::Begin("Settings");
 		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+
+		{
+			ImGui::LabelText("", "Camera Position :");
+			float camPos[3] = {
+				this->camera->getPosition().x,
+				this->camera->getPosition().y,
+				this->camera->getPosition().z
+			};
+			ImGui::DragFloat3("X Y Z",
+				camPos
+			);
+
+			ImGui::LabelText("", "Camera Rotation Degrees :");
+			float camRotDegree[3] = {
+				this->camera->getRotation().x,
+				this->camera->getRotation().y,
+				this->camera->getRotation().z
+			};
+			ImGui::DragFloat3("X Y Z",
+				camRotDegree
+			);
+
+			ImGui::LabelText("", "Camera Rotation Radians :");
+			float camRotRadians[3] = {
+				this->camera->getEulerAngles().x,
+				this->camera->getEulerAngles().y,
+				this->camera->getEulerAngles().z
+			};
+			ImGui::DragFloat3("X Y Z",
+				camRotRadians
+			);
+
+			ImGui::LabelText("", "Camera Rotation Degrees :");
+			float camRotQuat[4] = {
+				this->camera->getQuaternions().x,
+				this->camera->getQuaternions().y,
+				this->camera->getQuaternions().z,
+				this->camera->getQuaternions().w
+			};
+			ImGui::DragFloat4("X Y Z W",
+				camRotQuat
+			);
+		}
+
 		ImGui::End();
 	}
 	void onEvent(GameEngine::Event& event) override
