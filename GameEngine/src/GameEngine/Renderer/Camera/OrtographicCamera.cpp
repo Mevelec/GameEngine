@@ -9,6 +9,8 @@ namespace GameEngine {
 		this->projectionMat = glm::ortho(left, right, bottom, top, -1000.0f, 0.0f);
 		this->viewMat = this->getTransform();
 		this->viewProjectionMat = this->projectionMat * this->viewMat;
+
+		this->update();
 	}
 
 

@@ -16,7 +16,7 @@ namespace GameEngine {
 	{
 	}
 
-	void IRenderer::Submit(const std::shared_ptr<IShader>& shader, const std::shared_ptr<IVertexArray>& vertexArray, const glm::mat4 transform)
+	void IRenderer::Submit(const Ref<IShader>& shader, const Ref<IVertexArray>& vertexArray, const glm::mat4 transform)
 	{
 		shader->bind();
 		std::dynamic_pointer_cast<OpenGLShader>(shader)->uploadUniformMat4("u_ViewProjectionMatrix", sceneData->viewProjectionMat);
