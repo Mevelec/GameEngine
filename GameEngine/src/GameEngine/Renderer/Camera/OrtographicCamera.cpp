@@ -6,8 +6,8 @@
 namespace GameEngine {
 	OrtographicCamera::OrtographicCamera(float left, float right, float bottom, float top)
 	{
-		this->projectionMat = glm::ortho(left, right, bottom, top, -1.0f, 0.0f);
-		this->viewMat = glm::mat4(1.0f);
+		this->projectionMat = glm::ortho(left, right, bottom, top, -1000.0f, 0.0f);
+		this->viewMat = this->getTransform();
 		this->viewProjectionMat = this->projectionMat * this->viewMat;
 	}
 
@@ -18,10 +18,10 @@ namespace GameEngine {
 
 	void OrtographicCamera::update()
 	{
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), this->position) 
-			/*glm::rotate(glm::mat4(1.0f), glm::radians(this->rotation), glm::vec3(0, 0, 1 ))*/;
-		
-		this->viewMat = glm::inverse(transform);
+
+		ICamera::update();
+
+		this->viewMat = glm::inverse(this->getTransform());
 		this->viewProjectionMat = this->projectionMat * this->viewMat;
 	}
 
