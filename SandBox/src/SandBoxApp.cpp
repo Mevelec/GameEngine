@@ -31,7 +31,7 @@ public:
 			 0.5f, -0.5f, 0.0f, 0.2f, 0.2f, 0.8f, 1.0f,
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
 		};
-		std::shared_ptr<GameEngine::IVertexBuffer> vertexBuffer;
+		GameEngine::Ref<GameEngine::IVertexBuffer> vertexBuffer;
 		vertexBuffer.reset(GameEngine::IVertexBuffer::Create(vertices, sizeof(vertices)));
 		GameEngine::BufferLayout layout = {
 			{ GameEngine::ShaderDataType::Float3, "a_Position"},
@@ -44,7 +44,7 @@ public:
 
 		//Index Buffer
 		unsigned int indices[3] = { 0, 1, 2 };
-		std::shared_ptr<GameEngine::IIndexBuffer> indexBuffer;
+		GameEngine::Ref<GameEngine::IIndexBuffer> indexBuffer;
 		indexBuffer.reset(GameEngine::IIndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		this->vertexArray->setIndexBuffer(indexBuffer);
 
@@ -59,7 +59,7 @@ public:
 			 0.75,  0.75f, 0.0f,
 			-0.75,  0.75f, 0.0f,
 		};
-		std::shared_ptr<GameEngine::IVertexBuffer> squareVB;
+		GameEngine::Ref<GameEngine::IVertexBuffer> squareVB;
 		squareVB.reset(GameEngine::IVertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		GameEngine::BufferLayout squareLayout = {
 			{ GameEngine::ShaderDataType::Float3, "a_Position"},
@@ -69,7 +69,7 @@ public:
 
 		//Index Buffer
 		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 1 };
-		std::shared_ptr<GameEngine::IIndexBuffer> squareIB;
+		GameEngine::Ref<GameEngine::IIndexBuffer> squareIB;
 		squareIB.reset(GameEngine::IIndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		this->squareVA->setIndexBuffer(squareIB);
 
@@ -227,11 +227,11 @@ public:
 		return false;
 	}
 private:
-	std::shared_ptr<GameEngine::IShader> shader;
-	std::shared_ptr<GameEngine::IShader> flatColorShader;
+	GameEngine::Ref<GameEngine::IShader> shader;
+	GameEngine::Ref<GameEngine::IShader> flatColorShader;
 
-	std::shared_ptr<GameEngine::IVertexArray> vertexArray;
-	std::shared_ptr<GameEngine::IVertexArray> squareVA;
+	GameEngine::Ref<GameEngine::IVertexArray> vertexArray;
+	GameEngine::Ref<GameEngine::IVertexArray> squareVA;
 
 	GameEngine::ICamera* camera;
 	float cameraMoveSpeed = 1.0f;
