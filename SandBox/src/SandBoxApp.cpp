@@ -15,13 +15,13 @@ public:
 		int width = GameEngine::Application::get().GetWindow().getWidth();
 		int height = GameEngine::Application::get().GetWindow().getHeight();
 
-		this->camera = new GameEngine::PerspectiveCamera(
+		/*this->camera = new GameEngine::PerspectiveCamera(
 			70.0f, 
 			(float)width / (float)height,
 			0.01f, 
 			1000.0f
-		);
-		//this->camera = new GameEngine::OrtographicCamera(-1.6f, 1.6f, -0.9f, 0.9f);
+		);*/
+		this->camera = new GameEngine::OrtographicCamera(-1.6f, 1.6f, -0.9f, 0.9f);
 
 		//Vertex Array
 		this->vertexArray.reset(GameEngine::IVertexArray::Create());
@@ -151,8 +151,8 @@ public:
 
 	void onUpdate(GameEngine::TimeStep ts)
 	{
-		GE_TRACE("Camera rotation {0}, {1}, {2}, {3}", this->camera->getRotation().x, this->camera->getRotation().y, this->camera->getRotation().z);
-		//GE_TRACE("Camera position {0}, {1}, {2}", this->camera->getPosition().x, this->camera->getPosition().y, this->camera->getPosition().z);
+		//GE_TRACE("Camera rotation {0}, {1}, {2}, {3}", this->camera->getRotation().x, this->camera->getRotation().y, this->camera->getRotation().z);
+		GE_TRACE("Camera position {0}, {1}, {2}", this->camera->getPosition().x, this->camera->getPosition().y, this->camera->getPosition().z);
 
 		// MOVE
 		if (GameEngine::IInput::IsKeyPressed(GE_KEY_A)) {
