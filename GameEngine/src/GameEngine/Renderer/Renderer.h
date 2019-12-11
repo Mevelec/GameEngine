@@ -2,7 +2,7 @@
 
 #include "RenderCommand.h"
 #include "GameEngine/Renderer/Camera/ICamera.h"
-#include "GameEngine/Renderer/Shader.h"
+#include "GameEngine/Renderer/IShader.h"
 
 namespace GameEngine {
 
@@ -12,7 +12,7 @@ namespace GameEngine {
 		static void BeginScene(ICamera& camera);
 		static void EndScene();
 
-		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<IVertexArray>& vertexArray, const glm::mat4 transform = glm::mat4(1.0f));
+		static void Submit(const std::shared_ptr<IShader>& shader, const std::shared_ptr<IVertexArray>& vertexArray, const glm::mat4 transform = glm::mat4(1.0f));
 
 		inline static IRendererAPI::API GetAPI() { return IRendererAPI::GetAPI(); }
 	private:

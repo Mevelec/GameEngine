@@ -1,6 +1,10 @@
 #include <GameEngine.h>
 
+#include "Plateform/OpenGl/OpenGLShader.h"
+
 #include "imgui/imgui.h"
+
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer : public GameEngine::ILayer
 {
@@ -69,6 +73,7 @@ public:
 		squareIB.reset(GameEngine::IIndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		this->squareVA->setIndexBuffer(squareIB);
 
+		// BASIC SHADER
 		std::string vertexSrc = R"(
 			#version 330 core
 
@@ -103,9 +108,10 @@ public:
 			}			
 
 		)";
-		this->shader = std::make_shared<GameEngine::Shader>(vertexSrc, fragmentSrc);
+		this->shader.reset(GameEngine::IShader::Create(vertexSrc, fragmentSrc));
 
-		std::string blueShaderVertexSrc = R"(
+		// FLAT SHADER
+		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
 
 			layout(location = 0) in vec3 a_Position;
@@ -122,22 +128,21 @@ public:
 			}			
 
 		)";
-		std::string blueShaderFragmentSrc = R"(
+		std::string flatColorShaderFragmentSrc = R"(
 			#version 330 core
 
 			layout(location = 0) out vec4 color;
 			in vec3 v_Position;
-			in vec4 v_Color;
+
+			uniform vec3 u_Color;
 
 			void main()
 			{
-				color = vec4(0.2f, 0.2f, 0.8f, 1.0f);
+				color = vec4(u_Color, 1.0f);
 			}			
 
 		)";
-
-
-		this->blueShader = std::make_shared<GameEngine::Shader>(blueShaderVertexSrc, blueShaderFragmentSrc);
+		this->flatColorShader.reset(GameEngine::IShader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 	}
 
 	~ExampleLayer() {
@@ -192,10 +197,13 @@ public:
 		GameEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		GameEngine::RenderCommand::Clear();
 
+		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->flatColorShader)->bind();
+		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->flatColorShader)->uploadUniformFloat3("u_Color", m_SquareColor);
+
 
 		GameEngine::IRenderer::BeginScene(*this->camera);
 		{
-			GameEngine::IRenderer::Submit(this->blueShader, this->squareVA);
+			GameEngine::IRenderer::Submit(this->flatColorShader, this->squareVA);
 			GameEngine::IRenderer::Submit(this->shader, this->vertexArray);
 		}
 		GameEngine::IRenderer::EndScene();
@@ -204,7 +212,9 @@ public:
 	}
 	void onImGuiRender() 
 	{
-
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+		ImGui::End();
 	}
 	void onEvent(GameEngine::Event& event) override
 	{
@@ -217,8 +227,8 @@ public:
 		return false;
 	}
 private:
-	std::shared_ptr<GameEngine::Shader> shader;
-	std::shared_ptr<GameEngine::Shader> blueShader;
+	std::shared_ptr<GameEngine::IShader> shader;
+	std::shared_ptr<GameEngine::IShader> flatColorShader;
 
 	std::shared_ptr<GameEngine::IVertexArray> vertexArray;
 	std::shared_ptr<GameEngine::IVertexArray> squareVA;
@@ -228,6 +238,7 @@ private:
 	float cmaraRotateSpeed = 1.0f;
 
 	//GameEngine::Transform squareTrans = GameEngine::Transform();
+	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 
 };
 class Sandbox : public GameEngine::Application
