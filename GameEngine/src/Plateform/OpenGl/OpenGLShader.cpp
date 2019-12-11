@@ -1,11 +1,13 @@
 #include "hzpch.h"
-#include "Shader.h"
+#include "OpenGLShader.h"
 
 #include <glad/glad.h>
 
+#include <glm/gtc/type_ptr.hpp>
+
 namespace GameEngine {
 
-	Shader::Shader(const std::string& vertexSrc, const std::string& fragmentSrc)
+	OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
 	{
 		// Create an empty vertex shader handle
 		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -32,10 +34,8 @@ namespace GameEngine {
 			// We don't need the shader anymore.
 			glDeleteShader(vertexShader);
 
-			// Use the infoLog as you see fit.
-			GE_CORE_ASSERT(false, "Vertex Shader compilation faillure!");
 			GE_CORE_ERROR("{0}", infoLog.data());
-
+			GE_CORE_ASSERT(false, "Vertex shader compilation failure!");
 			return;
 		}
 
@@ -65,10 +65,8 @@ namespace GameEngine {
 			// Either of them. Don't leak shaders.
 			glDeleteShader(vertexShader);
 
-			// Use the infoLog as you see fit.
-			GE_CORE_ASSERT(false, "Fragment Shader compilation faillure!");
 			GE_CORE_ERROR("{0}", infoLog.data());
-
+			GE_CORE_ASSERT(false, "Fragment shader compilation failure!");
 			return;
 		}
 
@@ -76,62 +74,98 @@ namespace GameEngine {
 		// Now time to link them together into a program.
 		// Get a program object.
 		this->rendererID = glCreateProgram();
+		GLuint program = rendererID;
 
 		// Attach our shaders to our program
-		glAttachShader(this->rendererID, vertexShader);
-		glAttachShader(this->rendererID, fragmentShader);
+		glAttachShader(program, vertexShader);
+		glAttachShader(program, fragmentShader);
 
 		// Link our program
-		glLinkProgram(this->rendererID);
+		glLinkProgram(program);
 
 		// Note the different functions here: glGetProgram* instead of glGetShader*.
 		GLint isLinked = 0;
-		glGetProgramiv(this->rendererID, GL_LINK_STATUS, (int*)&isLinked);
+		glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
 		if (isLinked == GL_FALSE)
 		{
 			GLint maxLength = 0;
-			glGetProgramiv(this->rendererID, GL_INFO_LOG_LENGTH, &maxLength);
+			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
 
 			// The maxLength includes the NULL character
 			std::vector<GLchar> infoLog(maxLength);
-			glGetProgramInfoLog(this->rendererID, maxLength, &maxLength, &infoLog[0]);
+			glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
 
 			// We don't need the program anymore.
-			glDeleteProgram(this->rendererID);
+			glDeleteProgram(program);
 			// Don't leak shaders either.
 			glDeleteShader(vertexShader);
 			glDeleteShader(fragmentShader);
 
-			// Use the infoLog as you see fit.
-			GE_CORE_ASSERT(false, "Shader Link faillure!");
 			GE_CORE_ERROR("{0}", infoLog.data());
-
+			GE_CORE_ASSERT(false, "Shader link failure!");
 			return;
 		}
 
 		// Always detach shaders after a successful link.
-		glDetachShader(this->rendererID, vertexShader);
-		glDetachShader(this->rendererID, fragmentShader);
+		glDetachShader(program, vertexShader);
+		glDetachShader(program, fragmentShader);
 	}
 
-	Shader::~Shader()
+	OpenGLShader::~OpenGLShader()
 	{
-		glDeleteProgram(this->rendererID);
+		glDeleteProgram(rendererID);
 	}
 
-	void Shader::bind() const
+	void OpenGLShader::bind() const
 	{
-		glUseProgram(this->rendererID);
+		glUseProgram(rendererID);
 	}
 
-	void Shader::unbind() const
+	void OpenGLShader::unbind() const
 	{
 		glUseProgram(0);
 	}
 
-	void Shader::setUniformMat4(const std::string& name, const glm::mat4& matrix)
+	void OpenGLShader::uploadUniformInt(const std::string& name, int value)
 	{
-		GLint location = glGetUniformLocation(this->rendererID, name.c_str());
+		GLint location = glGetUniformLocation(rendererID, name.c_str());
+		glUniform1i(location, value);
+	}
+
+	void OpenGLShader::uploadUniformFloat(const std::string& name, float value)
+	{
+		GLint location = glGetUniformLocation(rendererID, name.c_str());
+		glUniform1f(location, value);
+	}
+
+	void OpenGLShader::uploadUniformFloat2(const std::string& name, const glm::vec2& value)
+	{
+		GLint location = glGetUniformLocation(rendererID, name.c_str());
+		glUniform2f(location, value.x, value.y);
+	}
+
+	void OpenGLShader::uploadUniformFloat3(const std::string& name, const glm::vec3& value)
+	{
+		GLint location = glGetUniformLocation(rendererID, name.c_str());
+		glUniform3f(location, value.x, value.y, value.z);
+	}
+
+	void OpenGLShader::uploadUniformFloat4(const std::string& name, const glm::vec4& value)
+	{
+		GLint location = glGetUniformLocation(rendererID, name.c_str());
+		glUniform4f(location, value.x, value.y, value.z, value.w);
+	}
+
+	void OpenGLShader::uploadUniformMat3(const std::string& name, const glm::mat3& matrix)
+	{
+		GLint location = glGetUniformLocation(rendererID, name.c_str());
+		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+	}
+
+	void OpenGLShader::uploadUniformMat4(const std::string& name, const glm::mat4& matrix)
+	{
+		GLint location = glGetUniformLocation(rendererID, name.c_str());
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
+
 }

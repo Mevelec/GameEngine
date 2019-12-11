@@ -97,9 +97,6 @@
     <ClInclude Include="src\GameEngine\Renderer\Renderer.h">
       <Filter>GameEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\Shader.h">
-      <Filter>GameEngine\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameEngine\imGui\imGuiLayer.h">
       <Filter>GameEngine\imGui</Filter>
     </ClInclude>
@@ -137,6 +134,12 @@
     <ClInclude Include="src\GameEngine\Components\ITransform.h">
       <Filter>GameEngine\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\Plateform\OpenGl\OpenGLShader.h">
+      <Filter>Plateform\OpenGl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\IShader.h">
+      <Filter>GameEngine\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
@@ -164,9 +167,6 @@
       <Filter>GameEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEngine\Renderer\Renderer.cpp">
-      <Filter>GameEngine\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\Shader.cpp">
       <Filter>GameEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEngine\imGui\ImGuiBuild.cpp">
@@ -202,6 +202,12 @@
     </ClCompile>
     <ClCompile Include="src\GameEngine\Components\ITransform.cpp">
       <Filter>GameEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plateform\OpenGl\OpenGLShader.cpp">
+      <Filter>Plateform\OpenGl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\IShader.cpp">
+      <Filter>GameEngine\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -140,6 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Plateform\OpenGl\OpenGLShader.h" />
     <ClInclude Include="src\GameEngine\Core\TimeStep.h" />
     <ClInclude Include="src\GameEngine\Renderer\Camera\ICamera.h" />
     <ClInclude Include="src\GameEngine.h" />
@@ -165,7 +166,7 @@
     <ClInclude Include="src\GameEngine\Renderer\Camera\OrtographicCamera.h" />
     <ClInclude Include="src\GameEngine\Renderer\RenderCommand.h" />
     <ClInclude Include="src\GameEngine\Renderer\Renderer.h" />
-    <ClInclude Include="src\GameEngine\Renderer\Shader.h" />
+    <ClInclude Include="src\GameEngine\Renderer\IShader.h" />
     <ClInclude Include="src\GameEngine\imGui\imGuiLayer.h" />
     <ClInclude Include="src\Plateform\OpenGl\OpenGLContext.h" />
     <ClInclude Include="src\Plateform\OpenGl\OpenGLRendererAPI.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="src\GameEngine\Components\ITransform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Plateform\OpenGl\OpenGLShader.cpp" />
     <ClCompile Include="src\GameEngine\Application.cpp" />
     <ClCompile Include="src\GameEngine\Layer\ILayer.cpp" />
     <ClCompile Include="src\GameEngine\Layer\LayerStack.cpp" />
@@ -188,7 +190,7 @@
     <ClCompile Include="src\GameEngine\Renderer\Camera\OrtographicCamera.cpp" />
     <ClCompile Include="src\GameEngine\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\GameEngine\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\GameEngine\Renderer\Shader.cpp" />
+    <ClCompile Include="src\GameEngine\Renderer\IShader.cpp" />
     <ClCompile Include="src\GameEngine\imGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\GameEngine\imGui\imGuiLayer.cpp" />
     <ClCompile Include="src\Plateform\OpenGl\OpenGLContext.cpp" />

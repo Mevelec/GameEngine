@@ -22,7 +22,7 @@
 #include "GameEngine/Renderer/RenderCommand.h"
 
 #include "GameEngine/Renderer/Buffer.h"
-#include "GameEngine/Renderer/Shader.h"
+#include "GameEngine/Renderer/IShader.h"
 #include "GameEngine/Renderer/IVertexArray.h"
 
 #include "GameEngine/Renderer/Camera/ICamera.h"
