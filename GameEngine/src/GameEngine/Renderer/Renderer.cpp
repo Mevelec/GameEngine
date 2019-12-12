@@ -7,6 +7,11 @@ namespace GameEngine {
 	
 	IRenderer::SceneData* IRenderer::sceneData = new IRenderer::SceneData;
 
+	void IRenderer::Init()
+	{
+		RenderCommand::Init();
+	}
+
 	void IRenderer::BeginScene(ICamera& camera)
 	{
 		sceneData->viewProjectionMat = camera.getViewProjectionMat();
