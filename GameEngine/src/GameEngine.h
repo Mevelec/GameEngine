@@ -22,9 +22,13 @@
 #include "GameEngine/Renderer/RenderCommand.h"
 
 #include "GameEngine/Renderer/Buffer.h"
-#include "GameEngine/Renderer/IShader.h"
 #include "GameEngine/Renderer/IVertexArray.h"
 
+// Texture
+#include "GameEngine/Renderer/IShader.h"
+#include "GameEngine/Renderer/ITexture.h"
+
+// Camera
 #include "GameEngine/Renderer/Camera/ICamera.h"
 #include "GameEngine/Renderer/Camera/OrtographicCamera.h"
 #include "GameEngine/Renderer/Camera/PerspectiveCamera.h"

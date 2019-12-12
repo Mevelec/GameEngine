@@ -49,18 +49,20 @@ public:
 		this->vertexArray->setIndexBuffer(indexBuffer);
 
 		//////// SQUARE ////////
+		this->squareTransform.reset(new GameEngine::ITransform());
 		//Vertex Array
 		this->squareVA.reset(GameEngine::IVertexArray::Create());
-		float squareVertices[3 * 4] = {
-			 0.75, -0.75f, 0.0f,
-			-0.75, -0.75f, 0.0f,
-			 0.75,  0.75f, 0.0f,
-			-0.75,  0.75f, 0.0f,
+		float squareVertices[5 * 4] = {
+			 0.75, -0.75f, 0.0f, 0.0f, 0.0f, 
+			-0.75, -0.75f, 0.0f, 1.0f, 0.0f,
+			 0.75,  0.75f, 0.0f, 1.0f, 1.0f, 
+			-0.75,  0.75f, 0.0f, 0.0f, 1.0f
 		};
 		GameEngine::Ref<GameEngine::IVertexBuffer> squareVB;
 		squareVB.reset(GameEngine::IVertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		GameEngine::BufferLayout squareLayout = {
 			{ GameEngine::ShaderDataType::Float3, "a_Position"},
+			{ GameEngine::ShaderDataType::Float2, "a_TextCoord" }
 		};
 		squareVB->setLayout(squareLayout);
 		this->squareVA->addVertexBuffer(squareVB);
@@ -141,6 +143,48 @@ public:
 
 		)";
 		this->flatColorShader.reset(GameEngine::IShader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+	
+		// TEXTURE SHADER
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 0) in vec2 a_TextCoord;
+
+			uniform mat4 u_ViewProjectionMatrix;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TextCoord;
+
+			void main()
+			{
+				v_TextCoord = a_TextCoord;
+				gl_Position = u_ViewProjectionMatrix * u_Transform * vec4(a_Position, 1.0);
+			}			
+
+		)";
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TextCoord;
+
+			uniform sampler2D u_Texture;
+
+			void main()
+			{
+				color = texture(u_Texture, v_TextCoord);
+			}			
+
+		)";
+		this->textureShader.reset(GameEngine::IShader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		this->uv_texture = GameEngine::ITexture2D::Create("assets/textures/UV_check.png");
+
+		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->bind();
+		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->uploadUniformInt("u_Texture", 0);
+
 	}
 
 	~ExampleLayer() {
@@ -198,8 +242,11 @@ public:
 
 		GameEngine::IRenderer::BeginScene(*this->camera);
 		{
-			GameEngine::IRenderer::Submit(this->flatColorShader, this->squareVA);
-			GameEngine::IRenderer::Submit(this->shader, this->vertexArray);
+			// square
+			this->uv_texture->bind();
+			GameEngine::IRenderer::Submit(this->textureShader, this->squareVA, this->squareTransform->getTransform());
+			// triangle
+			//GameEngine::IRenderer::Submit(this->shader, this->vertexArray);
 		}
 		GameEngine::IRenderer::EndScene();
 
@@ -267,10 +314,13 @@ public:
 	}
 private:
 	GameEngine::Ref<GameEngine::IShader> shader;
-	GameEngine::Ref<GameEngine::IShader> flatColorShader;
+	GameEngine::Ref<GameEngine::IShader> flatColorShader, textureShader;
+
+	GameEngine::Ref<GameEngine::ITexture> uv_texture;
 
 	GameEngine::Ref<GameEngine::IVertexArray> vertexArray;
 	GameEngine::Ref<GameEngine::IVertexArray> squareVA;
+	GameEngine::Ref<GameEngine::ITransform>   squareTransform;
 
 	GameEngine::ICamera* camera;
 	float cameraMoveSpeed = 1.0f;
