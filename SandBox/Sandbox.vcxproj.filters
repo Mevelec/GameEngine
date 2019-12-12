@@ -20,5 +20,8 @@
     <Image Include="assets\textures\UV_check.png">
       <Filter>assets\textures</Filter>
     </Image>
+    <Image Include="assets\textures\disney.png">
+      <Filter>assets\textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

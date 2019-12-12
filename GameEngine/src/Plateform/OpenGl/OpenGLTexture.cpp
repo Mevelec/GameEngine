@@ -1,4 +1,4 @@
-#include "hzpch.h"
+ #include "hzpch.h"
 #include "OpenGLTexture.h"
 
 #include "stb_image.h"
@@ -19,30 +19,33 @@ namespace GameEngine {
 		this->height = height;
 
 		// Determine image pixels Format and channel
-		unsigned int size;
-		unsigned int type;
+		GLenum internalFormat, dataFormat;
 		switch (channels) {
+		case 1:
+			internalFormat = GL_R8;
+			dataFormat = GL_R;
+			break;
 		case 3:
-			size = GL_RGB8;
-			type = GL_RGB;
+			internalFormat = GL_RGB8;
+			dataFormat = GL_RGB;
 			break;
 		case 4:
-			size = GL_RGBA8;
-			type = GL_RGBA;
+			internalFormat = GL_RGBA8;
+			dataFormat = GL_RGBA;
 			break;
-		default:
-			GE_ASSERT(false, "Image colorFormat not handled");
-			break;
+
 		}
+		GE_ASSERT(internalFormat && dataFormat, "Image Format not supported");
+
 
 		// Create Texture
 		glCreateTextures(GL_TEXTURE_2D, 1, &this->rendererID);
-		glTextureStorage2D(this->rendererID, 1, size, this->width, this->height);
+		glTextureStorage2D(this->rendererID, 1, internalFormat, this->width, this->height);
 
 		glTextureParameteri(this->rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTextureParameteri(this->rendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-		glTextureSubImage2D(this->rendererID, 0, 0, 0, this->width, this->height, type, GL_UNSIGNED_BYTE, data);
+		glTextureSubImage2D(this->rendererID, 0, 0, 0, this->width, this->height, dataFormat, GL_UNSIGNED_BYTE, data);
 
 		stbi_image_free(data);
 	}

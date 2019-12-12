@@ -9,6 +9,8 @@ namespace GameEngine {
 	class IRenderer
 	{
 	public:
+		static void Init();
+
 		static void BeginScene(ICamera& camera);
 		static void EndScene();
 
