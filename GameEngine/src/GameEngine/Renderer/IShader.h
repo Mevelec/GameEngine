@@ -13,5 +13,6 @@ namespace GameEngine {
 		virtual void unbind() const = 0;
 		
 		static IShader* Create(const std::string& vertexSrc, const std::string& fragmentSrc);
+		static IShader* Create(const std::string& path);
 	};
 }
