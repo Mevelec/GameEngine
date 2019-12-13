@@ -12,7 +12,7 @@ namespace GameEngine {
 		RenderCommand::Init();
 	}
 
-	void IRenderer::BeginScene(ICamera& camera)
+	void IRenderer::BeginScene(Camera& camera)
 	{
 		sceneData->viewProjectionMat = camera.getViewProjectionMat();
 	}
@@ -21,7 +21,7 @@ namespace GameEngine {
 	{
 	}
 
-	void IRenderer::Submit(const Ref<IShader>& shader, const Ref<IVertexArray>& vertexArray, const glm::mat4 transform)
+	void IRenderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4 transform)
 	{
 		shader->bind();
 		std::dynamic_pointer_cast<OpenGLShader>(shader)->uploadUniformMat4("u_ViewProjectionMatrix", sceneData->viewProjectionMat);

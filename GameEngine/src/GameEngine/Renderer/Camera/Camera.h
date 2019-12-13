@@ -1,14 +1,14 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "GameEngine/Components/ITransform.h"
+#include "GameEngine/GameComponents/Transform.h"
 
 namespace GameEngine {
 
-	class  ICamera : public ITransform
+	class  Camera : public Transform
 	{
 	public:
-		virtual void update() { ITransform::update(); };
+		virtual void update() { Transform::update(); };
 
 		const glm::mat4& getProjectionMat() const { return this->projectionMat; };
 		const glm::mat4& getViewMat() const { return this->viewMat; };

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "RenderCommand.h"
-#include "GameEngine/Renderer/Camera/ICamera.h"
-#include "GameEngine/Renderer/IShader.h"
+#include "GameEngine/Renderer/Camera/Camera.h"
+#include "GameEngine/Renderer/Material/Shader.h"
 
 namespace GameEngine {
 
@@ -11,12 +11,12 @@ namespace GameEngine {
 	public:
 		static void Init();
 
-		static void BeginScene(ICamera& camera);
+		static void BeginScene(Camera& camera);
 		static void EndScene();
 
-		static void Submit(const Ref<IShader>& shader, const Ref<IVertexArray>& vertexArray, const glm::mat4 transform = glm::mat4(1.0f));
+		static void Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4 transform = glm::mat4(1.0f));
 
-		inline static IRendererAPI::API GetAPI() { return IRendererAPI::GetAPI(); }
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	private:
 		struct  SceneData
 		{

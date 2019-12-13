@@ -1,18 +1,18 @@
 #include "hzpch.h"
-#include "IVertexArray.h"
+#include "VertexArray.h"
 
-#include "Renderer.h"
+#include "../Renderer.h"
 #include "Plateform/OpenGl/OpenGLVertexArray.h"
 
 namespace GameEngine {
 
-	IVertexArray* IVertexArray::Create() {
+	VertexArray* VertexArray::Create() {
 		switch (IRenderer::GetAPI())
 		{
-		case IRendererAPI::API::None:
+		case RendererAPI::API::None:
 			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
-		case IRendererAPI::API::OpengGL:
+		case RendererAPI::API::OpengGL:
 			return new OpenGLVertexArray();
 		default:
 			GE_CORE_ASSERT(false, "RendererAPI::Unknow renderAPI")

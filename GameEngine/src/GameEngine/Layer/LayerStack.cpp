@@ -7,20 +7,20 @@ namespace GameEngine {
 	}
 
 	LayerStack::~LayerStack() {
-		for (ILayer* layer : layers)
+		for (Layer* layer : layers)
 			delete layer;
 	}
 
-	void LayerStack::pushLayer(ILayer* layer) {
+	void LayerStack::pushLayer(Layer* layer) {
 		this->layers.emplace(this->layers.begin() + this->layerInsertIndex, layer);
 		this->layerInsertIndex++;
 		layer->onAttach();
 	}
-	void LayerStack::pushOverlay(ILayer* overlay) {
+	void LayerStack::pushOverlay(Layer* overlay) {
 		this->layers.emplace_back(overlay);
 		overlay->onAttach();
 	}
-	void LayerStack::popLayer(ILayer* layer) {
+	void LayerStack::popLayer(Layer* layer) {
 		auto it = std::find(this->layers.begin(), this->layers.end(), layer);
 		if ( it != this->layers.end()) {
 			this->layers.erase(it);
@@ -28,7 +28,7 @@ namespace GameEngine {
 			layer->onDetach();
 		}
 	}
-	void LayerStack::popOverlay(ILayer* overlay) {
+	void LayerStack::popOverlay(Layer* overlay) {
 		auto it = std::find(this->layers.begin(), this->layers.end(), overlay);
 		if (it != this->layers.end()) {
 			this->layers.erase(it);

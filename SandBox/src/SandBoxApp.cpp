@@ -6,11 +6,11 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
-class ExampleLayer : public GameEngine::ILayer
+class ExampleLayer : public GameEngine::Layer
 {
 public:
 	ExampleLayer() 
-		: ILayer("Example")
+		: Layer("Example")
 	{
 		int width = GameEngine::Application::get().GetWindow().getWidth();
 		int height = GameEngine::Application::get().GetWindow().getHeight();
@@ -24,7 +24,7 @@ public:
 		//this->camera = new GameEngine::OrtographicCamera(-1.6f, 1.6f, -0.9f, 0.9f);
 
 		//Vertex Array
-		this->vertexArray.reset(GameEngine::IVertexArray::Create());
+		this->vertexArray.reset(GameEngine::VertexArray::Create());
 
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -49,9 +49,9 @@ public:
 		this->vertexArray->setIndexBuffer(indexBuffer);
 
 		//////// SQUARE ////////
-		this->squareTransform.reset(new GameEngine::ITransform());
+		this->squareTransform.reset(new GameEngine::Transform());
 		//Vertex Array
-		this->squareVA.reset(GameEngine::IVertexArray::Create());
+		this->squareVA.reset(GameEngine::VertexArray::Create());
 		float squareVertices[5 * 4] = {
 			 0.75, -0.75f, 0.0f, 0.0f, 0.0f, 
 			-0.75, -0.75f, 0.0f, 1.0f, 0.0f,
@@ -74,12 +74,12 @@ public:
 		this->squareVA->setIndexBuffer(squareIB);
 
 		// FLAT SHADER
-		this->flatColorShader.reset(GameEngine::IShader::Create("assets/shaders/FlatColor.glsl"));
+		this->flatColorShader.reset(GameEngine::Shader::Create("assets/shaders/FlatColor.glsl"));
 	
 		// TEXTURE SHADER
-		this->textureShader.reset(GameEngine::IShader::Create("assets/shaders/Texture2D.glsl"));
+		this->textureShader.reset(GameEngine::Shader::Create("assets/shaders/Texture2D.glsl"));
 
-		this->uv_texture = GameEngine::ITexture2D::Create("assets/textures/UV_check.png");
+		this->uv_texture = GameEngine::Texture2D::Create("assets/textures/UV_check.png");
 
 		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->bind();
 		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->uploadUniformInt("u_Texture", 0);
@@ -93,41 +93,41 @@ public:
 	void onUpdate(GameEngine::TimeStep ts)
 	{
 		// MOVE
-		if (GameEngine::IInput::IsKeyPressed(GE_KEY_A)) {
+		if (GameEngine::Input::IsKeyPressed(GE_KEY_A)) {
 			this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0});
 		}
-		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_D)) {
+		else if (GameEngine::Input::IsKeyPressed(GE_KEY_D)) {
 			this->camera->translate({ this->cameraMoveSpeed * ts * -1, 0, 0 });
 		}
-		if (GameEngine::IInput::IsKeyPressed(GE_KEY_W)) {
+		if (GameEngine::Input::IsKeyPressed(GE_KEY_W)) {
 			this->camera->translate({ 0, 0, this->cameraMoveSpeed * ts });
 		}
-		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_S)) {
+		else if (GameEngine::Input::IsKeyPressed(GE_KEY_S)) {
 			this->camera->translate({ 0, 0, this->cameraMoveSpeed * ts * -1 });
 		}
-		if (GameEngine::IInput::IsKeyPressed(GE_KEY_LEFT_SHIFT)) {
+		if (GameEngine::Input::IsKeyPressed(GE_KEY_LEFT_SHIFT)) {
 			this->camera->translate({ 0, this->cameraMoveSpeed * ts, 0 });
 		}
-		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_LEFT_CONTROL)) {
+		else if (GameEngine::Input::IsKeyPressed(GE_KEY_LEFT_CONTROL)) {
 			this->camera->translate({ 0, this->cameraMoveSpeed * ts * -1, 0 });
 		}
 		// ROTATE
-		if (GameEngine::IInput::IsKeyPressed(GE_KEY_Q)) {
+		if (GameEngine::Input::IsKeyPressed(GE_KEY_Q)) {
 			this->camera->rotate({0, this->cmaraRotateSpeed * ts , 0});
 		}
-		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_E)) {
+		else if (GameEngine::Input::IsKeyPressed(GE_KEY_E)) {
 			this->camera->rotate({ 0, this->cmaraRotateSpeed * ts * -1 , 0 });
 		}
-		if (GameEngine::IInput::IsKeyPressed(GE_KEY_UP)) {
+		if (GameEngine::Input::IsKeyPressed(GE_KEY_UP)) {
 			this->camera->rotate({ this->cmaraRotateSpeed * ts, 0 , 0 });
 		}
-		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_DOWN)) {
+		else if (GameEngine::Input::IsKeyPressed(GE_KEY_DOWN)) {
 			this->camera->rotate({ this->cmaraRotateSpeed * ts * -1, 0 , 0 });
 		}
-		if (GameEngine::IInput::IsKeyPressed(GE_KEY_LEFT)) {
+		if (GameEngine::Input::IsKeyPressed(GE_KEY_LEFT)) {
 			this->camera->rotate({ 0, 0, this->cmaraRotateSpeed * ts});
 		}
-		else if (GameEngine::IInput::IsKeyPressed(GE_KEY_RIGHT)) {
+		else if (GameEngine::Input::IsKeyPressed(GE_KEY_RIGHT)) {
 			this->camera->rotate({ 0, 0, this->cmaraRotateSpeed * ts * -1 });
 		}
 
@@ -212,15 +212,15 @@ public:
 		return false;
 	}
 private:
-	GameEngine::Ref<GameEngine::IShader> flatColorShader, textureShader;
+	GameEngine::Ref<GameEngine::Shader> flatColorShader, textureShader;
 
-	GameEngine::Ref<GameEngine::ITexture> uv_texture;
+	GameEngine::Ref<GameEngine::Texture> uv_texture;
 
-	GameEngine::Ref<GameEngine::IVertexArray> vertexArray;
-	GameEngine::Ref<GameEngine::IVertexArray> squareVA;
-	GameEngine::Ref<GameEngine::ITransform>   squareTransform;
+	GameEngine::Ref<GameEngine::VertexArray> vertexArray;
+	GameEngine::Ref<GameEngine::VertexArray> squareVA;
+	GameEngine::Ref<GameEngine::Transform>   squareTransform;
 
-	GameEngine::ICamera* camera;
+	GameEngine::Camera* camera;
 	float cameraMoveSpeed = 1.0f;
 	float cmaraRotateSpeed = 1.0f;
 

@@ -1,14 +1,14 @@
 #pragma once
 
 #include <memory>
-#include "GameEngine/Renderer/Buffer.h"
+#include "GameEngine/Renderer/Buffer/Buffer.h"
 
 namespace GameEngine {
 
-	class IVertexArray
+	class VertexArray
 	{
 	public:
-		virtual ~IVertexArray() {};
+		virtual ~VertexArray() {};
 
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
@@ -19,6 +19,6 @@ namespace GameEngine {
 		virtual const std::vector<Ref<IVertexBuffer>>& getVertexBuffer() = 0;
 		virtual const Ref<IIndexBuffer>& getIndexBuffer() = 0;
 
-		static IVertexArray* Create();
+		static VertexArray* Create();
 	};
 }

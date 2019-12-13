@@ -3,7 +3,7 @@
 
 namespace GameEngine {
 
-	class IGraphicsContext
+	class GraphicsContext
 	{
 	public:
 		virtual void init() = 0;

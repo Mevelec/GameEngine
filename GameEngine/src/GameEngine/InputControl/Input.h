@@ -4,7 +4,7 @@
 
 namespace GameEngine {
 
-	class GE_API IInput
+	class GE_API Input
 	{
 	public:
 		inline static bool IsKeyPressed(int keycode) { return instance->IsKeyPressedImpl(keycode); }
@@ -23,6 +23,6 @@ namespace GameEngine {
 		virtual std::pair<float, float> getMousePosImpl() = 0;
 
 	private:
-		static IInput* instance;
+		static Input* instance;
 	};
 }

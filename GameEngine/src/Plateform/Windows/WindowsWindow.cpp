@@ -1,6 +1,6 @@
 #include "hzpch.h"
 #include "WindowsWindow.h"
-#include "GameEngine/Log.h"
+#include "GameEngine/Log/Log.h"
 
 #include "GameEngine/Events/ApplicationEvent.h"
 #include "GameEngine/Events/MouseEvent.h"
@@ -16,7 +16,7 @@ namespace GameEngine {
 		GE_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
-	IWindow* IWindow::create(const WindowProps& props) {
+	Window* Window::create(const WindowProps& props) {
 		return new WindowsWindow(props);
 	}
 

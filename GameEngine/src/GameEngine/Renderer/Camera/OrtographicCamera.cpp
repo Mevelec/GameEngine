@@ -21,7 +21,7 @@ namespace GameEngine {
 	void OrtographicCamera::update()
 	{
 
-		ICamera::update();
+		Camera::update();
 
 		this->viewMat = glm::inverse(this->getTransform());
 		this->viewProjectionMat = this->projectionMat * this->viewMat;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IRendererAPI.h"
+#include "RendererAPI.h"
 
 namespace GameEngine {
 
@@ -10,9 +10,9 @@ namespace GameEngine {
 
 		inline static void SetClearColor(const glm::vec4& color) { rendererAPI->setClearColor(color); };
 		inline static void Clear() { rendererAPI->clear(); };
-		inline static void DrawIndexed(const Ref<IVertexArray>& vertexArray) {	rendererAPI->drawIndexed(vertexArray); }
+		inline static void DrawIndexed(const Ref<VertexArray>& vertexArray) {	rendererAPI->drawIndexed(vertexArray); }
 
 	private:
-		static IRendererAPI* rendererAPI;
+		static RendererAPI* rendererAPI;
 	};
 }

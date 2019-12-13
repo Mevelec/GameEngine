@@ -7,10 +7,10 @@
 
 namespace GameEngine {
 
-	class ITransform
+	class Transform
 	{
 	public:
-		ITransform();
+		Transform();
 
 		//GETTERS
 		inline glm::mat4 getTransform() { return this->transform; };

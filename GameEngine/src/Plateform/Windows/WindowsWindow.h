@@ -1,13 +1,13 @@
 #pragma once
 
-#include "GameEngine/IWindow.h"
-#include "GameEngine/Renderer/IGraphicsContext.h"
+#include "GameEngine/Window.h"
+#include "GameEngine/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
 
 namespace GameEngine {
-	class WindowsWindow : public IWindow
+	class WindowsWindow : public Window
 	{
 	public:
 		WindowsWindow(const WindowProps& props);
@@ -28,7 +28,7 @@ namespace GameEngine {
 
 	private:
 		GLFWwindow* window;
-		IGraphicsContext* context;
+		GraphicsContext* context;
 
 		struct WindowData
 		{

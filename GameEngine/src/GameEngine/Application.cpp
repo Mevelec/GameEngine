@@ -1,7 +1,7 @@
 #include "hzpch.h"
 #include "Application.h"
 
-#include "GameEngine/Log.h"
+#include "GameEngine/Log/Log.h"
 #include "GameEngine/Renderer/Renderer.h"
 
 #include "GLFW/glfw3.h"
@@ -15,7 +15,7 @@ namespace GameEngine {
 		GE_CORE_ASSERT(!s_Instance, "Application already exists!")
 		s_Instance = this;
 
-		this->window = std::unique_ptr<IWindow>(IWindow::create());
+		this->window = std::unique_ptr<Window>(Window::create());
 		this->window->setEventCallback(GE_BIND_EVENT_FN(Application::onEvent));
 
 		IRenderer::Init();
@@ -28,11 +28,11 @@ namespace GameEngine {
 	{
 	}
 
-	void Application::pushLayer(ILayer* layer)
+	void Application::pushLayer(Layer* layer)
 	{
 		this->layerStack.pushLayer(layer);
 	}
-	void Application::pushOverlay(ILayer* overlay)
+	void Application::pushOverlay(Layer* overlay)
 	{
 		this->layerStack.pushOverlay(overlay);
 	}
@@ -59,13 +59,13 @@ namespace GameEngine {
 			TimeStep timeStep = time - this->lastFrameTime;
 			this->lastFrameTime = time;
 
-			for (ILayer* layer : this->layerStack) 
+			for (Layer* layer : this->layerStack)
 			{
 				layer->onUpdate(timeStep);
 			}
 
 			this->imGuiLayer->begin();
-			for (ILayer* layer : this->layerStack)
+			for (Layer* layer : this->layerStack)
 			{
 				layer->onImGuiRender();
 			}

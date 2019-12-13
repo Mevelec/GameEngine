@@ -22,12 +22,12 @@ namespace GameEngine {
 	};
 
 	/// class IWindow representing a desktop system based window
-	class GE_API IWindow
+	class GE_API Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;
 
-		virtual ~IWindow() = default;
+		virtual ~Window() = default;
 
 		virtual void onUpdate() = 0;
 
@@ -40,7 +40,7 @@ namespace GameEngine {
 		virtual void setVSync(bool enabled) = 0;
 		virtual bool isVSync() const = 0;
 
-		static IWindow* create(const WindowProps& props = WindowProps());
+		static Window* create(const WindowProps& props = WindowProps());
 
 	private:
 	};

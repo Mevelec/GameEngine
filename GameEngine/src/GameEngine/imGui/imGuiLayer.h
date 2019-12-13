@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameEngine/Layer/ILayer.h"
+#include "GameEngine/Layer/Layer.h"
 #include "GameEngine/Events/MouseEvent.h"
 #include "GameEngine/Events/KeyEvent.h"
 #include "GameEngine/Events/ApplicationEvent.h"
@@ -8,7 +8,7 @@
 
 namespace GameEngine {
 
-	class GE_API ImGuiLayer : public ILayer
+	class GE_API ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();

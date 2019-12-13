@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameEngine/Renderer/Buffer.h"
+#include "GameEngine/Renderer/Buffer/Buffer.h"
 
 namespace GameEngine {
 

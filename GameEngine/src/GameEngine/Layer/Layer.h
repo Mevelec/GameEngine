@@ -5,11 +5,11 @@
 
 namespace GameEngine {
 
-	class GE_API ILayer
+	class GE_API Layer
 	{
 	public:
-		ILayer(const std::string& debugName = "Layer");
-		virtual ~ILayer() = default;
+		Layer(const std::string& debugName = "Layer");
+		virtual ~Layer() = default;
 
 		virtual void onAttach() {};
 		virtual void onDetach() {};

@@ -6,7 +6,7 @@
 
 namespace GameEngine {
 
-	IInput* IInput::instance = new WindowsInput();
+	Input* Input::instance = new WindowsInput();
 
 	bool WindowsInput::IsKeyPressedImpl(int keycode)
 	{

@@ -2,7 +2,7 @@
 
 #include "Core.h"
 
-#include "IWindow.h"
+#include "Window.h"
 #include "GameEngine/Layer/LayerStack.h"
 #include "GameEngine/Events/Event.h"
 #include "GameEngine/Events/ApplicationEvent.h"
@@ -21,15 +21,15 @@ namespace GameEngine
 		void run();
 		void onEvent(Event& e);
 
-		void pushLayer(ILayer* layer);
-		void pushOverlay(ILayer* overlay);
+		void pushLayer(Layer* layer);
+		void pushOverlay(Layer* overlay);
 
 		inline static Application& get() { return *s_Instance; }
-		inline IWindow& GetWindow() { return *this->window;  }
+		inline Window& GetWindow() { return *this->window;  }
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
 	private:
-		std::unique_ptr<IWindow> window;
+		std::unique_ptr<Window> window;
 		ImGuiLayer* imGuiLayer;
 		bool running = true;
 		LayerStack layerStack;

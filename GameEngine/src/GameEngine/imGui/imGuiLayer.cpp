@@ -16,7 +16,7 @@
 namespace GameEngine {
 
 	ImGuiLayer::ImGuiLayer()
-		: ILayer("ImGuiLayer")
+		: Layer("ImGuiLayer")
 	{
 
 	}

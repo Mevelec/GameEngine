@@ -1,10 +1,10 @@
 #pragma once
 
-#include "ICamera.h"
+#include "Camera.h"
 
 namespace GameEngine {
 
-	class GE_API OrtographicCamera : public ICamera
+	class GE_API OrtographicCamera : public Camera
 	{
 	public:
 		OrtographicCamera(float left, float right, float bottom, float top);

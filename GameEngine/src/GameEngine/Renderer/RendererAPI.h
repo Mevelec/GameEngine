@@ -2,11 +2,11 @@
 
 #include <glm/glm.hpp>
 
-#include "GameEngine/Renderer/IVertexArray.h"
+#include "GameEngine/Renderer/Buffer/VertexArray.h"
 
 namespace GameEngine {
 
-	class IRendererAPI
+	class RendererAPI
 	{
 	public:
 		enum class API
@@ -19,7 +19,7 @@ namespace GameEngine {
 		virtual void setClearColor(const glm::vec4& color) = 0;
 		virtual void clear() = 0;
 
-		virtual void drawIndexed(const Ref<IVertexArray>& vertexArray) = 0;
+		virtual void drawIndexed(const Ref<VertexArray>& vertexArray) = 0;
 
 		inline static API GetAPI() { return s_API; };
 	private:

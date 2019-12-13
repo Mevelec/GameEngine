@@ -1,18 +1,18 @@
 #include "hzpch.h"
-#include "IShader.h"
+#include "Shader.h"
 
-#include "Renderer.h"
+#include "../Renderer.h"
 #include "Plateform/OpenGL/OpenGLShader.h"
 
 namespace GameEngine {
 
-	IShader* IShader::Create(const std::string& vertexSrc, const std::string& fragmentSrc)
+	Shader* Shader::Create(const std::string& vertexSrc, const std::string& fragmentSrc)
 	{
 		switch (IRenderer::GetAPI())
 		{
-			case IRendererAPI::API::None:    
+			case RendererAPI::API::None:    
 				GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case IRendererAPI::API::OpengGL:
+			case RendererAPI::API::OpengGL:
 				return new OpenGLShader(vertexSrc, fragmentSrc);
 		}
 
@@ -20,13 +20,13 @@ namespace GameEngine {
 		return nullptr;
 	}
 
-	IShader* IShader::Create(const std::string& path)
+	Shader* Shader::Create(const std::string& path)
 	{
 		switch (IRenderer::GetAPI())
 		{
-		case IRendererAPI::API::None:
+		case RendererAPI::API::None:
 			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case IRendererAPI::API::OpengGL:
+		case RendererAPI::API::OpengGL:
 			return new OpenGLShader(path);
 		}
 

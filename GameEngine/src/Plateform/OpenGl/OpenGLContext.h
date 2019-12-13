@@ -1,12 +1,12 @@
 #pragma once
 
-#include "GameEngine/Renderer/IGraphicsContext.h"
+#include "GameEngine/Renderer/GraphicsContext.h"
 
 struct GLFWwindow;
 
 namespace GameEngine {
 
-	class  OpenGLContext : public IGraphicsContext
+	class  OpenGLContext : public GraphicsContext
 	{
 	public:
 		OpenGLContext(GLFWwindow* windowHandle);

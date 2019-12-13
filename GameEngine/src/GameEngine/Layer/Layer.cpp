@@ -1,8 +1,8 @@
 #include "hzpch.h"
-#include "ILayer.h"
+#include "Layer.h"
 
 namespace GameEngine {
-	ILayer::ILayer(const std::string& debugName)
+	Layer::Layer(const std::string& debugName)
 		: debugName(debugName)
 	{
 

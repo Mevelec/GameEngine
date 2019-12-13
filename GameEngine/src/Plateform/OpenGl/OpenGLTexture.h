@@ -1,10 +1,10 @@
 #pragma once
 
-#include "GameEngine/Renderer/ITexture.h"
+#include "GameEngine/Renderer/Material/Texture.h"
 
 namespace GameEngine {
 
-	class OpenGLTexture2D : public ITexture2D
+	class OpenGLTexture2D : public Texture2D
 	{
 	public:
 		OpenGLTexture2D(const std::string& path);

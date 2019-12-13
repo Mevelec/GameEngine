@@ -19,7 +19,7 @@ namespace GameEngine {
 
 	void PerspectiveCamera::update()
 	{
-		ICamera::update();
+		Camera::update();
 
 		this->viewMat = this->getTransform();
 		this->viewProjectionMat = this->projectionMat * this->viewMat;

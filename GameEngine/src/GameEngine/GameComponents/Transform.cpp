@@ -1,10 +1,10 @@
 #include "hzpch.h"
-#include "ITransform.h"
+#include "Transform.h"
 
 
 
 namespace GameEngine {
-	ITransform::ITransform()
+	Transform::Transform()
 		: position({0, 0, -1}),
 		dimensions({1, 1, 1}),
 		rotation(glm::fquat()),
@@ -16,7 +16,7 @@ namespace GameEngine {
 	}
 
 
-	void ITransform::update()
+	void Transform::update()
 	{
 		this->transform = glm::mat4_cast(this->rotation) *
 			glm::translate(glm::mat4(1.0f), this->position) *
@@ -25,7 +25,7 @@ namespace GameEngine {
 
 
 	// TRANSFORMS
-	void ITransform::translate(glm::vec3 direction)
+	void Transform::translate(glm::vec3 direction)
 	{
 		this->position += direction;
 
@@ -33,7 +33,7 @@ namespace GameEngine {
 	}
 
 	// ROTATE
-	void ITransform::rotate(glm::vec3 rotation)
+	void Transform::rotate(glm::vec3 rotation)
 	{
 		glm::quat key_quat = glm::quat(glm::vec3(rotation.x, rotation.y, rotation.z));
 

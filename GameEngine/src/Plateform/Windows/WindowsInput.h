@@ -1,10 +1,10 @@
 #pragma once
 
-#include "GameEngine/IInput.h"
+#include "GameEngine/InputControl/Input.h"
 
 namespace GameEngine
 {
-	class WindowsInput : public IInput
+	class WindowsInput : public Input
 	{
 	protected:
 		virtual bool IsKeyPressedImpl(int keycode) override;

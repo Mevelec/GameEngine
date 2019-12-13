@@ -1,13 +1,13 @@
 #pragma once
 
-#include "GameEngine/Renderer/IShader.h"
+#include "GameEngine/Renderer/Material/Shader.h"
 #include <glm/glm.hpp>
 
 typedef unsigned int GLenum;
 
 namespace GameEngine {
 
-	class OpenGLShader : public IShader
+	class OpenGLShader : public Shader
 	{
 	public:
 		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
