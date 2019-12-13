@@ -19,4 +19,18 @@ namespace GameEngine {
 		GE_CORE_ASSERT(false, "Unknow RendererAPI!");
 		return nullptr;
 	}
+
+	IShader* IShader::Create(const std::string& path)
+	{
+		switch (IRenderer::GetAPI())
+		{
+		case IRendererAPI::API::None:
+			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+		case IRendererAPI::API::OpengGL:
+			return new OpenGLShader(path);
+		}
+
+		GE_CORE_ASSERT(false, "Unknow RendererAPI!");
+		return nullptr;
+	}
 }
