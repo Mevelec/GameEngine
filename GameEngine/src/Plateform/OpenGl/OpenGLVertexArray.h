@@ -19,6 +19,7 @@ namespace GameEngine {
 		virtual Ref<IIndexBuffer>& getIndexBuffer() override { return this->indexBuffer; };
 	private:
 		uint32_t rendererID;
+		uint32_t vertexBufferIndex = 0;
 		std::vector<Ref<IVertexBuffer>> vertexBuffers;
 		Ref<IIndexBuffer> indexBuffer;
 	};
