@@ -64,20 +64,18 @@ namespace GameEngine {
 	/// EventDispatcher class 
 	class EventDispatcher
 	{
-		template<typename T>
-		using EventFn = std::function<bool(T&)>;
 	public:
 		EventDispatcher(Event & event)
 			: event(event)
 		{
 		}
 
-		template<typename T>
-		bool Dispatch(EventFn<T> func)
+		template<typename T, typename F>
+		bool Dispatch(const F& func)
 		{
 			if (this->event.GetEventType() == T::GetStaticType())
 			{
-				this->event.handled = func(*(T*)&this->event);
+				this->event.handled = func(static_cast<T&>(this->event));
 				return true;
 			}
 			return false;
