@@ -73,12 +73,13 @@ public:
 		squareIB.reset(GameEngine::IIndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		this->squareVA->setIndexBuffer(squareIB);
 
-		// FLAT SHADER
-		this->flatColorShader.reset(GameEngine::Shader::Create("assets/shaders/FlatColor.glsl"));
-	
-		// TEXTURE SHADER
-		this->textureShader.reset(GameEngine::Shader::Create("assets/shaders/Texture2D.glsl"));
+		// SHADERS
+		// Flat
+		this->shaderLib.load("flat", "assets/shaders/FlatColor.glsl");
+		// Texture 
+		this->textureShader = GameEngine::Shader::Create("assets/shaders/Texture2D.glsl");
 
+		// TEXTURE
 		this->uv_texture = GameEngine::Texture2D::Create("assets/textures/UV_check.png");
 
 		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->bind();
@@ -135,8 +136,9 @@ public:
 		GameEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		GameEngine::RenderCommand::Clear();
 
-		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->flatColorShader)->bind();
-		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->flatColorShader)->uploadUniformFloat3("u_Color", m_SquareColor);
+		auto flatShader = this->shaderLib.get("flat");
+		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->bind();
+		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->uploadUniformFloat3("u_Color", m_SquareColor);
 
 
 		GameEngine::IRenderer::BeginScene(*this->camera);
@@ -145,7 +147,7 @@ public:
 			this->uv_texture->bind();
 			GameEngine::IRenderer::Submit(this->textureShader, this->squareVA, this->squareTransform->getTransform());
 			// triangle
-			//GameEngine::IRenderer::Submit(this->shader, this->vertexArray);
+			GameEngine::IRenderer::Submit(flatShader, this->vertexArray);
 		}
 		GameEngine::IRenderer::EndScene();
 
@@ -212,7 +214,9 @@ public:
 		return false;
 	}
 private:
-	GameEngine::Ref<GameEngine::Shader> flatColorShader, textureShader;
+	GameEngine::ShaderLibrary shaderLib;
+
+	GameEngine::Ref<GameEngine::Shader> textureShader;
 
 	GameEngine::Ref<GameEngine::Texture> uv_texture;
 

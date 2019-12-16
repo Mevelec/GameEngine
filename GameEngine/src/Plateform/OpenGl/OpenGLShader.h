@@ -10,13 +10,15 @@ namespace GameEngine {
 	class OpenGLShader : public Shader
 	{
 	public:
-		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+		OpenGLShader(const std::string&  name, const std::string& vertexSrc, const std::string& fragmentSrc);
 		OpenGLShader(const std::string& path);
 
 		virtual ~OpenGLShader();
 
 		virtual void bind() const override;
 		virtual void unbind() const override;
+
+		virtual const std::string& getName() const override { return this->name; };
 
 		void uploadUniformInt(const std::string& name, int value);
 
@@ -33,6 +35,7 @@ namespace GameEngine {
 		void compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 	private:
 		uint32_t rendererID;
+		std::string name;
 	};
 
 }

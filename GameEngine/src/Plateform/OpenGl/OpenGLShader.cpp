@@ -19,7 +19,8 @@ namespace GameEngine {
 		return 0;
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+	OpenGLShader::OpenGLShader(const std::string&  name, const std::string& vertexSrc, const std::string& fragmentSrc)
+		: name(name)
 	{
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSrc;
@@ -34,6 +35,14 @@ namespace GameEngine {
 		auto shaderSources = preProcess(source);
 
 		this->compile(shaderSources);
+
+		//Extract file name from file path
+		// assets/shaders/Texture.glsl
+		auto lastSlash = path.find_last_of("/\\");
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = path.rfind(".");
+		auto count = lastDot == std::string::npos ? path.size() - lastSlash : lastDot - lastSlash;
+		this->name = path.substr(lastSlash, count);
 	}
 
 	OpenGLShader::~OpenGLShader()
@@ -44,7 +53,7 @@ namespace GameEngine {
 	std::string OpenGLShader::readFile(const std::string& path)
 	{
 		std::string result;
-		std::ifstream in(path, std::ios::in, std::ios::binary);
+		std::ifstream in(path, std::ios::in | std::ios::binary);
 		if (in)
 		{
 			in.seekg(0, std::ios::end);
@@ -89,7 +98,10 @@ namespace GameEngine {
 	void OpenGLShader::compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
 		GLuint program = glCreateProgram();
-		std::vector<GLenum> glShaderIDs(shaderSources.size());
+		GE_CORE_ASSERT(shaderSources.size() <= 2, "Only support 2 shaders for now");
+		std::array<GLenum, 2> glShaderIDs;
+		int glShaderIDIndex = 0;
+		 
 		for (auto& kv : shaderSources)
 		{
 			GLenum type = kv.first;
@@ -124,7 +136,7 @@ namespace GameEngine {
 			}
 
 			glAttachShader(program, shader);
-			glShaderIDs.push_back(shader);
+			glShaderIDs[glShaderIDIndex++] = shader;
 		}
 
 		// Link our program
