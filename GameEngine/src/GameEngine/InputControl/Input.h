@@ -6,6 +6,12 @@ namespace GameEngine {
 
 	class GE_API Input
 	{
+	protected:
+		Input() = default;
+	public:
+		Input(const Input&) = delete;
+		Input& operator=(const Input&) = delete;
+
 	public:
 		inline static bool IsKeyPressed(int keycode) { return instance->IsKeyPressedImpl(keycode); }
 
