@@ -65,20 +65,19 @@ namespace GameEngine {
 		glBindVertexArray(this->rendererID);
 		vertexBuffer->bind();
 
-		uint32_t index = 0;
 		const auto& layout = vertexBuffer->getLayout();
 		for (const auto& element : layout)
 		{
-			glEnableVertexAttribArray(index);
+			glEnableVertexAttribArray(this->vertexBufferIndex);
 			glVertexAttribPointer(
-				index,
+				this->vertexBufferIndex,
 				element.getComponentCount(),
 				ShaderDataTypeToOpenGLBaseType(element.type),
 				element.normalized? GL_TRUE : GL_FALSE,
 				layout.getStride(),
-				(const void*)element.offset
+				(const void*)(intptr_t)element.offset
 			);
-			index++;
+			vertexBufferIndex++;
 		}
 
 		this->vertexBuffers.push_back(vertexBuffer);

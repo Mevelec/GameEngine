@@ -30,7 +30,7 @@ namespace GameEngine {
 	}
 	void LayerStack::popOverlay(Layer* overlay) {
 		auto it = std::find(this->layers.begin(), this->layers.end(), overlay);
-		if (it != this->layers.end()) {
+		if (it != this->layers.begin() + this->layerInsertIndex) {
 			this->layers.erase(it);
 			overlay->onDetach();
 		}

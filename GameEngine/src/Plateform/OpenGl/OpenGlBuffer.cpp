@@ -38,8 +38,8 @@ namespace GameEngine {
 		:count(count)
 	{
 		glCreateBuffers(1, &this->rendererID);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->rendererID);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, this->rendererID);
+		glBufferData(GL_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
 	}
 
 	OpenGlIndexBuffer::~OpenGlIndexBuffer()
