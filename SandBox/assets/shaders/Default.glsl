@@ -22,10 +22,17 @@ layout(location = 0) out vec4 color;
 
 in vec2 v_TextCoord;
 
-uniform sampler2D u_Texture;
+uniform sampler2D u_ColorTex;
+uniform sampler2D u_MetalTex;
+uniform sampler2D u_SpecuTex;
+
+
 uniform vec3 u_Color;
+uniform vec3 u_Metal;
+uniform vec3 u_Specu;
+
 
 void main()
 {
-	color = texture(u_Texture, v_TextCoord) + vec4(u_Color, 1.0f);
+	color = texture(u_ColorTex, v_TextCoord) * vec4(u_Color, 1.0f);
 }

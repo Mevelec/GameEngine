@@ -140,6 +140,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\disney.png" />
+    <Image Include="assets\textures\src\pixelB.png" />
+    <Image Include="assets\textures\src\pixelW.png" />
     <Image Include="assets\textures\UV_check.png" />
   </ItemGroup>
   <ItemGroup>

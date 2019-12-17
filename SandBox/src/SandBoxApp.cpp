@@ -83,8 +83,7 @@ public:
 		this->uv_texture = GameEngine::Texture2D::Create("assets/textures/UV_check.png");
 
 		// MATERIAL
-
-		this->material = std::make_shared<GameEngine::Material>();
+		this->material = GameEngine::Material::Create();
 
 		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->bind();
 		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->uploadUniformInt("u_Texture", 0);

@@ -9,23 +9,26 @@ namespace GameEngine {
 	class Material
 	{
 	public :
-		Material();
+		virtual ~Material() = default;
 
 		const inline Ref<Shader> getShader() { return this->shader; };
-		void bind();
+		virtual void bind() const = 0;
 
-	private:
+		static Ref<Material> Create();
+
+	protected:
 		Ref<Shader> shader;
 
-		Ref<GameEngine::Texture> diffuse;
-		glm::vec3 diffuseColor;
+		Ref<GameEngine::Texture> diffuseTex;
+		glm::vec3 diffuseColor = { 0.f, 0.f, 0.f };
 
-		//std::unordered_map<std::string, Ref<Texture>> texMap;
-		//Diffuse
-		//Mettalic
-		//Speculars
-		//Normal
-		
+		Ref<GameEngine::Texture> metallicTex;
+		glm::vec3 metallicColor = { 0.f, 0.f, 0.f };
+
+		Ref<GameEngine::Texture> specularTex;
+		glm::vec3 specularColor = { 0.5f, 0.5f, 0.5f };
+
+		Ref<GameEngine::Texture> normalTex;		
 	};
 }
 

@@ -2,27 +2,24 @@
 
 #include "Material.h"
 #include "../Renderer.h"
-#include "Plateform/OpenGl/OpenGLShader.h"
 
-#include <memory>
+#include "Plateform/OpenGl/OpenGLShader.h"
+#include "Plateform/OpenGl/OpenGLMaterial.h"
 
 namespace GameEngine {
 
-	Material::Material()
+	Ref<Material> Material::Create()
 	{
-		this->diffuse = Texture2D::Create("assets/textures/UV_check.png");
-		this->diffuseColor = { 1.f, 1.f, 0.f };
+		switch (IRenderer::GetAPI())
+		{
+		case RendererAPI::API::None:
+			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); 
+			return nullptr;
+		case RendererAPI::API::OpengGL:
+			return std::make_shared<OpenGLMaterial>();
+		}
 
-		this->shader = Shader::Create("assets/shaders/default.glsl");
+		GE_CORE_ASSERT(false, "Unknow RendererAPI!");
+		return nullptr;
 	}
-
-	void Material::bind()
-	{
-		//bind textures
-		this->diffuse->bind();
-		std::dynamic_pointer_cast<OpenGLShader>(this->shader)->bind();
-		std::dynamic_pointer_cast<OpenGLShader>(this->shader)->uploadUniformFloat3("u_Color", this->diffuseColor);
-
-	}
-
 }

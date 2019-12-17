@@ -1299,6 +1299,9 @@
     <ClInclude Include="src\GameEngine\Renderer\Material\Material.h">
       <Filter>src\GameEngine\Renderer\Material</Filter>
     </ClInclude>
+    <ClInclude Include="src\Plateform\OpenGl\OpenGLMaterial.h">
+      <Filter>src\Plateform\OpenGl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
@@ -1381,6 +1384,9 @@
     </ClCompile>
     <ClCompile Include="src\GameEngine\Renderer\Material\Material.cpp">
       <Filter>src\GameEngine\Renderer\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plateform\OpenGl\OpenGLMaterial.cpp">
+      <Filter>src\Plateform\OpenGl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
