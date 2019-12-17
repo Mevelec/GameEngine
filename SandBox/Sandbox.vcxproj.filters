@@ -30,5 +30,6 @@
   <ItemGroup>
     <None Include="assets\shaders\FlatColor.glsl" />
     <None Include="assets\shaders\Texture2D.glsl" />
+    <None Include="assets\shaders\Default.glsl" />
   </ItemGroup>
 </Project>

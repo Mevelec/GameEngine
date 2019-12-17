@@ -143,6 +143,7 @@
     <Image Include="assets\textures\UV_check.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\shaders\Default.glsl" />
     <None Include="assets\shaders\FlatColor.glsl" />
     <None Include="assets\shaders\Texture2D.glsl" />
   </ItemGroup>
