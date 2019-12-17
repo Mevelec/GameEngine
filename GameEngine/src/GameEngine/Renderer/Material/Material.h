@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 
 namespace GameEngine {
+
 	class Material
 	{
 	public :
@@ -30,24 +31,18 @@ namespace GameEngine {
 
 		Ref<GameEngine::Texture> normalTex;		
 	};
+
+	class MaterialLibrary
+	{
+	public:
+		void add(const Ref<Material>& shader);
+		void add(const std::string& name, const Ref<Material>& shader);
+
+		Ref<Material> get(const std::string& name);
+
+		bool exists(const std::string& name);
+
+	private:
+		std::unordered_map<std::string, Ref<Material>> shaders;
+	};
 }
-
-/*
-
-
-		What if I want to draw vertices with colors only?
-
-Use a solid white texture (a 1x1 texture is fine).
-
-		What if I want to draw image by texture only?
-
-Set the colour to white.
-
-		gl_FragColor = texture2D(uTexture, texCoord) + uColor;
-
-It’s more common to multiply the texture with the colour. The most common use of a texture is as a diffuse reflection map, indicating the proportion of incoming light which is reflected. If you’re adding them, use black (rather than white) to leave the colour unchanged.
-
-		Yes, you can swith between glsl programs by glUseProgram, but create program, compile, link, switch is not the zero cost.
-
-You don’t have to re-create the program object each time. You just need to call glUseProgram to select the program. But for something this simple, you may as well use one program and just change the uniforms.
-*/

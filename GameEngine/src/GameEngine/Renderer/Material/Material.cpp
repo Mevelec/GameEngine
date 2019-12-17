@@ -23,3 +23,30 @@ namespace GameEngine {
 		return nullptr;
 	}
 }
+
+
+namespace GameEngine {
+	void MaterialLibrary::add(const Ref<Material>& shader)
+	{
+		auto& name = shader->getName();
+		GE_CORE_ASSERT(!this->exists(name), "Shader already exist");
+		this->shaders[name] = shader;
+	}
+
+	void MaterialLibrary::add(const std::string& name, const Ref<Material>& shader)
+	{
+		GE_CORE_ASSERT(!this->exists(name), "Shader already exist");
+		this->shaders[name] = shader;
+	}
+
+	Ref<Material> MaterialLibrary::get(const std::string& name)
+	{
+		GE_CORE_ASSERT(this->exists(name), "Shader not found");
+		return this->shaders[name];
+	}
+
+	bool MaterialLibrary::exists(const std::string& name)
+	{
+		return this->shaders.find(name) != this->shaders.end();
+	}
+}
