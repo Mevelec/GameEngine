@@ -83,7 +83,8 @@ public:
 		this->uv_texture = GameEngine::Texture2D::Create("assets/textures/UV_check.png");
 
 		// MATERIAL
-		this->material = GameEngine::Material::Create();
+		auto mat = GameEngine::Material::Create("default");
+		this->materialLib.add(mat);
 
 		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->bind();
 		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->uploadUniformInt("u_Texture", 0);
@@ -218,8 +219,8 @@ public:
 	}
 private:
 	GameEngine::ShaderLibrary shaderLib;
+	GameEngine::MaterialLibrary materialLib;
 
-	GameEngine::Ref<GameEngine::Material> material;
 	GameEngine::Ref<GameEngine::Shader> textureShader;
 
 	GameEngine::Ref<GameEngine::Texture> uv_texture;

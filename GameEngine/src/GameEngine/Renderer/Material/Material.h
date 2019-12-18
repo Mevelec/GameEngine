@@ -10,14 +10,20 @@ namespace GameEngine {
 	class Material
 	{
 	public :
+		Material(const std::string& name) { this->name = name; };
+
 		virtual ~Material() = default;
+
+		const inline std::string& getName() const { return this->name; };
 
 		const inline Ref<Shader> getShader() { return this->shader; };
 		virtual void bind() const = 0;
 
-		static Ref<Material> Create();
+		static Ref<Material> Create(const std::string& name);
 
 	protected:
+		std::string name;
+
 		Ref<Shader> shader;
 
 		Ref<GameEngine::Texture> diffuseTex;
@@ -43,6 +49,6 @@ namespace GameEngine {
 		bool exists(const std::string& name);
 
 	private:
-		std::unordered_map<std::string, Ref<Material>> shaders;
+		std::unordered_map<std::string, Ref<Material>> materials;
 	};
 }

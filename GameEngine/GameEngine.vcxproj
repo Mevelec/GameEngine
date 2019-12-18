@@ -140,6 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameEngine\Log\Log.h" />
     <ClInclude Include="src\Plateform\OpenGl\OpenGLMaterial.h" />
     <ClInclude Include="src\GameEngine\Renderer\Material\Material.h" />
     <ClInclude Include="src\GameEngine.h" />
@@ -157,7 +158,6 @@
     <ClInclude Include="src\GameEngine\InputControl\KeyCodes.h" />
     <ClInclude Include="src\GameEngine\Layer\Layer.h" />
     <ClInclude Include="src\GameEngine\Layer\LayerStack.h" />
-    <ClInclude Include="src\GameEngine\Log\Log.h" />
     <ClInclude Include="src\GameEngine\InputControl\MouseButtonCodes.h" />
     <ClInclude Include="src\GameEngine\Renderer\Buffer\Buffer.h" />
     <ClInclude Include="src\GameEngine\Renderer\Camera\Camera.h" />
@@ -551,13 +551,13 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameEngine\Log\Log.cpp" />
     <ClCompile Include="src\Plateform\OpenGl\OpenGLMaterial.cpp" />
     <ClCompile Include="src\GameEngine\Renderer\Material\Material.cpp" />
     <ClCompile Include="src\GameEngine\Application.cpp" />
     <ClCompile Include="src\GameEngine\GameComponents\Transform.cpp" />
     <ClCompile Include="src\GameEngine\Layer\Layer.cpp" />
     <ClCompile Include="src\GameEngine\Layer\LayerStack.cpp" />
-    <ClCompile Include="src\GameEngine\Log\Log.cpp" />
     <ClCompile Include="src\GameEngine\Renderer\Buffer\Buffer.cpp" />
     <ClCompile Include="src\GameEngine\Renderer\Camera\OrtographicCamera.cpp" />
     <ClCompile Include="src\GameEngine\Renderer\Camera\PerspectiveCamera.cpp" />

@@ -7,7 +7,8 @@
 
 namespace GameEngine {
 
-	OpenGLMaterial::OpenGLMaterial()
+	OpenGLMaterial::OpenGLMaterial(const std::string& name)
+		: Material(name)
 	{
 		this->diffuseTex = Texture2D::Create("assets/textures/UV_check.png");
 		this->diffuseColor = { 0.f, 1.f, 0.f };

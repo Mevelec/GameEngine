@@ -1266,9 +1266,6 @@
     <ClInclude Include="src\GameEngine\Renderer\Material\Texture.h">
       <Filter>src\GameEngine\Renderer\Material</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameEngine\Log\Log.h">
-      <Filter>src\GameEngine\Log</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameEngine\Renderer\Buffer\Buffer.h">
       <Filter>src\GameEngine\Renderer\Buffer</Filter>
     </ClInclude>
@@ -1301,6 +1298,9 @@
     </ClInclude>
     <ClInclude Include="src\Plateform\OpenGl\OpenGLMaterial.h">
       <Filter>src\Plateform\OpenGl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Log\Log.h">
+      <Filter>src\GameEngine\Log</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1367,9 +1367,6 @@
     <ClCompile Include="src\GameEngine\Renderer\Material\Texture.cpp">
       <Filter>src\GameEngine\Renderer\Material</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameEngine\Log\Log.cpp">
-      <Filter>src\GameEngine\Log</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameEngine\Renderer\Buffer\Buffer.cpp">
       <Filter>src\GameEngine\Renderer\Buffer</Filter>
     </ClCompile>
@@ -1387,6 +1384,9 @@
     </ClCompile>
     <ClCompile Include="src\Plateform\OpenGl\OpenGLMaterial.cpp">
       <Filter>src\Plateform\OpenGl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Log\Log.cpp">
+      <Filter>src\GameEngine\Log</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

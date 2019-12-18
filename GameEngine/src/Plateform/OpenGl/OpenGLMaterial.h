@@ -7,7 +7,7 @@ namespace GameEngine {
 	class OpenGLMaterial : public Material
 	{
 	public:
-		OpenGLMaterial();
+		OpenGLMaterial(const std::string& name);
 		virtual ~OpenGLMaterial() override;
 
 		virtual void bind() const override;
