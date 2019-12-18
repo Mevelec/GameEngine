@@ -82,6 +82,10 @@ public:
 		// TEXTURE
 		this->uv_texture = GameEngine::Texture2D::Create("assets/textures/UV_check.png");
 
+		// MATERIAL
+		auto mat = GameEngine::Material::Create("default");
+		this->materialLib.add(mat);
+
 		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->bind();
 		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->uploadUniformInt("u_Texture", 0);
 
@@ -144,8 +148,9 @@ public:
 		GameEngine::IRenderer::BeginScene(*this->camera);
 		{
 			// square
-			this->uv_texture->bind();
-			GameEngine::IRenderer::Submit(this->textureShader, this->squareVA, this->squareTransform->getTransform());
+			auto mat = this->materialLib.get("default");
+			mat->bind();
+			GameEngine::IRenderer::Submit(mat->getShader(), this->squareVA, this->squareTransform->getTransform());
 			// triangle
 			GameEngine::IRenderer::Submit(flatShader, this->vertexArray);
 		}
@@ -215,6 +220,7 @@ public:
 	}
 private:
 	GameEngine::ShaderLibrary shaderLib;
+	GameEngine::MaterialLibrary materialLib;
 
 	GameEngine::Ref<GameEngine::Shader> textureShader;
 

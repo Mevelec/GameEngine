@@ -13,6 +13,9 @@
     <Filter Include="assets\shaders">
       <UniqueIdentifier>{e8ceb761-a572-4d6a-bc6b-37de6a502c73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="assets\textures\src">
+      <UniqueIdentifier>{c18b6fe9-c285-4dd8-ab90-7d9bf2276ee0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SandBoxApp.cpp">
@@ -26,9 +29,22 @@
     <Image Include="assets\textures\disney.png">
       <Filter>assets\textures</Filter>
     </Image>
+    <Image Include="assets\textures\src\pixelW.png">
+      <Filter>assets\textures\src</Filter>
+    </Image>
+    <Image Include="assets\textures\src\pixelB.png">
+      <Filter>assets\textures\src</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\FlatColor.glsl" />
-    <None Include="assets\shaders\Texture2D.glsl" />
+    <None Include="assets\shaders\FlatColor.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\Texture2D.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\Default.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
