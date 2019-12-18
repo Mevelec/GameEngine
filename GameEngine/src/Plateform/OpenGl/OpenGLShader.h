@@ -3,6 +3,7 @@
 #include "GameEngine/Renderer/Material/Shader.h"
 #include <glm/glm.hpp>
 
+#include <unordered_map>
 typedef unsigned int GLenum;
 
 namespace GameEngine {
@@ -30,12 +31,16 @@ namespace GameEngine {
 		void uploadUniformMat3(const std::string& name, const glm::mat3& matrix);
 		void uploadUniformMat4(const std::string& name, const glm::mat4& matrix);
 	private:
+		uint32_t getUniformLocation(const std::string& name) const;
+	private:
 		std::string readFile(const std::string& path);
 		std::unordered_map<GLenum, std::string> preProcess(const std::string& source);
 		void compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 	private:
 		uint32_t rendererID;
 		std::string name;
+
+		mutable std::unordered_map<std::string, uint32_t> uniformLocationCache;
 	};
 
 }
