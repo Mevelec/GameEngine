@@ -41,8 +41,8 @@ namespace GameEngine {
 	class MaterialLibrary
 	{
 	public:
-		void add(const Ref<Material>& shader);
-		void add(const std::string& name, const Ref<Material>& shader);
+		void add(const Ref<Material>& material);
+		void add(const std::string& name, const Ref<Material>& material);
 
 		Ref<Material> get(const std::string& name);
 

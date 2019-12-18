@@ -148,8 +148,9 @@ public:
 		GameEngine::IRenderer::BeginScene(*this->camera);
 		{
 			// square
-			this->material->bind();
-			GameEngine::IRenderer::Submit(this->material->getShader(), this->squareVA, this->squareTransform->getTransform());
+			auto mat = this->materialLib.get("default");
+			mat->bind();
+			GameEngine::IRenderer::Submit(mat->getShader(), this->squareVA, this->squareTransform->getTransform());
 			// triangle
 			GameEngine::IRenderer::Submit(flatShader, this->vertexArray);
 		}

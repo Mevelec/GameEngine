@@ -26,17 +26,17 @@ namespace GameEngine {
 
 
 namespace GameEngine {
-	void MaterialLibrary::add(const Ref<Material>& shader)
+	void MaterialLibrary::add(const Ref<Material>& material)
 	{
-		auto& name = shader->getName();
-		GE_CORE_ASSERT(!this->exists(name), "Shader already exist");
-		this->materials[name] = shader;
+		auto& name = material->getName();
+		GE_CORE_ASSERT(!this->exists(name), "Material already exist");
+		this->materials[name] = material;
 	}
 
-	void MaterialLibrary::add(const std::string& name, const Ref<Material>& shader)
+	void MaterialLibrary::add(const std::string& name, const Ref<Material>& material)
 	{
-		GE_CORE_ASSERT(!this->exists(name), "Shader already exist");
-		this->materials[name] = shader;
+		GE_CORE_ASSERT(!this->exists(name), "Material already exist");
+		this->materials[name] = material;
 	}
 
 	Ref<Material> MaterialLibrary::get(const std::string& name)
