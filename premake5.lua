@@ -65,6 +65,7 @@ project "GameEngine"
 
 	includedirs
 	{
+		"OcTree/src",
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
