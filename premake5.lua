@@ -65,7 +65,6 @@ project "GameEngine"
 
 	includedirs
 	{
-		"OcTree/src",
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
@@ -180,6 +179,7 @@ project "Sandbox"
 
 	includedirs
 	{
+		"OcTree/src",
 		"GameEngine/vendor/spdlog/include",
 		"GameEngine/src",
 		"GameEngine/vendor",
@@ -188,7 +188,8 @@ project "Sandbox"
 
 	links
 	{
-		"GameEngine"
+		"GameEngine",
+		"OcTree"
 	}
 
 	filter "system:windows"

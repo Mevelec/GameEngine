@@ -127,7 +127,16 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\OcTree.h" />
+    <ClInclude Include="src\SVO\Node.h" />
+    <ClInclude Include="src\SVO\OctreeBuilder.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\SVO\Node.cpp" />
+    <ClCompile Include="src\SVO\OctreeBuilder.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-</Project>
+</Project> 
