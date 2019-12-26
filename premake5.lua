@@ -23,6 +23,10 @@ IncludeDir["Glad"] = "GameEngine/vendor/Glad/include"
 IncludeDir["imgui"] = "GameEngine/vendor/imgui"
 IncludeDir["glm"] = "GameEngine/vendor/glm"
 IncludeDir["stb_image"] = "GameEngine/vendor/stb_image"
+IncludeDir["libmorton"] = "OcTree/vendor/libmorton/include"
+IncludeDir["libtri"] = "OcTree/vendor/libtri/include"
+
+
 
 
 
@@ -123,6 +127,9 @@ project "OcTree"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+
+		"%{prj.name}/vendor/libmorton/include/**.h",
+		"%{prj.name}/vendor/libtri/include/**.h",
 	}
 
 	defines
@@ -133,6 +140,8 @@ project "OcTree"
 	includedirs
 	{
 		"%{prj.name}/src",
+		"%{IncludeDir.libmorton}",
+		"%{IncludeDir.libtri}",
 	}
 
 	filter "system:windows"
@@ -180,9 +189,12 @@ project "Sandbox"
 	includedirs
 	{
 		"OcTree/src",
+		"OcTree/vendor",
+
 		"GameEngine/vendor/spdlog/include",
 		"GameEngine/src",
 		"GameEngine/vendor",
+
 		"%{IncludeDir.glm}"
 	}
 

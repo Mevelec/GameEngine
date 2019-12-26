@@ -1,25 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="SVO">
-      <UniqueIdentifier>{5D1F880B-C928-887C-52A4-9E7CBEAC937C}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\SVO">
+      <UniqueIdentifier>{F4AB2FA9-608B-AE44-69A3-391BD50115A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\libmorton">
+      <UniqueIdentifier>{F83E9724-E437-B676-0D6A-9BFBF9C19582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\libmorton\include">
+      <UniqueIdentifier>{6BDE0FC2-5703-5F42-804E-44D26CD25D60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\libtri">
+      <UniqueIdentifier>{48FE8B11-B4BE-0748-7DF9-50C5E9784C24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\libtri\include">
+      <UniqueIdentifier>{BBED36A2-275A-F29C-F04D-8AFA5C791405}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\OcTree.h" />
-    <ClInclude Include="src\SVO\Node.h">
-      <Filter>SVO</Filter>
+    <ClInclude Include="src\OcTree.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\SVO\OctreeBuilder.h">
-      <Filter>SVO</Filter>
+    <ClInclude Include="src\SVO\Node.h">
+      <Filter>src\SVO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SVO\VoxelData.h">
+      <Filter>src\SVO</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libmorton\include\morton.h">
+      <Filter>vendor\libmorton\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libmorton\include\morton2D.h">
+      <Filter>vendor\libmorton\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libmorton\include\morton2D_LUTs.h">
+      <Filter>vendor\libmorton\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libmorton\include\morton3D.h">
+      <Filter>vendor\libmorton\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libmorton\include\morton3D_LUTs.h">
+      <Filter>vendor\libmorton\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libmorton\include\morton_BMI.h">
+      <Filter>vendor\libmorton\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libmorton\include\morton_LUT_generators.h">
+      <Filter>vendor\libmorton\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libmorton\include\morton_common.h">
+      <Filter>vendor\libmorton\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libtri\include\TriReader.h">
+      <Filter>vendor\libtri\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libtri\include\file_tools.h">
+      <Filter>vendor\libtri\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libtri\include\tri_tools.h">
+      <Filter>vendor\libtri\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libtri\include\tri_util.h">
+      <Filter>vendor\libtri\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\libtri\include\trip_tools.h">
+      <Filter>vendor\libtri\include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SVO\Node.cpp">
-      <Filter>SVO</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SVO\OctreeBuilder.cpp">
-      <Filter>SVO</Filter>
+      <Filter>src\SVO</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

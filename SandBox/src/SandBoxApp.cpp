@@ -178,6 +178,7 @@ public:
 		return false;
 	}
 
+
 	bool onWindowResized(GameEngine::WindowResizeEvent& event)
 	{
 		this->camera->onWindowResized(event);
