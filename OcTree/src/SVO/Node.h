@@ -3,11 +3,14 @@
 #include <cmath>
 
 #include "VoxelData.h"
+#include <morton.h>
 
 
 
 // An SVO node. Only contains child pointers, extend this if you want parent pointers as well
 namespace OcTree {
+
+
 
 	template<class T>
 	class Node
@@ -16,74 +19,80 @@ namespace OcTree {
 		Node()
 		{
 			this->data = NULL;
-			this->children_offset = nullptr;
+			this->childs = nullptr;
 		}
 	public:
 		T data;
-		Node<T>* children_offset;
-
-		// If the data pointer is NODATA, there is no data
-		inline bool hasData() const { return !(data == NULL);	}
+		Node<T>* childs;
 	};
+
+
+
 
 	template<class T>
 	class OcTree
 	{
 	public:
+	public:
 		OcTree()
 			:
 			root()
 		{
-
+			this->depth = 6;
+			this->splitRec(this->root, this->depth);
 		};
 
-		Node<T> root;
-		int size = 64;
+		inline bool hasData(Node<T>* node) const { return !(node->data == NULL); }
 
-		//get nearest node of pos at layer e
-		Node<T>& getNode(int posx, int posy, int posz, int e) {
-			int e0 = 30; // Conventionnellement, dans ce code, la largeur du cube racine est de 2^30
-			Node<T>& node = this->root;
-			while (node.children_offset != NULL && e0 > e) {// tant qu'il y a des fils et que la profondeur n'est pas atteinte
-				e0--;// on	 descend d'un niveau dans la profondeur de l'arbre
-				node = (Node<T>&)node.children_offset[
-					((posx >> e0) & 1) +
-					(((posy >> e0) & 1) << 1) +
-					(((posz >> e0) & 1) << 2)
-				];
+		void splitRec(Node<T>& node, int depth) {
+			if (depth > 0) {
+				Node<T>* nodeChilds = this->split(node);
+				this->splitRec(nodeChilds[0], depth - 1);
+				this->splitRec(nodeChilds[1], depth - 1);
+				this->splitRec(nodeChilds[2], depth - 1);
+				this->splitRec(nodeChilds[3], depth - 1);
+				this->splitRec(nodeChilds[4], depth - 1);
+				this->splitRec(nodeChilds[5], depth - 1);
+				this->splitRec(nodeChilds[6], depth - 1);
+				this->splitRec(nodeChilds[7], depth - 1);
 			}
-			return node;
 		}
 
-		//get nearest node of pos at layer e
-		Node<T>& setNode(T data, int posx, int posy, int posz, int depthSeek = 0) {
-			int maxdepth = std::log2(size + 1);
-			//depthSeek = depthSeek > 0? depthSeek : maxdepth; // width = 2^depth
-
-			Node<T>& node = this->root;
-			while (maxdepth > depthSeek) {// tant qu'il y a des fils et que la profondeur n'est pas atteinte
-				maxdepth--;// on	 descend d'un niveau dans la profondeur de l'arbre
-				if (node.children_offset == NULL)
-				{
-					this->subdivide(node);
-				}
-
-				node = (Node<T>&)node.children_offset[
-					((posx >> size) & 1) +
-					(((posy >> size) & 1) << 1) +
-					(((posz >> size) & 1) << 2)
-				];
-
-			}
-			node.data = data;
-			return node;
+		Node<T>* split(Node<T>& node) { 
+			node.childs = new Node<T>[8];
+			return node.childs; 
 		}
-
-		void subdivide(Node<T>& node)
+		
+		void setNode(T value, uint_fast16_t posx, uint_fast16_t posy, uint_fast16_t posz,  int depthSeek)
 		{
-			node.children_offset = new Node<T>[8];
+			uint_fast32_t mortonCode = morton3D_32_encode(posx, posy, posz);
+
+			int depth =this->depth;
+			Node<T> *node = &this->root;
+			while (depth > depthSeek)
+			{
+				depth--;
+				node = &(*node).childs[(mortonCode >> 3 * depth) & 7];
+			}
+			node->data = value;
 		}
 
+		Node<T>& getNode(uint_fast16_t posx, uint_fast16_t posy, uint_fast16_t posz, int depthSeek)
+		{
+			uint_fast32_t mortonCode = morton3D_32_encode(posx, posy, posz);
+
+			int depth = this->depth;
+			Node<T>* node = &this->root;
+			while (depth > depthSeek)
+			{
+				depth--;
+				node = &(*node).childs[(mortonCode >> 3 * depth) & 7];
+			}
+			return (*node);
+		}
+	private :
+		Node<T> root;
+		int depth;
 	};
 }
 

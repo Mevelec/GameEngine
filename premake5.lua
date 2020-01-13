@@ -195,7 +195,8 @@ project "Sandbox"
 		"GameEngine/src",
 		"GameEngine/vendor",
 
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.libmorton}"
 	}
 
 	links
