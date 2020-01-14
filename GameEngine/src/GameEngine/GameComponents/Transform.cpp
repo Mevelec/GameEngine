@@ -5,8 +5,8 @@
 
 namespace GameEngine {
 	Transform::Transform()
-		: position({0, 0, -1}),
-		dimensions({1, 1, 1}),
+		: position({0, 0, 0}),
+		scale({1, 1, 1}),
 		rotation(glm::fquat()),
 
 		forward({ 0, 0, 1}),
@@ -20,7 +20,7 @@ namespace GameEngine {
 	{
 		this->transform = glm::mat4_cast(this->rotation) *
 			glm::translate(glm::mat4(1.0f), this->position) *
-			glm::scale(glm::mat4(1.0f), this->dimensions);
+			glm::scale(glm::mat4(1.0f), this->scale);
 	}
 
 

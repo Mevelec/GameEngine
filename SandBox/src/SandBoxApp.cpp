@@ -147,12 +147,29 @@ public:
 
 		GameEngine::IRenderer::BeginScene(*this->camera);
 		{
+			for (int x = 0; x < 4; x++)
+			{
+				for (int y = 0; y < 4; y++)
+				{
+					for (int z = 0; z < 4; z++)
+					{
+						this->squareTransform->setPostion(glm::vec3(x, y, z));
+						//this->squareTransform->setScale(0.5f);
+						GameEngine::IRenderer::Submit(
+							flatShader, 
+							this->vertexArray, 
+							this->squareTransform->getTransform()
+						);
+					}
+				}
+			}
 			// square
 			auto mat = this->materialLib.get("default");
 			mat->bind();
-			GameEngine::IRenderer::Submit(mat->getShader(), this->squareVA, this->squareTransform->getTransform());
-			// triangle
-			GameEngine::IRenderer::Submit(flatShader, this->vertexArray);
+			GameEngine::IRenderer::Submit(
+				mat->getShader(),
+				this->squareVA
+				);
 		}
 		GameEngine::IRenderer::EndScene();
 
