@@ -26,6 +26,8 @@ namespace GameEngine {
 
 		//TRANSFORM
 		void translate(glm::vec3 direction);
+
+
 		inline void setPostion(glm::vec3 position) { this->position = position; this->update(); };
 
 		//ROTATE
@@ -38,6 +40,7 @@ namespace GameEngine {
 
 		glm::vec3 forward;
 		glm::vec3 up;
+		glm::vec3 right;
 
 	protected:
 		virtual void update();

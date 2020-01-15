@@ -89,6 +89,8 @@ public:
 		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->bind();
 		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->uploadUniformInt("u_Texture", 0);
 
+
+		GameEngine::Input::resetMousePos();
 	}
 
 	~ExampleLayer() {
@@ -99,10 +101,10 @@ public:
 	{
 		// MOVE
 		if (GameEngine::Input::IsKeyPressed(GE_KEY_A)) {
-			this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0});
+			this->camera->translate({ this->cameraMoveSpeed * ts * -1, 0, 0});
 		}
 		else if (GameEngine::Input::IsKeyPressed(GE_KEY_D)) {
-			this->camera->translate({ this->cameraMoveSpeed * ts * -1, 0, 0 });
+			this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0 });
 		}
 		if (GameEngine::Input::IsKeyPressed(GE_KEY_W)) {
 			this->camera->translate({ 0, 0, this->cameraMoveSpeed * ts });
@@ -135,6 +137,10 @@ public:
 		else if (GameEngine::Input::IsKeyPressed(GE_KEY_RIGHT)) {
 			this->camera->rotate({ 0, 0, this->cmaraRotateSpeed * ts * -1 });
 		}
+
+		std::pair<float, float> mousePos = GameEngine::Input::getMouseDeviation();
+		GameEngine::Input::resetMousePos();
+		this->camera->rotate({ this->mouseMoveSpeed * ts * mousePos.second, this->mouseMoveSpeed * ts * mousePos.first, 0 });
 
 
 		GameEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
@@ -249,7 +255,8 @@ private:
 
 	GameEngine::Camera* camera;
 	float cameraMoveSpeed = 1.0f;
-	float cmaraRotateSpeed = 1.0f;
+	float cmaraRotateSpeed = 10.0f;
+	float mouseMoveSpeed = 1.0f;
 
 	//GameEngine::Transform squareTrans = GameEngine::Transform();
 	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };

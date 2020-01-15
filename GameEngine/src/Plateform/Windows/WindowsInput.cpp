@@ -43,4 +43,23 @@ namespace GameEngine {
 		return { (float)posX, (float)posY };
 	}
 
+	std::pair<float, float> WindowsInput::getMouseDeviationImpl()
+	{
+		auto window = static_cast<GLFWwindow*>(Application::get().GetWindow().getNativeWindow());
+		int width, height;
+		glfwGetWindowSize(window, &width, &height);
+		double posX, posY;
+		glfwGetCursorPos(window, &posX, &posY);
+
+		return { (float)width/2 - posX, (float)height/2 - posY };
+	}
+
+	void WindowsInput::resetMousePosImpl()
+	{
+		auto window = static_cast<GLFWwindow*>(Application::get().GetWindow().getNativeWindow());
+		int width, height;
+		glfwGetWindowSize(window, &width, &height);
+		glfwSetCursorPos(window, width / 2, height / 2);
+	}
+
 }

@@ -13,6 +13,8 @@ namespace GameEngine
 		virtual float getMouseXImpl() override;
 		virtual float getMouseYImpl() override;
 		virtual std::pair<float, float> getMousePosImpl() override;
+		virtual std::pair<float, float> getMouseDeviationImpl() override;
+		virtual void resetMousePosImpl() override;
 	};
 }
 
