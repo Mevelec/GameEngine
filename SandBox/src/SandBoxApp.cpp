@@ -1,10 +1,5 @@
-#include <GameEngine.h>
-
-#include "Plateform/OpenGl/OpenGLShader.h"
-
-#include "imgui/imgui.h"
-
-#include <glm/gtc/type_ptr.hpp>
+#include "Sandbox.h"
+#include <GameEngine/EntryPoint.h>
 
 class ExampleLayer : public GameEngine::Layer
 {
@@ -23,72 +18,7 @@ public:
 		);
 		//this->camera = new GameEngine::OrtographicCamera(-1.6f, 1.6f, -0.9f, 0.9f);
 
-		//Vertex Array
-		this->vertexArray.reset(GameEngine::VertexArray::Create());
-
-		float vertices[3 * 7] = {
-			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
-			 0.5f, -0.5f, 0.0f, 0.2f, 0.2f, 0.8f, 1.0f,
-			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
-		};
-		GameEngine::Ref<GameEngine::IVertexBuffer> vertexBuffer;
-		vertexBuffer.reset(GameEngine::IVertexBuffer::Create(vertices, sizeof(vertices)));
-		GameEngine::BufferLayout layout = {
-			{ GameEngine::ShaderDataType::Float3, "a_Position"},
-			{ GameEngine::ShaderDataType::Float4, "a_Color"},
-
-		};
-		vertexBuffer->setLayout(layout);
-		this->vertexArray->addVertexBuffer(vertexBuffer);
-
-
-		//Index Buffer
-		unsigned int indices[3] = { 0, 1, 2 };
-		GameEngine::Ref<GameEngine::IIndexBuffer> indexBuffer;
-		indexBuffer.reset(GameEngine::IIndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
-		this->vertexArray->setIndexBuffer(indexBuffer);
-
-		//////// SQUARE ////////
-		this->squareTransform.reset(new GameEngine::Transform());
-		//Vertex Array
-		this->squareVA.reset(GameEngine::VertexArray::Create());
-		float squareVertices[5 * 4] = {
-			 0.75, -0.75f, 0.0f, 0.0f, 0.0f, 
-			-0.75, -0.75f, 0.0f, 1.0f, 0.0f,
-			 0.75,  0.75f, 0.0f, 1.0f, 1.0f, 
-			-0.75,  0.75f, 0.0f, 0.0f, 1.0f
-		};
-		GameEngine::Ref<GameEngine::IVertexBuffer> squareVB;
-		squareVB.reset(GameEngine::IVertexBuffer::Create(squareVertices, sizeof(squareVertices)));
-		GameEngine::BufferLayout squareLayout = {
-			{ GameEngine::ShaderDataType::Float3, "a_Position"},
-			{ GameEngine::ShaderDataType::Float2, "a_TextCoord" }
-		};
-		squareVB->setLayout(squareLayout);
-		this->squareVA->addVertexBuffer(squareVB);
-
-		//Index Buffer
-		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 1 };
-		GameEngine::Ref<GameEngine::IIndexBuffer> squareIB;
-		squareIB.reset(GameEngine::IIndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
-		this->squareVA->setIndexBuffer(squareIB);
-
-		// SHADERS
-		// Flat
-		this->shaderLib.load("flat", "assets/shaders/FlatColor.glsl");
-		// Texture 
-		this->textureShader = GameEngine::Shader::Create("assets/shaders/Texture2D.glsl");
-
-		// TEXTURE
-		this->uv_texture = GameEngine::Texture2D::Create("assets/textures/UV_check.png");
-
-		// MATERIAL
-		auto mat = GameEngine::Material::Create("default");
-		this->materialLib.add(mat);
-
-		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->bind();
-		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->uploadUniformInt("u_Texture", 0);
-
+		GameEngine::Input::resetMousePos();
 	}
 
 	~ExampleLayer() {
@@ -99,10 +29,10 @@ public:
 	{
 		// MOVE
 		if (GameEngine::Input::IsKeyPressed(GE_KEY_A)) {
-			this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0});
+			this->camera->translate({ this->cameraMoveSpeed * ts * -1, 0, 0});
 		}
 		else if (GameEngine::Input::IsKeyPressed(GE_KEY_D)) {
-			this->camera->translate({ this->cameraMoveSpeed * ts * -1, 0, 0 });
+			this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0 });
 		}
 		if (GameEngine::Input::IsKeyPressed(GE_KEY_W)) {
 			this->camera->translate({ 0, 0, this->cameraMoveSpeed * ts });
@@ -136,23 +66,53 @@ public:
 			this->camera->rotate({ 0, 0, this->cmaraRotateSpeed * ts * -1 });
 		}
 
+		std::pair<float, float> mousePos = GameEngine::Input::getMouseDeviation();
+		GameEngine::Input::resetMousePos();
+		this->camera->rotate({ this->mouseMoveSpeed * ts * mousePos.second, this->mouseMoveSpeed * ts * mousePos.first, 0 });
+
 
 		GameEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		GameEngine::RenderCommand::Clear();
 
-		auto flatShader = this->shaderLib.get("flat");
-		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->bind();
-		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->uploadUniformFloat3("u_Color", m_SquareColor);
-
-
 		GameEngine::IRenderer::BeginScene(*this->camera);
 		{
+			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(-1, -1, -1));
+			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Grass, glm::vec3(-1, -1, 1));/*
+			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(1, -1, -1));
+			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(1, -1, -1));
+			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(-1, 1, -1));
+			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(-1, 1, 1));
+			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(1, 1, -1));
+			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(1, 1, -1));*/
+
+
+			/*
+			for (int x = 0; x < 4; x++)
+			{
+				for (int y = 0; y < 4; y++)
+				{
+					for (int z = 0; z < 4; z++)
+					{
+						this->squareTransform->setPostion(glm::vec3(x, y, z));
+						//this->squareTransform->setScale(0.5f);
+						GameEngine::IRenderer::Submit(
+							flatShader, 
+							this->vertexArray, 
+							this->squareTransform->getTransform()
+						);
+					}
+				}
+			}
+			*/
 			// square
+			/*
 			auto mat = this->materialLib.get("default");
 			mat->bind();
-			GameEngine::IRenderer::Submit(mat->getShader(), this->squareVA, this->squareTransform->getTransform());
-			// triangle
-			GameEngine::IRenderer::Submit(flatShader, this->vertexArray);
+			GameEngine::IRenderer::Submit(
+				mat->getShader(),
+				this->squareVA
+				);
+			*/
 		}
 		GameEngine::IRenderer::EndScene();
 
@@ -161,8 +121,6 @@ public:
 	void onImGuiRender()
 	{
 		ImGui::Begin("Settings");
-		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
-
 		{
 			ImGui::LabelText("", "Camera Position :");
 			float camPos[3] = {
@@ -219,24 +177,10 @@ public:
 		return false;
 	}
 private:
-	GameEngine::ShaderLibrary shaderLib;
-	GameEngine::MaterialLibrary materialLib;
-
-	GameEngine::Ref<GameEngine::Shader> textureShader;
-
-	GameEngine::Ref<GameEngine::Texture> uv_texture;
-
-	GameEngine::Ref<GameEngine::VertexArray> vertexArray;
-	GameEngine::Ref<GameEngine::VertexArray> squareVA;
-	GameEngine::Ref<GameEngine::Transform>   squareTransform;
-
 	GameEngine::Camera* camera;
 	float cameraMoveSpeed = 1.0f;
-	float cmaraRotateSpeed = 1.0f;
-
-	//GameEngine::Transform squareTrans = GameEngine::Transform();
-	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
-
+	float cmaraRotateSpeed = 10.0f;
+	float mouseMoveSpeed = 1.0f;
 };
 class Sandbox : public GameEngine::Application
 {

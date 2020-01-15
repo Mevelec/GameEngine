@@ -36,5 +36,5 @@
 // -------------------------------------
 
 // --Entry Point -----------------------
-#include "GameEngine/EntryPoint.h"
+//#include "GameEngine/EntryPoint.h"
 // -------------------------------------

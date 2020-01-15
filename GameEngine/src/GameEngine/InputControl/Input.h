@@ -19,6 +19,9 @@ namespace GameEngine {
 		inline static float getMouseX() { return instance->getMouseXImpl(); }
 		inline static float getMouseY() { return instance->getMouseYImpl(); }
 		inline static std::pair<float, float> getMousePos() { return instance->getMousePosImpl(); }
+		inline static std::pair<float, float> getMouseDeviation() { return instance->getMouseDeviationImpl(); }
+		inline static void resetMousePos() { instance->resetMousePosImpl(); }
+
 			   		 
 	protected:
 		virtual bool IsKeyPressedImpl(int keycode) = 0;
@@ -27,6 +30,9 @@ namespace GameEngine {
 		virtual float getMouseXImpl() = 0;
 		virtual float getMouseYImpl() = 0;
 		virtual std::pair<float, float> getMousePosImpl() = 0;
+		virtual std::pair<float, float> getMouseDeviationImpl() = 0;
+		virtual void resetMousePosImpl() = 0;
+
 
 	private:
 		static Input* instance;
