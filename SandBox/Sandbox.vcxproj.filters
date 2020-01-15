@@ -16,10 +16,16 @@
     <Filter Include="assets\textures\src">
       <UniqueIdentifier>{c18b6fe9-c285-4dd8-ab90-7d9bf2276ee0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Blocks">
+      <UniqueIdentifier>{d600c395-d808-44b1-9d6e-55ab74f5aa2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SandBoxApp.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Blocks\Block.cpp">
+      <Filter>src\Blocks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,5 +52,11 @@
     <None Include="assets\shaders\Default.glsl">
       <Filter>assets\shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Blocks\Block.h">
+      <Filter>src\Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sandbox.h" />
   </ItemGroup>
 </Project>
