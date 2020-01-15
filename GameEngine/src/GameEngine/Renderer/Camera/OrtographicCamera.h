@@ -7,10 +7,14 @@ namespace GameEngine {
 	class GE_API OrtographicCamera : public Camera
 	{
 	public:
-		OrtographicCamera(float left, float right, float bottom, float top);
+		OrtographicCamera(float aspectRatio, glm::vec3 position);
 		~OrtographicCamera();
+		
+		virtual void onWindowResized(WindowResizeEvent& e) override;
 
 	private:
 		virtual void update() override;
+		float aspectRatio;
+		float zoomLevel = 1;
 	};
 }

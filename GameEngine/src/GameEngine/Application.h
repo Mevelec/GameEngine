@@ -28,10 +28,13 @@ namespace GameEngine
 		inline Window& GetWindow() { return *this->window;  }
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
+		bool onWindowResize(WindowResizeEvent& e);
+
 	private:
 		std::unique_ptr<Window> window;
 		ImGuiLayer* imGuiLayer;
 		bool running = true;
+		bool minimized = false;
 		LayerStack layerStack;
 		float lastFrameTime = 0.0f;
 
