@@ -2,13 +2,13 @@
 
 //FOR use by applications
 
-#include "GameEngine/Application.h"
-#include "GameEngine/Layer/Layer.h"
-#include "GameEngine/Log/Log.h"
+#include "GameEngine/Core/Application.h"
+#include "GameEngine/Core/Layer/Layer.h"
+#include "GameEngine/Core/Log/Log.h"
 
-#include "GameEngine/InputControl/Input.h"
-#include "GameEngine/InputControl/KeyCodes.h"
-#include "GameEngine/InputControl/MouseButtonCodes.h"
+#include "GameEngine/Core/InputControl/Input.h"
+#include "GameEngine/Core/InputControl/KeyCodes.h"
+#include "GameEngine/Core/InputControl/MouseButtonCodes.h"
 
 #include "GameEngine/imGui/imGuiLayer.h"
 

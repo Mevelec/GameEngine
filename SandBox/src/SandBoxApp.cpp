@@ -1,5 +1,5 @@
 #include "Sandbox.h"
-#include <GameEngine/EntryPoint.h>
+#include <GameEngine/Core/EntryPoint.h>
 
 class ExampleLayer : public GameEngine::Layer
 {

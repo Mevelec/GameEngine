@@ -10,20 +10,20 @@
     <Filter Include="src\GameEngine\Core">
       <UniqueIdentifier>{64C85E01-D029-3C0F-5997-82C1C5F772CE}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\GameEngine\Core\InputControl">
+      <UniqueIdentifier>{64C1AE31-5012-9A73-7976-883565262DDD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameEngine\Core\Layer">
+      <UniqueIdentifier>{30804D14-9C42-819E-E5F2-0F2B51F4597C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameEngine\Core\Log">
+      <UniqueIdentifier>{3572AFAA-A1A9-F741-AAB3-5B65166A1E3B}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\GameEngine\Events">
       <UniqueIdentifier>{F08254D9-5CEF-0FD4-25E3-A731910E323C}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\GameEngine\GameComponents">
       <UniqueIdentifier>{1BC2E4D6-87DA-CB00-5087-5B9ABC5E609A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\GameEngine\InputControl">
-      <UniqueIdentifier>{8C669356-F873-C13C-815A-BD27ED668DF3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\GameEngine\Layer">
-      <UniqueIdentifier>{5822D32D-44B1-5CF7-EDCF-70F2D93D6D9D}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\GameEngine\Log">
-      <UniqueIdentifier>{5D6A962E-494E-5784-B2AE-51D79EB14106}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\GameEngine\Renderer">
       <UniqueIdentifier>{B20D7C77-1E45-C40E-274F-28329305EB07}</UniqueIdentifier>
@@ -78,17 +78,38 @@
     <ClInclude Include="src\GameEngine.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameEngine\Application.h">
-      <Filter>src\GameEngine</Filter>
+    <ClInclude Include="src\GameEngine\Core\Application.h">
+      <Filter>src\GameEngine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameEngine\Core.h">
-      <Filter>src\GameEngine</Filter>
+    <ClInclude Include="src\GameEngine\Core\Core.h">
+      <Filter>src\GameEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Core\EntryPoint.h">
+      <Filter>src\GameEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Core\InputControl\Input.h">
+      <Filter>src\GameEngine\Core\InputControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Core\InputControl\KeyCodes.h">
+      <Filter>src\GameEngine\Core\InputControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Core\InputControl\MouseButtonCodes.h">
+      <Filter>src\GameEngine\Core\InputControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Core\Layer\Layer.h">
+      <Filter>src\GameEngine\Core\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Core\Layer\LayerStack.h">
+      <Filter>src\GameEngine\Core\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Core\Log\Log.h">
+      <Filter>src\GameEngine\Core\Log</Filter>
     </ClInclude>
     <ClInclude Include="src\GameEngine\Core\TimeStep.h">
       <Filter>src\GameEngine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameEngine\EntryPoint.h">
-      <Filter>src\GameEngine</Filter>
+    <ClInclude Include="src\GameEngine\Core\Window.h">
+      <Filter>src\GameEngine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\GameEngine\Events\ApplicationEvent.h">
       <Filter>src\GameEngine\Events</Filter>
@@ -104,24 +125,6 @@
     </ClInclude>
     <ClInclude Include="src\GameEngine\GameComponents\Transform.h">
       <Filter>src\GameEngine\GameComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\InputControl\Input.h">
-      <Filter>src\GameEngine\InputControl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\InputControl\KeyCodes.h">
-      <Filter>src\GameEngine\InputControl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\InputControl\MouseButtonCodes.h">
-      <Filter>src\GameEngine\InputControl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Layer\Layer.h">
-      <Filter>src\GameEngine\Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Layer\LayerStack.h">
-      <Filter>src\GameEngine\Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Log\Log.h">
-      <Filter>src\GameEngine\Log</Filter>
     </ClInclude>
     <ClInclude Include="src\GameEngine\Renderer\Buffer\Buffer.h">
       <Filter>src\GameEngine\Renderer\Buffer</Filter>
@@ -158,9 +161,6 @@
     </ClInclude>
     <ClInclude Include="src\GameEngine\Renderer\RendererAPI.h">
       <Filter>src\GameEngine\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Window.h">
-      <Filter>src\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\GameEngine\imGui\imGuiLayer.h">
       <Filter>src\GameEngine\imGui</Filter>
@@ -1304,20 +1304,20 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\GameEngine\Application.cpp">
-      <Filter>src\GameEngine</Filter>
+    <ClCompile Include="src\GameEngine\Core\Application.cpp">
+      <Filter>src\GameEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Core\Layer\Layer.cpp">
+      <Filter>src\GameEngine\Core\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Core\Layer\LayerStack.cpp">
+      <Filter>src\GameEngine\Core\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Core\Log\Log.cpp">
+      <Filter>src\GameEngine\Core\Log</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEngine\GameComponents\Transform.cpp">
       <Filter>src\GameEngine\GameComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Layer\Layer.cpp">
-      <Filter>src\GameEngine\Layer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Layer\LayerStack.cpp">
-      <Filter>src\GameEngine\Layer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Log\Log.cpp">
-      <Filter>src\GameEngine\Log</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEngine\Renderer\Buffer\Buffer.cpp">
       <Filter>src\GameEngine\Renderer\Buffer</Filter>

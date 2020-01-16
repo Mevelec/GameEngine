@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GameEngine/Core.h"
-#include "GameEngine/Layer/Layer.h"
+#include "GameEngine/Core/Core.h"
+#include "GameEngine/Core/Layer/Layer.h"
 
 namespace GameEngine {
 

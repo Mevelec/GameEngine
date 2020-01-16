@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "GameEngine/Log/Log.h"
+#include "GameEngine/Core/Log/Log.h"
 
 #ifdef HZ_PLATFORM_WINDOWS
 	#include <Windows.h>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameEngine/InputControl/Input.h"
+#include "GameEngine/Core/InputControl/Input.h"
 
 namespace GameEngine
 {

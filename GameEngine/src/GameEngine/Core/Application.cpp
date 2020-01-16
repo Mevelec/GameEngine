@@ -1,7 +1,7 @@
 #include "hzpch.h"
 #include "Application.h"
 
-#include "GameEngine/Log/Log.h"
+#include "GameEngine/Core/Log/Log.h"
 #include "GameEngine/Renderer/Renderer.h"
 
 #include "GLFW/glfw3.h"
