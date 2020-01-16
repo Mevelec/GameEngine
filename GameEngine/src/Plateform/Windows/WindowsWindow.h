@@ -28,7 +28,7 @@ namespace GameEngine {
 
 	private:
 		GLFWwindow* window;
-		GraphicsContext* context;
+		Scope<GraphicsContext> context;
 
 		struct WindowData
 		{

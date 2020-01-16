@@ -6,7 +6,7 @@
 
 namespace GameEngine {
 
-	Input* Input::instance = new WindowsInput();
+	Scope<Input> Input::instance = CreateScope<WindowsInput>();
 
 	bool WindowsInput::IsKeyPressedImpl(int keycode)
 	{

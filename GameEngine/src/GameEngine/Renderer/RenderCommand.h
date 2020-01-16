@@ -15,6 +15,6 @@ namespace GameEngine {
 		inline static void DrawIndexed(const Ref<VertexArray>& vertexArray) {	rendererAPI->drawIndexed(vertexArray); }
 
 	private:
-		static RendererAPI* rendererAPI;
+		static Scope<RendererAPI> rendererAPI;
 	};
 }
