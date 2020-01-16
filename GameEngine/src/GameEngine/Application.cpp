@@ -41,6 +41,8 @@ namespace GameEngine {
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(GE_BIND_EVENT_FN(Application::onWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(GE_BIND_EVENT_FN(Application::onWindowResize));
+
 
 		for (auto it = this->layerStack.end(); it != this->layerStack.begin();)
 		{
@@ -59,9 +61,12 @@ namespace GameEngine {
 			TimeStep timeStep = time - this->lastFrameTime;
 			this->lastFrameTime = time;
 
-			for (Layer* layer : this->layerStack)
+			if (!this->minimized)
 			{
-				layer->onUpdate(timeStep);
+				for (Layer* layer : this->layerStack)
+				{
+					layer->onUpdate(timeStep);
+				}
 			}
 
 			this->imGuiLayer->begin();
@@ -71,7 +76,6 @@ namespace GameEngine {
 			}
 			this->imGuiLayer->end();
 
-
 			this->window->onUpdate();
 		}
 	}
@@ -80,5 +84,20 @@ namespace GameEngine {
 	{
 		this->running = false;
 		return true;
+	}
+
+	bool Application::onWindowResize(WindowResizeEvent& e)
+	{
+		if (e.getWidth() == 0 || e.getHeight() == 0)
+		{
+			this->minimized = true;
+			return false;
+		}
+
+		this->minimized = false;
+
+		IRenderer::OnWindowResize(e.getWidth(), e.getHeight());
+
+		return false;
 	}
 }

@@ -9,8 +9,8 @@ namespace GameEngine {
 		scale({1, 1, 1}),
 		rotation(glm::fquat(1, 0, 0, 0)),
 
-		forward({ 0, 0, -1}),
-		up({0, 1, 0})
+		forward({ 0, 0, 1}),
+		up({0, -1, 0})
 	{
 		this->right = glm::vec3(1, 0, 0);
 		this->update();
@@ -19,7 +19,7 @@ namespace GameEngine {
 
 	void Transform::update()
 	{
-		this->transform = glm::lookAt(this->position, this->position + this->forward, {0, 1, 0});
+		this->transform = glm::lookAt(this->position, this->position + this->forward, this->up);
 		/*
 		this->transform = glm::mat4_cast(this->rotation) *
 			glm::translate(glm::mat4(1.0f), this->position) *
@@ -55,8 +55,8 @@ namespace GameEngine {
 		this->rotation = key_quat * this->rotation;
 
 		this->forward = key_quat * this->forward * glm::conjugate(key_quat);
-		this->up = key_quat * this->up * glm::conjugate(key_quat);
-		this->right = glm::cross(this->forward, {0, 1, 0});
+		//this->up = key_quat * this->up * glm::conjugate(key_quat);
+		this->right = glm::cross(this->forward, this->up);
 
 
 		this->update();

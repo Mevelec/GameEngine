@@ -12,6 +12,11 @@ namespace GameEngine {
 		RenderCommand::Init();
 	}
 
+	void IRenderer::OnWindowResize(uint32_t width, uint32_t height)
+	{
+		RenderCommand::SetViewPort(0, 0, width, height);
+	}
+
 	void IRenderer::BeginScene(Camera& camera)
 	{
 		sceneData->viewProjectionMat = camera.getViewProjectionMat();

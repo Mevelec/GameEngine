@@ -11,14 +11,13 @@ public:
 		int height = GameEngine::Application::get().GetWindow().getHeight();
 
 		this->camera = new GameEngine::PerspectiveCamera(
-			70.0f, 
+			70.0f,
 			(float)width / (float)height,
-			0.01f, 
-			1000.0f
+			0.01f,
+			1000.0f,
+			glm::vec3(0, 0, -5)
 		);
-		//this->camera = new GameEngine::OrtographicCamera(-1.6f, 1.6f, -0.9f, 0.9f);
-
-		GameEngine::Input::resetMousePos();
+		//this->camera = new GameEngine::OrtographicCamera( (float)16/ (float)9, { 0, 0, 0 });
 	}
 
 	~ExampleLayer() {
@@ -29,10 +28,10 @@ public:
 	{
 		// MOVE
 		if (GameEngine::Input::IsKeyPressed(GE_KEY_A)) {
-			this->camera->translate({ this->cameraMoveSpeed * ts * -1, 0, 0});
+			this->camera->translate({ this->cameraMoveSpeed * ts, 0, 0});
 		}
 		else if (GameEngine::Input::IsKeyPressed(GE_KEY_D)) {
-			this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0 });
+			this->camera->translate({ this->cameraMoveSpeed * ts *-1 , 0, 0 });
 		}
 		if (GameEngine::Input::IsKeyPressed(GE_KEY_W)) {
 			this->camera->translate({ 0, 0, this->cameraMoveSpeed * ts });
@@ -67,8 +66,8 @@ public:
 		}
 
 		std::pair<float, float> mousePos = GameEngine::Input::getMouseDeviation();
-		GameEngine::Input::resetMousePos();
-		this->camera->rotate({ this->mouseMoveSpeed * ts * mousePos.second, this->mouseMoveSpeed * ts * mousePos.first, 0 });
+		//GameEngine::Input::resetMousePos();
+		//this->camera->rotate({ this->mouseMoveSpeed * ts * mousePos.second, this->mouseMoveSpeed * ts * mousePos.first, 0 });
 
 
 		GameEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
@@ -76,8 +75,9 @@ public:
 
 		GameEngine::IRenderer::BeginScene(*this->camera);
 		{
-			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(-1, -1, -1));
-			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Grass, glm::vec3(-1, -1, 1));/*
+			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(2, 0, 0));
+			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Sand, glm::vec3(0, 2, 0));
+			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Grass, glm::vec3(0, 0, 2));/*
 			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(1, -1, -1));
 			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(1, -1, -1));
 			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(-1, 1, -1));
@@ -124,7 +124,7 @@ public:
 		{
 			ImGui::LabelText("", "Camera Position :");
 			float camPos[3] = {
-				this->camera->getPosition().x,
+				this->camera->getPosition().x * -1,
 				this->camera->getPosition().y,
 				this->camera->getPosition().z
 			};
@@ -170,10 +170,17 @@ public:
 	{
 		GameEngine::EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<GameEngine::KeyPressedEvent>(GE_BIND_EVENT_FN(ExampleLayer::onKeyPressedEvent));
+		dispatcher.Dispatch<GameEngine::WindowResizeEvent>(GE_BIND_EVENT_FN(ExampleLayer::onWindowResized));
 	}
 
 	bool onKeyPressedEvent(GameEngine::KeyPressedEvent& event)
 	{
+		return false;
+	}
+
+	bool onWindowResized(GameEngine::WindowResizeEvent& event)
+	{
+		this->camera->onWindowResized(event);
 		return false;
 	}
 private:

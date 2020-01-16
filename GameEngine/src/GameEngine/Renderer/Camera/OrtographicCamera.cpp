@@ -4,9 +4,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace GameEngine {
-	OrtographicCamera::OrtographicCamera(float left, float right, float bottom, float top)
+	OrtographicCamera::OrtographicCamera(float aspectRatio, glm::vec3 position = glm::vec3(0))
 	{
-		this->projectionMat = glm::ortho(left, right, bottom, top, -1000.0f, 0.0f);
+		this->position = position;
+		this->aspectRatio = aspectRatio;
+
+		this->projectionMat = glm::ortho(-aspectRatio * this->zoomLevel, 
+			aspectRatio * this->zoomLevel, -this->zoomLevel, this->zoomLevel, -1000.0f, 0.0f);
 		this->viewMat = this->getTransform();
 		this->viewProjectionMat = this->projectionMat * this->viewMat;
 
@@ -16,6 +20,13 @@ namespace GameEngine {
 
 	OrtographicCamera::~OrtographicCamera()
 	{
+	}
+
+	void OrtographicCamera::onWindowResized(WindowResizeEvent& e) {
+		this->aspectRatio = (float)e.getWidth() / (float)e.getHeight();
+		this->projectionMat = glm::ortho(-aspectRatio * this->zoomLevel,
+			aspectRatio * this->zoomLevel, -this->zoomLevel, this->zoomLevel, -1000.0f, 0.0f);
+		this->viewProjectionMat = this->projectionMat * this->viewMat;
 	}
 
 	void OrtographicCamera::update()

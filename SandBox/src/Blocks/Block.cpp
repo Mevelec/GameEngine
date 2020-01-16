@@ -76,9 +76,11 @@ namespace Blocks {
 		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->bind();
 
 		if(type == BlockType::Dirt)
-			std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->uploadUniformFloat3("u_Color", glm::vec3(1, 1, 0));
-		else if(type == BlockType::Grass)
-			std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->uploadUniformFloat3("u_Color", glm::vec3(0, 1, 1));
+			std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->uploadUniformFloat3("u_Color", glm::vec3(1, 0, 0));
+		else if(type == BlockType::Sand)
+			std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->uploadUniformFloat3("u_Color", glm::vec3(0, 1, 0));
+		else if (type == BlockType::Grass)
+			std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->uploadUniformFloat3("u_Color", glm::vec3(0, 0, 1));
 
 		this->cubeTransform->setPostion(position);
 		this->cubeTransform->setScale(1.0f);
