@@ -13,14 +13,29 @@
     <Filter Include="src\GameEngine\Events">
       <UniqueIdentifier>{F08254D9-5CEF-0FD4-25E3-A731910E323C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\GameEngine\GameComponents">
+      <UniqueIdentifier>{1BC2E4D6-87DA-CB00-5087-5B9ABC5E609A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameEngine\InputControl">
+      <UniqueIdentifier>{8C669356-F873-C13C-815A-BD27ED668DF3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\GameEngine\Layer">
       <UniqueIdentifier>{5822D32D-44B1-5CF7-EDCF-70F2D93D6D9D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameEngine\Log">
+      <UniqueIdentifier>{5D6A962E-494E-5784-B2AE-51D79EB14106}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\GameEngine\Renderer">
       <UniqueIdentifier>{B20D7C77-1E45-C40E-274F-28329305EB07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\GameEngine\Renderer\Buffer">
+      <UniqueIdentifier>{5BF3F515-4719-C07C-305F-45481C24E548}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\GameEngine\Renderer\Camera">
       <UniqueIdentifier>{EA05E516-D62B-AF7D-BF71-3449AB36D449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameEngine\Renderer\Material">
+      <UniqueIdentifier>{90C424AF-7C15-10F1-A579-FEB29129A35A}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\GameEngine\imGui">
       <UniqueIdentifier>{D6AAE52F-C239-6FF9-6B58-83F457C67F9F}</UniqueIdentifier>
@@ -58,21 +73,6 @@
     <Filter Include="vendor\stb_image">
       <UniqueIdentifier>{0DA0BA59-F998-D9AB-22CB-BE300E23B9B7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\GameEngine\GameComponents">
-      <UniqueIdentifier>{2162785D-8D24-ACE7-D6D4-3A7442D684C5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\GameEngine\Renderer\Material">
-      <UniqueIdentifier>{0867480d-1b80-411e-aa12-a5029b07c7df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\GameEngine\Log">
-      <UniqueIdentifier>{0bd5d007-bb97-4d6d-beb2-9e5c2403255c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\GameEngine\Renderer\Buffer">
-      <UniqueIdentifier>{bc1863ed-f816-4c5e-8c3d-5495f54e7997}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\GameEngine\InputControl">
-      <UniqueIdentifier>{b24be227-ae12-4308-ae5f-ab3c05d0ae34}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameEngine.h">
@@ -102,8 +102,35 @@
     <ClInclude Include="src\GameEngine\Events\MouseEvent.h">
       <Filter>src\GameEngine\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEngine\GameComponents\Transform.h">
+      <Filter>src\GameEngine\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\InputControl\Input.h">
+      <Filter>src\GameEngine\InputControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\InputControl\KeyCodes.h">
+      <Filter>src\GameEngine\InputControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\InputControl\MouseButtonCodes.h">
+      <Filter>src\GameEngine\InputControl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Layer\Layer.h">
+      <Filter>src\GameEngine\Layer</Filter>
+    </ClInclude>
     <ClInclude Include="src\GameEngine\Layer\LayerStack.h">
       <Filter>src\GameEngine\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Log\Log.h">
+      <Filter>src\GameEngine\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Buffer\Buffer.h">
+      <Filter>src\GameEngine\Renderer\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Buffer\VertexArray.h">
+      <Filter>src\GameEngine\Renderer\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Camera\Camera.h">
+      <Filter>src\GameEngine\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="src\GameEngine\Renderer\Camera\OrtographicCamera.h">
       <Filter>src\GameEngine\Renderer\Camera</Filter>
@@ -111,16 +138,37 @@
     <ClInclude Include="src\GameEngine\Renderer\Camera\PerspectiveCamera.h">
       <Filter>src\GameEngine\Renderer\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\GraphicsContext.h">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Material\Material.h">
+      <Filter>src\GameEngine\Renderer\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Material\Shader.h">
+      <Filter>src\GameEngine\Renderer\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\Material\Texture.h">
+      <Filter>src\GameEngine\Renderer\Material</Filter>
+    </ClInclude>
     <ClInclude Include="src\GameEngine\Renderer\RenderCommand.h">
       <Filter>src\GameEngine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\GameEngine\Renderer\Renderer.h">
       <Filter>src\GameEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEngine\Renderer\RendererAPI.h">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine\Window.h">
+      <Filter>src\GameEngine</Filter>
+    </ClInclude>
     <ClInclude Include="src\GameEngine\imGui\imGuiLayer.h">
       <Filter>src\GameEngine\imGui</Filter>
     </ClInclude>
     <ClInclude Include="src\Plateform\OpenGl\OpenGLContext.h">
+      <Filter>src\Plateform\OpenGl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Plateform\OpenGl\OpenGLMaterial.h">
       <Filter>src\Plateform\OpenGl</Filter>
     </ClInclude>
     <ClInclude Include="src\Plateform\OpenGl\OpenGLRendererAPI.h">
@@ -1254,61 +1302,28 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameEngine\Window.h">
-      <Filter>src\GameEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\GameComponents\Transform.h">
-      <Filter>src\GameEngine\GameComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\Material\Shader.h">
-      <Filter>src\GameEngine\Renderer\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\Material\Texture.h">
-      <Filter>src\GameEngine\Renderer\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\Buffer\Buffer.h">
-      <Filter>src\GameEngine\Renderer\Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\Buffer\VertexArray.h">
-      <Filter>src\GameEngine\Renderer\Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\GraphicsContext.h">
-      <Filter>src\GameEngine\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\RendererAPI.h">
-      <Filter>src\GameEngine\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Layer\Layer.h">
-      <Filter>src\GameEngine\Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\InputControl\Input.h">
-      <Filter>src\GameEngine\InputControl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\InputControl\KeyCodes.h">
-      <Filter>src\GameEngine\InputControl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\InputControl\MouseButtonCodes.h">
-      <Filter>src\GameEngine\InputControl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\Camera\Camera.h">
-      <Filter>src\GameEngine\Renderer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Renderer\Material\Material.h">
-      <Filter>src\GameEngine\Renderer\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Plateform\OpenGl\OpenGLMaterial.h">
-      <Filter>src\Plateform\OpenGl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameEngine\Log\Log.h">
-      <Filter>src\GameEngine\Log</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameEngine\Application.cpp">
       <Filter>src\GameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameEngine\GameComponents\Transform.cpp">
+      <Filter>src\GameEngine\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Layer\Layer.cpp">
+      <Filter>src\GameEngine\Layer</Filter>
+    </ClCompile>
     <ClCompile Include="src\GameEngine\Layer\LayerStack.cpp">
       <Filter>src\GameEngine\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Log\Log.cpp">
+      <Filter>src\GameEngine\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Buffer\Buffer.cpp">
+      <Filter>src\GameEngine\Renderer\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Buffer\VertexArray.cpp">
+      <Filter>src\GameEngine\Renderer\Buffer</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEngine\Renderer\Camera\OrtographicCamera.cpp">
       <Filter>src\GameEngine\Renderer\Camera</Filter>
@@ -1316,10 +1331,22 @@
     <ClCompile Include="src\GameEngine\Renderer\Camera\PerspectiveCamera.cpp">
       <Filter>src\GameEngine\Renderer\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Material\Material.cpp">
+      <Filter>src\GameEngine\Renderer\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Material\Shader.cpp">
+      <Filter>src\GameEngine\Renderer\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\Material\Texture.cpp">
+      <Filter>src\GameEngine\Renderer\Material</Filter>
+    </ClCompile>
     <ClCompile Include="src\GameEngine\Renderer\RenderCommand.cpp">
       <Filter>src\GameEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEngine\Renderer\Renderer.cpp">
+      <Filter>src\GameEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine\Renderer\RendererAPI.cpp">
       <Filter>src\GameEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\GameEngine\imGui\ImGuiBuild.cpp">
@@ -1329,6 +1356,9 @@
       <Filter>src\GameEngine\imGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Plateform\OpenGl\OpenGLContext.cpp">
+      <Filter>src\Plateform\OpenGl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plateform\OpenGl\OpenGLMaterial.cpp">
       <Filter>src\Plateform\OpenGl</Filter>
     </ClCompile>
     <ClCompile Include="src\Plateform\OpenGl\OpenGLRendererAPI.cpp">
@@ -1357,36 +1387,6 @@
     </ClCompile>
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\GameComponents\Transform.cpp">
-      <Filter>src\GameEngine\GameComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\Material\Shader.cpp">
-      <Filter>src\GameEngine\Renderer\Material</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\Material\Texture.cpp">
-      <Filter>src\GameEngine\Renderer\Material</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\Buffer\Buffer.cpp">
-      <Filter>src\GameEngine\Renderer\Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\Buffer\VertexArray.cpp">
-      <Filter>src\GameEngine\Renderer\Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\RendererAPI.cpp">
-      <Filter>src\GameEngine\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Layer\Layer.cpp">
-      <Filter>src\GameEngine\Layer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Renderer\Material\Material.cpp">
-      <Filter>src\GameEngine\Renderer\Material</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Plateform\OpenGl\OpenGLMaterial.cpp">
-      <Filter>src\Plateform\OpenGl</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameEngine\Log\Log.cpp">
-      <Filter>src\GameEngine\Log</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
