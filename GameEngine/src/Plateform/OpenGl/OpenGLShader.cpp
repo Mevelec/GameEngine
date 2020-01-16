@@ -161,6 +161,7 @@ namespace GameEngine {
 
 			for (auto id : glShaderIDs)
 			{
+				glDetachShader(program, id);
 				glDeleteShader(id);
 			}
 
