@@ -6,14 +6,14 @@
 
 namespace GameEngine {
 
-	VertexArray* VertexArray::Create() {
+	Ref<VertexArray> VertexArray::Create() {
 		switch (IRenderer::GetAPI())
 		{
 		case RendererAPI::API::None:
 			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
 		case RendererAPI::API::OpengGL:
-			return new OpenGLVertexArray();
+			return CreateRef<OpenGLVertexArray>();
 		default:
 			GE_CORE_ASSERT(false, "RendererAPI::Unknow renderAPI")
 				break;

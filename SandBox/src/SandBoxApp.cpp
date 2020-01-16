@@ -1,4 +1,7 @@
-#include "Sandbox.h"
+#include "SandboxApp.h"
+
+#include "SandBox2D.h"
+
 #include <GameEngine/Core/EntryPoint.h>
 
 class ExampleLayer : public GameEngine::Layer
@@ -194,7 +197,8 @@ class Sandbox : public GameEngine::Application
 {
 public:
 	Sandbox(){
-		pushLayer(new ExampleLayer());
+		//pushLayer(new ExampleLayer());
+		pushLayer(new SandBox2D());
 	}
 	~Sandbox(){}
 private:

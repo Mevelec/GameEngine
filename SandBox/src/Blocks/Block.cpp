@@ -6,7 +6,7 @@ namespace Blocks {
 		//////// SQUARE ////////
 		this->cubeTransform.reset(new GameEngine::Transform());
 		//Vertex Array
-		this->cubeVA.reset(GameEngine::VertexArray::Create());
+		this->cubeVA = GameEngine::VertexArray::Create();
 		float squareVertices[5 * 8] = {
 			-1, -1.0f, -1.0f, 1.0f, 0.0f,
 			 1, -1.0f, -1.0f, 0.0f, 1.0f,
