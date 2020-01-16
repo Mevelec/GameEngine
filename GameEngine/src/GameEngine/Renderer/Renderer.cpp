@@ -5,7 +5,7 @@
 
 namespace GameEngine {
 	
-	IRenderer::SceneData* IRenderer::sceneData = new IRenderer::SceneData;
+	Scope<IRenderer::SceneData> IRenderer::sceneData = CreateScope<IRenderer::SceneData>();
 
 	void IRenderer::Init()
 	{

@@ -24,6 +24,6 @@ namespace GameEngine {
 			glm::mat4 viewProjectionMat;
 		};
 
-		static SceneData* sceneData;
+		static Scope<SceneData> sceneData;
 	};
 }

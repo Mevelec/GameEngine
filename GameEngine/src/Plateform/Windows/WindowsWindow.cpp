@@ -46,7 +46,7 @@ namespace GameEngine {
 
 		this->window = glfwCreateWindow(this->data.width, this->data.height, this->data.title.c_str(), nullptr, nullptr);
 		
-		this->context = new OpenGLContext(window);
+		this->context = CreateScope<OpenGLContext>(window);
 		this->context->init();
 
 		glfwSetWindowUserPointer(this->window, &this->data);
