@@ -1,6 +1,6 @@
 #pragma once
 #include "hzpch.h"
-#include "../Core.h"
+#include "GameEngine/Core/Core.h"
 
 namespace GameEngine {
 	// Events in GameEngine are currently blocking, meaning when an event occur it
