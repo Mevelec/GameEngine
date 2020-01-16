@@ -23,6 +23,10 @@ IncludeDir["Glad"] = "GameEngine/vendor/Glad/include"
 IncludeDir["imgui"] = "GameEngine/vendor/imgui"
 IncludeDir["glm"] = "GameEngine/vendor/glm"
 IncludeDir["stb_image"] = "GameEngine/vendor/stb_image"
+IncludeDir["libmorton"] = "OcTree/vendor/libmorton/include"
+IncludeDir["libtri"] = "OcTree/vendor/libtri/include"
+
+
 
 
 
@@ -108,6 +112,63 @@ project "GameEngine"
 		runtime "Release"
 		optimize "on"
 
+
+project "OcTree"
+	location "OcTree"
+	kind "StaticLib"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-intermediates/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp",
+
+		"%{prj.name}/vendor/libmorton/include/**.h",
+		"%{prj.name}/vendor/libtri/include/**.h",
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
+	}
+
+	includedirs
+	{
+		"%{prj.name}/src",
+		"%{IncludeDir.libmorton}",
+		"%{IncludeDir.libtri}",
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+
+		defines
+		{
+			"OC_PLATEFORM_WINDOWS",
+			"OC_BUILD_DLL"
+		}
+
+	filter "configurations:Debug"
+		defines "OC_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "OC_RELEASE"
+		runtime "Release"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "OC_DIST"
+		runtime "Release"
+		optimize "on"
+
+
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
@@ -127,15 +188,21 @@ project "Sandbox"
 
 	includedirs
 	{
+		"OcTree/src",
+		"OcTree/vendor",
+
 		"GameEngine/vendor/spdlog/include",
 		"GameEngine/src",
 		"GameEngine/vendor",
-		"%{IncludeDir.glm}"
+
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.libmorton}"
 	}
 
 	links
 	{
-		"GameEngine"
+		"GameEngine",
+		"OcTree"
 	}
 
 	filter "system:windows"
