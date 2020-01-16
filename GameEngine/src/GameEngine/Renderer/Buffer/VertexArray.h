@@ -19,6 +19,6 @@ namespace GameEngine {
 		virtual const std::vector<Ref<IVertexBuffer>>& getVertexBuffer() = 0;
 		virtual const Ref<IIndexBuffer>& getIndexBuffer() = 0;
 
-		static VertexArray* Create();
+		static Ref<VertexArray>  Create();
 	};
 }

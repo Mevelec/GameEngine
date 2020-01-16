@@ -8,6 +8,8 @@ namespace GameEngine {
 	{
 	public:
 		OrtographicCamera(float aspectRatio, glm::vec3 position);
+		OrtographicCamera(float aspectRatio);
+
 		~OrtographicCamera();
 		
 		virtual void onWindowResized(WindowResizeEvent& e) override;
