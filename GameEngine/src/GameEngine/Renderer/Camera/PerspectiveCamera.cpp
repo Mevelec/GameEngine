@@ -44,9 +44,6 @@ namespace GameEngine {
 	void PerspectiveCamera::update()
 	{
 		Camera::update();
-		auto a = this->position;
-		auto b = this->forward;
-		auto c = this->right;
 
 		this->viewMat = (this->getTransform());
 		this->viewProjectionMat = this->projectionMat * this->viewMat;

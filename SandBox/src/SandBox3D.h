@@ -1,11 +1,11 @@
 #pragma once
 #include <GameEngine.h>
 
-class SandBox2D : public GameEngine::Layer
+class SandBox3D : public GameEngine::Layer
 {
 public:
-	SandBox2D();
-	virtual ~SandBox2D() = default;
+	SandBox3D();
+	virtual ~SandBox3D() = default;
 
 	virtual void onAttach() override;
 	virtual void onDetach() override;
