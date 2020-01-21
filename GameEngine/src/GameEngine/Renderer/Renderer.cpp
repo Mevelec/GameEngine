@@ -32,4 +32,12 @@ namespace GameEngine {
 		vertexArray->bind();
 		RenderCommand::DrawIndexed(vertexArray);
 	}
+
+	void IRenderer::Submit(const Ref<Material>& mat, const Ref<VertexArray>& vertexArray, const glm::mat4 transform)
+	{
+		mat->bind(sceneData->viewProjectionMat, transform);
+
+		vertexArray->bind();
+		RenderCommand::DrawIndexed(vertexArray);
+	}
 }

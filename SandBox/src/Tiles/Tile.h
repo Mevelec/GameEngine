@@ -40,7 +40,8 @@ namespace Tiles {
 
 	private:
 		GameEngine::ShaderLibrary shaderLib;
-		//GameEngine::MaterialLibrary materialLib;
+		GameEngine::MaterialLibrary materialLib;
+
 		GameEngine::Ref<GameEngine::Texture> uv_texture;
 
 		GameEngine::Ref<GameEngine::VertexArray> squareVA;

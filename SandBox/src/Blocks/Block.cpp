@@ -63,7 +63,7 @@ namespace Blocks {
 		this->uv_texture = GameEngine::Texture2D::Create("assets/textures/UV_check.png");
 
 		// MATERIAL
-		auto mat = GameEngine::Material::Create("default");
+		auto mat = GameEngine::Material::Create("default", this->textureShader);
 		this->materialLib.add(mat);
 
 		this->textureShader->bind();

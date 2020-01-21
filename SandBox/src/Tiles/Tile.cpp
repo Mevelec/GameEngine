@@ -33,23 +33,33 @@ namespace Tiles {
 
 		// SHADERS
 		// Flat
-		this->shaderLib.load("flat", "assets/shaders/FlatColor.glsl");
-		this->shaderLib.load("textureCoordinates", "assets/shaders/TextureCoordinates.glsl");
-		auto shader = this->shaderLib.load("texture2D", "assets/shaders/Texture2D.glsl");
+		GameEngine::Ref<GameEngine::Shader> shader;
+		GameEngine::Ref<GameEngine::Material> mat;
+
+		shader = this->shaderLib.load("flat",               "assets/shaders/FlatColor.glsl");
+		mat = GameEngine::Material::Create(shader);
+		this->materialLib.add(mat);
+
+		shader = this->shaderLib.load("textureCoordinates", "assets/shaders/TextureCoordinates.glsl");
+		mat = GameEngine::Material::Create("textureCoordinates", shader);
+		this->materialLib.add(mat);
+
+		shader = this->shaderLib.load("texture2D",          "assets/shaders/Texture2D.glsl");
+		mat = GameEngine::Material::Create("texture2D", shader);
+		this->materialLib.add(mat);
+
+
 
 		// TEXTURE
 		shader->bind();
 		this->uv_texture = GameEngine::Texture2D::Create("assets/textures/uv_check.png");
 		shader->setInt("u_Texture", 0);
-
-		// MATERIAL
-		/*auto mat = GameEngine::Material::Create("default");
-		this->materialLib.add(mat);*/
 	}
 
 	void TilesRegistery::renderTile(TilesType type, glm::vec3 position)
 	{
 		GameEngine::Ref<GameEngine::Shader> shader;
+		//GameEngine::Ref<GameEngine::Material> mat;
 
 		if (type == TilesType::Dirt)
 		{
@@ -59,9 +69,15 @@ namespace Tiles {
 		}
 		else if (type == TilesType::Sand)
 		{
-			shader = this->shaderLib.get("flat");
-			shader->bind();
-			shader->setFloat3("u_Color", glm::vec3(0, 1, 0));
+			auto mat = this->materialLib.get("FlatColor");
+			this->squareTransform->setPostion(position);
+			this->squareTransform->setScale(1.0f);
+			GameEngine::IRenderer::Submit(
+				mat,
+				this->squareVA,
+				this->squareTransform->getTransform()
+			);
+			return;
 		}
 		else if (type == TilesType::Grass)
 		{

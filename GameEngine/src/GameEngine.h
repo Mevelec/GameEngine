@@ -27,6 +27,8 @@
 // Texture
 #include "GameEngine/Renderer/Material/Shader.h"
 #include "GameEngine/Renderer/Material/Texture.h"
+
+#include "GameEngine/Renderer/Material/MaterialLibrary.h"
 #include "GameEngine/Renderer/Material/Material.h"
 
 // Camera

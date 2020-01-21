@@ -7,30 +7,27 @@
 
 namespace GameEngine {
 
-	OpenGLMaterial::OpenGLMaterial(const std::string& name)
+	OpenGLMaterial::OpenGLMaterial(const std::string& name, const Ref<Shader>& shader)
 		: Material(name)
 	{
-		this->diffuseTex = Texture2D::Create("assets/textures/UV_check.png");
-		this->diffuseColor = { 0.f, 1.f, 0.f };
-		this->shader = Shader::Create("assets/shaders/default.glsl");
+		this->shader = shader;
+	}
+
+	OpenGLMaterial::OpenGLMaterial(const Ref<Shader>& shader)
+		: Material(shader->getName())
+	{
+		this->shader = shader;
 	}
 
 	OpenGLMaterial::~OpenGLMaterial()
 	{
 	}
 
-	void OpenGLMaterial::bind() const
+	void OpenGLMaterial::bind(glm::mat4 viewProjectionMatrix, glm::mat4 transform) const
 	{
-		//bind textures
-		std::dynamic_pointer_cast<OpenGLShader>(this->shader)->bind();
-
-		this->diffuseTex->bind(0);
-		std::dynamic_pointer_cast<OpenGLShader>(this->shader)->uploadUniformFloat3("u_Color", this->diffuseColor);
-
-		//this->diffuseTex->bind(1);
-		std::dynamic_pointer_cast<OpenGLShader>(this->shader)->uploadUniformFloat3("u_Metal", this->metallicColor);
-
-		//this->diffuseTex->bind(2);
-		std::dynamic_pointer_cast<OpenGLShader>(this->shader)->uploadUniformFloat3("u_Specu", this->specularColor);
+		this->shader->bind();
+		this->shader->setMat4("u_ViewProjectionMatrix", viewProjectionMatrix);
+		this->shader->setMat4("u_Transform", transform);
+		this->shader->setFloat3("u_Color", glm::vec3(1, 0, 0)/*this->diffuseColor*/);
 	}
 }

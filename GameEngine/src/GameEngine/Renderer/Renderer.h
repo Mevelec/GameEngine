@@ -3,6 +3,7 @@
 #include "RenderCommand.h"
 #include "GameEngine/Renderer/Camera/Camera.h"
 #include "GameEngine/Renderer/Material/Shader.h"
+#include "GameEngine/Renderer/Material/Material.h"
 
 namespace GameEngine {
 
@@ -16,7 +17,7 @@ namespace GameEngine {
 		static void EndScene();
 
 		static void Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4 transform = glm::mat4(1.0f));
-		static void IRenderer::SubmitQuad(const Ref<Shader>& shader, const glm::vec3& positionr, const glm::vec3& size, const glm::vec4& color);
+		static void IRenderer::Submit(const Ref<Material>& mat, const Ref<VertexArray>& vertexArray, const glm::mat4 transform);
 
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	private:
