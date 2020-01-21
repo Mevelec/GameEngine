@@ -32,10 +32,10 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 {
 	// MOVE
 	if (GameEngine::Input::IsKeyPressed(GE_KEY_A)) {
-		this->camera->translate({ this->cameraMoveSpeed * ts, 0, 0 });
+		this->camera->translate({ this->cameraMoveSpeed * ts *-1, 0, 0 });
 	}
 	else if (GameEngine::Input::IsKeyPressed(GE_KEY_D)) {
-		this->camera->translate({ this->cameraMoveSpeed * ts * -1 , 0, 0 });
+		this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0 });
 	}
 	if (GameEngine::Input::IsKeyPressed(GE_KEY_W)) {
 		this->camera->translate({ 0, 0, this->cameraMoveSpeed * ts });

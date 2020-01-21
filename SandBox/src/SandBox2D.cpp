@@ -1,5 +1,5 @@
 #include "SandBox2D.h"
-#include "Blocks/Block.h"
+#include "Tiles/Tile.h"
 #include "imgui/imgui.h"
 
 
@@ -9,7 +9,7 @@ SandBox2D::SandBox2D()
 	int width = GameEngine::Application::get().GetWindow().getWidth();
 	int height = GameEngine::Application::get().GetWindow().getHeight();
 
-	this->camera = new GameEngine::OrtographicCamera( (float)16/ (float)9, { 0, 0, -100 });
+	this->camera = new GameEngine::OrtographicCamera( (float)width / (float)height, { 0, 0, -50 });
 }
 
 void SandBox2D::onAttach()
@@ -69,9 +69,12 @@ void SandBox2D::onUpdate(GameEngine::TimeStep ts)
 
 	GameEngine::IRenderer::BeginScene(*this->camera);
 	{
-		Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(2, 0, 0));
-		Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Sand, glm::vec3(0, 2, 0));
-		Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Grass, glm::vec3(0, 0, 2));
+		Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Dirt, glm::vec3(2, 0, 0));
+		Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Sand, glm::vec3(0, 2, 0));
+
+		Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Grass, glm::vec3(0, 0, 2));
+		Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Grass, glm::vec3(2, 2, 0));
+
 	}
 	GameEngine::IRenderer::EndScene();
 }
@@ -130,6 +133,8 @@ void SandBox2D::onEvent(GameEngine::Event& e)
 	GameEngine::EventDispatcher dispatcher(e);
 	dispatcher.Dispatch<GameEngine::KeyPressedEvent>(GE_BIND_EVENT_FN(SandBox2D::onKeyPressedEvent));
 	dispatcher.Dispatch<GameEngine::WindowResizeEvent>(GE_BIND_EVENT_FN(SandBox2D::onWindowResized));
+	dispatcher.Dispatch<GameEngine::MouseScrolledEvent>(GE_BIND_EVENT_FN(SandBox2D::onMouseScrolled));
+
 }
 
 bool SandBox2D::onKeyPressedEvent(GameEngine::KeyPressedEvent& event)
@@ -137,6 +142,12 @@ bool SandBox2D::onKeyPressedEvent(GameEngine::KeyPressedEvent& event)
 	return false;
 }
 
+bool SandBox2D::onMouseScrolled(GameEngine::MouseScrolledEvent& e)
+{
+	this->camera->zoom(e.GetOffsetY() * 0.25f * -1);
+	
+	return false;
+}
 
 bool SandBox2D::onWindowResized(GameEngine::WindowResizeEvent& event)
 {

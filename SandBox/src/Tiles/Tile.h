@@ -6,9 +6,10 @@
 #include "imgui/imgui.h"
 
 #include <glm/gtc/type_ptr.hpp>
-namespace Blocks {
-	enum class BlockType {
-		BlockType_Default = 0,
+
+namespace Tiles {
+	enum class TilesType {
+		TileType_Default = 0,
 
 		Grass,
 		Dirt,
@@ -17,50 +18,49 @@ namespace Blocks {
 		Wood,
 		Sand,
 
-		BlockType_NumTypes,
+		TileType_NumTypes,
 	};
-	class Block
+	class Tile
 	{
 	public:
-		Block();
-		~Block();
+		Tile();
+		~Tile();
 
 		inline const bool isActive() const { return this->active; };
 		inline void setActive(bool active) { this->active = active; };
 	private:
 		bool active;
-		BlockType blockType;
+		TilesType tileType;
 	};
 	
-	class BlockRegistery
+	class TilesRegistery
 	{
 	public:
-		void renderBlock(BlockType type, glm::vec3 position);
+		void renderTile(TilesType type, glm::vec3 position);
 
 	private:
 		GameEngine::ShaderLibrary shaderLib;
-		GameEngine::MaterialLibrary materialLib;
-		GameEngine::Ref<GameEngine::Shader> textureShader;
+		//GameEngine::MaterialLibrary materialLib;
 		GameEngine::Ref<GameEngine::Texture> uv_texture;
 
-		GameEngine::Ref<GameEngine::VertexArray> cubeVA;
-		GameEngine::Ref<GameEngine::Transform>   cubeTransform;
+		GameEngine::Ref<GameEngine::VertexArray> squareVA;
+		GameEngine::Ref<GameEngine::Transform>   squareTransform;
 	public:
-		static BlockRegistery& getInstance()
+		static TilesRegistery& getInstance()
 		{
-			static BlockRegistery    instance;
+			static TilesRegistery    instance;
 			return instance;
 		}
 	private:
-		BlockRegistery();
+		TilesRegistery();
 
 		// C++ 11
 		// =======
 		// We can use the better technique of deleting the methods
 		// we don't want.
 	public:
-		BlockRegistery(BlockRegistery const&) = delete;
-		void operator=(BlockRegistery const&) = delete;
+		TilesRegistery(TilesRegistery const&) = delete;
+		void operator=(TilesRegistery const&) = delete;
 	};
 }
 

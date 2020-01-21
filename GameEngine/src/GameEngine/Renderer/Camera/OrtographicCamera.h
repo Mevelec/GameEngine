@@ -14,9 +14,10 @@ namespace GameEngine {
 		
 		virtual void onWindowResized(WindowResizeEvent& e) override;
 
+		virtual void zoom(const float& value) override;
+
 	private:
 		virtual void update() override;
 		float aspectRatio;
-		float zoomLevel = 1;
 	};
 }

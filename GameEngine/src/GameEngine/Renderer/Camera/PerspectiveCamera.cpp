@@ -34,13 +34,6 @@ namespace GameEngine {
 	{
 	}
 
-	void PerspectiveCamera::onWindowResized(WindowResizeEvent& e) {
-		this->aspectRatio = (float)e.getWidth() / (float)e.getHeight();
-		this->projectionMat = glm::perspective(this->fov, this->aspectRatio, this->clipNear, this->clipFar);
-		this->viewProjectionMat = this->projectionMat * this->viewMat;
-
-	}
-
 	void PerspectiveCamera::update()
 	{
 		Camera::update();
@@ -49,6 +42,16 @@ namespace GameEngine {
 		this->viewProjectionMat = this->projectionMat * this->viewMat;
 	}
 
+	void PerspectiveCamera::onWindowResized(WindowResizeEvent& e) {
+		this->aspectRatio = (float)e.getWidth() / (float)e.getHeight();
+		this->projectionMat = glm::perspective(this->fov, this->aspectRatio, this->clipNear, this->clipFar);
+		this->viewProjectionMat = this->projectionMat * this->viewMat;
 
+	}
+
+	void PerspectiveCamera::zoom(const float& value)
+	{
+		GE_CORE_ASSERT(false, "Functionnality not implemented");
+	}
 }
 

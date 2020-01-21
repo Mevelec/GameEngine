@@ -1,8 +1,6 @@
 #include "hzpch.h"
 #include "Renderer.h"
 
-#include "Plateform/OpenGl/OpenGLShader.h"
-
 namespace GameEngine {
 	
 	Scope<IRenderer::SceneData> IRenderer::sceneData = CreateScope<IRenderer::SceneData>();
@@ -28,9 +26,8 @@ namespace GameEngine {
 
 	void IRenderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4 transform)
 	{
-		shader->bind();
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->uploadUniformMat4("u_ViewProjectionMatrix", sceneData->viewProjectionMat);
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->uploadUniformMat4("u_Transform", transform);
+		shader->setMat4("u_ViewProjectionMatrix", sceneData->viewProjectionMat);
+		shader->setMat4("u_Transform", transform);
 
 		vertexArray->bind();
 		RenderCommand::DrawIndexed(vertexArray);

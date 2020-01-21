@@ -66,21 +66,21 @@ namespace Blocks {
 		auto mat = GameEngine::Material::Create("default");
 		this->materialLib.add(mat);
 
-		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->bind();
-		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(this->textureShader)->uploadUniformInt("u_Texture", 0);
+		this->textureShader->bind();
+		this->textureShader->setInt("u_Texture", 0);
 	}
 
 	void BlockRegistery::renderBlock(BlockType type, glm::vec3 position)
 	{
 		auto flatShader = this->shaderLib.get("flat");
-		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->bind();
+		flatShader->bind();
 
 		if(type == BlockType::Dirt)
-			std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->uploadUniformFloat3("u_Color", glm::vec3(1, 0, 0));
+			flatShader->setFloat3("u_Color", glm::vec3(1, 0, 0));
 		else if(type == BlockType::Sand)
-			std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->uploadUniformFloat3("u_Color", glm::vec3(0, 1, 0));
+			flatShader->setFloat3("u_Color", glm::vec3(0, 1, 0));
 		else if (type == BlockType::Grass)
-			std::dynamic_pointer_cast<GameEngine::OpenGLShader>(flatShader)->uploadUniformFloat3("u_Color", glm::vec3(0, 0, 1));
+			flatShader->setFloat3("u_Color", glm::vec3(0, 0, 1));
 
 		this->cubeTransform->setPostion(position);
 		this->cubeTransform->setScale(1.0f);

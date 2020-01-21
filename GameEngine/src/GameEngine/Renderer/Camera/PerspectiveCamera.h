@@ -12,6 +12,7 @@ namespace GameEngine {
 		~PerspectiveCamera();
 
 		virtual void onWindowResized(WindowResizeEvent& e) override;
+		virtual void zoom(const float& value) override;
 
 	private:
 		virtual void update() override;

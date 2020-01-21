@@ -16,6 +16,7 @@ namespace GameEngine {
 		static void EndScene();
 
 		static void Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4 transform = glm::mat4(1.0f));
+		static void IRenderer::SubmitQuad(const Ref<Shader>& shader, const glm::vec3& positionr, const glm::vec3& size, const glm::vec4& color);
 
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	private:

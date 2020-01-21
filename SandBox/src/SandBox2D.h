@@ -16,6 +16,7 @@ public:
 
 	bool onWindowResized(GameEngine::WindowResizeEvent& event);
 	bool onKeyPressedEvent(GameEngine::KeyPressedEvent& event);
+	bool onMouseScrolled(GameEngine::MouseScrolledEvent& e);
 
 
 private:

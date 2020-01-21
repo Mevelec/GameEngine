@@ -193,6 +193,23 @@ namespace GameEngine {
 	}
 
 	// UNIFORMS
+	void OpenGLShader::setInt(const std::string& name, int value)
+	{
+		this->uploadUniformInt(name, value);
+	}
+	void OpenGLShader::setFloat3(const std::string& name, const glm::vec3& value)
+	{
+		this->uploadUniformFloat3(name, value);
+	}
+	void OpenGLShader::setFloat4(const std::string& name, const glm::vec4 & value)
+	{
+		this->uploadUniformFloat4(name, value);
+	}
+	void OpenGLShader::setMat4(const std::string& name, const glm::mat4 & value)
+	{
+		this->uploadUniformMat4(name, value);
+	}
+
 	uint32_t OpenGLShader::getUniformLocation(const std::string& name)  const
 	{
 		if (this->uniformLocationCache.find(name) != this->uniformLocationCache.end())

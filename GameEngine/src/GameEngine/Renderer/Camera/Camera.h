@@ -17,9 +17,13 @@ namespace GameEngine {
 		const glm::mat4& getViewMat() const { return this->viewMat; };
 		const glm::mat4& getViewProjectionMat() const { return this->viewProjectionMat; };
 
+		virtual void zoom(const float& value) = 0;
+
 	protected:
 		glm::mat4 projectionMat;
 		glm::mat4 viewMat;;
 		glm::mat4 viewProjectionMat;
+
+		float zoomLevel = 1;
 	};
 }
