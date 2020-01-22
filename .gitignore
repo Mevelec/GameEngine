@@ -370,4 +370,4 @@ MigrationBackup/
 # GameEngine
 !Log*
 
-!vendor/bin/premake/premake.exe
+!vendor/bin/premake/*
