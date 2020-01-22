@@ -21,12 +21,13 @@ namespace GameEngine {
 		const inline std::string& getName() const { return this->name; };
 
 		const inline Ref<Shader> getShader() { return this->shader; };
+
 		void bind(glm::mat4 viewProjectionMatrix, glm::mat4 transform);
 
 		template<typename  T>
-		void addComponent(const std::string& name, T value)
+		void addComponent(const std::string& name, const T& value, uint32_t slot = 0)
 		{
-			auto comp = GameEngine::MaterialComponent::Create(name, value);
+			auto comp = GameEngine::MaterialComponent::Create(name, value, slot);
 			this->components.push_back(comp);
 		}
 
@@ -42,12 +43,12 @@ namespace GameEngine {
 	class  MaterialComponent
 	{
 	public:
-		virtual void bind(const Ref<Shader> shader) = 0;
+		virtual void bind(const Ref<Shader>& shader) = 0;
 
 		template<class T>
-		static Ref<MaterialComponent> Create(const std::string& name, T value)
+		static Ref<MaterialComponent> Create(const std::string& name, T value, uint32_t slot = 0)
 		{
-			return CreateRef<MaterialComponentImpl<T>>(name, value);
+			return CreateRef<MaterialComponentImpl<T>>(name, value, slot);
 		};
 	};
 
@@ -56,19 +57,22 @@ namespace GameEngine {
 	{
 
 	public:
-		MaterialComponentImpl(const std::string& name, const T& value) { 
+		MaterialComponentImpl(const std::string& name, const T& value, uint32_t slot) { 
 			static_assert(
 				std::is_same<T, int>::value
+				|| std::is_same<T, Ref<Texture>>::value
 				|| std::is_same<T, glm::fvec3>::value
 				|| std::is_same<T, glm::fvec4>::value
 				|| std::is_same<T, glm::fmat4>::value,
 				"MaterialComponent can not handle this type");
 			this->name = name; 
 			this->value = value; 
+			this->slot = slot;
 		};
-		virtual void bind(const Ref<Shader> shader) override;
+		virtual void bind(const Ref<Shader>& shader) override;
 	private:
 		std::string name;
+		uint32_t slot;
 		T value;
 	};
 

@@ -78,8 +78,9 @@ namespace Blocks {
 
 		mat = GameEngine::CreateRef<GameEngine::Material>("texture2D", this->shaderLib.get("texture2D"));
 		mat->addComponent("u_Color", glm::vec4(1, 0, 0, 1));
-		mat->addComponent("u_Texture", 0);
 		this->uv_texture = GameEngine::Texture2D::Create("assets/textures/uv_check.png");
+		this->texture2 = GameEngine::Texture2D::Create("assets/textures/disney.png");
+		mat->addComponent("u_Texture", this->uv_texture, 1);
 		this->materialLib.add(mat);
 
 
@@ -91,7 +92,6 @@ namespace Blocks {
 		{
 		this->cubeTransform->setPostion(position);
 			this->cubeTransform->setScale(1.0f);
-			this->uv_texture->bind();
 
 			GameEngine::IRenderer::Submit(
 				this->materialLib.get("texture2D"),

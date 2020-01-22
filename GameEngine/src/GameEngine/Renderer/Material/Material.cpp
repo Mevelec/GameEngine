@@ -27,6 +27,7 @@ namespace GameEngine {
 		this->shader->bind();
 		this->shader->setMat4("u_ViewProjectionMatrix", viewProjectionMatrix);
 		this->shader->setMat4("u_Transform", transform);
+
 		for each (Ref<MaterialComponent> comp in this->components)
 		{
 			comp->bind(this->shader);
@@ -35,25 +36,29 @@ namespace GameEngine {
 
 
 
-
-
 	template<>
-	void MaterialComponentImpl<int>::bind(const Ref<Shader> shader)
+	void MaterialComponentImpl<Ref<Texture>>::bind(const Ref<Shader>& shader)
+	{
+		this->value->bind(this->slot);
+		shader->setInt(this->name, this->slot);
+	}
+	template<>
+	void MaterialComponentImpl<int>::bind(const Ref<Shader>& shader)
 	{
 		shader->setInt(this->name, this->value);
 	}
 	template<>
-	void MaterialComponentImpl<glm::fvec3>::bind(const Ref<Shader> shader)
+	void MaterialComponentImpl<glm::fvec3>::bind(const Ref<Shader>& shader)
 	{
 		shader->setFloat3(this->name, this->value);
 	}
 	template<>
-	void MaterialComponentImpl<glm::fvec4>::bind(const Ref<Shader> shader)
+	void MaterialComponentImpl<glm::fvec4>::bind(const Ref<Shader>& shader)
 	{
 		shader->setFloat4(this->name, this->value);
 	}
 	template<>
-	void MaterialComponentImpl<glm::fmat4>::bind(const Ref<Shader> shader)
+	void MaterialComponentImpl<glm::fmat4>::bind(const Ref<Shader>& shader)
 	{
 		shader->setMat4(this->name, this->value);
 	}
