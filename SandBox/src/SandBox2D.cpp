@@ -26,10 +26,10 @@ void SandBox2D::onUpdate(GameEngine::TimeStep ts)
 {
 	// MOVE
 	if (GameEngine::Input::IsKeyPressed(GE_KEY_A)) {
-		this->camera->translate({ this->cameraMoveSpeed * ts, 0, 0 });
+		this->camera->translate({ this->cameraMoveSpeed * ts * -1, 0, 0 });
 	}
 	else if (GameEngine::Input::IsKeyPressed(GE_KEY_D)) {
-		this->camera->translate({ this->cameraMoveSpeed * ts * -1 , 0, 0 });
+		this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0 });
 	}
 	if (GameEngine::Input::IsKeyPressed(GE_KEY_W)) {
 		this->camera->translate({ 0, 0, this->cameraMoveSpeed * ts });
@@ -72,8 +72,8 @@ void SandBox2D::onUpdate(GameEngine::TimeStep ts)
 		Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Dirt, glm::vec3(2, 0, 0));
 		Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Sand, glm::vec3(0, 2, 0));
 
-		Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Grass, glm::vec3(0, 0, 2));
-		Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Grass, glm::vec3(2, 2, 0));
+		//Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Grass, glm::vec3(0, 0, 2));
+		//Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Grass, glm::vec3(2, 2, 0));
 
 	}
 	GameEngine::IRenderer::EndScene();

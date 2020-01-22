@@ -69,15 +69,9 @@ namespace Tiles {
 		}
 		else if (type == TilesType::Sand)
 		{
-			auto mat = this->materialLib.get("FlatColor");
-			this->squareTransform->setPostion(position);
-			this->squareTransform->setScale(1.0f);
-			GameEngine::IRenderer::Submit(
-				mat,
-				this->squareVA,
-				this->squareTransform->getTransform()
-			);
-			return;
+			shader = this->shaderLib.get("flat");
+			shader->bind();
+			shader->setFloat3("u_Color", glm::vec3(0, 1, 0));
 		}
 		else if (type == TilesType::Grass)
 		{

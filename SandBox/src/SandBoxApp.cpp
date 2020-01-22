@@ -16,8 +16,8 @@ class Sandbox : public GameEngine::Application
 public:
 	Sandbox(){
 		//pushLayer(new ExampleLayer());
-		pushLayer(new SandBox2D());
-		//pushLayer(new SandBox3D());
+		//pushLayer(new SandBox2D());
+		pushLayer(new SandBox3D());
 
 	}
 	~Sandbox(){}

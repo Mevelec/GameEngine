@@ -8,7 +8,6 @@ namespace GameEngine {
 	{
 		this->aspectRatio = aspectRatio;
 		this->position = position;
-		this->forward = glm::vec3(0, 0, 1);
 		this->up = glm::vec3(0, 1, 0);
 
 
@@ -21,7 +20,6 @@ namespace GameEngine {
 	OrtographicCamera::OrtographicCamera(float aspectRatio)
 	{
 		this->aspectRatio = aspectRatio;
-		this->forward = glm::vec3(0, 0, 1);
 		this->up = glm::vec3(0, 1, 0);
 
 		this->projectionMat = glm::ortho(-aspectRatio * this->zoomLevel,
@@ -47,7 +45,7 @@ namespace GameEngine {
 
 		Camera::update();
 
-		this->viewMat = glm::inverse(this->getTransform());
+		this->viewMat = this->getTransform();
 		this->viewProjectionMat = this->projectionMat * this->viewMat;
 	}
 

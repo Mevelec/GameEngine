@@ -28,9 +28,12 @@ namespace GameEngine {
 		Ref<Shader> shader;
 	};
 
-	struct  MaterialFlat
-	{
 
+	struct  MaterialComponent
+	{
+		std::string name;
+
+		
 	};
 
 

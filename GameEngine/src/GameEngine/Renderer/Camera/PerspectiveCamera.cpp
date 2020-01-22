@@ -8,7 +8,6 @@ namespace GameEngine {
 		: fov(fov), clipNear(clipNear), clipFar(clipFar)
 	{
 		this->position = position;
-		this->forward = glm::vec3(0, 0, 1);
 		this->up = glm::vec3(0, 1, 0);
 
 		this->aspectRatio = aspect;
@@ -20,7 +19,6 @@ namespace GameEngine {
 	PerspectiveCamera::PerspectiveCamera(float fov, float aspect, float clipNear, float clipFar)
 		: fov(fov), clipNear(clipNear), clipFar(clipFar)
 	{
-		this->forward = glm::vec3(0, 0, 1);
 		this->up = glm::vec3(0, 1, 0);
 
 		this->aspectRatio = aspect;
@@ -38,7 +36,7 @@ namespace GameEngine {
 	{
 		Camera::update();
 
-		this->viewMat = (this->getTransform());
+		this->viewMat = this->getTransform();
 		this->viewProjectionMat = this->projectionMat * this->viewMat;
 	}
 
