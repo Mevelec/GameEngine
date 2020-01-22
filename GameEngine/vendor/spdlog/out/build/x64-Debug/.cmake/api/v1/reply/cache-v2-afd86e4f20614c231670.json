@@ -23,7 +23,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug"
+			"value" : "d:/work/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -411,7 +411,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog"
+			"value" : "D:/work/GameEngine/GameEngine/vendor/spdlog"
 		},
 		{
 			"name" : "CMAKE_INSTALL_BINDIR",
@@ -615,7 +615,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/install/x64-Debug"
+			"value" : "D:/work/GameEngine/GameEngine/vendor/spdlog/out/install/x64-Debug"
 		},
 		{
 			"name" : "CMAKE_INSTALL_RUNSTATEDIR",
@@ -1871,7 +1871,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/install/x64-Debug"
+			"value" : "D:/work/GameEngine/GameEngine/vendor/spdlog/out/install/x64-Debug"
 		},
 		{
 			"name" : "spdlog_BINARY_DIR",
@@ -1883,7 +1883,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug"
+			"value" : "D:/work/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug"
 		},
 		{
 			"name" : "spdlog_SOURCE_DIR",
@@ -1895,7 +1895,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog"
+			"value" : "D:/work/GameEngine/GameEngine/vendor/spdlog"
 		},
 		{
 			"name" : "spdlog_examples_BINARY_DIR",
@@ -1907,7 +1907,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/example"
+			"value" : "D:/work/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/example"
 		},
 		{
 			"name" : "spdlog_examples_SOURCE_DIR",
@@ -1919,7 +1919,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/example"
+			"value" : "D:/work/GameEngine/GameEngine/vendor/spdlog/example"
 		},
 		{
 			"name" : "spdlog_utests_BINARY_DIR",
@@ -1931,7 +1931,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/tests"
+			"value" : "D:/work/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/tests"
 		},
 		{
 			"name" : "spdlog_utests_SOURCE_DIR",
@@ -1943,7 +1943,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/tests"
+			"value" : "D:/work/GameEngine/GameEngine/vendor/spdlog/tests"
 		}
 	],
 	"kind" : "cache",

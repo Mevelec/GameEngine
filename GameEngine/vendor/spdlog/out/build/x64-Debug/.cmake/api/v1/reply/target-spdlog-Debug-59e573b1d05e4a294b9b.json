@@ -80,7 +80,7 @@
 			[
 				{
 					"backtrace" : 3,
-					"path" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/include"
+					"path" : "D:/work/GameEngine/GameEngine/vendor/spdlog/include"
 				}
 			],
 			"language" : "CXX",
@@ -107,7 +107,7 @@
 		],
 		"prefix" : 
 		{
-			"path" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/install/x64-Debug"
+			"path" : "D:/work/GameEngine/GameEngine/vendor/spdlog/out/install/x64-Debug"
 		}
 	},
 	"name" : "spdlog",

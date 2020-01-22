@@ -486,8 +486,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug",
-		"source" : "C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog"
+		"build" : "D:/work/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug",
+		"source" : "D:/work/GameEngine/GameEngine/vendor/spdlog"
 	},
 	"version" : 
 	{

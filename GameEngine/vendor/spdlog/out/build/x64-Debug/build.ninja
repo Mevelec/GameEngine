@@ -115,7 +115,7 @@ build spdlogd.lib: CXX_STATIC_LIBRARY_LINKER__spdlog CMakeFiles\spdlog.dir\src\s
 # Utility command for package
 
 build CMakeFiles\package.util: CUSTOM_COMMAND all
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -127,7 +127,7 @@ build package: phony CMakeFiles\package.util
 # Utility command for package_source
 
 build CMakeFiles\package_source.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/CPackSourceConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake D:/work/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -139,7 +139,7 @@ build package_source: phony CMakeFiles\package_source.util
 # Utility command for rebuild_cache
 
 build CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog -BC:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:\work\GameEngine\GameEngine\vendor\spdlog -BD:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -151,7 +151,7 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 # Utility command for test
 
 build CMakeFiles\test.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
   DESC = Running tests...
   pool = console
   restat = 1
@@ -163,7 +163,7 @@ build test: phony CMakeFiles\test.util
 # Utility command for install
 
 build CMakeFiles\install.util: CUSTOM_COMMAND all
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -175,7 +175,7 @@ build install: phony CMakeFiles\install.util
 # Utility command for edit_cache
 
 build CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -192,7 +192,7 @@ build list_install_components: phony
 # Utility command for install/local
 
 build CMakeFiles\install\local.util: CUSTOM_COMMAND all
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -201,7 +201,7 @@ build install\local: phony CMakeFiles\install\local.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/CMakeLists.txt
+# D:/work/GameEngine/GameEngine/vendor/spdlog/CMakeLists.txt
 # =============================================================================
 
 
@@ -209,7 +209,7 @@ build install\local: phony CMakeFiles\install\local.util
 # Utility command for package_source
 
 build example\CMakeFiles\package_source.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/CPackSourceConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake D:/work/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -259,7 +259,7 @@ build example\example.exe: CXX_EXECUTABLE_LINKER__example example\CMakeFiles\exa
 # Utility command for package
 
 build example\CMakeFiles\package.util: CUSTOM_COMMAND example\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -271,7 +271,7 @@ build example\package: phony example\CMakeFiles\package.util
 # Utility command for rebuild_cache
 
 build example\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\example && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog -BC:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\example && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:\work\GameEngine\GameEngine\vendor\spdlog -BD:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -283,7 +283,7 @@ build example\rebuild_cache: phony example\CMakeFiles\rebuild_cache.util
 # Utility command for test
 
 build example\CMakeFiles\test.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\example && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\example && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
   DESC = Running tests...
   pool = console
   restat = 1
@@ -295,7 +295,7 @@ build example\test: phony example\CMakeFiles\test.util
 # Utility command for install/local
 
 build example\CMakeFiles\install\local.util: CUSTOM_COMMAND example\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\example && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\example && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -307,7 +307,7 @@ build example\install\local: phony example\CMakeFiles\install\local.util
 # Utility command for install
 
 build example\CMakeFiles\install.util: CUSTOM_COMMAND example\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\example && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\example && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -319,7 +319,7 @@ build example\install: phony example\CMakeFiles\install.util
 # Utility command for edit_cache
 
 build example\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\example && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\example && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -333,7 +333,7 @@ build example\list_install_components: phony
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/CMakeLists.txt
+# D:/work/GameEngine/GameEngine/vendor/spdlog/CMakeLists.txt
 # =============================================================================
 
 
@@ -341,7 +341,7 @@ build example\list_install_components: phony
 # Utility command for package
 
 build tests\CMakeFiles\package.util: CUSTOM_COMMAND tests\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -526,7 +526,7 @@ build tests\spdlog-utests.exe: CXX_EXECUTABLE_LINKER__spdlog-utests tests\CMakeF
 # Utility command for package_source
 
 build tests\CMakeFiles\package_source.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/CPackSourceConfig.cmake"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake D:/work/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -538,7 +538,7 @@ build tests\package_source: phony tests\CMakeFiles\package_source.util
 # Utility command for rebuild_cache
 
 build tests\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\tests && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog -BC:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\tests && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:\work\GameEngine\GameEngine\vendor\spdlog -BD:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -550,7 +550,7 @@ build tests\rebuild_cache: phony tests\CMakeFiles\rebuild_cache.util
 # Utility command for test
 
 build tests\CMakeFiles\test.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\tests && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\tests && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
   DESC = Running tests...
   pool = console
   restat = 1
@@ -562,7 +562,7 @@ build tests\test: phony tests\CMakeFiles\test.util
 # Utility command for install/local
 
 build tests\CMakeFiles\install\local.util: CUSTOM_COMMAND tests\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\tests && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\tests && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -574,7 +574,7 @@ build tests\install\local: phony tests\CMakeFiles\install\local.util
 # Utility command for install
 
 build tests\CMakeFiles\install.util: CUSTOM_COMMAND tests\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\tests && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\tests && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -586,7 +586,7 @@ build tests\install: phony tests\CMakeFiles\install.util
 # Utility command for edit_cache
 
 build tests\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\MEVELEC\Desktop\Project\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\tests && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D D:\work\GameEngine\GameEngine\vendor\spdlog\out\build\x64-Debug\tests && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -617,14 +617,14 @@ build spdlog-utests.exe: phony tests\spdlog-utests.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/example
+# Folder: D:/work/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/example
 
 build example\all: phony example
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/MEVELEC/Desktop/Project/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/tests
+# Folder: D:/work/GameEngine/GameEngine/vendor/spdlog/out/build/x64-Debug/tests
 
 build tests\all: phony spdlog-utests
 
