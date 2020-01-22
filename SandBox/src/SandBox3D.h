@@ -20,7 +20,7 @@ public:
 
 private:
 	GameEngine::Camera* camera;
-	float cameraMoveSpeed = 1.0f;
+	float cameraMoveSpeed = 5.0f;
 	float cmaraRotateSpeed = 10.0f;
 };
 

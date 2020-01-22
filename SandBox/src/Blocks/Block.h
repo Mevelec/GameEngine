@@ -12,13 +12,9 @@ namespace Blocks {
 
 		Grass,
 		Dirt,
-		Water,
-		Stone,
-		Wood,
-		Sand,
-
-		BlockType_NumTypes,
+		Stone
 	};
+
 	class Block
 	{
 	public:

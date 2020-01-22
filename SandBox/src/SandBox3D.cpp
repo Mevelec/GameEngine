@@ -75,9 +75,21 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 
 	GameEngine::IRenderer::BeginScene(*this->camera);
 	{
-		Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(2, 0, 0));
-		Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Sand, glm::vec3(0, 2, 0));
-		Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Grass, glm::vec3(0, 0, 2));
+		for (int x = 0; x <= 10; x++)
+		{
+			for (int z = 0; z <= 10; z++)
+			{
+				for (int y = 0; y <= 10; y++)
+				{
+					if(y > 6 && y < 10)
+						Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(x*2, y*2, z*2));
+					else if( y >= 10)
+						Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Grass, glm::vec3(x*2, y*2, z*2));
+					else
+						Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Stone, glm::vec3(x*2, y*2, z*2));
+				}
+			}
+		}
 	}
 	GameEngine::IRenderer::EndScene();
 }
