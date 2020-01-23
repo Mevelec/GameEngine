@@ -61,6 +61,10 @@ namespace Blocks {
 
 		GameEngine::Ref<GameEngine::Material> mat;
 
+		mat = GameEngine::CreateRef<GameEngine::Material>("assets/Materials/test/Source.json");
+		mat->addComponent("u_Color", glm::vec3(107, 91, 46) / glm::vec3(255));
+		this->materialLib.add(mat);
+
 		mat =  GameEngine::CreateRef<GameEngine::Material>("dirt", this->shaderLib.get("flat"));
 		mat->addComponent("u_Color", glm::vec3(107, 91, 46) / glm::vec3(255));
 		this->materialLib.add(mat);

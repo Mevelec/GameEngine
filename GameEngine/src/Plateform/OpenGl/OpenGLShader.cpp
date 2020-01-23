@@ -30,6 +30,21 @@ namespace GameEngine {
 		this->compile(sources);
 	}
 
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& path)
+	{
+		std::string source = this->readFile(path);
+		auto shaderSources = preProcess(source);
+
+		this->compile(shaderSources);
+
+		//Extract file name from file path
+		// assets/shaders/Texture.glsl
+		auto lastSlash = path.find_last_of("/\\");
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = path.rfind(".");
+		auto count = lastDot == std::string::npos ? path.size() - lastSlash : lastDot - lastSlash;
+		this->name = name;
+	}
 	OpenGLShader::OpenGLShader(const std::string& path)
 	{
 		std::string source = this->readFile(path);
