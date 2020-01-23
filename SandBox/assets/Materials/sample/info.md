@@ -1,11 +1,13 @@
 # Sample Material
 
-#### Infos
-the `resources` folder is optional
-the `info.md` file is optional
-the `configuration.json` is mandatory
+## Infos
+the `resources` folder is optional.
 
-#### configuration.json
+the `info.md` file is optional.
+
+the `configuration.json` is mandatory.
+
+## configuration.json
 The `configuration.json` file descripe the material, it must comply the schema of configuration found at `.......`.
 
 components availables types :
@@ -14,7 +16,7 @@ components availables types :
 * texture => `MaterialComponent<Texture>`
 	* need a specified slot
 
-#### resources folder
+## resources folder
 The `resources` folder may contain resources usefull to a material.
 As `MaterialComonents` data like a `Texture` or a `shader` file.
-These resources may be available only by this Material
+These resources may be available only by this Material.
