@@ -5,7 +5,17 @@
 
 #include "Plateform/OpenGl/OpenGLShader.h"
 
+#include "rapidjson/document.h"
+
+
 namespace GameEngine {
+
+	Material::Material(const std::string& path)
+	{
+
+		rapidjson::Document document;
+	}
+
 	Material::Material(const std::string& name, const Ref<Shader>& shader)
 		: name(name)
 	{
