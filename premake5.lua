@@ -23,6 +23,7 @@ IncludeDir["Glad"] = "GameEngine/vendor/Glad/include"
 IncludeDir["imgui"] = "GameEngine/vendor/imgui"
 IncludeDir["glm"] = "GameEngine/vendor/glm"
 IncludeDir["stb_image"] = "GameEngine/vendor/stb_image"
+IncludeDir["rapidjson"] = "GameEngine/vendor/rapidjson/include"
 IncludeDir["libmorton"] = "OcTree/vendor/libmorton/include"
 IncludeDir["libtri"] = "OcTree/vendor/libtri/include"
 
@@ -58,6 +59,9 @@ project "GameEngine"
 		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/stb_image/**.h",
 
+		"%{prj.name}/vendor/rapidjson/include/**.h",
+
+
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
@@ -75,8 +79,8 @@ project "GameEngine"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.imgui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
-
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.rapidjson}"
 	}
 
 	links
