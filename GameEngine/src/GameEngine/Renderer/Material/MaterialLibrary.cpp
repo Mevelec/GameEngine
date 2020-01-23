@@ -17,7 +17,7 @@ namespace GameEngine {
 
 	Ref<Material> MaterialLibrary::get(const std::string& name)
 	{
-		GE_CORE_ASSERT(this->exists(name), "Shader not found");
+		GE_CORE_ASSERT(this->exists(name), "Material not found");
 		return this->materials[name];
 	}
 

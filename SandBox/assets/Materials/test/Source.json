@@ -7,11 +7,12 @@
   "components": [
     {
       "name": "u_Color",
-      "type": "vec3",
+      "type": "vec4",
       "value": [
-        255,
+        1,
         0,
-        150
+        0.5,
+        1
       ],
       "slot": 0
     },
