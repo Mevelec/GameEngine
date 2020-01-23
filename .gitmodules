@@ -14,3 +14,6 @@
 	path = GameEngine/vendor/glm
 	url = https://github.com/g-truc/glm/
 	branch = master
+[submodule "GameEngine/vendor/rapidjson"]
+	path = GameEngine/vendor/rapidjson
+	url = https://github.com/Tencent/rapidjson.git

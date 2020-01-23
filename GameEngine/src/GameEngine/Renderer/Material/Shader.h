@@ -24,6 +24,7 @@ namespace GameEngine {
 		virtual const std::string& getName() const = 0;
 
 		static Ref<Shader> Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc);
+		static Ref<Shader> Create(const std::string& name, const std::string& path);
 		static Ref<Shader> Create(const std::string& path);
 	};
 

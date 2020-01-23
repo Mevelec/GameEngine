@@ -12,6 +12,7 @@ namespace GameEngine {
 	{
 	public:
 		OpenGLShader(const std::string&  name, const std::string& vertexSrc, const std::string& fragmentSrc);
+		OpenGLShader(const std::string& name, const std::string& path);
 		OpenGLShader(const std::string& path);
 
 		virtual ~OpenGLShader();

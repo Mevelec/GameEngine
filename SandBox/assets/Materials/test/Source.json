@@ -1,0 +1,27 @@
+{
+  "name": "Material",
+  "shader": {
+    "name": "Texture2D",
+    "path": "assets/shaders/Texture2D.glsl"
+  },
+  "components": [
+    {
+      "name": "u_Color",
+      "type": "vec4",
+      "value": [
+        1,
+        0,
+        0.5,
+        1
+      ],
+      "slot": 0
+    },
+    {
+      "name": "u_Texture",
+      "type": "texture",
+      "value": "uv_Checker",
+      "path": "assets/textures/uv_check.png",
+      "slot": 0
+    }
+  ]
+}

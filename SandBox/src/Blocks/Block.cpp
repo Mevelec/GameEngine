@@ -61,6 +61,9 @@ namespace Blocks {
 
 		GameEngine::Ref<GameEngine::Material> mat;
 
+		mat = GameEngine::CreateRef<GameEngine::Material>("assets/Materials/test/Source.json");
+		this->materialLib.add("Source", mat);
+
 		mat =  GameEngine::CreateRef<GameEngine::Material>("dirt", this->shaderLib.get("flat"));
 		mat->addComponent("u_Color", glm::vec3(107, 91, 46) / glm::vec3(255));
 		this->materialLib.add(mat);
@@ -94,7 +97,7 @@ namespace Blocks {
 			this->cubeTransform->setScale(1.0f);
 
 			GameEngine::IRenderer::Submit(
-				this->materialLib.get("texture2D"),
+				this->materialLib.get("Source"),
 				this->cubeVA,
 				this->cubeTransform->getTransform()
 			);
