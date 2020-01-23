@@ -1,6 +1,9 @@
 # Sample Material
 
 #### Infos
+the `resources` folder is optional
+the `info.md` file is optional
+the `configuration.json` is mandatory
 
 #### configuration.json
 The `configuration.json` file descripe the material, it must comply the schema of configuration found at `.......`.
