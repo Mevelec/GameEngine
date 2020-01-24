@@ -7,8 +7,10 @@ The GameEngine project is a personnal project made to learn in depth C++ and 3D 
   - window 32
 
 ## Installation
-clone the project
-get premake and put it in GameEngine/vendor/bin/premake
-run the script in the folder scripts
+1. clone the project
+4. Install git submoduls `git submodule init` `git submodule update`
+2. get premake and put it in GameEngine/vendor/bin/premake
+3. run the script in the folder scripts
+4. you now have a visualstudio2019 project in root directory
 
 ## 
