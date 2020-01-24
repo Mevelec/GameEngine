@@ -17,6 +17,39 @@ namespace GameEngine {
 	private:
 		std::unordered_map<std::string, Ref<Material>> materials;
 	};
+
+
+	enum class pathType {
+		default = 0,
+		relative,
+		absolute
+	};
+	//// PARSER
+	class MaterialParser
+	{
+
+
+	public :
+		Ref<Material> loadJson(const std::string& path);
+		pathType stringToPathType(const std::string& type);
+
+	private:
+		std::string& createPath(pathType type, const std::string& path);
+
+	public:
+		static MaterialParser& getInstance()
+		{
+			static MaterialParser    instance;
+			return instance;
+		}
+	private:
+		MaterialParser() {}
+
+	public:
+		MaterialParser(MaterialParser const&) = delete;
+		void operator=(MaterialParser const&) = delete;
+
+	};
 }
 
 
