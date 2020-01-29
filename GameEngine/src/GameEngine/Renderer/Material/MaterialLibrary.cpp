@@ -64,11 +64,23 @@ namespace GameEngine {
 		assert(d["shader"]["name"].IsString());
 		assert(d["shader"].HasMember("path"));
 		assert(d["shader"]["path"].IsString());
-
-		Ref<Shader> shader = Shader::Create(
-			d["shader"]["name"].GetString(),
-			d["shader"]["path"].GetString()
-		);
+		Ref<Shader> shader;
+		PathType pathType = this->stringToPathType(d["shader"]["type"].GetString());
+		if (pathType == PathType::relative)
+		{
+			std::filesystem::path folderPath(path);
+			auto a = folderPath.parent_path().append(d["shader"]["path"].GetString());
+			shader = Shader::Create(d["shader"]["name"].GetString(), a.string());
+		}
+		else if (pathType == PathType::absolute)
+		{
+			shader = Shader::Create(d["shader"]["name"].GetString(),
+				d["shader"]["path"].GetString());
+		}
+		else
+		{
+			GE_ASSERT(false, "Material Texture pathType invalid");
+		}
 
 		Ref<Material> material = CreateRef<Material>(d["name"].GetString(), shader);
 
@@ -110,13 +122,14 @@ namespace GameEngine {
 				assert(values["slot"].IsInt());
 
 				Ref<Texture> texture;
-				if (values["type"] == "relative")
+				PathType pathType = this->stringToPathType(values["type"].GetString());
+				if (pathType == PathType::relative)
 				{
 					std::filesystem::path folderPath(path);
 					auto a = folderPath.parent_path().append(values["path"].GetString());
 					texture = Texture2D::Create(a.string());
 				}
-				else if(values["type"] == "absolute")
+				else if(pathType == PathType::absolute)
 				{
 					texture = Texture2D::Create(values["path"].GetString());
 				}
@@ -139,38 +152,20 @@ namespace GameEngine {
 
 		return material;
 	}
-
-	std::string& MaterialParser::createPath(pathType type, const std::string& path)
-	{
-		if (type == pathType::relative)
-		{
-			std::filesystem::path folderPath(path);
-			auto a = folderPath.parent_path().append(values["path"].GetString());
-			texture = Texture2D::Create(a.string());
-		}
-		else if (type == pathType::absolute)
-		{
-			texture = Texture2D::Create(values["path"].GetString());
-		}
-		else
-		{
-			GE_ASSERT(false, "PathType not handled");
-		}
-	}
 		
-	pathType MaterialParser::stringToPathType(const std::string& type)
+	PathType MaterialParser::stringToPathType(const std::string& type)
 	{
 		if (type == "absolute")
 		{
-			return pathType::absolute;
+			return PathType::absolute;
 		}
 		else if (type == "relative")
 		{
-			return pathType::relative;
+			return PathType::relative;
 		}
 		else
 		{
-			return pathType::default;
+			return PathType::default;
 		}
 	}
 }

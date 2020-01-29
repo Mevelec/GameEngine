@@ -3,7 +3,7 @@
   "shader": {
     "name": "Texture2D",
     "type": "relative",
-    "path": "assets/shaders/Texture2D.glsl"
+    "path": "resources/Texture2D.glsl"
   },
   "components": [
     {

@@ -19,7 +19,7 @@ namespace GameEngine {
 	};
 
 
-	enum class pathType {
+	enum class PathType {
 		default = 0,
 		relative,
 		absolute
@@ -27,14 +27,9 @@ namespace GameEngine {
 	//// PARSER
 	class MaterialParser
 	{
-
-
 	public :
 		Ref<Material> loadJson(const std::string& path);
-		pathType stringToPathType(const std::string& type);
-
-	private:
-		std::string& createPath(pathType type, const std::string& path);
+		PathType stringToPathType(const std::string& type);
 
 	public:
 		static MaterialParser& getInstance()
