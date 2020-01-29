@@ -30,6 +30,11 @@ namespace GameEngine {
 	public :
 		Ref<Material> loadJson(const std::string& path);
 		PathType stringToPathType(const std::string& type);
+	private :
+		static const std::string pathMaterialFolder;
+
+		std::string createPath(const std::string& pathType, const std::string& path, const std::string& folderPath = "");
+		std::string createPath(const PathType& pathType, const std::string& path, const std::string& folderPath = "");
 
 	public:
 		static MaterialParser& getInstance()
