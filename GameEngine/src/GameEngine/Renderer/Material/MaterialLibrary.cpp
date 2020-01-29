@@ -1,5 +1,11 @@
 #include "hzpch.h"
+
+#include <filesystem>
+
 #include "MaterialLibrary.h"
+
+#include <rapidjson/document.h>
+#include "rapidjson/filereadstream.h"
 
 namespace GameEngine {
 	void MaterialLibrary::add(const Ref<Material>& material)
@@ -24,5 +30,155 @@ namespace GameEngine {
 	bool MaterialLibrary::exists(const std::string& name)
 	{
 		return this->materials.find(name) != this->materials.end();
+	}
+
+
+
+
+	static const std::string pathMaterialFolder = "assets/Materials";
+
+
+	Ref<Material> MaterialParser::loadJson(const std::string& path)
+	{
+		//// PARSE MATERIAL.json
+		FILE* fb = fopen(path.c_str(), "r");
+		std::filesystem::path folderPath(path);
+		GE_ASSERT(fb != 0, "Failed to open Material file.json");
+
+		char buffer[65536];
+		rapidjson::FileReadStream s(fb, buffer, sizeof(buffer));
+		fclose(fb);
+
+		rapidjson::Document d;
+		d.ParseStream(s);
+
+		if (d.HasParseError())
+		{
+			GE_ASSERT(false, "Error : {0}    Offset : {2}", d.GetParseError(), d.GetErrorOffset());
+		}
+
+		//// ASSERT CREATION MATERIAL
+		assert(d.IsObject());
+
+		assert(d.HasMember("name"));
+		assert(d["name"].IsString());
+
+		assert(d.HasMember("shader"));
+		assert(d["shader"].IsObject());
+		assert(d["shader"].HasMember("name"));
+		assert(d["shader"]["name"].IsString());
+		assert(d["shader"].HasMember("path"));
+		assert(d["shader"]["path"].IsString());
+		Ref<Shader> shader;
+		PathType pathType = this->stringToPathType(d["shader"]["type"].GetString());
+
+		
+		shader = Shader::Create(
+			d["shader"]["name"].GetString(), 
+			this->createPath(
+				d["shader"]["type"].GetString(),
+				d["shader"]["path"].GetString(),
+				folderPath.parent_path().string()
+			)
+		);
+
+		Ref<Material> material = CreateRef<Material>(d["name"].GetString(), shader);
+
+		for each (auto & it in d["components"].GetArray())
+		{
+			auto object = it.GetObject();
+			std::string type = object["type"].GetString();
+			if (type == "vec3")
+			{
+				material->addComponent(
+					object["name"].GetString(),
+					glm::fvec3(
+						object["value"][0].GetFloat(),
+						object["value"][1].GetFloat(),
+						object["value"][2].GetFloat()
+					)
+				);
+			}
+			if (type == "vec4")
+			{
+				material->addComponent(
+					object["name"].GetString(),
+					glm::fvec4(
+						object["value"][0].GetFloat(), 
+						object["value"][1].GetFloat(), 
+						object["value"][2].GetFloat(), 
+						object["value"][3].GetFloat()
+					)
+				);
+			}
+			else if (type == "texture")
+			{
+				assert(object["value"].IsObject());
+				auto values = object["value"].GetObject();
+				assert(values["type"].IsString());
+				assert(values["path"].IsString());
+				assert(values["slot"].IsInt());
+
+				Ref<Texture> texture = Texture2D::Create(
+					this->createPath(
+						values["type"].GetString(),
+						values["path"].GetString(),
+						folderPath.parent_path().string()
+					)
+				);
+				material->addComponent(
+					object["name"].GetString(),
+					texture,
+					values["slot"].GetInt()
+				);
+			}
+			else
+			{
+				GE_ASSERT(false, "Material component type is unknow")
+			}
+		}
+
+		return material;
+	}
+		
+	PathType MaterialParser::stringToPathType(const std::string& type)
+	{
+		if (type == "absolute")
+		{
+			return PathType::absolute;
+		}
+		else if (type == "relative")
+		{
+			return PathType::relative;
+		}
+		else
+		{
+			return PathType::default;
+		}
+	}
+
+	std::string MaterialParser::createPath(const std::string& pathType, const std::string& path, const std::string& folderPath)
+	{
+		return this->createPath(
+			this->stringToPathType(pathType),
+			path,
+			folderPath
+		);
+	}
+
+	std::string MaterialParser::createPath(const PathType& pathType, const std::string& path, const std::string& folderPath)
+	{
+		if (pathType == PathType::relative)
+		{
+			return folderPath +"/"+ path;
+		}
+		else if (pathType == PathType::absolute)
+		{
+			return path;
+		}
+		else
+		{
+			GE_ASSERT(false, "Material Texture pathType invalid");
+		}
 	}
 }

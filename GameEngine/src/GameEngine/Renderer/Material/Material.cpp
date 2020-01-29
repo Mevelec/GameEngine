@@ -5,82 +5,8 @@
 
 #include "Plateform/OpenGl/OpenGLShader.h"
 
-#include <rapidjson/document.h>
-#include "rapidjson/filereadstream.h"
-
-
 
 namespace GameEngine {
-
-	Material::Material(const std::string& path)
-	{
-		FILE* fb = fopen(path.c_str(), "r");
-		GE_ASSERT(fb != 0, "Failed to open Material file.json");
-
-		char buffer[65536];
-		rapidjson::FileReadStream s(fb, buffer, sizeof(buffer));
-		fclose(fb);
-
-		rapidjson::Document d;
-		d.ParseStream(s);
-
-		if (d.HasParseError())
-		{
-			GE_ASSERT(false, "Error : {0}    Offset : {2}", d.GetParseError(), d.GetErrorOffset());
-		}
-
-		assert(d.IsObject());
-
-		assert(d.HasMember("name"));
-		assert(d["name"].IsString());
-		this->name = d["name"].GetString();
-
-		assert(d.HasMember("shader"));
-		assert(d["shader"].IsObject());
-		assert(d["shader"].HasMember("name"));
-		assert(d["shader"]["name"].IsString());
-		assert(d["shader"].HasMember("path"));
-		assert(d["shader"]["path"].IsString());
-		this->shader = Shader::Create(
-			d["shader"]["name"].GetString(), 
-			d["shader"]["path"].GetString()
-		);
-
-
-		for each (auto& it in d["components"].GetArray() )
-		{
-			auto object = it.GetObject();
-			std::string type = object["type"].GetString();
-			if (type == "vec3")
-			{
-				this->addComponent(
-					object["name"].GetString(),
-					glm::fvec3(object["value"][0].GetFloat(), object["value"][1].GetFloat(), object["value"][2].GetFloat())
-					);
-			}
-			if (type == "vec4")
-			{
-				this->addComponent(
-					object["name"].GetString(),
-					glm::fvec4(object["value"][0].GetFloat(), object["value"][1].GetFloat(), object["value"][2].GetFloat(), object["value"][3].GetFloat())
-				);
-			}
-			else if (type == "texture")
-			{
-				Ref<Texture> texture = Texture2D::Create(object["path"].GetString());
-
-				this->addComponent(
-					object["name"].GetString(),
-					texture,
-					object["slot"].GetInt()
-				);
-			}
-			else
-			{
-				GE_ASSERT(false, "Material component type is unknow")
-			}
-		}
-	}
 
 	Material::Material(const std::string& name, const Ref<Shader>& shader)
 		: name(name)

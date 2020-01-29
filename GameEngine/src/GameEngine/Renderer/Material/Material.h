@@ -13,7 +13,6 @@ namespace GameEngine {
 	class Material
 	{
 	public :
-		Material(const std::string& path);
 		Material(const Ref<Shader>& shader);
 		Material(const std::string& name, const Ref<Shader>& shader);
 
@@ -39,6 +38,7 @@ namespace GameEngine {
 		std::vector<Ref<MaterialComponent>> components;
 		
 	};
+
 
 	// The Interface
 	class  MaterialComponent
