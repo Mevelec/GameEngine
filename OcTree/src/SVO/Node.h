@@ -18,7 +18,6 @@ namespace OcTree {
 	public:
 		Node()
 		{
-			this->data = NULL;
 			this->childs = nullptr;
 		}
 	public:
@@ -41,6 +40,16 @@ namespace OcTree {
 			this->depth = 6;
 			this->splitRec(this->root, this->depth);
 		};
+		OcTree(int depth)
+			:
+			root()
+		{
+			this->depth = depth;
+			this->splitRec(this->root, this->depth);
+		};
+
+		inline int getDepth() { return this->depth; };
+		inline int getWidth() { return pow(2, this->depth); }
 
 		inline bool hasData(Node<T>* node) const { return !(node->data == NULL); }
 

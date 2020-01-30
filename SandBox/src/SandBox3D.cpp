@@ -1,10 +1,9 @@
 #include "SandBox3D.h"
-#include "Blocks/Block.h"
 #include "imgui/imgui.h"
 
-
 SandBox3D::SandBox3D()
-	: Layer("SandBox3D")
+	: Layer("SandBox3D"),
+	ocTree(2)
 {
 	int width = GameEngine::Application::get().GetWindow().getWidth();
 	int height = GameEngine::Application::get().GetWindow().getHeight();
@@ -16,6 +15,25 @@ SandBox3D::SandBox3D()
 		1000.0f,
 		glm::vec3(0, 0, -10)
 	);
+
+	int a = ocTree.getWidth();
+
+	for (int x = 0; x <= ocTree.getWidth()-1; x++)
+	{
+		for (int z = 0; z <= ocTree.getWidth()-1; z++)
+		{
+			for (int y = 0; y <= ocTree.getWidth()-1; y++)
+			{
+				if(y > ocTree.getWidth()-2)
+					ocTree.setNode(Blocks::BlockType::Grass, x, y, z, 0);
+				else
+					ocTree.setNode(Blocks::BlockType::Dirt, x, y, z, 0);
+			}
+		}
+	}
+	ocTree.setNode(Blocks::BlockType::Stone, 0, 0, 0, 0);
+	//ocTree.setNode(Blocks::BlockType::Stone, 9, 9, 0, 1);
+	//ocTree.setNode(Blocks::BlockType::Dirt, 10, 10, 0, 1);
 }
 
 void SandBox3D::onAttach()
@@ -69,24 +87,24 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 		this->camera->rotate({ 0, 0, this->cmaraRotateSpeed * ts * -1 });
 	}
 
+
+	
 	//Render
 	GameEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	GameEngine::RenderCommand::Clear();
 
 	GameEngine::IRenderer::BeginScene(*this->camera);
 	{
-		for (int x = 0; x <= 10; x++)
+		int width = ocTree.getWidth()-1;
+		for (int x = 0; x <= width; x++)
 		{
-			for (int z = 0; z <= 10; z++)
+			for (int z = 0; z <= width; z++)
 			{
-				for (int y = 0; y <= 10; y++)
+				for (int y = 0; y <= width; y++)
 				{
-					if(y > 6 && y < 10)
-						Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(x*2, y*2, z*2));
-					else if( y >= 10)
-						Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Grass, glm::vec3(x*2, y*2, z*2));
-					else
-						Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Stone, glm::vec3(x*2, y*2, z*2));
+					Blocks::BlockRegistery::getInstance().renderBlock(
+						this->ocTree.getNode(x, y, z, 0).data, glm::vec3(x * 2, y * 2, z * 2)
+					);
 				}
 			}
 		}

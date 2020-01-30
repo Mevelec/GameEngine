@@ -1,5 +1,8 @@
 #pragma once
 #include <GameEngine.h>
+#include <OcTree.h>
+#include "Blocks/Block.h"
+
 
 class SandBox3D : public GameEngine::Layer
 {
@@ -22,5 +25,6 @@ private:
 	GameEngine::Camera* camera;
 	float cameraMoveSpeed = 5.0f;
 	float cmaraRotateSpeed = 10.0f;
+	OcTree::OcTree<Blocks::BlockType> ocTree;
 };
 

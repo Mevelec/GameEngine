@@ -8,16 +8,16 @@ namespace Blocks {
 		//Vertex Array
 		this->cubeVA = GameEngine::VertexArray::Create();
 		float squareVertices[5 * 8] = {
-			-1, -1.0f, -1.0f, 1.0f, 0.0f,
-			 1, -1.0f, -1.0f, 0.0f, 1.0f,
-			 1,  1.0f, -1.0f, 0.0f, 0.0f,
-			-1,  1.0f, -1.0f, 0.0f, 0.0f,
+			-1, -1.0f, -1.0f, 0.0f, 0.0f,
+			 1, -1.0f, -1.0f, 1.0f, 0.0f,
+			 1,  1.0f, -1.0f, 1.0f, 1.0f,
+			-1,  1.0f, -1.0f, 0.0f, 1.0f,
 
 			
-			-1, -1.0f,  1.0f, 1.0f, 0.0f,
-			 1, -1.0f,  1.0f, 0.0f, 1.0f,
-			 1,  1.0f,  1.0f, 0.0f, 0.0f,
-			-1,  1.0f,  1.0f, 0.0f, 0.0f,
+			-1, -1.0f,  1.0f, 0.0f, 0.0f,
+			 1, -1.0f,  1.0f, 1.0f, 0.0f,
+			 1,  1.0f,  1.0f, 1.0f, 1.0f,
+			-1,  1.0f,  1.0f, 0.0f, 1.0f,
 
 		};
 		GameEngine::Ref<GameEngine::IVertexBuffer> squareVB;
@@ -85,8 +85,6 @@ namespace Blocks {
 		this->texture2 = GameEngine::Texture2D::Create("assets/textures/disney.png");
 		mat->addComponent("u_Texture", this->uv_texture, 1);
 		this->materialLib.add(mat);
-
-
 	}
 
 	void BlockRegistery::renderBlock(BlockType type, glm::vec3 position)
@@ -105,6 +103,7 @@ namespace Blocks {
 		}
 		else if (type == BlockType::Dirt)
 		{
+			//GE_INFO("Render dirt at {0} {1} {2}", position.x, position.y, position.z);
 			this->cubeTransform->setPostion(position);
 			this->cubeTransform->setScale(1.0f);
 			GameEngine::IRenderer::Submit(
