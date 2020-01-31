@@ -23,6 +23,6 @@ private:
 	GameEngine::Camera* camera;
 	float cameraMoveSpeed = 5.0f;
 	float cmaraRotateSpeed = 10.0f;
-	//OcTree::OcTree<Blocks::BlockType> ocTree;
+	OcTree::OcTree<GameComponents::BlockType> ocTree;
 };
 

@@ -80,7 +80,10 @@ project "GameEngine"
 		"%{IncludeDir.imgui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.rapidjson}"
+		"%{IncludeDir.rapidjson}",
+
+		"OcTree/src",
+		"OcTree/vendor",
 	}
 
 	links
@@ -88,7 +91,8 @@ project "GameEngine"
 		"GLFW",
 		"Glad",
 		"imgui",
-		"opengl32.lib"
+		"opengl32.lib",
+		"OcTree"
 	}
 
 	filter "system:windows"
@@ -192,15 +196,15 @@ project "Sandbox"
 
 	includedirs
 	{
-		"OcTree/src",
-		"OcTree/vendor",
-
 		"GameEngine/vendor/spdlog/include",
 		"GameEngine/src",
 		"GameEngine/vendor",
 
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.libmorton}"
+		%{IncludeDir.libmorton}"
+
+		"OcTree/src",
+		"OcTree/vendor",
 	}
 
 	links

@@ -2,8 +2,8 @@
 #include "imgui/imgui.h"
 
 SandBox3D::SandBox3D()
-	: Layer("SandBox3D")
-	//ocTree(2)
+	: Layer("SandBox3D"),
+	ocTree(2)
 {
 	int width = GameEngine::Application::get().GetWindow().getWidth();
 	int height = GameEngine::Application::get().GetWindow().getHeight();
@@ -16,22 +16,22 @@ SandBox3D::SandBox3D()
 		glm::vec3(0, 0, -10)
 	);
 
-	//int a = ocTree.getWidth();
-	//
-	//for (int x = 0; x <= ocTree.getWidth()-1; x++)
-	//{
-	//	for (int z = 0; z <= ocTree.getWidth()-1; z++)
-	//	{
-	//		for (int y = 0; y <= ocTree.getWidth()-1; y++)
-	//		{
-	//			if(y > ocTree.getWidth()-2)
-	//				ocTree.setNode(Blocks::BlockType::Grass, x, y, z, 0);
-	//			else
-	//				ocTree.setNode(Blocks::BlockType::Dirt, x, y, z, 0);
-	//		}
-	//	}
-	//}
-	//ocTree.setNode(Blocks::BlockType::Stone, 0, 0, 0, 0);
+	int a = ocTree.getWidth();
+	
+	for (int x = 0; x <= ocTree.getWidth()-1; x++)
+	{
+		for (int z = 0; z <= ocTree.getWidth()-1; z++)
+		{
+			for (int y = 0; y <= ocTree.getWidth()-1; y++)
+			{
+				if(y > ocTree.getWidth()-2)
+					ocTree.setNode(GameComponents::BlockType::Grass, x, y, z, 0);
+				else
+					ocTree.setNode(GameComponents::BlockType::Dirt, x, y, z, 0);
+			}
+		}
+	}
+	ocTree.setNode(GameComponents::BlockType::Stone, 0, 0, 0, 0);
 	//ocTree.setNode(Blocks::BlockType::Stone, 9, 9, 0, 1);
 	//ocTree.setNode(Blocks::BlockType::Dirt, 10, 10, 0, 1);
 }
@@ -61,30 +61,19 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 	else if (GameEngine::Input::IsKeyPressed(GE_KEY_S)) {
 		this->camera->translate({ 0, 0, this->cameraMoveSpeed * ts * -1 });
 	}
-	if (GameEngine::Input::IsKeyPressed(GE_KEY_LEFT_SHIFT)) {
+	if (GameEngine::Input::IsKeyPressed(GE_KEY_SPACE)) {
 		this->camera->translate({ 0, this->cameraMoveSpeed * ts, 0 });
 	}
 	else if (GameEngine::Input::IsKeyPressed(GE_KEY_LEFT_CONTROL)) {
 		this->camera->translate({ 0, this->cameraMoveSpeed * ts * -1, 0 });
 	}
+
 	// ROTATE
-	if (GameEngine::Input::IsKeyPressed(GE_KEY_Q)) {
-		this->camera->rotate({ 0, this->cmaraRotateSpeed * ts , 0 });
-	}
-	else if (GameEngine::Input::IsKeyPressed(GE_KEY_E)) {
-		this->camera->rotate({ 0, this->cmaraRotateSpeed * ts * -1 , 0 });
-	}
-	if (GameEngine::Input::IsKeyPressed(GE_KEY_UP)) {
-		this->camera->rotate({ this->cmaraRotateSpeed * ts, 0 , 0 });
-	}
-	else if (GameEngine::Input::IsKeyPressed(GE_KEY_DOWN)) {
-		this->camera->rotate({ this->cmaraRotateSpeed * ts * -1, 0 , 0 });
-	}
-	if (GameEngine::Input::IsKeyPressed(GE_KEY_LEFT)) {
-		this->camera->rotate({ 0, 0, this->cmaraRotateSpeed * ts });
-	}
-	else if (GameEngine::Input::IsKeyPressed(GE_KEY_RIGHT)) {
-		this->camera->rotate({ 0, 0, this->cmaraRotateSpeed * ts * -1 });
+	if (GameEngine::Input::IsMouseButtonPressed(GE_MOUSE_BUTTON_3))
+	{
+		std::pair<float, float> mousePos = GameEngine::Input::getMouseDeviation();
+		GameEngine::Input::resetMousePos();
+		this->camera->rotate({ 1.0f * ts * mousePos.second, 1.0f * ts * mousePos.first, 0 });
 	}
 
 
@@ -95,19 +84,19 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 
 	GameEngine::IRenderer::BeginScene(*this->camera);
 	{
-		//int width = ocTree.getWidth()-1;
-		//for (int x = 0; x <= width; x++)
-		//{
-		//	for (int z = 0; z <= width; z++)
-		//	{
-		//		for (int y = 0; y <= width; y++)
-		//		{
-		//			Blocks::BlockRegistery::getInstance().renderBlock(
-		//				this->ocTree.getNode(x, y, z, 0).data, glm::vec3(x * 2, y * 2, z * 2)
-		//			);
-		//		}
-		//	}
-		//}
+		int width = ocTree.getWidth()-1;
+		for (int x = 0; x <= width; x++)
+		{
+			for (int z = 0; z <= width; z++)
+			{
+				for (int y = 0; y <= width; y++)
+				{
+					GameComponents::BlockRegistery::getInstance().renderBlock(
+						this->ocTree.getNode(x, y, z, 0).data, glm::vec3(x * 2, y * 2, z * 2)
+					);
+				}
+			}
+		}
 	}
 	GameEngine::IRenderer::EndScene();
 }
