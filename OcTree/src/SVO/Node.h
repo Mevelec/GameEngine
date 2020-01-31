@@ -5,7 +5,7 @@
 #include "VoxelData.h"
 #include <morton.h>
 
-
+#include "OcTree.h"
 
 // An SVO node. Only contains child pointers, extend this if you want parent pointers as well
 namespace OcTree {
@@ -29,18 +29,18 @@ namespace OcTree {
 
 
 	template<class T>
-	class OcTree
+	class OcTreeDefault : public Octree<T>
 	{
 	public:
 	public:
-		OcTree()
+		OcTreeDefault()
 			:
 			root()
 		{
 			this->depth = 6;
 			this->splitRec(this->root, this->depth);
 		};
-		OcTree(int depth)
+		OcTreeDefault(int depth)
 			:
 			root()
 		{

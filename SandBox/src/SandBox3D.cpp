@@ -76,8 +76,6 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 		this->camera->rotate({ 1.0f * ts * mousePos.second, 1.0f * ts * mousePos.first, 0 });
 	}
 
-
-	
 	//Render
 	GameEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	GameEngine::RenderCommand::Clear();
