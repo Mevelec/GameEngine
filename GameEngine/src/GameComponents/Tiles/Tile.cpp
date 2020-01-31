@@ -1,6 +1,9 @@
+#include "hzpch.h"
 #include "Tile.h"
 
-namespace Tiles {
+#include "GameEngine/Renderer/Renderer.h"
+
+namespace GameComponents {
 	TilesRegistery::TilesRegistery()
 	{
 		//////// SQUARE ////////

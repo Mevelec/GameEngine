@@ -1,13 +1,12 @@
 #pragma once
-
-#include <GameEngine.h>
-#include "Plateform/OpenGl/OpenGLShader.h"
-
-#include "imgui/imgui.h"
+#include "GameEngine/Renderer/Material/Shader.h"
+#include "GameEngine/Renderer/Material/MaterialLibrary.h"
+#include "GameEngine/Renderer/Buffer/VertexArray.h"
+#include "GameEngine/Core/Transform/Transform.h"
 
 #include <glm/gtc/type_ptr.hpp>
 
-namespace Tiles {
+namespace GameComponents {
 	enum class TilesType {
 		TileType_Default = 0,
 

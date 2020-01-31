@@ -1,6 +1,9 @@
+#include "hzpch.h"
 #include "Block.h"
 
-namespace Blocks {
+#include "GameEngine/Renderer/Renderer.h"
+
+namespace GameComponents {
 	BlockRegistery::BlockRegistery()
 	{
 		//////// SQUARE ////////

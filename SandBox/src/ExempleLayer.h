@@ -75,10 +75,10 @@ public:
 
 		GameEngine::IRenderer::BeginScene(*this->camera);
 		{
-			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(2, 0, 0));
-			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Stone, glm::vec3(0, 2, 0));
-			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Grass, glm::vec3(0, 0, 2));/*
-			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(1, -1, -1));
+			//Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(2, 0, 0));
+			//Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Stone, glm::vec3(0, 2, 0));
+			//Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Grass, glm::vec3(0, 0, 2));
+			/*Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(1, -1, -1));
 			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(1, -1, -1));
 			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(-1, 1, -1));
 			Blocks::BlockRegistery::getInstance().renderBlock(Blocks::BlockType::Dirt, glm::vec3(-1, 1, 1));

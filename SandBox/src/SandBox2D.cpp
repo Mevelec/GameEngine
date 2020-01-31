@@ -1,5 +1,4 @@
 #include "SandBox2D.h"
-#include "Tiles/Tile.h"
 #include "imgui/imgui.h"
 
 
@@ -69,8 +68,8 @@ void SandBox2D::onUpdate(GameEngine::TimeStep ts)
 
 	GameEngine::IRenderer::BeginScene(*this->camera);
 	{
-		Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Dirt, glm::vec3(2, 0, 0));
-		Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Grass, glm::vec3(0, 2, 0));
+		//Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Dirt, glm::vec3(2, 0, 0));
+		//Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Grass, glm::vec3(0, 2, 0));
 
 		//Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Grass, glm::vec3(0, 0, 2));
 		//Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Grass, glm::vec3(2, 2, 0));

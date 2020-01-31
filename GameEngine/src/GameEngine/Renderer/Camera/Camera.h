@@ -1,7 +1,6 @@
 #pragma once
-
 #include <glm/glm.hpp>
-#include "GameEngine/GameComponents/Transform.h"
+#include "GameEngine/Core/Transform/Transform.h"
 #include "GameEngine/Events/ApplicationEvent.h"
 
 namespace GameEngine {

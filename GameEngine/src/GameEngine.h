@@ -13,7 +13,11 @@
 #include "GameEngine/imGui/imGuiLayer.h"
 
 // -- Components -----------------------
-#include "GameEngine/GameComponents/Transform.h"
+#include "GameEngine/Core/Transform/Transform.h"
+
+#include "GameComponents/Blocks/Block.h"
+#include "GameComponents/Tiles/Tile.h"
+
 // -- Time -----------------------------
 #include "GameEngine/Core/TimeStep.h"
 
