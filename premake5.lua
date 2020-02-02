@@ -201,7 +201,7 @@ project "Sandbox"
 		"GameEngine/vendor",
 
 		"%{IncludeDir.glm}",
-		%{IncludeDir.libmorton}"
+		"%{IncludeDir.libmorton}",
 
 		"OcTree/src",
 		"OcTree/vendor",
