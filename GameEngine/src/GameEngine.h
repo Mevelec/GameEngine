@@ -17,6 +17,7 @@
 
 #include "GameComponents/Blocks/Block.h"
 #include "GameComponents/Tiles/Tile.h"
+#include "GameComponents/Chunk/Chunk.h"
 
 // -- DataStructures
 //#include "OcTree.h"
