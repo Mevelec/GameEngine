@@ -19,9 +19,6 @@
 #include "GameComponents/Tiles/Tile.h"
 #include "GameComponents/Chunk/Chunk.h"
 
-// -- DataStructures
-//#include "OcTree.h"
-
 // -- Time -----------------------------
 #include "GameEngine/Core/TimeStep.h"
 

@@ -1,6 +1,5 @@
 #pragma once
 #include <GameEngine.h>
-#include <OcTree.h>
 
 class SandBox3D : public GameEngine::Layer
 {
@@ -23,6 +22,6 @@ private:
 	GameEngine::Camera* camera;
 	float cameraMoveSpeed = 5.0f;
 	float cmaraRotateSpeed = 10.0f;
-	GameEngine::Scope<OcTree::Octree<GameComponents::BlockType>> ocTree;
+	GameComponents::Chunk chunk;
 };
 

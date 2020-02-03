@@ -63,7 +63,7 @@ project "GameEngine"
 
 
 		"%{prj.name}/vendor/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl"
+		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
 
 	defines
@@ -84,6 +84,7 @@ project "GameEngine"
 
 		"OcTree/src",
 		"OcTree/vendor",
+		"%{IncludeDir.libmorton}",
 	}
 
 	links
@@ -201,10 +202,10 @@ project "Sandbox"
 		"GameEngine/vendor",
 
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.libmorton}",
 
 		"OcTree/src",
 		"OcTree/vendor",
+		"%{IncludeDir.libmorton}",
 	}
 
 	links

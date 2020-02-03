@@ -1,12 +1,12 @@
 #pragma once
 
 #include "GameComponents/Blocks/Block.h"
+#include <OcTree.h>
 
 namespace GameComponents {
-	class Chunk
+
+	class Chunk : public OcTree::OcTreeDefault<BlockType>
 	{
-		BlockType getBlock(glm::vec3 pos);
-		BlockType setBlock(glm::vec3 pos);
 	};
 }
 

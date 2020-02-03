@@ -8,7 +8,7 @@ namespace OcTree {
 	{
 	public:
 		virtual T& get(int posx, int posy, int posz);
-		virtual void set(T& value, int posx, int posy, int posz);
+		virtual void set(T value, int posx, int posy, int posz);
 
 		virtual int getWidth();
 
@@ -59,8 +59,10 @@ namespace OcTree {
 		}
 
 
-		virtual T& get(int posx, int posy, int posz) override { this->getNode(posx, posy, posz, this->getDepth()).data };
-		virtual void set(T value, int posx, int posy, int posz) override { this->setNode(value, posx, posy, posz, this->getDepth()) };
+		virtual T& get(int posx, int posy, int posz) override { 
+			return this->getNode(posx, posy, posz, this->getDepth()).data; 
+		};
+		virtual void set(T value, int posx, int posy, int posz) override { this->setNode(value, posx, posy, posz, this->getDepth()); };
 
 		void setNode(T value, uint_fast16_t posx, uint_fast16_t posy, uint_fast16_t posz, int depthSeek)
 		{

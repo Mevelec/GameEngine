@@ -15,24 +15,22 @@ SandBox3D::SandBox3D()
 		glm::vec3(0, 0, -10)
 	);
 
-	this->ocTree = GameEngine::CreateScope<OcTree::OcTreeDefault<GameComponents::BlockType>>(2);
-
-	int a = ocTree->getWidth();
+	int a = chunk.getWidth();
 	
-	for (int x = 0; x <= ocTree->getWidth()-1; x++)
+	for (int x = 0; x <= chunk.getWidth()-1; x++)
 	{
-		for (int z = 0; z <= ocTree->getWidth()-1; z++)
+		for (int z = 0; z <= chunk.getWidth()-1; z++)
 		{
-			for (int y = 0; y <= ocTree->getWidth()-1; y++)
+			for (int y = 0; y <= chunk.getWidth()-1; y++)
 			{
-				if(y > ocTree->getWidth()-2)
-					ocTree->set(GameComponents::BlockType::Grass, x, y, z);
+				if(y > chunk.getWidth()-2)
+					chunk.set(GameComponents::BlockType::Grass, x, y, z);
 				else
-					ocTree->set(GameComponents::BlockType::Dirt, x, y, z);
+					chunk.set(GameComponents::BlockType::Dirt, x, y, z);
 			}
 		}
 	}
-	ocTree->set(GameComponents::BlockType::Stone, 0, 0, 0, 0);
+	//ocTree->set(GameComponents::BlockType::Stone, 0, 0, 0, 0);
 	//ocTree->setNode(Blocks::BlockType::Stone, 9, 9, 0, 1);
 	//ocTree->setNode(Blocks::BlockType::Dirt, 10, 10, 0, 1);
 }
@@ -83,19 +81,6 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 
 	GameEngine::IRenderer::BeginScene(*this->camera);
 	{
-		int width = ocTree->getWidth()-1;
-		for (int x = 0; x <= width; x++)
-		{
-			for (int z = 0; z <= width; z++)
-			{
-				for (int y = 0; y <= width; y++)
-				{
-					GameComponents::BlockRegistery::getInstance().renderBlock(
-						this->ocTree->get(x, y, z).data, glm::vec3(x * 2, y * 2, z * 2)
-					);
-				}
-			}
-		}
 	}
 	GameEngine::IRenderer::EndScene();
 }
