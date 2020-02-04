@@ -1,19 +1,7 @@
 #pragma once
-#include "SVO/Node.h"
-#include <cmath>
+#include "OcTree/OcTree.h"
 
 namespace OcTree {
-	template <class T>
-	class Octree
-	{
-	public:
-		virtual T& get(int posx, int posy, int posz);
-		virtual void set(T value, int posx, int posy, int posz);
-
-		virtual int getWidth();
-
-	};
-
 	template<class T>
 	class OcTreeDefault : public Octree<T>
 	{
@@ -58,15 +46,16 @@ namespace OcTree {
 			return node.childs;
 		}
 
-
-		virtual T& get(int posx, int posy, int posz) override { 
-			return this->getNode(posx, posy, posz, this->getDepth()).data; 
+		virtual T& get(int posx, int posy, int posz) override {
+			return this->getNode(posx, posy, posz, 0).data;
 		};
-		virtual void set(T value, int posx, int posy, int posz) override { this->setNode(value, posx, posy, posz, this->getDepth()); };
+		virtual void set(T value, int posx, int posy, int posz) override {
+			this->setNode(value, posx, posy, posz, 0);
+		};
 
 		void setNode(T value, uint_fast16_t posx, uint_fast16_t posy, uint_fast16_t posz, int depthSeek)
 		{
-			uint_fast32_t mortonCode = morton3D_32_encode(posx, posy, posz);
+			uint_fast32_t mortonCode = libmorton::morton3D_32_encode(posx, posy, posz);
 
 			int depth = this->depth;
 			Node<T>* node = &this->root;
@@ -80,7 +69,7 @@ namespace OcTree {
 
 		Node<T>& getNode(uint_fast16_t posx, uint_fast16_t posy, uint_fast16_t posz, int depthSeek)
 		{
-			uint_fast32_t mortonCode = morton3D_32_encode(posx, posy, posz);
+			uint_fast32_t mortonCode = libmorton::morton3D_32_encode(posx, posy, posz);
 
 			int depth = this->depth;
 			Node<T>* node = &this->root;
@@ -95,4 +84,4 @@ namespace OcTree {
 		Node<T> root;
 		int depth;
 	};
-  }
+}

@@ -14,25 +14,6 @@ SandBox3D::SandBox3D()
 		1000.0f,
 		glm::vec3(0, 0, -10)
 	);
-
-	int a = chunk.getWidth();
-	
-	for (int x = 0; x <= chunk.getWidth()-1; x++)
-	{
-		for (int z = 0; z <= chunk.getWidth()-1; z++)
-		{
-			for (int y = 0; y <= chunk.getWidth()-1; y++)
-			{
-				if(y > chunk.getWidth()-2)
-					chunk.set(GameComponents::BlockType::Grass, x, y, z);
-				else
-					chunk.set(GameComponents::BlockType::Dirt, x, y, z);
-			}
-		}
-	}
-	//ocTree->set(GameComponents::BlockType::Stone, 0, 0, 0, 0);
-	//ocTree->setNode(Blocks::BlockType::Stone, 9, 9, 0, 1);
-	//ocTree->setNode(Blocks::BlockType::Dirt, 10, 10, 0, 1);
 }
 
 void SandBox3D::onAttach()
@@ -81,6 +62,7 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 
 	GameEngine::IRenderer::BeginScene(*this->camera);
 	{
+		this->chunk.render();
 	}
 	GameEngine::IRenderer::EndScene();
 }

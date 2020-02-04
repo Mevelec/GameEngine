@@ -24,12 +24,6 @@ IncludeDir["imgui"] = "GameEngine/vendor/imgui"
 IncludeDir["glm"] = "GameEngine/vendor/glm"
 IncludeDir["stb_image"] = "GameEngine/vendor/stb_image"
 IncludeDir["rapidjson"] = "GameEngine/vendor/rapidjson/include"
-IncludeDir["libmorton"] = "OcTree/vendor/libmorton/include"
-IncludeDir["libtri"] = "OcTree/vendor/libtri/include"
-
-
-
-
 
 group "Dependencies"
 	include "GameEngine/vendor/GLFW" -- copy GLFW premake config
@@ -61,9 +55,10 @@ project "GameEngine"
 
 		"%{prj.name}/vendor/rapidjson/include/**.h",
 
-
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
+
+		"%{prj.name}/vendor/libmorton/libmorton/include/**.h",
 	}
 
 	defines
@@ -81,10 +76,7 @@ project "GameEngine"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.rapidjson}",
-
-		"OcTree/src",
-		"OcTree/vendor",
-		"%{IncludeDir.libmorton}",
+		"%{prj.name}/vendor/libmorton/libmorton/include",
 	}
 
 	links
@@ -93,7 +85,6 @@ project "GameEngine"
 		"Glad",
 		"imgui",
 		"opengl32.lib",
-		"OcTree"
 	}
 
 	filter "system:windows"
@@ -121,63 +112,6 @@ project "GameEngine"
 		runtime "Release"
 		optimize "on"
 
-
-project "OcTree"
-	location "OcTree"
-	kind "StaticLib"
-	language "C++"
-	cppdialect "C++17"
-	staticruntime "on"
-
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-intermediates/" .. outputdir .. "/%{prj.name}")
-
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
-
-		"%{prj.name}/vendor/libmorton/include/**.h",
-		"%{prj.name}/vendor/libtri/include/**.h",
-	}
-
-	defines
-	{
-		"_CRT_SECURE_NO_WARNINGS"
-	}
-
-	includedirs
-	{
-		"%{prj.name}/src",
-		"%{IncludeDir.libmorton}",
-		"%{IncludeDir.libtri}",
-	}
-
-	filter "system:windows"
-		systemversion "latest"
-
-		defines
-		{
-			"OC_PLATEFORM_WINDOWS",
-			"OC_BUILD_DLL"
-		}
-
-	filter "configurations:Debug"
-		defines "OC_DEBUG"
-		runtime "Debug"
-		symbols "on"
-
-	filter "configurations:Release"
-		defines "OC_RELEASE"
-		runtime "Release"
-		optimize "on"
-
-	filter "configurations:Dist"
-		defines "OC_DIST"
-		runtime "Release"
-		optimize "on"
-
-
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
@@ -192,7 +126,7 @@ project "Sandbox"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
 	}
 
 	includedirs
@@ -200,18 +134,14 @@ project "Sandbox"
 		"GameEngine/vendor/spdlog/include",
 		"GameEngine/src",
 		"GameEngine/vendor",
+		"GameEngine/vendor/libmorton/libmorton/include",
 
 		"%{IncludeDir.glm}",
-
-		"OcTree/src",
-		"OcTree/vendor",
-		"%{IncludeDir.libmorton}",
 	}
 
 	links
 	{
 		"GameEngine",
-		"OcTree"
 	}
 
 	filter "system:windows"

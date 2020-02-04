@@ -17,3 +17,6 @@
 [submodule "GameEngine/vendor/rapidjson"]
 	path = GameEngine/vendor/rapidjson
 	url = https://github.com/Tencent/rapidjson.git
+[submodule "GameEngine/vendor/libmorton"]
+	path = GameEngine/vendor/libmorton
+	url = https://github.com/Forceflow/libmorton

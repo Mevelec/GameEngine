@@ -24,6 +24,7 @@
 
 // -- Renderer -------------------------
 #include "GameEngine/Renderer/Renderer.h"
+#include "GameEngine/Renderer/Renderable.h"
 #include "GameEngine/Renderer/RenderCommand.h"
 
 #include "GameEngine/Renderer/Buffer/Buffer.h"
