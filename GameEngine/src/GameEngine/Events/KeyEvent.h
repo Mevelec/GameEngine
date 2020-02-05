@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Event.h"
+#include "GameEngine/Events/Event.h"
 
 namespace GameEngine
 {
-	class GE_API KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	public:
 		inline int GetKeyCode() const { return keyCode; }
@@ -16,7 +16,7 @@ namespace GameEngine
 		int keyCode;
 	};
 
-	class GE_API KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeatCount)
@@ -36,7 +36,7 @@ namespace GameEngine
 		int repeatCount;
 	};
 
-	class GE_API KeyReleasedEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode)
@@ -52,7 +52,7 @@ namespace GameEngine
 		EVENT_CLASS_TYPE(KeyPressed)
 	};
 
-	class GE_API KeyTypedEvent : public KeyEvent
+	class KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int keycode)

@@ -1,5 +1,5 @@
 #include "hzpch.h"
-#include "PerspectiveCamera.h"
+#include "GameEngine/Renderer/Camera/PerspectiveCamera.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 

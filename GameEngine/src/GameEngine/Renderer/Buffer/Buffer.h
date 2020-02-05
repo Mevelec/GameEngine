@@ -131,7 +131,7 @@ namespace GameEngine {
 		virtual const BufferLayout& getLayout() const = 0;
 		virtual void setLayout(const BufferLayout& layout) = 0;
 
-		static IVertexBuffer* Create(float* vertices, uint32_t size);
+		static Ref<IVertexBuffer> Create(float* vertices, uint32_t size);
 	};
 
 	class IIndexBuffer
@@ -144,6 +144,6 @@ namespace GameEngine {
 
 		virtual uint32_t getCount() const = 0;
 
-		static IIndexBuffer* Create(uint32_t* indices, uint32_t count);
+		static Ref<IIndexBuffer> Create(uint32_t* indices, uint32_t count);
 	};
 }

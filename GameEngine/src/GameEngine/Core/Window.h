@@ -2,7 +2,7 @@
 
 #include "hzpch.h"
 
-#include "Core.h"
+#include "GameEngine/Core/Core.h"
 #include "GameEngine/Events/Event.h"
 
 namespace GameEngine {
@@ -22,7 +22,7 @@ namespace GameEngine {
 	};
 
 	/// class IWindow representing a desktop system based window
-	class GE_API Window
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;
@@ -40,7 +40,7 @@ namespace GameEngine {
 		virtual void setVSync(bool enabled) = 0;
 		virtual bool isVSync() const = 0;
 
-		static Window* create(const WindowProps& props = WindowProps());
+		static Scope<Window> create(const WindowProps& props = WindowProps());
 
 	private:
 	};

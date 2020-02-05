@@ -16,8 +16,7 @@ namespace GameComponents {
 			 1,  1.0f, 0.0f, 0.0f, 0.0f,
 			-1,  1.0f, 0.0f, 1.0f, 0.0f,
 		};
-		GameEngine::Ref<GameEngine::IVertexBuffer> squareVB;
-		squareVB.reset(GameEngine::IVertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		GameEngine::Ref<GameEngine::IVertexBuffer> squareVB = GameEngine::IVertexBuffer::Create(squareVertices, sizeof(squareVertices));
 		GameEngine::BufferLayout squareLayout = {
 			{ GameEngine::ShaderDataType::Float3, "a_Position"},
 			{ GameEngine::ShaderDataType::Float2, "a_TextCoord" }
@@ -30,8 +29,7 @@ namespace GameComponents {
 			0, 1, 2,
 			2, 3, 0,
 		};
-		GameEngine::Ref<GameEngine::IIndexBuffer> squareIB;
-		squareIB.reset(GameEngine::IIndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		GameEngine::Ref<GameEngine::IIndexBuffer> squareIB = GameEngine::IIndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		this->squareVA->setIndexBuffer(squareIB);
 
 		// SHADERS

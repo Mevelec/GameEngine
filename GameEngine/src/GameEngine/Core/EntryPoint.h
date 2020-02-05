@@ -1,4 +1,5 @@
 #pragma once
+#include "GameEngine/Core/Core.h"
 
 #ifdef GE_PLATEFORM_WINDOWS
 

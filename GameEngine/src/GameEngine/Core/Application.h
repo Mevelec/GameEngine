@@ -1,8 +1,8 @@
 #pragma  once
 
-#include "Core.h"
+#include"GameEngine/Core/Core.h"
 
-#include "Window.h"
+#include "GameEngine/Core/Window.h"
 #include "GameEngine/Core/Layer/LayerStack.h"
 #include "GameEngine/Events/Event.h"
 #include "GameEngine/Events/ApplicationEvent.h"

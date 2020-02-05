@@ -1,8 +1,10 @@
 #include "hzpch.h"
-#include "Application.h"
+#include "GameEngine/Core/Application.h"
 
 #include "GameEngine/Core/Log/Log.h"
 #include "GameEngine/Renderer/Renderer.h"
+
+#include "GameEngine/Core/InputControl/Input.h"
 
 #include "GLFW/glfw3.h"
 
@@ -12,10 +14,12 @@ namespace GameEngine {
 
 	Application::Application()
 	{
+		//PROFILE_SCOPE("GameEngine::OnUpdate");
+
 		GE_CORE_ASSERT(!s_Instance, "Application already exists!")
 		s_Instance = this;
 
-		this->window = std::unique_ptr<Window>(Window::create());
+		this->window = Window::create();
 		this->window->setEventCallback(GE_BIND_EVENT_FN(Application::onEvent));
 
 		IRenderer::Init();
@@ -26,6 +30,7 @@ namespace GameEngine {
 
 	Application::~Application()
 	{
+		IRenderer::Shutdown();
 	}
 
 	void Application::pushLayer(Layer* layer)

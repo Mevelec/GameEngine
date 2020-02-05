@@ -1,7 +1,7 @@
  #include "hzpch.h"
-#include "OpenGLTexture.h"
+#include "Plateform/OpenGl/OpenGLTexture.h"
 
-#include "stb_image.h"
+#include <stb_image.h>
 
 namespace GameEngine {
 	OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)

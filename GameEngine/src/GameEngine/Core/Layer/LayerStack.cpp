@@ -1,10 +1,7 @@
 #include "hzpch.h"
-#include "LayerStack.h"
+#include "GameEngine/Core/Layer/LayerStack.h"
 
 namespace GameEngine {
-
-	LayerStack::LayerStack() {
-	}
 
 	LayerStack::~LayerStack() {
 		for (Layer* layer : layers)

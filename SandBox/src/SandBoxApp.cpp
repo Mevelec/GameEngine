@@ -1,15 +1,9 @@
 #include "SandboxApp.h"
-
-#include "ExempleLayer.h"
-
-#include "SandBox2D.h"
-#include "SandBox3D.h"
-
-
 #include <GameEngine/Core/EntryPoint.h>
 
-
-
+#include "ExempleLayer.h"
+#include "SandBox2D.h"
+#include "SandBox3D.h"
 
 class Sandbox : public GameEngine::Application
 {

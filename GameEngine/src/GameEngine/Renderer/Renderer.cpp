@@ -10,6 +10,11 @@ namespace GameEngine {
 		RenderCommand::Init();
 	}
 
+	void IRenderer::Shutdown()
+	{
+		GE_INFO("remember to delete items on  shutdown");
+	}
+
 	void IRenderer::OnWindowResize(uint32_t width, uint32_t height)
 	{
 		RenderCommand::SetViewPort(0, 0, width, height);

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Event.h"
+#include "GameEngine/Events/Event.h"
 
 namespace GameEngine
 {
-	class GE_API MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(float x, float y)
@@ -26,7 +26,7 @@ namespace GameEngine
 		float mouseX, mouseY;
 	};
 
-	class GE_API MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(float offsetX, float offsetY)
@@ -48,7 +48,7 @@ namespace GameEngine
 		float offsetX, offsetY;
 	};
 
-	class GE_API MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	public:
 		inline int GetMouseButton() const { return button; }
@@ -61,7 +61,7 @@ namespace GameEngine
 		int button;
 	};
 
-	class GE_API MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(int button)
@@ -77,7 +77,7 @@ namespace GameEngine
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class GE_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(int button)

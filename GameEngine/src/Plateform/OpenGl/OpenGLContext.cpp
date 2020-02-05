@@ -1,5 +1,5 @@
 #include "hzpch.h"
-#include "OpenGLContext.h"
+#include "Plateform/OpenGl/OpenGLContext.h"
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>

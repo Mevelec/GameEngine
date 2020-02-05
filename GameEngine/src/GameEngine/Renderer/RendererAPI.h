@@ -12,7 +12,7 @@ namespace GameEngine {
 		enum class API
 		{
 			None = 0,
-			OpengGL = 1,
+			OpenGL = 1,
 		};
 	public:
 		virtual void init() = 0;
@@ -23,6 +23,7 @@ namespace GameEngine {
 		virtual void drawIndexed(const Ref<VertexArray>& vertexArray) = 0;
 
 		inline static API GetAPI() { return s_API; };
+		static Scope<RendererAPI> Create();
 	private:
 		static API s_API;
 	};

@@ -1,19 +1,19 @@
 #include "hzpch.h"
-#include "Buffer.h"
+#include "GameEngine/Renderer/Buffer/Buffer.h"
 
-#include "../Renderer.h"
+#include "GameEngine/Renderer/Renderer.h"
 #include "Plateform/OpenGl/OpenGlBuffer.h"
 
 namespace GameEngine {
 
-	IVertexBuffer* IVertexBuffer::Create(float* vertices, uint32_t size) {
+	Ref<IVertexBuffer> IVertexBuffer::Create(float* vertices, uint32_t size) {
 		switch (IRenderer::GetAPI())
 		{
 		case RendererAPI::API::None:
 			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
-		case RendererAPI::API::OpengGL:
-			return new OpenGlVertexBuffer(vertices, size);
+		case RendererAPI::API::OpenGL:
+			return CreateRef<OpenGlVertexBuffer>(vertices, size);
 		default:
 			GE_CORE_ASSERT(false, "RendererAPI::Unknow renderAPI")
 			break;
@@ -23,14 +23,14 @@ namespace GameEngine {
 		return nullptr;
 	}
 
-	IIndexBuffer* IIndexBuffer::Create(uint32_t* indices, uint32_t count) {
+	Ref<IIndexBuffer> IIndexBuffer::Create(uint32_t* indices, uint32_t count) {
 		switch (IRenderer::GetAPI())
 		{
 		case RendererAPI::API::None:
 			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
-		case RendererAPI::API::OpengGL:
-			return new OpenGlIndexBuffer(indices, count);
+		case RendererAPI::API::OpenGL:
+			return CreateRef<OpenGlIndexBuffer>(indices, count);
 		default:
 			GE_CORE_ASSERT(false, "RendererAPI::Unknow renderAPI")
 				break;

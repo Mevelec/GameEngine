@@ -1,5 +1,6 @@
 #pragma once
 #include "hzpch.h"
+
 #include "GameEngine/Core/Core.h"
 
 namespace GameEngine {
@@ -43,7 +44,7 @@ namespace GameEngine {
 
 	/// Event class 
 	/// used as base for others events
-	class GE_API Event {
+	class Event {
 		friend class EventDispatcher;
 	public:
 		virtual EventType GetEventType() const = 0;
