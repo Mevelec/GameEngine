@@ -1,6 +1,8 @@
 #include "SandBox3D.h"
 #include "imgui/imgui.h"
 
+#include "Profiling/Profiler.h"
+
 SandBox3D::SandBox3D()
 	: Layer("SandBox3D")
 {
@@ -28,6 +30,8 @@ void SandBox3D::onDetach()
 
 void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 {
+	PROFILE_SCOPE("GameEngine::OnUpdate");
+
 	// MOVE
 	if (GameEngine::Input::IsKeyPressed(GE_KEY_A)) {
 		this->camera->translate({ this->cameraMoveSpeed * ts *-1, 0, 0 });
@@ -62,6 +66,7 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 
 	GameEngine::IRenderer::BeginScene(*this->camera);
 	{
+		PROFILE_SCOPE("GameEngine::RenderChunk");
 		this->chunk.render();
 	}
 	GameEngine::IRenderer::EndScene();
@@ -113,6 +118,15 @@ void SandBox3D::onImGuiRender()
 		);
 	}
 
+	for (auto& result : Profiler::profile)
+	{
+		char label[50];
+		strcpy(label, result.name);
+		strcat(label, "  %.3fms");
+		ImGui::Text(label, result.time);
+	}
+	Profiler::profile.clear();
+	
 	ImGui::End();
 }
 
