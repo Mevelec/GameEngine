@@ -12,6 +12,7 @@
 #include <unordered_set>
 
 #include "GameEngine/Core/Log/Log.h"
+#include "GameEngine/Debug/Instrumentor.h"
 
 #ifdef HZ_PLATFORM_WINDOWS
 	#include <Windows.h>

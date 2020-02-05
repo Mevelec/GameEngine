@@ -1,5 +1,8 @@
 #pragma once
-#include "SandboxApp.h"
+#include <GameEngine.h>
+
+#include <imgui/imgui.h>
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer : public GameEngine::Layer
 {

@@ -1,7 +1,6 @@
 #include "hzpch.h"
 #include "GameEngine/Core/Application.h"
 
-#include "GameEngine/Core/Log/Log.h"
 #include "GameEngine/Renderer/Renderer.h"
 
 #include "GameEngine/Core/InputControl/Input.h"
@@ -14,7 +13,7 @@ namespace GameEngine {
 
 	Application::Application()
 	{
-		//PROFILE_SCOPE("GameEngine::OnUpdate");
+		GE_PROFILE_SCOPE("GameEngine::OnUpdate");
 
 		GE_CORE_ASSERT(!s_Instance, "Application already exists!")
 		s_Instance = this;

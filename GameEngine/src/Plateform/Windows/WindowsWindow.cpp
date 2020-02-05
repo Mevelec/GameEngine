@@ -1,6 +1,5 @@
 #include "hzpch.h"
 #include "Plateform/Windows/WindowsWindow.h"
-#include "GameEngine/Core/Log/Log.h"
 
 #include "GameEngine/Events/ApplicationEvent.h"
 #include "GameEngine/Events/MouseEvent.h"

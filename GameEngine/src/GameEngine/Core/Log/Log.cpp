@@ -1,6 +1,5 @@
 #include "hzpch.h"
 
-#include "GameEngine/Core/Log/Log.h"
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 namespace GameEngine {

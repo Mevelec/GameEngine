@@ -55,6 +55,20 @@
 #endif // GE_ENABLE_ASSERTS
 
 
+#define GE_PROFILE 1
+#if GE_PROFILE
+	#define GE_PROFILE_BEGIN_SESSION(name, filepath) ::GameEngine::Instrumentor::get().beginSession(name, filepath)
+	#define GE_PROFILE_END_SESSION() ::GameEngine::Instrumentor::get().endSession()
+	#define GE_PROFILE_SCOPE(name) ::GameEngine::InstrumentationTimer timer##__LINE__(name);
+	#define GE_PROFILE_FUNCTION() GE_PROFILE_SCOPE(__FUNCSIG__)
+#else
+	#define GE_PROFILE_BEGIN_SESSION(name, filepath)
+	#define GE_PROFILE_END_SESSION()
+	#define GE_PROFILE_SCOPE(name)
+	#define GE_PROFILE_FUNCTION()
+#endif 
+
+
 #define BIT(x) (1 << x)
 
 #define GE_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
