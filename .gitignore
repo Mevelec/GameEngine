@@ -370,4 +370,3 @@ bin-int/
 # GameEngine
 !Log*
 !vendor/bin/premake/
-GameEngine/vendor/**
