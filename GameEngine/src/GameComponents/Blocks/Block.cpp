@@ -57,18 +57,23 @@ namespace GameComponents {
 		this->cubeVA->setIndexBuffer(squareIB);
 
 		// SHADERS
-		// Flat
 		this->shaderLib.load("flat", "assets/shaders/FlatColor.glsl");
+		this->shaderLib.load("default", "assets/shaders/Default.glsl");
 		this->shaderLib.load("texture2D", "assets/shaders/Texture2D.glsl");
 		this->shaderLib.load("textureCoordinates", "assets/shaders/TextureCoordinates.glsl");
 
+		// MATERIALS
 		GameEngine::Ref<GameEngine::Material> mat;
 
 		mat = GameEngine::MaterialParser::getInstance().loadJson("assets/Materials/sample/configuration.json");
 		this->materialLib.add("sample", mat);
 
-		mat =  GameEngine::CreateRef<GameEngine::Material>("dirt", this->shaderLib.get("flat"));
-		mat->addComponent("u_Color", glm::vec3(107, 91, 46) / glm::vec3(255));
+		mat =  GameEngine::CreateRef<GameEngine::Material>("dirt", this->shaderLib.get("default"));
+		mat->addComponent("u_Color", glm::vec4(107, 91, 46, 255) / glm::vec4(255));
+		this->whiteTexture = GameEngine::Texture2D::Create(1, 1);
+		uint32_t whiteTextureData = 0xffffffff;
+		this->whiteTexture->setData(&whiteTextureData, sizeof(uint32_t));
+		mat->addComponent("u_Texture", this->whiteTexture, 0);
 		this->materialLib.add(mat);
 
 		mat = GameEngine::CreateRef<GameEngine::Material>("stone", this->shaderLib.get("flat"));
@@ -98,7 +103,7 @@ namespace GameComponents {
 			this->cubeTransform->setScale(1.0f);
 
 			GameEngine::IRenderer::Submit(
-				this->materialLib.get("sample"),
+				this->materialLib.get("stone"),
 				this->cubeVA,
 				this->cubeTransform->getTransform()
 			);

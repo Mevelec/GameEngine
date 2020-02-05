@@ -37,7 +37,7 @@ namespace GameComponents{
 		GameEngine::ShaderLibrary shaderLib;
 		GameEngine::MaterialLibrary materialLib;
 		GameEngine::Ref<GameEngine::Shader> textureShader;
-		GameEngine::Ref<GameEngine::Texture> uv_texture, texture2;
+		GameEngine::Ref<GameEngine::Texture> uv_texture, texture2, whiteTexture;
 
 
 		GameEngine::Ref<GameEngine::VertexArray> cubeVA;

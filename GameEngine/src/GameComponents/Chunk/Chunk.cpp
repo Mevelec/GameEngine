@@ -7,7 +7,7 @@
 namespace GameComponents {
 	Chunk::Chunk()
 	{
-		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault<BlockType>>(4);
+		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault<BlockType>>(2);
 
 		for (int x = 0; x <= chunk->getWidth() - 1; x++)
 		{
