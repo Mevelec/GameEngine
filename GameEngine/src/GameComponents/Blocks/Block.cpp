@@ -6,6 +6,8 @@
 namespace GameComponents {
 	BlockRegistery::BlockRegistery()
 	{
+		GE_PROFILE_FUNCTION();
+
 		//////// SQUARE ////////
 		this->cubeTransform.reset(new GameEngine::Transform());
 		//Vertex Array
@@ -23,8 +25,7 @@ namespace GameComponents {
 			-1,  1.0f,  1.0f, 0.0f, 1.0f,
 
 		};
-		GameEngine::Ref<GameEngine::IVertexBuffer> squareVB;
-		squareVB.reset(GameEngine::IVertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		GameEngine::Ref<GameEngine::IVertexBuffer> squareVB = GameEngine::IVertexBuffer::Create(squareVertices, sizeof(squareVertices));
 		GameEngine::BufferLayout squareLayout = {
 			{ GameEngine::ShaderDataType::Float3, "a_Position"},
 			{ GameEngine::ShaderDataType::Float2, "a_TextCoord" }
@@ -52,8 +53,7 @@ namespace GameComponents {
 			5, 1, 2,
 			2, 6, 5,
 		};
-		GameEngine::Ref<GameEngine::IIndexBuffer> squareIB;
-		squareIB.reset(GameEngine::IIndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		GameEngine::Ref<GameEngine::IIndexBuffer> squareIB = GameEngine::IIndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		this->cubeVA->setIndexBuffer(squareIB);
 
 		// SHADERS
@@ -97,6 +97,8 @@ namespace GameComponents {
 
 	void BlockRegistery::renderBlock(BlockType type, glm::vec3 position)
 	{
+		GE_PROFILE_FUNCTION();
+
 		if (type == BlockType::Stone)
 		{
 		this->cubeTransform->setPostion(position);

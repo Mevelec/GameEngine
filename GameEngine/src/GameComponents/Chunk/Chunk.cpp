@@ -7,6 +7,8 @@
 namespace GameComponents {
 	Chunk::Chunk()
 	{
+		GE_PROFILE_FUNCTION();
+
 		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault<BlockType>>(2);
 
 		for (int x = 0; x <= chunk->getWidth() - 1; x++)
@@ -28,20 +30,28 @@ namespace GameComponents {
 	}
 
 	BlockType& Chunk::get(int posx, int posy, int posz) {
+		GE_PROFILE_FUNCTION();
+
 		return this->chunk->get(posx, posy, posz);
 	};
 	void Chunk::set(BlockType value, int posx, int posy, int posz) {
+		GE_PROFILE_FUNCTION();
+
 		this->chunk->set(value, posx, posy, posz);
 	};
 
 	void Chunk::render()
 	{
+		GE_PROFILE_FUNCTION();
+
 		for (int x = 0; x <= chunk->getWidth() - 1; x++)
 		{
 			for (int z = 0; z <= chunk->getWidth() - 1; z++)
 			{
 				for (int y = 0; y <= chunk->getWidth() - 1; y++)
 				{
+					GE_PROFILE_SCOPE("Render Block of Chunk");
+
 					GameComponents::BlockRegistery::getInstance().renderBlock(chunk->get(x, y, z), glm::vec3(x * 2, y * 2, z * 2));
 				}
 			}

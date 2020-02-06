@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RenderCommand.h"
+#include "GameEngine/Renderer/RenderCommand.h"
 #include "GameEngine/Renderer/Camera/Camera.h"
 #include "GameEngine/Renderer/Material/Shader.h"
 #include "GameEngine/Renderer/Material/Material.h"
@@ -11,6 +11,7 @@ namespace GameEngine {
 	{
 	public:
 		static void Init();
+		static void Shutdown();
 		static void OnWindowResize(uint32_t width, uint32_t height);
 
 		static void BeginScene(Camera& camera);

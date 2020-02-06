@@ -370,3 +370,8 @@ bin-int/
 # GameEngine
 !Log*
 !vendor/bin/premake/
+!Debug/
+
+# SandBox
+SandBox/profiling/**
+!.gitignore

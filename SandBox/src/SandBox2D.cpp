@@ -1,6 +1,7 @@
 #include "SandBox2D.h"
-#include "imgui/imgui.h"
 
+#include <imgui/imgui.h>
+#include <glm/gtc/type_ptr.hpp>
 
 SandBox2D::SandBox2D()
 	: Layer("SandBox2D")
@@ -23,6 +24,8 @@ void SandBox2D::onDetach()
 
 void SandBox2D::onUpdate(GameEngine::TimeStep ts)
 {
+	GE_PROFILE_FUNCTION();
+
 	// MOVE
 	if (GameEngine::Input::IsKeyPressed(GE_KEY_A)) {
 		this->camera->translate({ this->cameraMoveSpeed * ts * -1, 0, 0 });
@@ -68,6 +71,8 @@ void SandBox2D::onUpdate(GameEngine::TimeStep ts)
 
 	GameEngine::IRenderer::BeginScene(*this->camera);
 	{
+		GE_PROFILE_SCOPE("SandBox2D render");
+
 		//Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Dirt, glm::vec3(2, 0, 0));
 		//Tiles::TilesRegistery::getInstance().renderTile(Tiles::TilesType::Grass, glm::vec3(0, 2, 0));
 

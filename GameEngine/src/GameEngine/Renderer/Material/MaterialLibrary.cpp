@@ -10,6 +10,8 @@
 namespace GameEngine {
 	void MaterialLibrary::add(const Ref<Material>& material)
 	{
+		GE_PROFILE_FUNCTION();
+
 		auto& name = material->getName();
 		GE_CORE_ASSERT(!this->exists(name), "Material already exist");
 		this->materials[name] = material;
@@ -17,18 +19,24 @@ namespace GameEngine {
 
 	void MaterialLibrary::add(const std::string& name, const Ref<Material>& material)
 	{
+		GE_PROFILE_FUNCTION();
+
 		GE_CORE_ASSERT(!this->exists(name), "Material already exist");
 		this->materials[name] = material;
 	}
 
 	Ref<Material> MaterialLibrary::get(const std::string& name)
 	{
+		GE_PROFILE_FUNCTION();
+
 		GE_CORE_ASSERT(this->exists(name), "Material not found");
 		return this->materials[name];
 	}
 
 	bool MaterialLibrary::exists(const std::string& name)
 	{
+		GE_PROFILE_FUNCTION();
+
 		return this->materials.find(name) != this->materials.end();
 	}
 
@@ -40,6 +48,8 @@ namespace GameEngine {
 
 	Ref<Material> MaterialParser::loadJson(const std::string& path)
 	{
+		GE_PROFILE_FUNCTION();
+
 		//// PARSE MATERIAL.json
 		FILE* fb = fopen(path.c_str(), "r");
 		std::filesystem::path folderPath(path);

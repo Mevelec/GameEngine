@@ -1,7 +1,7 @@
 #include "hzpch.h"
-#include "Texture.h"
+#include "GameEngine/Renderer/Material/Texture.h"
 
-#include "../Renderer.h"
+#include "GameEngine/Renderer/Renderer.h"
 #include "Plateform/OpenGl/OpenGLTexture.h"
 
 namespace GameEngine {
@@ -12,7 +12,7 @@ namespace GameEngine {
 		case RendererAPI::API::None:
 			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
-		case RendererAPI::API::OpengGL:
+		case RendererAPI::API::OpenGL:
 			return CreateRef<OpenGLTexture2D>(width, height);
 		default:
 			GE_CORE_ASSERT(false, "RendererAPI::Unknow renderAPI")
@@ -30,7 +30,7 @@ namespace GameEngine {
 		case RendererAPI::API::None:
 			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
-		case RendererAPI::API::OpengGL:
+		case RendererAPI::API::OpenGL:
 			return CreateRef<OpenGLTexture2D>(path);
 		default:
 			GE_CORE_ASSERT(false, "RendererAPI::Unknow renderAPI")

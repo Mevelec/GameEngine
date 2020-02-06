@@ -42,21 +42,6 @@
 	#error "Unknown platform!"
 #endif // End of platform detection
 
-// DLL support
-#ifdef GE_PLATFORM_WINDOWS
-	#if GE_DYNAMIC_LINK
-		#ifdef GE_BUILD_DLL
-			#define GE_API __declspec(dllexport)
-		#else
-			#define GE_API __declspec(dllimport)
-		#endif
-	#else
-		#define GE_API
-	#endif
-#else
-	#error Hazel only supports Windows!
-#endif // End of DLL support
-
 #ifdef GE_DEBUG
 	#define GE_ENABLE_ASSERTS
 #endif // GE_DEBUG
@@ -68,6 +53,20 @@
 	#define GE_ASSERT(x, ...)
 	#define GE_CORE_ASSERT(x, ...)
 #endif // GE_ENABLE_ASSERTS
+
+
+#define GE_PROFILE 1
+#if GE_PROFILE
+	#define GE_PROFILE_BEGIN_SESSION(name, filepath) ::GameEngine::Instrumentor::get().beginSession(name, filepath)
+	#define GE_PROFILE_END_SESSION() ::GameEngine::Instrumentor::get().endSession()
+	#define GE_PROFILE_SCOPE(name) ::GameEngine::InstrumentationTimer timer##__LINE__(name);
+	#define GE_PROFILE_FUNCTION() GE_PROFILE_SCOPE(__FUNCSIG__)
+#else
+	#define GE_PROFILE_BEGIN_SESSION(name, filepath)
+	#define GE_PROFILE_END_SESSION()
+	#define GE_PROFILE_SCOPE(name)
+	#define GE_PROFILE_FUNCTION()
+#endif 
 
 
 #define BIT(x) (1 << x)

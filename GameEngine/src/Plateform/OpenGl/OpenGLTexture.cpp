@@ -1,12 +1,14 @@
  #include "hzpch.h"
-#include "OpenGLTexture.h"
+#include "Plateform/OpenGl/OpenGLTexture.h"
 
-#include "stb_image.h"
+#include <stb_image.h>
 
 namespace GameEngine {
 	OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
 		: width(width), height(height)
 	{
+		GE_PROFILE_FUNCTION();
+
 		// Determine image pixels Format and channel
 		this->internalFormat = GL_RGBA8;
 		this->dataFormat = GL_RGBA;
@@ -25,10 +27,16 @@ namespace GameEngine {
 	OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
 		: path(path)
 	{
+		GE_PROFILE_FUNCTION();
+
 		int channels;
 		int width, height;
 		stbi_set_flip_vertically_on_load(1);
-		stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+		stbi_uc* data = nullptr;
+		{
+			GE_PROFILE_SCOPE("stbi_load - OpenGLTexture2D::OpenGLTexture2D(const std::string& path)");
+			data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+		}
 		GE_ASSERT(data, "Failed to load image");
 
 		this->width = width;
@@ -72,11 +80,15 @@ namespace GameEngine {
 
 	OpenGLTexture2D::~OpenGLTexture2D()
 	{
+		GE_PROFILE_FUNCTION();
+
 		glDeleteTextures(1, &this->rendererID);
 	}
 
 	void OpenGLTexture2D::setData(void* data, uint32_t size)
 	{
+		GE_PROFILE_FUNCTION();
+
 		uint32_t bpp = this->dataFormat == GL_RGBA ? 4 : 3;
 		GE_CORE_ASSERT(size == this->width * this->height * bpp, "Data must be entire texture");
 		glTextureSubImage2D(this->rendererID, 0, 0, 0, this->width, this->height, this->dataFormat, GL_UNSIGNED_BYTE, data);
@@ -84,6 +96,8 @@ namespace GameEngine {
 
 	void OpenGLTexture2D::bind(uint32_t slot) const
 	{
+		GE_PROFILE_FUNCTION();
+
 		glBindTextureUnit(slot, this->rendererID);
 	}
 

@@ -19,6 +19,8 @@ namespace GameEngine {
 
 	void Transform::update()
 	{
+		GE_PROFILE_FUNCTION();
+
 		this->transform = glm::lookAt(this->position, this->position + this->forward, this->up);
 		/*
 		this->transform = glm::mat4_cast(this->rotation) *
@@ -30,6 +32,7 @@ namespace GameEngine {
 	// TRANSFORMS
 	void Transform::translate(glm::vec3 direction)
 	{
+		GE_PROFILE_FUNCTION();
 
 		//this->position += direction * this->forward;
 
@@ -46,6 +49,8 @@ namespace GameEngine {
 	// ROTATE
 	void Transform::rotate(glm::vec3 rotation)
 	{
+		GE_PROFILE_FUNCTION();
+
 		// Fuck quaternions
 		glm::fquat pitchQuat(cos(glm::radians(rotation.x / 2.0f)), cross(this->forward, this->up * (float)sin(glm::radians(rotation.x / 2.0f))));
 		glm::fquat yawQuat(cos(glm::radians(rotation.y / 2.0f)), this->up * (float)sin(glm::radians(rotation.y / 2.0f)));

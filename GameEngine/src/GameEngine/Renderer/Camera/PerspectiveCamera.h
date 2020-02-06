@@ -4,7 +4,7 @@
 
 namespace GameEngine {
 
-	class GE_API PerspectiveCamera : public Camera
+	class PerspectiveCamera : public Camera
 	{
 	public:
 		PerspectiveCamera(float fov, float aspect, float clipNear, float clipFar, glm::vec3 position);

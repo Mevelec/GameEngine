@@ -26,12 +26,16 @@ namespace GameEngine {
 
 	void Material::bind(glm::mat4 viewProjectionMatrix, glm::mat4 transform) 
 	{
+		GE_PROFILE_FUNCTION();
+
 		this->shader->bind();
 		this->shader->setMat4("u_ViewProjectionMatrix", viewProjectionMatrix);
 		this->shader->setMat4("u_Transform", transform);
 
 		for each (Ref<MaterialComponent> comp in this->components)
 		{
+			GE_PROFILE_SCOPE("Bind Material Components");
+
 			comp->bind(this->shader);
 		}
 	}

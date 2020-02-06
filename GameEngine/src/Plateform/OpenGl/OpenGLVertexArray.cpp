@@ -1,5 +1,5 @@
 #include "hzpch.h"
-#include "OpenGLVertexArray.h"
+#include "Plateform/OpenGl/OpenGLVertexArray.h"
 
 #include <glad/glad.h>
 
@@ -9,27 +9,27 @@ namespace GameEngine {
 	{
 		switch (type)
 		{
-		case GameEngine::ShaderDataType::Float:
+		case ShaderDataType::Float:
 			return GL_FLOAT;
-		case GameEngine::ShaderDataType::Float2:
+		case ShaderDataType::Float2:
 			return GL_FLOAT;
-		case GameEngine::ShaderDataType::Float3:
+		case ShaderDataType::Float3:
 			return GL_FLOAT;
-		case GameEngine::ShaderDataType::Float4:
+		case ShaderDataType::Float4:
 			return GL_FLOAT;
-		case GameEngine::ShaderDataType::Mat3:
+		case ShaderDataType::Mat3:
 			return GL_FLOAT;
-		case GameEngine::ShaderDataType::Mat4:
+		case ShaderDataType::Mat4:
 			return GL_FLOAT;
-		case GameEngine::ShaderDataType::Int:
+		case ShaderDataType::Int:
 			return GL_INT;
-		case GameEngine::ShaderDataType::Int2:
+		case ShaderDataType::Int2:
 			return GL_INT;
-		case GameEngine::ShaderDataType::Int3:
+		case ShaderDataType::Int3:
 			return GL_INT;
-		case GameEngine::ShaderDataType::Int4:
+		case ShaderDataType::Int4:
 			return GL_INT;
-		case GameEngine::ShaderDataType::Bool:
+		case ShaderDataType::Bool:
 			return GL_BOOL;
 		}
 
@@ -40,26 +40,36 @@ namespace GameEngine {
 
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
+		GE_PROFILE_FUNCTION();
+
 		glCreateVertexArrays(1, &rendererID);
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()
 	{
+		GE_PROFILE_FUNCTION();
+
 		glDeleteVertexArrays(1, &this->rendererID);
 	}
 
 	void OpenGLVertexArray::bind() const
 	{
+		GE_PROFILE_FUNCTION();
+
 		glBindVertexArray(this->rendererID);
 	}
 
 	void OpenGLVertexArray::unbind() const
 	{
+		GE_PROFILE_FUNCTION();
+
 		glBindVertexArray(0);
 	}
 
 	void OpenGLVertexArray::addVertexBuffer(const Ref<IVertexBuffer>& vertexBuffer)
 	{
+		GE_PROFILE_FUNCTION();
+
 		GE_CORE_ASSERT(vertexBuffer->getLayout().getElements().size(), "Vertex Buffer has no layout!");
 
 		glBindVertexArray(this->rendererID);
@@ -85,6 +95,8 @@ namespace GameEngine {
 
 	void OpenGLVertexArray::setIndexBuffer(const Ref<IIndexBuffer>& indexBuffer)
 	{
+		GE_PROFILE_FUNCTION();
+
 		glBindVertexArray(this->rendererID);
 		indexBuffer->bind();
 

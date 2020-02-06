@@ -4,7 +4,7 @@
 
 namespace GameEngine {
 
-	class GE_API OrtographicCamera : public Camera
+	class OrtographicCamera : public Camera
 	{
 	public:
 		OrtographicCamera(float aspectRatio, glm::vec3 position);

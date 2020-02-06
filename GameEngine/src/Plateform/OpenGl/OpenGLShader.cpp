@@ -1,5 +1,5 @@
 #include "hzpch.h"
-#include "OpenGLShader.h"
+#include "Plateform/OpenGl/OpenGLShader.h"
 
 #include <fstream>
 #include <glad/glad.h>
@@ -23,6 +23,8 @@ namespace GameEngine {
 	OpenGLShader::OpenGLShader(const std::string&  name, const std::string& vertexSrc, const std::string& fragmentSrc)
 		: name(name)
 	{
+		GE_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSrc;
 		sources[GL_FRAGMENT_SHADER] = fragmentSrc;
@@ -32,6 +34,8 @@ namespace GameEngine {
 
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& path)
 	{
+		GE_PROFILE_FUNCTION();
+
 		std::string source = this->readFile(path);
 		auto shaderSources = preProcess(source);
 
@@ -47,6 +51,8 @@ namespace GameEngine {
 	}
 	OpenGLShader::OpenGLShader(const std::string& path)
 	{
+		GE_PROFILE_FUNCTION();
+
 		std::string source = this->readFile(path);
 		auto shaderSources = preProcess(source);
 
@@ -63,21 +69,33 @@ namespace GameEngine {
 
 	OpenGLShader::~OpenGLShader()
 	{
+		GE_PROFILE_FUNCTION();
+
 		glDeleteProgram(rendererID);
 	}
 
 	//UTILS
 	std::string OpenGLShader::readFile(const std::string& path)
 	{
+		GE_PROFILE_FUNCTION();
+
 		std::string result;
 		std::ifstream in(path, std::ios::in | std::ios::binary);
 		if (in)
 		{
 			in.seekg(0, std::ios::end);
-			result.resize(in.tellg());
-			in.seekg(0, std::ios::beg);
-			in.read(&result[0], result.size());
-			in.close();
+			size_t size = in.tellg();
+			if (size != -1)
+			{
+				result.resize(size);
+				in.seekg(0, std::ios::beg);
+				in.read(&result[0], size);
+				in.close();
+			}
+			else
+			{
+				GE_CORE_ERROR("Could not read from file '{0}'", path);
+			}
 		}
 		else
 		{
@@ -88,6 +106,8 @@ namespace GameEngine {
 
 	std::unordered_map<GLenum, std::string> OpenGLShader::preProcess(const std::string& source)
 	{
+		GE_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> shaderSources;
 
 		const char* typeToken = "#type";
@@ -116,6 +136,8 @@ namespace GameEngine {
 
 	void OpenGLShader::compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
+		GE_PROFILE_FUNCTION();
+
 		GLuint program = glCreateProgram();
 		GE_CORE_ASSERT(shaderSources.size() <= 2, "Only support 2 shaders for now");
 		std::array<GLenum, 2> glShaderIDs;
@@ -199,34 +221,48 @@ namespace GameEngine {
 	// BINDING
 	void OpenGLShader::bind() const
 	{
+		GE_PROFILE_FUNCTION();
+
 		glUseProgram(rendererID);
 	}
 
 	void OpenGLShader::unbind() const
 	{
+		GE_PROFILE_FUNCTION();
+
 		glUseProgram(0);
 	}
 
 	// UNIFORMS
 	void OpenGLShader::setInt(const std::string& name, int value)
 	{
+		GE_PROFILE_FUNCTION();
+
 		this->uploadUniformInt(name, value);
 	}
 	void OpenGLShader::setFloat3(const std::string& name, const glm::vec3& value)
 	{
+		GE_PROFILE_FUNCTION();
+
 		this->uploadUniformFloat3(name, value);
 	}
 	void OpenGLShader::setFloat4(const std::string& name, const glm::vec4 & value)
 	{
+		GE_PROFILE_FUNCTION();
+
 		this->uploadUniformFloat4(name, value);
 	}
 	void OpenGLShader::setMat4(const std::string& name, const glm::mat4 & value)
 	{
+		GE_PROFILE_FUNCTION();
+
 		this->uploadUniformMat4(name, value);
 	}
 
 	uint32_t OpenGLShader::getUniformLocation(const std::string& name)  const
 	{
+		GE_PROFILE_FUNCTION();
+
 		if (this->uniformLocationCache.find(name) != this->uniformLocationCache.end())
 			return this->uniformLocationCache[name];
 

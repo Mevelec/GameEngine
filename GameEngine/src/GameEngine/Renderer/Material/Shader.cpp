@@ -1,7 +1,7 @@
 #include "hzpch.h"
-#include "Shader.h"
+#include "GameEngine/Renderer/Material/Shader.h"
 
-#include "../Renderer.h"
+#include "GameEngine/Renderer/Renderer.h"
 #include "Plateform/OpenGL/OpenGLShader.h"
 
 namespace GameEngine {
@@ -12,7 +12,7 @@ namespace GameEngine {
 		{
 			case RendererAPI::API::None:    
 				GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case RendererAPI::API::OpengGL:
+			case RendererAPI::API::OpenGL:
 				return CreateRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
 		}
 
@@ -26,7 +26,7 @@ namespace GameEngine {
 		{
 		case RendererAPI::API::None:
 			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpengGL:
+		case RendererAPI::API::OpenGL:
 			return CreateRef<OpenGLShader>(name, path);
 		}
 
@@ -40,7 +40,7 @@ namespace GameEngine {
 		{
 		case RendererAPI::API::None:
 			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpengGL:
+		case RendererAPI::API::OpenGL:
 			return CreateRef<OpenGLShader>(path);
 		}
 

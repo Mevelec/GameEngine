@@ -11,6 +11,8 @@ namespace GameEngine {
 
 	OpenGlVertexBuffer::OpenGlVertexBuffer(float* vertices, uint32_t size)
 	{
+		GE_PROFILE_FUNCTION();
+
 		glCreateBuffers(1, &this->rendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, this->rendererID);
 		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
@@ -18,16 +20,22 @@ namespace GameEngine {
 
 	OpenGlVertexBuffer::~OpenGlVertexBuffer()
 	{
+		GE_PROFILE_FUNCTION();
+
 		glDeleteBuffers(1, &this->rendererID);
 	}
 
 	void OpenGlVertexBuffer::bind() const
 	{
+		GE_PROFILE_FUNCTION();
+
 		glBindBuffer(GL_ARRAY_BUFFER, this->rendererID);
 	}
 
 	void OpenGlVertexBuffer::unbind() const
 	{
+		GE_PROFILE_FUNCTION();
+
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
@@ -37,6 +45,8 @@ namespace GameEngine {
 	OpenGlIndexBuffer::OpenGlIndexBuffer(uint32_t* indices, uint32_t count)
 		:count(count)
 	{
+		GE_PROFILE_FUNCTION();
+
 		glCreateBuffers(1, &this->rendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, this->rendererID);
 		glBufferData(GL_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
@@ -44,16 +54,22 @@ namespace GameEngine {
 
 	OpenGlIndexBuffer::~OpenGlIndexBuffer()
 	{
+		GE_PROFILE_FUNCTION();
+
 		glDeleteBuffers(1, &this->rendererID);
 	}
 
 	void OpenGlIndexBuffer::bind() const
 	{
+		GE_PROFILE_FUNCTION();
+
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->rendererID);
 	}
 
 	void OpenGlIndexBuffer::unbind() const
 	{
+		GE_PROFILE_FUNCTION();
+
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 }

@@ -1,11 +1,13 @@
 #include "hzpch.h"
-#include "OrtographicCamera.h"
+#include "GameEngine/Renderer/Camera/OrtographicCamera.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace GameEngine {
 	OrtographicCamera::OrtographicCamera(float aspectRatio, glm::vec3 position)
 	{
+		GE_PROFILE_FUNCTION();
+
 		this->aspectRatio = aspectRatio;
 		this->position = position;
 		this->up = glm::vec3(0, 1, 0);
@@ -19,6 +21,8 @@ namespace GameEngine {
 
 	OrtographicCamera::OrtographicCamera(float aspectRatio)
 	{
+		GE_PROFILE_FUNCTION();
+
 		this->aspectRatio = aspectRatio;
 		this->up = glm::vec3(0, 1, 0);
 
@@ -42,6 +46,7 @@ namespace GameEngine {
 
 	void OrtographicCamera::update()
 	{
+		GE_PROFILE_FUNCTION();
 
 		Camera::update();
 
