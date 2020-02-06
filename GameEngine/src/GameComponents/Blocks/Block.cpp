@@ -6,6 +6,8 @@
 namespace GameComponents {
 	BlockRegistery::BlockRegistery()
 	{
+		GE_PROFILE_FUNCTION();
+
 		//////// SQUARE ////////
 		this->cubeTransform.reset(new GameEngine::Transform());
 		//Vertex Array
@@ -95,6 +97,8 @@ namespace GameComponents {
 
 	void BlockRegistery::renderBlock(BlockType type, glm::vec3 position)
 	{
+		GE_PROFILE_FUNCTION();
+
 		if (type == BlockType::Stone)
 		{
 		this->cubeTransform->setPostion(position);
