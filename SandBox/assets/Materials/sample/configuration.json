@@ -24,6 +24,11 @@
         "path": "resources/uv_check.png",
         "slot": 0
       }
+    },
+    {
+      "name": "u_TilingFactor",
+      "type": "float",
+      "value": 1
     }
   ]
 }

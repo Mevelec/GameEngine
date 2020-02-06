@@ -64,7 +64,8 @@ namespace GameEngine {
 				|| std::is_same<T, Ref<Texture>>::value
 				|| std::is_same<T, glm::fvec3>::value
 				|| std::is_same<T, glm::fvec4>::value
-				|| std::is_same<T, glm::fmat4>::value,
+				|| std::is_same<T, glm::fmat4>::value
+				|| std::is_same<T, float>::value,
 				"MaterialComponent can not handle this type");
 			this->name = name; 
 			this->value = value; 

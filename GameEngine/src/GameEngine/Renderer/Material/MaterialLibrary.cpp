@@ -142,6 +142,13 @@ namespace GameEngine {
 					values["slot"].GetInt()
 				);
 			}
+			else if(type == "float")
+			{
+				material->addComponent(
+					object["name"].GetString(),
+					(float)(object["value"].GetDouble())
+				);
+			}
 			else
 			{
 				GE_ASSERT(false, "Material component type is unknow")

@@ -54,6 +54,16 @@ namespace GameEngine {
 		shader->setInt(this->name, this->value);
 	}
 	template<>
+	void MaterialComponentImpl<float>::bind(const Ref<Shader>& shader)
+	{
+		shader->setFloat(this->name, this->value);
+	}
+	template<>
+	void MaterialComponentImpl<glm::fvec2>::bind(const Ref<Shader>& shader)
+	{
+		shader->setFloat2(this->name, this->value);
+	}
+	template<>
 	void MaterialComponentImpl<glm::fvec3>::bind(const Ref<Shader>& shader)
 	{
 		shader->setFloat3(this->name, this->value);
@@ -68,4 +78,5 @@ namespace GameEngine {
 	{
 		shader->setMat4(this->name, this->value);
 	}
+
 }
