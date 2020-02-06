@@ -74,6 +74,7 @@ namespace GameComponents {
 		uint32_t whiteTextureData = 0xffffffff;
 		this->whiteTexture->setData(&whiteTextureData, sizeof(uint32_t));
 		mat->addComponent("u_Texture", this->whiteTexture, 0);
+		mat->addComponent("u_TilingFactor", 1);
 		this->materialLib.add(mat);
 
 		mat = GameEngine::CreateRef<GameEngine::Material>("stone", this->shaderLib.get("flat"));
@@ -105,7 +106,7 @@ namespace GameComponents {
 			this->cubeTransform->setScale(1.0f);
 
 			GameEngine::IRenderer::Submit(
-				this->materialLib.get("stone"),
+				this->materialLib.get("sample"),
 				this->cubeVA,
 				this->cubeTransform->getTransform()
 			);

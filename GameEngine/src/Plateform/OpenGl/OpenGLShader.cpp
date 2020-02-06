@@ -240,6 +240,18 @@ namespace GameEngine {
 
 		this->uploadUniformInt(name, value);
 	}
+	void OpenGLShader::setFloat(const std::string& name, const float& value)
+	{
+		GE_PROFILE_FUNCTION();
+
+		this->uploadUniformFloat(name, value);
+	}
+	void OpenGLShader::setFloat2(const std::string& name, const glm::vec2& value)
+	{
+		GE_PROFILE_FUNCTION();
+
+		this->uploadUniformFloat2(name, value);
+	}
 	void OpenGLShader::setFloat3(const std::string& name, const glm::vec3& value)
 	{
 		GE_PROFILE_FUNCTION();
