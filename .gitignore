@@ -371,3 +371,5 @@ bin-int/
 !Log*
 !vendor/bin/premake/
 !Debug/
+
+# SandBox

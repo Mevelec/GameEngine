@@ -10,15 +10,15 @@ extern GameEngine::Application* GameEngine::CreateApplication();
 int main(int argc, char** argv) {
 	GameEngine::Log::Init();
 
-	GE_PROFILE_BEGIN_SESSION("Startup", "HazelProfile-Startup.json");
+	GE_PROFILE_BEGIN_SESSION("Startup", "profiling/Startup.json");
 	auto app = GameEngine::CreateApplication();
 	GE_PROFILE_END_SESSION();
 
-	GE_PROFILE_BEGIN_SESSION("Runtime", "HazelProfile-Runtime.json");
+	GE_PROFILE_BEGIN_SESSION("Runtime", "profiling/Runtime.json");
 	app->run();
 	GE_PROFILE_END_SESSION();
 
-	GE_PROFILE_BEGIN_SESSION("Startup", "HazelProfile-Shutdown.json");
+	GE_PROFILE_BEGIN_SESSION("Startup", "profiling/Shutdown.json");
 	delete app;
 	GE_PROFILE_END_SESSION();
 }
