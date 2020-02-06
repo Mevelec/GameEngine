@@ -40,26 +40,36 @@ namespace GameEngine {
 
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
+		GE_PROFILE_FUNCTION();
+
 		glCreateVertexArrays(1, &rendererID);
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()
 	{
+		GE_PROFILE_FUNCTION();
+
 		glDeleteVertexArrays(1, &this->rendererID);
 	}
 
 	void OpenGLVertexArray::bind() const
 	{
+		GE_PROFILE_FUNCTION();
+
 		glBindVertexArray(this->rendererID);
 	}
 
 	void OpenGLVertexArray::unbind() const
 	{
+		GE_PROFILE_FUNCTION();
+
 		glBindVertexArray(0);
 	}
 
 	void OpenGLVertexArray::addVertexBuffer(const Ref<IVertexBuffer>& vertexBuffer)
 	{
+		GE_PROFILE_FUNCTION();
+
 		GE_CORE_ASSERT(vertexBuffer->getLayout().getElements().size(), "Vertex Buffer has no layout!");
 
 		glBindVertexArray(this->rendererID);
@@ -85,6 +95,8 @@ namespace GameEngine {
 
 	void OpenGLVertexArray::setIndexBuffer(const Ref<IIndexBuffer>& indexBuffer)
 	{
+		GE_PROFILE_FUNCTION();
+
 		glBindVertexArray(this->rendererID);
 		indexBuffer->bind();
 

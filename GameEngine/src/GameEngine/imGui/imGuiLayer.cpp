@@ -22,6 +22,8 @@ namespace GameEngine {
 
 	void ImGuiLayer::onAttach()
 	{
+		GE_PROFILE_FUNCTION();
+
 		// Setup ImGui context
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -55,6 +57,8 @@ namespace GameEngine {
 
 	void ImGuiLayer::onDetach()
 	{
+		GE_PROFILE_FUNCTION();
+
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
@@ -67,12 +71,16 @@ namespace GameEngine {
 	}
 
 	void ImGuiLayer::begin() {
+		GE_PROFILE_FUNCTION();
+
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 	}
 
 	void ImGuiLayer::end() {
+		GE_PROFILE_FUNCTION();
+
 		ImGuiIO& io = ImGui::GetIO();
 		Application& app = Application::get();
 		io.DisplaySize = ImVec2((float)app.GetWindow().getWidth(), (float)app.GetWindow().getHeight());

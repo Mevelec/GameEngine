@@ -14,11 +14,9 @@ namespace GameEngine {
 	void LayerStack::pushLayer(Layer* layer) {
 		this->layers.emplace(this->layers.begin() + this->layerInsertIndex, layer);
 		this->layerInsertIndex++;
-		layer->onAttach();
 	}
 	void LayerStack::pushOverlay(Layer* overlay) {
 		this->layers.emplace_back(overlay);
-		overlay->onAttach();
 	}
 	void LayerStack::popLayer(Layer* layer) {
 		auto it = std::find(this->layers.begin(), this->layers.end(), layer);

@@ -4,6 +4,8 @@
 #include <glad/glad.h>
 
 namespace GameEngine {
+
+
 	void OpenGLRendererAPI::init()
 	{
 		glEnable(GL_BLEND);

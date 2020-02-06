@@ -16,6 +16,8 @@ namespace GameEngine {
 
 	void OpenGLContext::init()
 	{
+		GE_PROFILE_FUNCTION();
+
 		glfwMakeContextCurrent(this->windowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		GE_CORE_ASSERT(status, "Failed to init GLlad!");
@@ -38,6 +40,8 @@ namespace GameEngine {
 
 	void OpenGLContext::swapBuffers()
 	{
+		GE_PROFILE_FUNCTION();
+
 		glfwSwapBuffers(this->windowHandle);
 	}
 }

@@ -15,19 +15,28 @@ namespace GameEngine {
 		GE_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
-	Scope<Window> Window::create(const WindowProps& props) {
+	Scope<Window> Window::create(const WindowProps& props) 
+	{
 		return CreateScope<WindowsWindow>(props);
 	}
 
-	WindowsWindow::WindowsWindow(const WindowProps& props) {
+	WindowsWindow::WindowsWindow(const WindowProps& props) 
+	{
+		GE_PROFILE_FUNCTION();
 		init(props);
 	}
 
-	WindowsWindow::~WindowsWindow() {
+	WindowsWindow::~WindowsWindow() 
+	{
+		GE_PROFILE_FUNCTION();
+
 		this->shutDown();
 	}
 
-	void WindowsWindow::init(const WindowProps& props) {
+	void WindowsWindow::init(const WindowProps& props) 
+	{
+		GE_PROFILE_FUNCTION();
+
 		this->data.title = props.title;
 		this->data.width = props.width;
 		this->data.height = props.height;
@@ -36,13 +45,20 @@ namespace GameEngine {
 
 		if (GLFWWindowCount == 0)
 		{
+			GE_PROFILE_SCOPE("glfwInit");
+
 			int succes = glfwInit();
 			GE_CORE_ASSERT(succes, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallBack);
 		}
 
-		this->window = glfwCreateWindow(this->data.width, this->data.height, this->data.title.c_str(), nullptr, nullptr);
-		GLFWWindowCount++;
+		{
+			GE_PROFILE_SCOPE("glfwCreateWindow");
+
+			this->window = glfwCreateWindow(this->data.width, this->data.height, this->data.title.c_str(), nullptr, nullptr);
+			GLFWWindowCount++;
+		}
+
 
 		this->context = GraphicsContext::Create(window);
 		this->context->init();
@@ -142,7 +158,10 @@ namespace GameEngine {
 		);
 	}
 
-	void WindowsWindow::shutDown() {
+	void WindowsWindow::shutDown() 
+	{
+		GE_PROFILE_FUNCTION();
+
 		glfwDestroyWindow(this->window);
 		--GLFWWindowCount;
 		if (GLFWWindowCount == 0)
@@ -151,13 +170,19 @@ namespace GameEngine {
 		}
 	}
 
-	void WindowsWindow::onUpdate() {
+	void WindowsWindow::onUpdate() 
+	{
+		GE_PROFILE_FUNCTION();
+
 		glfwPollEvents();
 
 		this->context->swapBuffers();
 	}
 
-	void WindowsWindow::setVSync(bool enabled) {
+	void WindowsWindow::setVSync(bool enabled) 
+	{
+		GE_PROFILE_FUNCTION();
+
 		if (enabled) {
 			glfwSwapInterval(1);
 		}
