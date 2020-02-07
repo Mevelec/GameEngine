@@ -20,6 +20,9 @@
 #include "GameComponents/Tiles/Tile.h"
 #include "GameComponents/Chunk/Chunk.h"
 
+//-- Geometry -------------------------
+#include "GameEngine/Renderer/Geometry/Geometry.h"
+
 // -- Time -----------------------------
 #include "GameEngine/Core/TimeStep.h"
 
