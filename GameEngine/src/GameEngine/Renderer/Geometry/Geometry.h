@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 #include "GameEngine/Renderer/Buffer/Buffer.h"
 #include "GameEngine/Renderer/Buffer/VertexArray.h"
 
@@ -8,10 +10,31 @@ namespace GameEngine {
 	class Geometry
 	{
 	public:
-		virtual const Ref<VertexArray>& getVertexArray() = 0;
+		virtual float* getVertices() { return this->vertices; };
+		virtual float* getVertices(glm::vec3 position) { return this->vertices; };
+
+		virtual const uint32_t getVerticesSize() { return sizeof(this->verticesSize); };
+
+		virtual uint32_t* getIndices() { return this->indices; };
+		virtual const uint32_t getIndicesSize() { return sizeof( this->indicesSize); };
+
+	protected:
+		float* vertices;
+		uint32_t verticesSize;
+		uint32_t* indices;
+		uint32_t indicesSize;
+
+	};
+
+	class DynamicGeometry
+	{
+	public:
+		virtual const Ref<VertexArray>& getVertexArray() { return this->VA; };
 
 	protected:
 		Ref<VertexArray> VA;
+
+		float* vertices;
 	};
 
 	class Square : public Geometry
@@ -20,68 +43,47 @@ namespace GameEngine {
 		Square()
 		{
 			// VertexArray
-			this->VA = VertexArray::Create();
-			float squareVertices[3 * 4] = {
+			this->verticesSize = 4 * 3;
+			float tempVertices[4*3] = {
 				-0.5, -0.5f, 0.0f,
 				 0.5, -0.5f, 0.0f,
-				 0.5,  0.5f, 0.0f, 
+				 0.5,  0.5f, 0.0f,
 				-0.5,  0.5f, 0.0f,
 			};
-
-			// VertexBuffer
-			Ref<IVertexBuffer> VB = GameEngine::IVertexBuffer::Create(squareVertices, sizeof(squareVertices));
-			BufferLayout squareLayout = {
-				{ GameEngine::ShaderDataType::Float3, "a_Position"},
-			};
-			VB->setLayout(squareLayout);
-			this->VA->addVertexBuffer(VB);
-
-			// IndexBuffer
+			this->vertices = tempVertices;
 			//Index Buffer
-			unsigned int squareIndices[2 * 3] = {
+			this->indicesSize = 2 * 3;
+			uint32_t tempIndices[2*3] = {
 				0, 1, 2,
 				2, 3, 0,
 			};
-			Ref<IIndexBuffer> IB = IIndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
-			this->VA->setIndexBuffer(IB);
-		}
-
-		virtual const Ref<VertexArray>& getVertexArray() override
-		{
-			return this->VA;
+			this->indices = tempIndices;
 		}
 	};
 
 	class Cube : public Geometry
 	{
 	public:
-		Cube()
+		Cube(glm::vec3 position = { 0.0f, 0.0f, 0.0f })
 		{
 			// VertexArray
-			this->VA = VertexArray::Create();
-			float squareVertices[6 * 4] = {
-				-0.5, -0.5f, -0.5f,
-				 0.5, -0.5f, -0.5f,
-				 0.5,  0.5f, -0.5f,
-				-0.5,  0.5f, -0.5f,
+			this->verticesSize = 3 * 8;
+			float tempVertices[3 * 8] = {
+				-0.5 + position.x, -0.5f + position.y, -0.5f + position.z,
+				 0.5 + position.x, -0.5f + position.y, -0.5f + position.z,
+				 0.5 + position.x,  0.5f + position.y, -0.5f + position.z,
+				-0.5 + position.x,  0.5f + position.y, -0.5f + position.z,
 
-				-0.5, -0.5f,  0.5f,
-				 0.5, -0.5f,  0.5f,
-				 0.5,  0.5f,  0.5f,
-				-0.5,  0.5f,  0.5f,
+				-0.5 + position.x, -0.5f + position.y,  0.5f + position.z,
+				 0.5 + position.x, -0.5f + position.y,  0.5f + position.z,
+				 0.5 + position.x,  0.5f + position.y,  0.5f + position.z,
+				-0.5 + position.x,  0.5f + position.y,  0.5f + position.z,
 			};
+			this->vertices = tempVertices;
 
-			// VertexBuffer
-			Ref<IVertexBuffer> VB = GameEngine::IVertexBuffer::Create(squareVertices, sizeof(squareVertices));
-			BufferLayout squareLayout = {
-				{ GameEngine::ShaderDataType::Float3, "a_Position"},
-			};
-			VB->setLayout(squareLayout);
-			this->VA->addVertexBuffer(VB);
-
-			// IndexBuffer
 			//Index Buffer
-			unsigned int squareIndices[12 * 3] = {
+			this->indicesSize = 12 * 3;
+			uint32_t tempIndices[12 * 3] = {
 				0, 1, 2,
 				2, 3, 0,
 
@@ -100,13 +102,7 @@ namespace GameEngine {
 				5, 1, 2,
 				2, 6, 5,
 			};
-			Ref<IIndexBuffer> IB = IIndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
-			this->VA->setIndexBuffer(IB);
-		}
-
-		virtual const Ref<VertexArray>& getVertexArray() override
-		{
-			return this->VA;
+			this->indices = tempIndices;
 		}
 	};
 }

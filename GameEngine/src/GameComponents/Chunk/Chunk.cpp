@@ -1,6 +1,7 @@
 #include "hzpch.h"
 
 #include "OcTree/SVO/OcTreeDefault.h"
+#include "GameEngine/Renderer/Renderer.h"
 
 #include "Chunk.h"
 
@@ -25,8 +26,51 @@ namespace GameComponents {
 			}
 		}
 		chunk->set(GameComponents::BlockType::Stone, 0, 0, 0);
-//ocTree->setNode(Blocks::BlockType::Stone, 9, 9, 0, 1);
-//ocTree->setNode(Blocks::BlockType::Dirt, 10, 10, 0, 1);
+
+		this->generateVA();
+
+		// SHADERS
+		this->shaderLib.load("flat", "assets/shaders/FlatColor.glsl");
+
+		// MATERIALS
+		GameEngine::Ref<GameEngine::Material> mat;
+
+		mat = GameEngine::MaterialParser::getInstance().loadJson("assets/Materials/sample/configuration.json");
+		this->materialLib.add("sample", mat);
+
+		mat = GameEngine::CreateRef<GameEngine::Material>("flat", this->shaderLib.get("flat"));
+		mat->addComponent("u_Color", glm::vec3(50, 50, 50) / glm::vec3(255));
+		this->materialLib.add(mat);
+	}
+
+	bool Chunk::generateVA()
+	{
+		GE_PROFILE_FUNCTION();
+
+		// VertexBuffer
+		GameEngine::Geometry square = GameEngine::Cube();
+		GameEngine::Ref<GameEngine::IVertexBuffer> VB = GameEngine::IVertexBuffer::Create(square.getVertices(), square.getVerticesSize());
+		GameEngine::BufferLayout squareLayout = {
+			{ GameEngine::ShaderDataType::Float3, "a_Position"},
+		};
+		VB->setLayout(squareLayout);
+		this->VA = GameEngine::VertexArray::Create();
+		this->VA->addVertexBuffer(VB);
+
+		GameEngine::Ref<GameEngine::IIndexBuffer> IB = GameEngine::IIndexBuffer::Create(square.getIndices(), square.getIndicesSize() / sizeof(uint32_t));
+		this->VA->setIndexBuffer(IB);
+
+		for (int x = 0; x <= chunk->getWidth() - 1; x++)
+		{
+			for (int z = 0; z <= chunk->getWidth() - 1; z++)
+			{
+				for (int y = 0; y <= chunk->getWidth() - 1; y++)
+				{
+
+				}
+			}
+		}
+		return true;
 	}
 
 	BlockType& Chunk::get(int posx, int posy, int posz) {
@@ -43,6 +87,12 @@ namespace GameComponents {
 	void Chunk::render()
 	{
 		GE_PROFILE_FUNCTION();
+		GameEngine::IRenderer::Submit(
+			this->materialLib.get("flat"),
+			this->VA
+		);
+		
+		/*GE_PROFILE_FUNCTION();
 
 		for (int x = 0; x <= chunk->getWidth() - 1; x++)
 		{
@@ -55,6 +105,7 @@ namespace GameComponents {
 					GameComponents::BlockRegistery::getInstance().renderBlock(chunk->get(x, y, z), glm::vec3(x * 2, y * 2, z * 2));
 				}
 			}
-		}
+		}*/
+		
 	}
 }

@@ -31,6 +31,7 @@ namespace GameComponents {
 
 	void BlockRegistery::renderBlock(BlockType type, glm::vec3 position)
 	{
+		/*
 		GE_PROFILE_FUNCTION();
 
 		if (type == BlockType::Stone)
@@ -69,5 +70,6 @@ namespace GameComponents {
 			);
 			return;
 		}
+		*/
 	}
 }
