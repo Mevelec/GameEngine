@@ -48,16 +48,19 @@ namespace GameComponents {
 		GE_PROFILE_FUNCTION();
 
 		// VertexBuffer
-		GameEngine::Geometry square = GameEngine::Cube();
-		GameEngine::Ref<GameEngine::IVertexBuffer> VB = GameEngine::IVertexBuffer::Create(square.getVertices(), square.getVerticesSize());
+		cube = GameEngine::CreateScope<GameEngine::Cube>();
+
+		GameEngine::Ref<GameEngine::IVertexBuffer> VB = GameEngine::IVertexBuffer::Create(cube->getVertices(), cube->getVerticesSize());
 		GameEngine::BufferLayout squareLayout = {
 			{ GameEngine::ShaderDataType::Float3, "a_Position"},
 		};
 		VB->setLayout(squareLayout);
+
 		this->VA = GameEngine::VertexArray::Create();
 		this->VA->addVertexBuffer(VB);
 
-		GameEngine::Ref<GameEngine::IIndexBuffer> IB = GameEngine::IIndexBuffer::Create(square.getIndices(), square.getIndicesSize() / sizeof(uint32_t));
+		auto a = cube->getIndices();
+		GameEngine::Ref<GameEngine::IIndexBuffer> IB = GameEngine::IIndexBuffer::Create(cube->getIndices(), cube->getIndicesSize() / sizeof(uint32_t));
 		this->VA->setIndexBuffer(IB);
 
 		for (int x = 0; x <= chunk->getWidth() - 1; x++)

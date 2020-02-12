@@ -10,18 +10,14 @@ namespace GameEngine {
 	class Geometry
 	{
 	public:
-		virtual float* getVertices() { return this->vertices; };
-		virtual float* getVertices(glm::vec3 position) { return this->vertices; };
+		virtual float* getVertices(glm::vec3 position = glm::vec3(0.0f)) = 0;
+		virtual const uint32_t getVerticesSize() { return this->verticesSize; };
 
-		virtual const uint32_t getVerticesSize() { return sizeof(this->verticesSize); };
-
-		virtual uint32_t* getIndices() { return this->indices; };
-		virtual const uint32_t getIndicesSize() { return sizeof( this->indicesSize); };
+		virtual uint32_t* getIndices() = 0;
+		virtual const uint32_t getIndicesSize() { return this->indicesSize; };
 
 	protected:
-		float* vertices;
 		uint32_t verticesSize;
-		uint32_t* indices;
 		uint32_t indicesSize;
 
 	};
@@ -39,51 +35,47 @@ namespace GameEngine {
 
 	class Square : public Geometry
 	{
-	public:
-		Square()
-		{
-			// VertexArray
-			this->verticesSize = 4 * 3;
-			float tempVertices[4*3] = {
+	private:
+		float vertices[4 * 3] = {
 				-0.5, -0.5f, 0.0f,
 				 0.5, -0.5f, 0.0f,
 				 0.5,  0.5f, 0.0f,
 				-0.5,  0.5f, 0.0f,
-			};
-			this->vertices = tempVertices;
-			//Index Buffer
-			this->indicesSize = 2 * 3;
-			uint32_t tempIndices[2*3] = {
+		};;
+		uint32_t indices[2 * 3] = {
 				0, 1, 2,
 				2, 3, 0,
-			};
-			this->indices = tempIndices;
+		};
+	public:
+		Square()
+		{
+			this->verticesSize = sizeof(this->vertices);
+			this->indicesSize =sizeof(this->indices);
 		}
+
+		virtual float* getVertices(glm::vec3 position = glm::vec3(0.0f)) override {
+			return this->vertices;
+		}
+		virtual uint32_t* getIndices() override {
+			return this->indices;
+		}
+
 	};
 
 	class Cube : public Geometry
 	{
-	public:
-		Cube(glm::vec3 position = { 0.0f, 0.0f, 0.0f })
-		{
-			// VertexArray
-			this->verticesSize = 3 * 8;
-			float tempVertices[3 * 8] = {
-				-0.5 + position.x, -0.5f + position.y, -0.5f + position.z,
-				 0.5 + position.x, -0.5f + position.y, -0.5f + position.z,
-				 0.5 + position.x,  0.5f + position.y, -0.5f + position.z,
-				-0.5 + position.x,  0.5f + position.y, -0.5f + position.z,
-
-				-0.5 + position.x, -0.5f + position.y,  0.5f + position.z,
-				 0.5 + position.x, -0.5f + position.y,  0.5f + position.z,
-				 0.5 + position.x,  0.5f + position.y,  0.5f + position.z,
-				-0.5 + position.x,  0.5f + position.y,  0.5f + position.z,
-			};
-			this->vertices = tempVertices;
-
-			//Index Buffer
-			this->indicesSize = 12 * 3;
-			uint32_t tempIndices[12 * 3] = {
+	private:
+		float vertices[3 * 8] = {
+				-0.5, -0.5f, -0.5f,
+				 0.5, -0.5f, -0.5f,
+				 0.5,  0.5f, -0.5f,
+				-0.5,  0.5f, -0.5f,
+				-0.5, -0.5f,  0.5f,
+				 0.5, -0.5f,  0.5f,
+				 0.5,  0.5f,  0.5f,
+				-0.5,  0.5f,  0.5f,
+		};
+		uint32_t indices[12 * 3] = {
 				0, 1, 2,
 				2, 3, 0,
 
@@ -101,8 +93,18 @@ namespace GameEngine {
 
 				5, 1, 2,
 				2, 6, 5,
-			};
-			this->indices = tempIndices;
+		};
+	public:
+		Cube()
+		{
+			this->verticesSize = sizeof(this->vertices);
+			this->indicesSize = sizeof(this->indices);
+		}
+		virtual float* getVertices(glm::vec3 position = glm::vec3(0.0f)) override {
+			return this->vertices;
+		}
+		virtual uint32_t* getIndices() override {
+			return this->indices;
 		}
 	};
 }

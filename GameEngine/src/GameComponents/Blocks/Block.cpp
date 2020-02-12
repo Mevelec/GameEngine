@@ -10,7 +10,7 @@ namespace GameComponents {
 
 		this->cubeTransform.reset(new GameEngine::Transform());
 
-		this->cube = GameEngine::CreateRef<GameEngine::Cube>();
+		//this->cube = GameEngine::CreateRef<GameEngine::Cube>();
 
 		// SHADERS
 		this->shaderLib.load("flat", "assets/shaders/FlatColor.glsl");

@@ -19,7 +19,7 @@ namespace GameComponents {
 		bool generateVA();
 	private:
 		GameEngine::Scope<OcTree::Octree<BlockType>> chunk;
-
+		GameEngine::Scope<GameEngine::Geometry> cube;
 		GameEngine::Ref<GameEngine::VertexArray> VA;
 
 		GameEngine::ShaderLibrary shaderLib;
