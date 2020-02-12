@@ -49,19 +49,14 @@ namespace GameComponents {
 
 		// VertexBuffer
 		cube = GameEngine::CreateScope<GameEngine::Cube>();
+		GameEngine::Scope<GameEngine::DynamicGeometry> a = GameEngine::CreateScope<GameEngine::DynamicGeometry>();
+		
+		a->addVertices(cube->getVertices(), cube->getVerticesSize() / sizeof(float));
+		a->addIndices(cube->getIndices(), cube->getIndicesSize() / sizeof(uint32_t));
 
-		GameEngine::Ref<GameEngine::IVertexBuffer> VB = GameEngine::IVertexBuffer::Create(cube->getVertices(), cube->getVerticesSize());
-		GameEngine::BufferLayout squareLayout = {
-			{ GameEngine::ShaderDataType::Float3, "a_Position"},
-		};
-		VB->setLayout(squareLayout);
+		a->createVA();
+		this->VA = a->getVA();
 
-		this->VA = GameEngine::VertexArray::Create();
-		this->VA->addVertexBuffer(VB);
-
-		auto a = cube->getIndices();
-		GameEngine::Ref<GameEngine::IIndexBuffer> IB = GameEngine::IIndexBuffer::Create(cube->getIndices(), cube->getIndicesSize() / sizeof(uint32_t));
-		this->VA->setIndexBuffer(IB);
 
 		for (int x = 0; x <= chunk->getWidth() - 1; x++)
 		{

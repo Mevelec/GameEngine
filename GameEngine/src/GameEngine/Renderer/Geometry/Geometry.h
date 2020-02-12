@@ -1,6 +1,8 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <array>
+#include <vector>
 
 #include "GameEngine/Renderer/Buffer/Buffer.h"
 #include "GameEngine/Renderer/Buffer/VertexArray.h"
@@ -22,15 +24,70 @@ namespace GameEngine {
 
 	};
 
-	class DynamicGeometry
+	class DynamicGeometry : Geometry
 	{
 	public:
-		virtual const Ref<VertexArray>& getVertexArray() { return this->VA; };
+		DynamicGeometry()
+		{
+			this->vertices = std::vector<float>();
+			this->indices  = std::vector<uint32_t>();
+
+			this->update();
+		}
+
+		void update()
+		{
+			this->verticesSize = sizeof(float) * this->vertices.size();
+			this->indicesSize = sizeof(uint32_t) * this->indices.size();
+		}
+
+		virtual float* getVertices(glm::vec3 position = glm::vec3(0.0f)) override {
+			return &this->vertices[0];
+		}
+		virtual uint32_t* getIndices() override {
+			return &this->indices[0];
+		}
+
+		void addVertices(float* vertices, uint32_t size)
+		{
+			for (uint32_t it = 0; it < size; it += 1)
+			{
+				this->vertices.push_back(vertices[it]);
+			}
+			this->update();
+		}
+		void addIndices(uint32_t* indices, uint32_t size)
+		{
+			for (uint32_t it = 0; it < size; it += 1)
+			{
+				this->indices.push_back(indices[it]);
+			}
+			this->update();
+		}
+
+		void createVA()
+		{
+			GameEngine::Ref<GameEngine::IVertexBuffer> VB = GameEngine::IVertexBuffer::Create(this->getVertices(), this->getVerticesSize());
+			GameEngine::BufferLayout squareLayout = {
+				{ GameEngine::ShaderDataType::Float3, "a_Position"},
+			};
+			VB->setLayout(squareLayout);
+
+			this->VA = GameEngine::VertexArray::Create();
+			this->VA->addVertexBuffer(VB);
+
+			GameEngine::Ref<GameEngine::IIndexBuffer> IB = GameEngine::IIndexBuffer::Create(this->getIndices(), this->getIndicesSize() / sizeof(uint32_t));
+			this->VA->setIndexBuffer(IB);
+		}
+
+		GameEngine::Ref<GameEngine::VertexArray> getVA() { return this->VA; }
 
 	protected:
-		Ref<VertexArray> VA;
+		bool toGenerate = false;
+		GameEngine::Ref<GameEngine::VertexArray> VA;
 
-		float* vertices;
+		std::vector<float> vertices;
+		std::vector<uint32_t> indices;
 	};
 
 	class Square : public Geometry
