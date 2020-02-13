@@ -48,20 +48,20 @@ namespace GameEngine {
 			return &this->indices[0];
 		}
 
-		void addVertices(float* vertices, uint32_t size)
+		void add(float* vertices, uint32_t sizeV, uint32_t* indices, uint32_t sizeI)
 		{
-			for (uint32_t it = 0; it < size; it += 1)
+
+			int offsetI = this->verticesSize / sizeof(float) / 3;
+			for (uint32_t it = 0; it < sizeI; it += 1)
+			{
+				this->indices.push_back(indices[it] + offsetI);
+			}
+
+			for (uint32_t it = 0; it < sizeV; it += 1)
 			{
 				this->vertices.push_back(vertices[it]);
 			}
-			this->update();
-		}
-		void addIndices(uint32_t* indices, uint32_t size)
-		{
-			for (uint32_t it = 0; it < size; it += 1)
-			{
-				this->indices.push_back(indices[it]);
-			}
+
 			this->update();
 		}
 
@@ -93,7 +93,7 @@ namespace GameEngine {
 	class Square : public Geometry
 	{
 	private:
-		float vertices[4 * 3] = {
+		float verticesRef[4 * 3] = {
 				-0.5, -0.5f, 0.0f,
 				 0.5, -0.5f, 0.0f,
 				 0.5,  0.5f, 0.0f,
@@ -103,15 +103,30 @@ namespace GameEngine {
 				0, 1, 2,
 				2, 3, 0,
 		};
+
+		std::vector<float> vertices;
+
 	public:
 		Square()
 		{
-			this->verticesSize = sizeof(this->vertices);
-			this->indicesSize =sizeof(this->indices);
+			this->verticesSize = sizeof(this->verticesRef);
+			this->indicesSize = sizeof(this->indices);
+
+			this->vertices = std::vector<float>(this->verticesRef, this->verticesRef + this->verticesSize / sizeof(float));
 		}
 
 		virtual float* getVertices(glm::vec3 position = glm::vec3(0.0f)) override {
-			return this->vertices;
+			if (position.x == 0 && position.y == 0 && position.z == 0)
+				return this->verticesRef;
+
+			for (int i = 0; i < this->vertices.capacity() - 1; i += 3)
+			{
+				float a = this->verticesRef[i + 0] + position.x;
+				this->vertices.at(i + 0) = this->verticesRef[i + 0] + position.x;
+				this->vertices.at(i + 1) = this->verticesRef[i + 1] + position.y;
+				this->vertices.at(i + 2) = this->verticesRef[i + 2] + position.z;
+			}
+			return &this->vertices[0];
 		}
 		virtual uint32_t* getIndices() override {
 			return this->indices;
@@ -122,7 +137,7 @@ namespace GameEngine {
 	class Cube : public Geometry
 	{
 	private:
-		float vertices[3 * 8] = {
+		float verticesRef[3 * 8] = {
 				-0.5, -0.5f, -0.5f,
 				 0.5, -0.5f, -0.5f,
 				 0.5,  0.5f, -0.5f,
@@ -151,14 +166,29 @@ namespace GameEngine {
 				5, 1, 2,
 				2, 6, 5,
 		};
+
+		std::vector<float> vertices;
 	public:
 		Cube()
 		{
-			this->verticesSize = sizeof(this->vertices);
+			this->verticesSize = sizeof(this->verticesRef);
 			this->indicesSize = sizeof(this->indices);
+
+			this->vertices = std::vector<float>(this->verticesRef, this->verticesRef + this->verticesSize / sizeof(float));
 		}
+
 		virtual float* getVertices(glm::vec3 position = glm::vec3(0.0f)) override {
-			return this->vertices;
+			if (position.x == 0 && position.y == 0 && position.z == 0)
+				return this->verticesRef;
+
+			for (int i = 0; i < this->vertices.capacity()-1; i += 3)
+			{
+				float a = this->verticesRef[i + 0] + position.x;
+				this->vertices.at(i + 0) = this->verticesRef[i + 0] + position.x;
+				this->vertices.at(i + 1) = this->verticesRef[i + 1] + position.y;
+				this->vertices.at(i + 2) = this->verticesRef[i + 2] + position.z;
+			}
+			return &this->vertices[0];
 		}
 		virtual uint32_t* getIndices() override {
 			return this->indices;

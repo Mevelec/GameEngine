@@ -50,13 +50,6 @@ namespace GameComponents {
 		// VertexBuffer
 		cube = GameEngine::CreateScope<GameEngine::Cube>();
 		GameEngine::Scope<GameEngine::DynamicGeometry> a = GameEngine::CreateScope<GameEngine::DynamicGeometry>();
-		
-		a->addVertices(cube->getVertices(), cube->getVerticesSize() / sizeof(float));
-		a->addIndices(cube->getIndices(), cube->getIndicesSize() / sizeof(uint32_t));
-
-		a->createVA();
-		this->VA = a->getVA();
-
 
 		for (int x = 0; x <= chunk->getWidth() - 1; x++)
 		{
@@ -64,10 +57,16 @@ namespace GameComponents {
 			{
 				for (int y = 0; y <= chunk->getWidth() - 1; y++)
 				{
-
+					a->add(
+						cube->getVertices(glm::vec3(x, y, z)), cube->getVerticesSize() / sizeof(float),
+						cube->getIndices(), cube->getIndicesSize() / sizeof(uint32_t)
+					);
 				}
 			}
 		}
+
+		a->createVA();
+		this->VA = a->getVA();
 		return true;
 	}
 
