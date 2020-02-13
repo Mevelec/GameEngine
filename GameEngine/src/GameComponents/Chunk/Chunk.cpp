@@ -84,6 +84,7 @@ namespace GameComponents {
 	void Chunk::render()
 	{
 		GE_PROFILE_FUNCTION();
+
 		GameEngine::IRenderer::Submit(
 			this->materialLib.get("flat"),
 			this->VA
