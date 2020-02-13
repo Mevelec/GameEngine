@@ -1,0 +1,11 @@
+Rendering Chunck
+
+method :
+
+chunck is octree with leafs only as block
+
+create VA by iterating over all setted blocks and adding vertex and index data together
+
+1 Chunk = 1 draw call
+bigger VA
+do not handle materials (only vertex pos)

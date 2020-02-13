@@ -1,0 +1,11 @@
+Rendering Chunck
+
+method :
+
+chunck is octree with leafs only as block
+
+iterate over octree and render a block at position with determinded material
+
+1 block = 1 draw call
+share vertex data
+move block wit u_Transform in shader
