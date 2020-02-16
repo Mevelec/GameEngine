@@ -2,6 +2,7 @@
 #include "GameEngine/Renderer/Material/Shader.h"
 #include "GameEngine/Renderer/Material/MaterialLibrary.h"
 #include "GameEngine/Renderer/Geometry/Geometry.h"
+#include "GameEngine/Renderer/Geometry/Primitives.h"
 
 #include "GameEngine/Core/Transform/Transform.h"
 

@@ -59,8 +59,7 @@ namespace GameComponents {
 				{
 					a->add(
 						cube->getVertices(glm::vec3(x, y, z)), cube->getVerticesSize() / sizeof(float),
-						cube->getIndices(), cube->getIndicesSize() / sizeof(uint32_t)
-					);
+						cube->getIndices(), cube->getIndicesSize() / sizeof(uint32_t)					);
 				}
 			}
 		}
