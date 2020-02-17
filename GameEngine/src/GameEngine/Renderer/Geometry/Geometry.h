@@ -26,7 +26,7 @@ namespace GameEngine {
 	class DynamicGeometry : Geometry
 	{
 	public:
-		DynamicGeometry();
+		DynamicGeometry(const GameEngine::BufferLayout& layout);
 
 		void update();
 
@@ -40,10 +40,10 @@ namespace GameEngine {
 		GameEngine::Ref<GameEngine::VertexArray> getVA();
 
 	protected:
-		bool toGenerate = false;
 		GameEngine::Ref<GameEngine::VertexArray> VA;
 
 		std::vector<float> vertices;
 		std::vector<uint32_t> indices;
+		GameEngine::BufferLayout layout;
 	};
 }

@@ -49,8 +49,13 @@ namespace GameComponents {
 
 		// VertexBuffer
 		cube = GameEngine::CreateScope<GameEngine::Cube>();
-		GameEngine::Scope<GameEngine::DynamicGeometry> a = GameEngine::CreateScope<GameEngine::DynamicGeometry>();
 
+		GameEngine::BufferLayout layout = {
+				{ GameEngine::ShaderDataType::Float3, "a_Position"},
+				{ GameEngine::ShaderDataType::Float3, "a_Color"},
+		};
+		GameEngine::Scope<GameEngine::DynamicGeometry> a = GameEngine::CreateScope<GameEngine::DynamicGeometry>(layout);
+		
 		for (int x = 0; x <= chunk->getWidth() - 1; x++)
 		{
 			for (int z = 0; z <= chunk->getWidth() - 1; z++)
@@ -58,8 +63,9 @@ namespace GameComponents {
 				for (int y = 0; y <= chunk->getWidth() - 1; y++)
 				{
 					a->add(
-						cube->getVertices(glm::vec3(x, y, z)), cube->getVerticesSize() / sizeof(float),
-						cube->getIndices(), cube->getIndicesSize() / sizeof(uint32_t)					);
+						cube->getVertices(glm::vec3(x, y, z)), cube->getVerticesSize(),
+						cube->getIndices(), cube->getIndicesSize() / sizeof(uint32_t)
+					);
 				}
 			}
 		}
