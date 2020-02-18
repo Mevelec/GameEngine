@@ -1,5 +1,7 @@
 #include "hzpch.h"
 
+#include <stdlib.h>
+
 #include "OcTree/SVO/OcTreeDefault.h"
 #include "GameEngine/Renderer/Renderer.h"
 
@@ -18,10 +20,14 @@ namespace GameComponents {
 			{
 				for (int y = 0; y <= chunk->getWidth() - 1; y++)
 				{
-					if (y > chunk->getWidth() - 2)
+					int seed = (y << 16 |x << z);
+
+					std::srand(seed);
+					bool rand = (std::rand() % 100) < 50;
+
+					if (rand)
 						chunk->set(GameComponents::BlockType::Grass, x, y, z);
-					else
-						chunk->set(GameComponents::BlockType::Dirt, x, y, z);
+
 				}
 			}
 		}
@@ -48,13 +54,7 @@ namespace GameComponents {
 		GE_PROFILE_FUNCTION();
 
 		// VertexBuffer
-		cube = GameEngine::CreateScope<GameEngine::Cube>();
-
-		GameEngine::BufferLayout layout = {
-				{ GameEngine::ShaderDataType::Float3, "a_Position"},
-				{ GameEngine::ShaderDataType::Float3, "a_Color"},
-		};
-		GameEngine::Scope<GameEngine::DynamicGeometry> a = GameEngine::CreateScope<GameEngine::DynamicGeometry>(layout);
+		GameEngine::Scope<GameEngine::DynamicGeometry> a = GameEngine::CreateScope<GameEngine::DynamicGeometry>();
 		
 		for (int x = 0; x <= chunk->getWidth() - 1; x++)
 		{
@@ -62,10 +62,14 @@ namespace GameComponents {
 			{
 				for (int y = 0; y <= chunk->getWidth() - 1; y++)
 				{
-					a->add(
-						cube->getVertices(glm::vec3(x, y, z)), cube->getVerticesSize(),
-						cube->getIndices(), cube->getIndicesSize() / sizeof(uint32_t)
-					);
+					auto ref = GameEngine::Cube::CreateCube(glm::fvec3( x, y, z ));
+					if (this->chunk->get( x, y, z ) == GameComponents::BlockType::Grass)
+					{
+						a->add(
+							&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
+							GameEngine::Cube::indices, GameEngine::Cube::iCount
+						);
+					}
 				}
 			}
 		}

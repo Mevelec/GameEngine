@@ -9,31 +9,35 @@
 
 namespace GameEngine {
 
+	struct Vertex
+	{
+		glm::vec3 position;
+		glm::vec4 color;
+		glm::vec2 texCoords;
+		float texId;
+	};
+
 	class Geometry
 	{
 	public:
-		virtual float* getVertices(glm::vec3 position = glm::vec3(0.0f)) = 0;
-		virtual const uint32_t getVerticesSize() { return this->verticesSize; };
-
+		virtual float* getVertices() = 0;
 		virtual uint32_t* getIndices() = 0;
-		virtual const uint32_t getIndicesSize() { return this->indicesSize; };
 
 	protected:
-		uint32_t verticesSize;
 		uint32_t indicesSize;
 	};
+
+
 
 	class DynamicGeometry : Geometry
 	{
 	public:
-		DynamicGeometry(const GameEngine::BufferLayout& layout);
+		DynamicGeometry();
 
-		void update();
-
-		virtual float* getVertices(glm::vec3 position = glm::vec3(0.0f)) override;
+		virtual float* getVertices() override;
 		virtual uint32_t* getIndices() override;
 
-		void add(float* vertices, uint32_t sizeV, uint32_t* indices, uint32_t sizeI);
+		void add(float* vertices, const uint32_t countV, const uint32_t vStride, const uint32_t* indices, const uint32_t countI);
 
 		void createVA();
 
@@ -44,6 +48,7 @@ namespace GameEngine {
 
 		std::vector<float> vertices;
 		std::vector<uint32_t> indices;
-		GameEngine::BufferLayout layout;
+
+		uint32_t verticesOffset = 0;
 	};
 }
