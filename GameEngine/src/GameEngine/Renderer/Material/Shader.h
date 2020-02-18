@@ -16,6 +16,7 @@ namespace GameEngine {
 		virtual void unbind() const = 0;
 		
 		virtual void setInt(const std::string& name, int value) = 0;
+		virtual void setSampler(const std::string& name, int* value, int size) = 0;
 		virtual void setFloat(const std::string& name, const float& value) = 0;
 		virtual void setFloat2(const std::string& name, const glm::vec2& value) = 0;
 		virtual void setFloat3(const std::string& name, const glm::vec3& value) = 0;

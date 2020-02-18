@@ -240,6 +240,12 @@ namespace GameEngine {
 
 		this->uploadUniformInt(name, value);
 	}
+	void OpenGLShader::setSampler(const std::string& name, int* value, int size)
+	{
+		GE_PROFILE_FUNCTION();
+
+		this->uploadUniformSampler(name, value, size);
+	}
 	void OpenGLShader::setFloat(const std::string& name, const float& value)
 	{
 		GE_PROFILE_FUNCTION();
@@ -293,6 +299,12 @@ namespace GameEngine {
 	{
 		GLint location = getUniformLocation(name);
 		glUniform1i(location, value);
+	}
+
+	void OpenGLShader::uploadUniformSampler(const std::string& name, int* value, int size)
+	{
+		GLint location = getUniformLocation(name);
+		glUniform1iv(location, size, value);
 	}
 
 	void OpenGLShader::uploadUniformFloat(const std::string& name, float value)

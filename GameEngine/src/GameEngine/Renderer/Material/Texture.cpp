@@ -40,4 +40,39 @@ namespace GameEngine {
 		GE_CORE_ASSERT(false, "RendererAPI::Something went wrong!")
 			return nullptr;
 	}
+
+	Ref<Sampler> Sampler::Create(std::vector<Ref<Texture>> textures)
+	{
+		switch (IRenderer::GetAPI())
+		{
+		case RendererAPI::API::None:
+			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
+			return nullptr;
+		case RendererAPI::API::OpenGL:
+			return CreateRef<OpenGLSampler>(textures);
+		default:
+			GE_CORE_ASSERT(false, "RendererAPI::Unknow renderAPI")
+				break;
+		}
+
+		GE_CORE_ASSERT(false, "RendererAPI::Something went wrong!")
+			return nullptr;
+	}
+	Ref<Sampler> Sampler::Create()
+	{
+		switch (IRenderer::GetAPI())
+		{
+		case RendererAPI::API::None:
+			GE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
+			return nullptr;
+		case RendererAPI::API::OpenGL:
+			return CreateRef<OpenGLSampler>();
+		default:
+			GE_CORE_ASSERT(false, "RendererAPI::Unknow renderAPI")
+				break;
+		}
+
+		GE_CORE_ASSERT(false, "RendererAPI::Something went wrong!")
+			return nullptr;
+	}
 }

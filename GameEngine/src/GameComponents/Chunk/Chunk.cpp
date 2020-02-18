@@ -36,7 +36,7 @@ namespace GameComponents {
 		this->generateVA();
 
 		// SHADERS
-		this->shaderLib.load("flat", "assets/shaders/FlatColor.glsl");
+		this->shaderLib.load("flat", "assets/shaders/Default.glsl");
 
 		// MATERIALS
 		GameEngine::Ref<GameEngine::Material> mat;
@@ -45,7 +45,21 @@ namespace GameComponents {
 		this->materialLib.add("sample", mat);
 
 		mat = GameEngine::CreateRef<GameEngine::Material>("flat", this->shaderLib.get("flat"));
-		mat->addComponent("u_Color", glm::vec3(50, 50, 50) / glm::vec3(255));
+		mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
+		mat->addComponent("u_TilingFactor", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
+		mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
+
+		GameEngine::Ref<GameEngine::Texture> uv_texture = GameEngine::Texture2D::Create("assets/textures/uv_check.png");
+		GameEngine::Ref<GameEngine::Texture> tex = GameEngine::Texture2D::Create("assets/textures/disney.png");
+
+		GameEngine::Ref<GameEngine::Sampler> sampler = GameEngine::Sampler::Create();
+		sampler->add(uv_texture, 0);
+		sampler->add(tex, 1);
+
+		mat->addComponent("u_Textures", sampler);
+
+		//shader->setInt("u_Texture", 0);
+
 		this->materialLib.add(mat);
 	}
 
@@ -62,9 +76,18 @@ namespace GameComponents {
 			{
 				for (int y = 0; y <= chunk->getWidth() - 1; y++)
 				{
-					auto ref = GameEngine::Cube::CreateCube(glm::fvec3( x, y, z ));
 					if (this->chunk->get( x, y, z ) == GameComponents::BlockType::Grass)
 					{
+						auto ref = GameEngine::Cube::CreateCube(glm::fvec3(x, y, z));
+						a->add(
+							&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
+							GameEngine::Cube::indices, GameEngine::Cube::iCount
+						);
+					}
+					else
+					{
+						auto ref = GameEngine::Cube::CreateCube(glm::fvec3(x, y, z), 1.0f);
+
 						a->add(
 							&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
 							GameEngine::Cube::indices, GameEngine::Cube::iCount

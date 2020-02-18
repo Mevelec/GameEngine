@@ -46,6 +46,8 @@ namespace GameEngine {
 		GameEngine::BufferLayout layout = {
 				{ GameEngine::ShaderDataType::Float3, "a_Position"},
 				{ GameEngine::ShaderDataType::Float4, "a_Color"},
+				{ GameEngine::ShaderDataType::Float2, "a_TexCoord"},
+				{ GameEngine::ShaderDataType::Float, "a_TexId"},
 		};
 
 		VB->setLayout(layout);
