@@ -122,7 +122,6 @@ namespace GameEngine {
 		for (std::size_t i = 0; i < this->texures.size(); ++i) {
 			this->texures[i]->bind(this->slots[i]);
 		}
-
 	}
 
 	std::vector<int> OpenGLSampler::getSlots() {

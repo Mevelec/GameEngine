@@ -12,7 +12,7 @@ uniform mat4 u_Transform;
 out vec3 v_Position;
 out vec2 v_TexCoord;
 out vec4 v_Color;
-out float v_TexId;
+flat out int v_TexId;
 
 
 void main()
@@ -20,7 +20,7 @@ void main()
 	v_Position = a_Position;
 	v_Color = a_Color;
 	v_TexCoord = a_TexCoord;
-	v_TexId = a_TexId;
+	v_TexId = int(a_TexId);
 
 	gl_Position = u_ViewProjectionMatrix * u_Transform * vec4(a_Position, 1.0);
 }
@@ -32,7 +32,7 @@ layout(location = 0) out vec4 color;
 in vec3 v_Position;
 in vec2 v_TexCoord;
 in vec4 v_Color;
-in float v_TexId;
+flat in int v_TexId;
 
 uniform vec4 u_Color;
 
@@ -41,6 +41,5 @@ uniform sampler2D u_Textures[2];
 
 void main()
 {
-	int index = int(v_TexId);
-	color =  texture(u_Textures[index], v_TexCoord * 1.0) * u_Color * v_Color;
+	color =  texture(u_Textures[v_TexId], v_TexCoord * u_TilingFactor) * u_Color * v_Color;
 }

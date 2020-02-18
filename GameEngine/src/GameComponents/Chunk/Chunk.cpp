@@ -36,7 +36,7 @@ namespace GameComponents {
 		this->generateVA();
 
 		// SHADERS
-		this->shaderLib.load("flat", "assets/shaders/Default.glsl");
+		this->shaderLib.load("default", "assets/shaders/Default.glsl");
 
 		// MATERIALS
 		GameEngine::Ref<GameEngine::Material> mat;
@@ -44,10 +44,9 @@ namespace GameComponents {
 		mat = GameEngine::MaterialParser::getInstance().loadJson("assets/Materials/sample/configuration.json");
 		this->materialLib.add("sample", mat);
 
-		mat = GameEngine::CreateRef<GameEngine::Material>("flat", this->shaderLib.get("flat"));
+		mat = GameEngine::CreateRef<GameEngine::Material>("default", this->shaderLib.get("default"));
 		mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
-		mat->addComponent("u_TilingFactor", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
-		mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
+		mat->addComponent("u_TilingFactor", 1.0f);
 
 		GameEngine::Ref<GameEngine::Texture> uv_texture = GameEngine::Texture2D::Create("assets/textures/uv_check.png");
 		GameEngine::Ref<GameEngine::Texture> tex = GameEngine::Texture2D::Create("assets/textures/disney.png");
@@ -58,7 +57,6 @@ namespace GameComponents {
 
 		mat->addComponent("u_Textures", sampler);
 
-		//shader->setInt("u_Texture", 0);
 
 		this->materialLib.add(mat);
 	}
@@ -78,7 +76,7 @@ namespace GameComponents {
 				{
 					if (this->chunk->get( x, y, z ) == GameComponents::BlockType::Grass)
 					{
-						auto ref = GameEngine::Cube::CreateCube(glm::fvec3(x, y, z));
+						auto ref = GameEngine::Cube::CreateCube(glm::fvec3(x, y, z), 1.0f);
 						a->add(
 							&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
 							GameEngine::Cube::indices, GameEngine::Cube::iCount
@@ -86,8 +84,7 @@ namespace GameComponents {
 					}
 					else
 					{
-						auto ref = GameEngine::Cube::CreateCube(glm::fvec3(x, y, z), 1.0f);
-
+						auto ref = GameEngine::Cube::CreateCube(glm::fvec3(x, y, z), 0.0f);
 						a->add(
 							&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
 							GameEngine::Cube::indices, GameEngine::Cube::iCount
@@ -118,24 +115,8 @@ namespace GameComponents {
 		GE_PROFILE_FUNCTION();
 
 		GameEngine::IRenderer::Submit(
-			this->materialLib.get("flat"),
+			this->materialLib.get("default"),
 			this->VA
 		);
-		
-		/*GE_PROFILE_FUNCTION();
-
-		for (int x = 0; x <= chunk->getWidth() - 1; x++)
-		{
-			for (int z = 0; z <= chunk->getWidth() - 1; z++)
-			{
-				for (int y = 0; y <= chunk->getWidth() - 1; y++)
-				{
-					GE_PROFILE_SCOPE("Render Block of Chunk");
-
-					GameComponents::BlockRegistery::getInstance().renderBlock(chunk->get(x, y, z), glm::vec3(x * 2, y * 2, z * 2));
-				}
-			}
-		}*/
-		
 	}
 }
