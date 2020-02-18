@@ -48,12 +48,17 @@ namespace GameComponents {
 		mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
 		mat->addComponent("u_TilingFactor", 1.0f);
 
-		GameEngine::Ref<GameEngine::Texture> uv_texture = GameEngine::Texture2D::Create("assets/textures/uv_check.png");
-		GameEngine::Ref<GameEngine::Texture> tex = GameEngine::Texture2D::Create("assets/textures/disney.png");
+		GameEngine::Ref<GameEngine::Texture> dirt = GameEngine::Texture2D::Create(1, 1);
+		uint32_t a = 0xffffffff;
+		dirt->setData(&a, sizeof(uint32_t));
+		GameEngine::Ref<GameEngine::Texture> grass = GameEngine::Texture2D::Create("assets/textures/Blocks/grass.png");
+		GameEngine::Ref<GameEngine::Texture> stone = GameEngine::Texture2D::Create("assets/textures/Blocks/stone.png");
 
 		GameEngine::Ref<GameEngine::Sampler> sampler = GameEngine::Sampler::Create();
-		sampler->add(uv_texture, 0);
-		sampler->add(tex, 1);
+		sampler->add(dirt, 0);
+		sampler->add(grass, 1);
+		sampler->add(stone, 1);
+
 
 		mat->addComponent("u_Textures", sampler);
 
