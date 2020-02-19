@@ -5,6 +5,7 @@
 #include "GameEngine/Events/MouseEvent.h"
 #include "GameEngine/Events/KeyEvent.h"
 
+#include "GameEngine/Renderer/Renderer.h"
 #include "Plateform/OpenGl/OpenGLContext.h"
 
 namespace GameEngine {
@@ -54,7 +55,10 @@ namespace GameEngine {
 
 		{
 			GE_PROFILE_SCOPE("glfwCreateWindow");
-
+#if defined(GE_DEBUG)
+			if (IRenderer::GetAPI() == RendererAPI::API::OpenGL)
+				glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+#endif
 			this->window = glfwCreateWindow(this->data.width, this->data.height, this->data.title.c_str(), nullptr, nullptr);
 			GLFWWindowCount++;
 		}
