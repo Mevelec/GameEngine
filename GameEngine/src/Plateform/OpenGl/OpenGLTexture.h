@@ -26,4 +26,22 @@ namespace GameEngine {
 		uint32_t rendererID;
 		GLenum internalFormat, dataFormat;
 	};
+
+	class OpenGLSampler : public Sampler
+	{
+	public:
+		OpenGLSampler();
+		OpenGLSampler(std::vector<Ref<Texture>> texures);
+
+
+		virtual void bind() const override;
+		virtual void add(Ref<Texture> texture, int slot) override;
+		virtual std::vector<int> getSlots() override;
+
+
+	private:
+		std::vector<Ref<Texture>> texures;
+		std::vector<int> slots;
+
+	};
 }

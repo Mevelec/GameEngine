@@ -1,7 +1,9 @@
 #pragma once
 #include "GameEngine/Renderer/Material/Shader.h"
 #include "GameEngine/Renderer/Material/MaterialLibrary.h"
-#include "GameEngine/Renderer/Buffer/VertexArray.h"
+#include "GameEngine/Renderer/Geometry/Geometry.h"
+#include "GameEngine/Renderer/Geometry/Primitives.h"
+
 #include "GameEngine/Core/Transform/Transform.h"
 
 #include <glm/gtc/type_ptr.hpp>
@@ -36,12 +38,9 @@ namespace GameComponents{
 	private:
 		GameEngine::ShaderLibrary shaderLib;
 		GameEngine::MaterialLibrary materialLib;
-		GameEngine::Ref<GameEngine::Shader> textureShader;
-		GameEngine::Ref<GameEngine::Texture> uv_texture, texture2, whiteTexture;
 
-
-		GameEngine::Ref<GameEngine::VertexArray> cubeVA;
-		GameEngine::Ref<GameEngine::Transform>   cubeTransform;
+		GameEngine::Ref<GameEngine::Geometry> cube;
+		GameEngine::Ref<GameEngine::Transform> cubeTransform;
 	public:
 		static BlockRegistery& getInstance()
 		{

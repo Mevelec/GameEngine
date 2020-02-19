@@ -49,6 +49,12 @@ namespace GameEngine {
 		shader->setInt(this->name, this->slot);
 	}
 	template<>
+	void MaterialComponentImpl< Ref<Sampler> >::bind(const Ref<Shader>& shader)
+	{
+		this->value->bind();
+		shader->setSampler(this->name, &this->value->getSlots()[0], this->value->getSlots().size());
+	}
+	template<>
 	void MaterialComponentImpl<int>::bind(const Ref<Shader>& shader)
 	{
 		shader->setInt(this->name, this->value);

@@ -20,5 +20,8 @@ namespace GameEngine {
 		virtual const Ref<IIndexBuffer>& getIndexBuffer() = 0;
 
 		static Ref<VertexArray>  Create();
+
 	};
+
+
 }

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "GameEngine/Renderer/Material/Shader.h"
+#include "GameEngine/Renderer/Material/Texture.h"
+
 #include <glm/glm.hpp>
 
 #include <unordered_map>
@@ -24,6 +26,8 @@ namespace GameEngine {
 
 		// SETTERS
 		virtual void setInt(const std::string& name, int value) override;
+		virtual void setSampler(const std::string& name, int* value, int size);
+
 		virtual void setFloat(const std::string& name, const float& value) override;
 		virtual void setFloat2(const std::string& name, const glm::vec2& value) override;
 		virtual void setFloat3(const std::string& name, const glm::vec3& value) override;
@@ -32,6 +36,7 @@ namespace GameEngine {
 
 		//UPLOADERS
 		void uploadUniformInt(const std::string& name, int value);
+		void uploadUniformSampler(const std::string& name, int* value, int size );
 
 		void uploadUniformFloat(const std::string& name, float value);
 		void uploadUniformFloat2(const std::string& name, const glm::vec2& value);

@@ -62,6 +62,8 @@ namespace GameEngine {
 			static_assert(
 				std::is_same<T, int>::value
 				|| std::is_same<T, Ref<Texture>>::value
+				|| std::is_same<T, Ref<Sampler>>::value
+				|| std::is_same<T, glm::fvec2>::value
 				|| std::is_same<T, glm::fvec3>::value
 				|| std::is_same<T, glm::fvec4>::value
 				|| std::is_same<T, glm::fmat4>::value

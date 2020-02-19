@@ -1,6 +1,9 @@
 #include "hzpch.h"
 
+#include <stdlib.h>
+
 #include "OcTree/SVO/OcTreeDefault.h"
+#include "GameEngine/Renderer/Renderer.h"
 
 #include "Chunk.h"
 
@@ -17,16 +20,88 @@ namespace GameComponents {
 			{
 				for (int y = 0; y <= chunk->getWidth() - 1; y++)
 				{
-					if (y > chunk->getWidth() - 2)
+					int seed = (y << 16 |x << z);
+
+					std::srand(seed);
+					bool rand = (std::rand() % 100) < 50;
+
+					if (rand)
 						chunk->set(GameComponents::BlockType::Grass, x, y, z);
-					else
-						chunk->set(GameComponents::BlockType::Dirt, x, y, z);
+
 				}
 			}
 		}
 		chunk->set(GameComponents::BlockType::Stone, 0, 0, 0);
-//ocTree->setNode(Blocks::BlockType::Stone, 9, 9, 0, 1);
-//ocTree->setNode(Blocks::BlockType::Dirt, 10, 10, 0, 1);
+
+		this->generateVA();
+
+		// SHADERS
+		this->shaderLib.load("default", "assets/shaders/Default.glsl");
+
+		// MATERIALS
+		GameEngine::Ref<GameEngine::Material> mat;
+
+		mat = GameEngine::MaterialParser::getInstance().loadJson("assets/Materials/sample/configuration.json");
+		this->materialLib.add("sample", mat);
+
+		mat = GameEngine::CreateRef<GameEngine::Material>("default", this->shaderLib.get("default"));
+		mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
+		mat->addComponent("u_TilingFactor", 1.0f);
+
+		GameEngine::Ref<GameEngine::Texture> dirt = GameEngine::Texture2D::Create(1, 1);
+		uint32_t a = 0xffffffff;
+		dirt->setData(&a, sizeof(uint32_t));
+		GameEngine::Ref<GameEngine::Texture> grass = GameEngine::Texture2D::Create("assets/textures/Blocks/grass.png");
+		GameEngine::Ref<GameEngine::Texture> stone = GameEngine::Texture2D::Create("assets/textures/Blocks/stone.png");
+
+		GameEngine::Ref<GameEngine::Sampler> sampler = GameEngine::Sampler::Create();
+		sampler->add(dirt, 0);
+		sampler->add(grass, 1);
+		sampler->add(stone, 1);
+
+
+		mat->addComponent("u_Textures", sampler);
+
+
+		this->materialLib.add(mat);
+	}
+
+	bool Chunk::generateVA()
+	{
+		GE_PROFILE_FUNCTION();
+
+		// VertexBuffer
+		GameEngine::Scope<GameEngine::DynamicGeometry> a = GameEngine::CreateScope<GameEngine::DynamicGeometry>();
+		
+		for (int x = 0; x <= chunk->getWidth() - 1; x++)
+		{
+			for (int z = 0; z <= chunk->getWidth() - 1; z++)
+			{
+				for (int y = 0; y <= chunk->getWidth() - 1; y++)
+				{
+					if (this->chunk->get( x, y, z ) == GameComponents::BlockType::Grass)
+					{
+						auto ref = GameEngine::Cube::CreateCube(glm::fvec3(x, y, z), 1.0f);
+						a->add(
+							&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
+							GameEngine::Cube::indices, GameEngine::Cube::iCount
+						);
+					}
+					else
+					{
+						auto ref = GameEngine::Cube::CreateCube(glm::fvec3(x, y, z), 0.0f);
+						a->add(
+							&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
+							GameEngine::Cube::indices, GameEngine::Cube::iCount
+						);
+					}
+				}
+			}
+		}
+
+		a->createVA();
+		this->VA = a->getVA();
+		return true;
 	}
 
 	BlockType& Chunk::get(int posx, int posy, int posz) {
@@ -44,17 +119,9 @@ namespace GameComponents {
 	{
 		GE_PROFILE_FUNCTION();
 
-		for (int x = 0; x <= chunk->getWidth() - 1; x++)
-		{
-			for (int z = 0; z <= chunk->getWidth() - 1; z++)
-			{
-				for (int y = 0; y <= chunk->getWidth() - 1; y++)
-				{
-					GE_PROFILE_SCOPE("Render Block of Chunk");
-
-					GameComponents::BlockRegistery::getInstance().renderBlock(chunk->get(x, y, z), glm::vec3(x * 2, y * 2, z * 2));
-				}
-			}
-		}
+		GameEngine::IRenderer::Submit(
+			this->materialLib.get("default"),
+			this->VA
+		);
 	}
 }

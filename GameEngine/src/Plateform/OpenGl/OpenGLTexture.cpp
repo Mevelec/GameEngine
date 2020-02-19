@@ -102,3 +102,30 @@ namespace GameEngine {
 	}
 
 }
+
+namespace GameEngine {
+
+	OpenGLSampler::OpenGLSampler() {
+
+	}
+
+	OpenGLSampler::OpenGLSampler(std::vector<Ref<Texture>> texures) {
+		this->texures = texures;
+	}
+
+	void OpenGLSampler::add(Ref<Texture> texture, int slot) {
+		this->texures.push_back(texture);
+		this->slots.push_back(slot);
+	}
+
+	void OpenGLSampler::bind() const {
+		for (std::size_t i = 0; i < this->texures.size(); ++i) {
+			this->texures[i]->bind(this->slots[i]);
+		}
+	}
+
+	std::vector<int> OpenGLSampler::getSlots() {
+		return this->slots;
+	}
+
+}
