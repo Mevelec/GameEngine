@@ -6,6 +6,26 @@
 namespace GameEngine {
 
 
+	void OpenGLMessageCallback(
+		unsigned source,
+		unsigned type,
+		unsigned id,
+		unsigned severity,
+		int length,
+		const char* message,
+		const void* userParam)
+	{
+		switch (severity)
+		{
+		case GL_DEBUG_SEVERITY_HIGH:         GE_CORE_ERROR(message); return;
+		case GL_DEBUG_SEVERITY_MEDIUM:       GE_CORE_ERROR(message); return;
+		case GL_DEBUG_SEVERITY_LOW:          GE_CORE_WARN(message); return;
+		case GL_DEBUG_SEVERITY_NOTIFICATION: GE_CORE_TRACE(message); return;
+		}
+
+		GE_CORE_ASSERT(false, "Unknown severity level!");
+	}
+
 	void OpenGLRendererAPI::init()
 	{
 		glEnable(GL_BLEND);
@@ -39,25 +59,5 @@ namespace GameEngine {
 	void OpenGLRendererAPI::drawIndexed(const Ref<VertexArray>& vertexArray)
 	{
 		glDrawElements(GL_TRIANGLES, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
-	}
-
-	void OpenGLMessageCallback(
-		unsigned source,
-		unsigned type,
-		unsigned id,
-		unsigned severity,
-		int length,
-		const char* message,
-		const void* userParam)
-	{
-		switch (severity)
-		{
-		case GL_DEBUG_SEVERITY_HIGH:         GE_CORE_ERROR(message); return;
-		case GL_DEBUG_SEVERITY_MEDIUM:       GE_CORE_ERROR(message); return;
-		case GL_DEBUG_SEVERITY_LOW:          GE_CORE_WARN(message); return;
-		case GL_DEBUG_SEVERITY_NOTIFICATION: GE_CORE_TRACE(message); return;
-		}
-
-		GE_CORE_ASSERT(false, "Unknown severity level!");
 	}
 }
