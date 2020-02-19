@@ -85,7 +85,7 @@ namespace GameEngine {
 				ShaderDataTypeToOpenGLBaseType(element.type),
 				element.normalized? GL_TRUE : GL_FALSE,
 				layout.getStride(),
-				(const void*)(intptr_t)element.offset
+				(const void*)element.offset
 			);
 			vertexBufferIndex++;
 		}

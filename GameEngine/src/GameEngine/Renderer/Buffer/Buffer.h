@@ -41,11 +41,11 @@ namespace GameEngine {
 	struct BufferElement {
 		std::string name;
 		ShaderDataType type;
-		uint32_t offset;
+		size_t offset;
 		uint32_t size;
 		bool normalized;
 
-		BufferElement() {};
+		BufferElement() = default;
 
 		BufferElement(ShaderDataType type, const std::string& name, bool normalized = false)
 			: name(name), type(type), size(ShaderDataTypeSize(type)), offset(0), normalized(0)
@@ -106,7 +106,7 @@ namespace GameEngine {
 	private:
 		void CalculatOffsetAndStride()
 		{
-			uint32_t offset = 0;
+			size_t offset = 0;
 			stride = 0;
 			for (auto& element : elements)
 			{
