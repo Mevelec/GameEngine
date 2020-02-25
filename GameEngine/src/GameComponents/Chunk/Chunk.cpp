@@ -8,17 +8,20 @@
 #include "Chunk.h"
 
 namespace GameComponents {
-	Chunk::Chunk()
+	Chunk::Chunk(const glm::vec3& position)
 	{
 		GE_PROFILE_FUNCTION();
 
+		this->position = position;
+
 		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault<BlockType>>(2);
 
-		for (int x = 0; x <= chunk->getWidth() - 1; x++)
+		int chunkW = chunk->getWidth();
+		for (int x = 0; x <= chunkW - 1; x++)
 		{
-			for (int z = 0; z <= chunk->getWidth() - 1; z++)
+			for (int z = 0; z <= chunkW - 1; z++)
 			{
-				for (int y = 0; y <= chunk->getWidth() - 1; y++)
+				for (int y = 0; y <= chunkW - 1; y++)
 				{
 					int seed = (y << 16 |x << z);
 
@@ -73,15 +76,18 @@ namespace GameComponents {
 		// VertexBuffer
 		GameEngine::Scope<GameEngine::DynamicGeometry> a = GameEngine::CreateScope<GameEngine::DynamicGeometry>();
 		
-		for (int x = 0; x <= chunk->getWidth() - 1; x++)
+		int chunkW = chunk->getWidth();
+		for (int x = 0; x <= chunkW - 1; x++)
 		{
-			for (int z = 0; z <= chunk->getWidth() - 1; z++)
+			for (int z = 0; z <= chunkW - 1; z++)
 			{
-				for (int y = 0; y <= chunk->getWidth() - 1; y++)
+				for (int y = 0; y <= chunkW - 1; y++)
 				{
+					glm::vec3 pos(x + this->position.x * chunkW, y + this->position.y * chunkW, z + this->position.z * chunkW);
+
 					if (this->chunk->get( x, y, z ) == GameComponents::BlockType::Grass)
 					{
-						auto ref = GameEngine::Cube::CreateCube(glm::fvec3(x, y, z), 1.0f);
+						auto ref = GameEngine::Cube::CreateCube(pos, 1.0f);
 						a->add(
 							&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
 							GameEngine::Cube::indices, GameEngine::Cube::iCount
@@ -89,7 +95,7 @@ namespace GameComponents {
 					}
 					else
 					{
-						auto ref = GameEngine::Cube::CreateCube(glm::fvec3(x, y, z), 0.0f);
+						auto ref = GameEngine::Cube::CreateCube(pos, 0.0f);
 						a->add(
 							&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
 							GameEngine::Cube::indices, GameEngine::Cube::iCount

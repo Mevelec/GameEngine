@@ -4,10 +4,16 @@
 namespace GameComponents {
 	ChunkManager::ChunkManager()
 	{
-		GameEngine::Ref<Chunk> t = GameEngine::CreateRef<Chunk>();
+		GameEngine::Ref<Chunk> t0 = GameEngine::CreateRef<Chunk>(glm::vec3({0, 0, 0}));
+		GameEngine::Ref<Chunk> t1 = GameEngine::CreateRef<Chunk>(glm::vec3({ 0, 0, 1 }));
+		GameEngine::Ref<Chunk> t2 = GameEngine::CreateRef<Chunk>(glm::vec3({ 0, 0, 2 }));
+		GameEngine::Ref<Chunk> t3 = GameEngine::CreateRef<Chunk>(glm::vec3({ 0, 0, 3 }));
 
 		std::vector<GameEngine::Ref<Chunk>> a;
-		a.push_back(t);
+		a.push_back(t0);
+		a.push_back(t1);
+		a.push_back(t2);
+		a.push_back(t3);
 
 		std::vector<std::vector<GameEngine::Ref<Chunk>>> b;
 		b.push_back(a);
