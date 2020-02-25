@@ -24,11 +24,14 @@ IncludeDir["imgui"] = "GameEngine/vendor/imgui"
 IncludeDir["glm"] = "GameEngine/vendor/glm"
 IncludeDir["stb_image"] = "GameEngine/vendor/stb_image"
 IncludeDir["rapidjson"] = "GameEngine/vendor/rapidjson/include"
+IncludeDir["FastNoiseSIMD"] = "GameEngine/vendor/FastNoiseSIMD/include"
 
 group "Dependencies"
 	include "GameEngine/vendor/GLFW" -- copy GLFW premake config
 	include "GameEngine/vendor/Glad" -- copy GLAD premake config
 	include "GameEngine/vendor/imgui" -- copy imgui premake config
+	include "GameEngine/vendor/FastNoiseSIMD" -- copy imgui premake config
+
 
 group ""
 
@@ -59,8 +62,6 @@ project "GameEngine"
 		"%{prj.name}/vendor/glm/glm/**.inl",
 
 		"%{prj.name}/vendor/libmorton/libmorton/include/**.h",
-		"%{prj.name}/vendor/FastNoiseSIMD/FastNoiseSIMD/**.h",
-
 	}
 
 	defines
@@ -78,9 +79,9 @@ project "GameEngine"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.rapidjson}",
-		"%{prj.name}/vendor/libmorton/libmorton/include",
-		"%{prj.name}/vendor/FastNoiseSIMD/FastNoiseSIMD",
+		"%{IncludeDir.FastNoiseSIMD}",
 
+		"%{prj.name}/vendor/libmorton/libmorton/include",
 	}
 
 	links
@@ -88,6 +89,7 @@ project "GameEngine"
 		"GLFW",
 		"Glad",
 		"imgui",
+		"FastNoiseSIMD",
 		"opengl32.lib",
 	}
 
@@ -139,8 +141,6 @@ project "Sandbox"
 		"GameEngine/src",
 		"GameEngine/vendor",
 		"GameEngine/vendor/libmorton/libmorton/include",
-		"GameEngine/vendor/FastNoiseSIMD/FastNoiseSIMD/",
-
 
 		"%{IncludeDir.glm}",
 	}

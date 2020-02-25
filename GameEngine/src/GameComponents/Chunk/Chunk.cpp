@@ -1,6 +1,7 @@
 #include "hzpch.h"
 
 #include <stdlib.h>
+#include <FastNoiseSIMD.h>
 
 #include "OcTree/SVO/OcTreeDefault.h"
 #include "GameEngine/Renderer/Renderer.h"
@@ -11,6 +12,9 @@ namespace GameComponents {
 	Chunk::Chunk(const glm::vec3& position)
 	{
 		GE_PROFILE_FUNCTION();
+
+		FastNoiseSIMD* myNoise = FastNoiseSIMD::NewFastNoiseSIMD();
+		float* noiseSet = myNoise->GetSimplexFractalSet(0, 0, 0, 16, 16, 16);
 
 		this->position = position;
 
@@ -93,7 +97,7 @@ namespace GameComponents {
 							GameEngine::Cube::indices, GameEngine::Cube::iCount
 						);
 					}
-					else
+					else if(this->chunk->get(x, y, z) == GameComponents::BlockType::Stone)
 					{
 						auto ref = GameEngine::Cube::CreateCube(pos, 0.0f);
 						a->add(
