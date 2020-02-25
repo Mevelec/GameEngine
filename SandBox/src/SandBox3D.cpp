@@ -67,7 +67,7 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 	GameEngine::IRenderer::BeginScene(*this->camera);
 	{
 		GE_PROFILE_SCOPE("Sandbox3D Render");
-		this->chunk.render();
+		this->chunkManager.render();
 	}
 	GameEngine::IRenderer::EndScene();
 }

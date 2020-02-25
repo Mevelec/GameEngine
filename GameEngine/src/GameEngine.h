@@ -19,6 +19,7 @@
 #include "GameComponents/Blocks/Block.h"
 #include "GameComponents/Tiles/Tile.h"
 #include "GameComponents/Chunk/Chunk.h"
+#include "GameComponents/Chunk/ChunkManager.h"
 
 //-- Geometry -------------------------
 #include "GameEngine/Renderer/Geometry/Geometry.h"

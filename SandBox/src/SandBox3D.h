@@ -22,6 +22,6 @@ private:
 	GameEngine::Camera* camera;
 	float cameraMoveSpeed = 5.0f;
 	float cmaraRotateSpeed = 10.0f;
-	GameComponents::Chunk chunk;
+	GameComponents::ChunkManager chunkManager;
 };
 
