@@ -59,6 +59,8 @@ project "GameEngine"
 		"%{prj.name}/vendor/glm/glm/**.inl",
 
 		"%{prj.name}/vendor/libmorton/libmorton/include/**.h",
+		"%{prj.name}/vendor/FastNoiseSIMD/FastNoiseSIMD/**.h",
+
 	}
 
 	defines
@@ -77,6 +79,8 @@ project "GameEngine"
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.rapidjson}",
 		"%{prj.name}/vendor/libmorton/libmorton/include",
+		"%{prj.name}/vendor/FastNoiseSIMD/FastNoiseSIMD",
+
 	}
 
 	links
@@ -135,6 +139,8 @@ project "Sandbox"
 		"GameEngine/src",
 		"GameEngine/vendor",
 		"GameEngine/vendor/libmorton/libmorton/include",
+		"GameEngine/vendor/FastNoiseSIMD/FastNoiseSIMD/",
+
 
 		"%{IncludeDir.glm}",
 	}
