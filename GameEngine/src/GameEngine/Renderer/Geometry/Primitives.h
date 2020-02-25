@@ -43,14 +43,14 @@ namespace GameEngine {
 
 		static std::vector<float> CreateCube( glm::fvec3 position, float texId = 0.0f) {
 			return std::vector<float>{
-				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z,      0.0f, 0.0f, 0.0f, 1.0f,        0.0f, 0.0f,       texId,
-				 0.5f + position.x, -0.5f + position.y, -0.5f + position.z,	     1.0f, 0.0f, 0.0f, 1.0f,        1.0f, 0.0f,       texId,
-				 0.5f + position.x,  0.5f + position.y, -0.5f + position.z,	     1.0f, 1.0f, 0.0f, 1.0f,        1.0f, 1.0f,       texId,
-				-0.5f + position.x,  0.5f + position.y, -0.5f + position.z,	     0.0f, 1.0f, 0.0f, 1.0f,        0.0f, 1.0f,       texId,
-				-0.5f + position.x, -0.5f + position.y,  0.5f + position.z,	     0.0f, 0.0f, 1.0f, 1.0f,        0.0f, 0.0f,       texId,
-				 0.5f + position.x, -0.5f + position.y,  0.5f + position.z,	     1.0f, 0.0f, 1.0f, 1.0f,        1.0f, 0.0f,       texId,
+				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z,      1.0f, 1.0f, 1.0f, 1.0f,        0.0f, 0.0f,       texId,
+				 0.5f + position.x, -0.5f + position.y, -0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        1.0f, 0.0f,       texId,
+				 0.5f + position.x,  0.5f + position.y, -0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        1.0f, 1.0f,       texId,
+				-0.5f + position.x,  0.5f + position.y, -0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        0.0f, 1.0f,       texId,
+				-0.5f + position.x, -0.5f + position.y,  0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        0.0f, 0.0f,       texId,
+				 0.5f + position.x, -0.5f + position.y,  0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        1.0f, 0.0f,       texId,
 				 0.5f + position.x,  0.5f + position.y,  0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        1.0f, 1.0f,       texId,
-				-0.5f + position.x,  0.5f + position.y,  0.5f + position.z,	     0.0f, 1.0f, 1.0f, 1.0f,        0.0f, 1.0f,       texId,
+				-0.5f + position.x,  0.5f + position.y,  0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        0.0f, 1.0f,       texId,
 			}; 
 		}
 	};
