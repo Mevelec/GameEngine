@@ -1,9 +1,9 @@
 #include "hzpch.h"
 
 #include <stdlib.h>
-#include <FastNoiseSIMD/FastNoiseSIMD.h>
 
 #include "OcTree/SVO/OcTreeDefault.h"
+#include "Noise/Noise.h"
 #include "GameEngine/Renderer/Renderer.h"
 
 #include "Chunk.h"
@@ -14,6 +14,8 @@ namespace GameComponents {
 		GE_PROFILE_FUNCTION();
 
 		this->position = position;
+
+		GameEngine::Noise noise(16, 16);
 
 		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault<BlockType>>(2);
 
@@ -29,7 +31,9 @@ namespace GameComponents {
 					std::srand(seed);
 					bool rand = (std::rand() % 100) < 50;
 
-					if (rand)
+					float v = noise.get(x, y, 0);
+					v = abs(v) * 16;
+					if (v > 0.5)
 						chunk->set(GameComponents::BlockType::Grass, x, y, z);
 
 				}

@@ -2,7 +2,7 @@
 #include "Noise.h"
 
 #include <FastNoiseSIMD/FastNoiseSIMD.h>
-
+#include <vector>
 #include "GameEngine/Renderer/Material/Texture.h"
 
 namespace GameEngine {
@@ -16,10 +16,14 @@ namespace GameEngine {
 		myNoise->SetFrequency(0.01);
 		myNoise->SetSeed(1337);
 		myNoise->SetNoiseType(FastNoiseSIMD::NoiseType::Perlin);
-		float* noiseSet = myNoise->GetNoiseSet(0, 0, 0, this->width, this->height, this->depth);
+		float* tempnoise = myNoise->GetNoiseSet(0, 0, 0, this->width, this->height, this->depth);
 
+		this->noise = std::vector(tempnoise, tempnoise + (this->width * this->height * this->depth));
+		FastNoiseSIMD::FreeNoiseSet(tempnoise);
+	}
 
-
+	void Noise::save()
+	{
 		std::ofstream img("picture.ppm");
 		img << "P3" << std::endl;
 		img << this->width << " " << this->height << std::endl;
@@ -32,15 +36,19 @@ namespace GameEngine {
 			{
 				for (int z = 0; z < this->depth; z++)
 				{
-					int v = abs(noiseSet[index]) * 255;
+					int v = abs(this->noise[index]) * 255;
 					img << v << " " << v << " " << v << " " << std::endl;
 
 					index++;
 				}
 			}
-		}		
-
-		FastNoiseSIMD::FreeNoiseSet(noiseSet);
-		system("open picture.ppm");
+		}
+	}
+	const float& Noise::get(int x, int y, int z)
+	{
+		if (x >= 0 && x <= this->width)
+			if (y >= 0 && y <= this->height)
+				if (z >= 0 && z <= this->depth)
+					return this->noise[x * this->height * this->depth + y * this->depth + z];
 	}
 }

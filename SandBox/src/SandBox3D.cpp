@@ -18,7 +18,7 @@ SandBox3D::SandBox3D()
 	);
 
 	GameEngine::Noise noise(256, 256);
-
+	noise.save();
 }
 
 void SandBox3D::onAttach()
