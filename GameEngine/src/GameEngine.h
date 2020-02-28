@@ -21,6 +21,9 @@
 #include "GameComponents/Chunk/Chunk.h"
 #include "GameComponents/Chunk/ChunkManager.h"
 
+// -- NOISE ---------------------------
+#include "Noise/Noise.h"
+
 //-- Geometry -------------------------
 #include "GameEngine/Renderer/Geometry/Geometry.h"
 

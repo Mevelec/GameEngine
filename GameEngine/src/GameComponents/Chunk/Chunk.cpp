@@ -13,9 +13,6 @@ namespace GameComponents {
 	{
 		GE_PROFILE_FUNCTION();
 
-		FastNoiseSIMD* myNoise = FastNoiseSIMD::NewFastNoiseSIMD();
-		float* noiseSet = myNoise->GetSimplexFractalSet(0, 0, 0, 16, 16, 16);
-
 		this->position = position;
 
 		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault<BlockType>>(2);
