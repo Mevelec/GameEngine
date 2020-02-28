@@ -1,7 +1,7 @@
 #include "hzpch.h"
 
 #include <stdlib.h>
-#include <FastNoiseSIMD.h>
+#include <FastNoiseSIMD/FastNoiseSIMD.h>
 
 #include "OcTree/SVO/OcTreeDefault.h"
 #include "GameEngine/Renderer/Renderer.h"

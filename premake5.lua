@@ -24,7 +24,7 @@ IncludeDir["imgui"] = "GameEngine/vendor/imgui"
 IncludeDir["glm"] = "GameEngine/vendor/glm"
 IncludeDir["stb_image"] = "GameEngine/vendor/stb_image"
 IncludeDir["rapidjson"] = "GameEngine/vendor/rapidjson/include"
-IncludeDir["FastNoiseSIMD"] = "GameEngine/vendor/FastNoiseSIMD/include"
+IncludeDir["FastNoiseSIMD"] = "GameEngine/vendor/FastNoiseSIMD"
 
 group "Dependencies"
 	include "GameEngine/vendor/GLFW" -- copy GLFW premake config
