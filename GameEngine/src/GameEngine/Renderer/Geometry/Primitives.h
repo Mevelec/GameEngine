@@ -41,16 +41,16 @@ namespace GameEngine {
 		static const uint32_t vStride = sizeof(float) * (3 + 4 + 2 + 1);
 		static const uint32_t vCount = 8;
 
-		static std::vector<float> CreateCube( glm::fvec3 position, float texId = 0.0f) {
+		static std::vector<float> CreateCube(glm::fvec3 position, glm::fvec4 color = glm::fvec4(1.0f, 1.0f, 1.0f, 1.0f), float texId = 0.0f) {
 			return std::vector<float>{
-				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z,      1.0f, 1.0f, 1.0f, 1.0f,        0.0f, 0.0f,       texId,
-				 0.5f + position.x, -0.5f + position.y, -0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        1.0f, 0.0f,       texId,
-				 0.5f + position.x,  0.5f + position.y, -0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        1.0f, 1.0f,       texId,
-				-0.5f + position.x,  0.5f + position.y, -0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        0.0f, 1.0f,       texId,
-				-0.5f + position.x, -0.5f + position.y,  0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        0.0f, 0.0f,       texId,
-				 0.5f + position.x, -0.5f + position.y,  0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        1.0f, 0.0f,       texId,
-				 0.5f + position.x,  0.5f + position.y,  0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        1.0f, 1.0f,       texId,
-				-0.5f + position.x,  0.5f + position.y,  0.5f + position.z,	     1.0f, 1.0f, 1.0f, 1.0f,        0.0f, 1.0f,       texId,
+				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z,      color.r, color.g, color.b, color.a,        0.0f, 0.0f,       texId,
+				 0.5f + position.x, -0.5f + position.y, -0.5f + position.z,	     color.r, color.g, color.b, color.a,        1.0f, 0.0f,       texId,
+				 0.5f + position.x,  0.5f + position.y, -0.5f + position.z,	     color.r, color.g, color.b, color.a,        1.0f, 1.0f,       texId,
+				-0.5f + position.x,  0.5f + position.y, -0.5f + position.z,	     color.r, color.g, color.b, color.a,        0.0f, 1.0f,       texId,
+				-0.5f + position.x, -0.5f + position.y,  0.5f + position.z,	     color.r, color.g, color.b, color.a,        0.0f, 0.0f,       texId,
+				 0.5f + position.x, -0.5f + position.y,  0.5f + position.z,	     color.r, color.g, color.b, color.a,        1.0f, 0.0f,       texId,
+				 0.5f + position.x,  0.5f + position.y,  0.5f + position.z,	     color.r, color.g, color.b, color.a,        1.0f, 1.0f,       texId,
+				-0.5f + position.x,  0.5f + position.y,  0.5f + position.z,	     color.r, color.g, color.b, color.a,        0.0f, 1.0f,       texId,
 			}; 
 		}
 	};
