@@ -15,30 +15,26 @@ namespace GameComponents {
 
 		this->position = position;
 
-		GameEngine::Noise noise(16, 16);
-
-		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault<BlockType>>(2);
+		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault<BlockType>>(4);
 
 		int chunkW = chunk->getWidth();
+		GameEngine::Noise noise(chunkW, chunkW);
 		for (int x = 0; x <= chunkW - 1; x++)
 		{
 			for (int z = 0; z <= chunkW - 1; z++)
 			{
-				for (int y = 0; y <= chunkW - 1; y++)
+				float v = noise.get(x, z, 0);
+				v = abs(v);
+				float height = (v * (chunkW - 1) * 1.0f) * 1.0f;
+				for (int y = 0; y < height; y++)
 				{
-					int seed = (y << 16 |x << z);
-
-					std::srand(seed);
-					bool rand = (std::rand() % 100) < 50;
-
-					float v = noise.get(x, y, 0);
-					v = abs(v) * 16;
-					if (v > 0.5)
-						chunk->set(GameComponents::BlockType::Grass, x, y, z);
+					chunk->set(GameComponents::BlockType::Grass, x, y, z);
 
 				}
 			}
 		}
+		noise.save("Chunk");
+
 		chunk->set(GameComponents::BlockType::Stone, 0, 0, 0);
 
 		this->generateVA();
@@ -84,11 +80,11 @@ namespace GameComponents {
 		int chunkW = chunk->getWidth();
 		for (int x = 0; x <= chunkW - 1; x++)
 		{
-			for (int z = 0; z <= chunkW - 1; z++)
+			for (int y = 0; y <= chunkW - 1; y++)
 			{
-				for (int y = 0; y <= chunkW - 1; y++)
+				for (int z = 0; z <= chunkW - 1; z++)
 				{
-					glm::vec3 pos(x + this->position.x * chunkW, y + this->position.y * chunkW, z + this->position.z * chunkW);
+					glm::vec3 pos(chunkW - x + this->position.x * chunkW, y + this->position.y * chunkW, z + this->position.z * chunkW);
 
 					if (this->chunk->get( x, y, z ) == GameComponents::BlockType::Grass)
 					{

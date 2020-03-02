@@ -11,9 +11,9 @@ namespace GameComponents {
 
 		std::vector<GameEngine::Ref<Chunk>> a;
 		a.push_back(t0);
-		a.push_back(t1);
+		/*a.push_back(t1);
 		a.push_back(t2);
-		a.push_back(t3);
+		a.push_back(t3);*/
 
 		std::vector<std::vector<GameEngine::Ref<Chunk>>> b;
 		b.push_back(a);
