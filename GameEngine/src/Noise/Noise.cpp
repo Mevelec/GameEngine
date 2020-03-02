@@ -15,7 +15,6 @@ namespace GameEngine {
 		posY(0),
 		posZ(0)
 	{
-		this->loadNoiseAt(this->posX, this->posY, this->posZ);
 	}
 
 
@@ -46,11 +45,11 @@ namespace GameEngine {
 		FastNoiseSIMD* myNoise = FastNoiseSIMD::NewFastNoiseSIMD();
 		myNoise->SetFrequency(0.1);
 		myNoise->SetSeed(1337);
-		myNoise->SetNoiseType(FastNoiseSIMD::NoiseType::Perlin);
-		/*myNoise->SetFractalType(FastNoiseSIMD::FractalType::FBM);
+		myNoise->SetNoiseType(FastNoiseSIMD::NoiseType::Simplex);
+		myNoise->SetFractalType(FastNoiseSIMD::FractalType::FBM);
 		myNoise->SetFractalOctaves(5);
 		myNoise->SetFractalLacunarity(2.0);
-		myNoise->SetFractalGain(5.0);*/
+		myNoise->SetFractalGain(5.0);
 		float* tempnoise = myNoise->GetNoiseSet(x * this->width, y * this->height, z * this->depth, this->width, this->height, this->depth);
 
 		this->noise = std::vector(tempnoise, tempnoise + (this->width * this->height * this->depth));
@@ -63,6 +62,9 @@ namespace GameEngine {
 
 	const float& Noise::get(int x, int y, int z)
 	{
+		if (this->noise.empty())
+			this->loadNoiseFor(x, y, z);
+
 		if (x >= 0 && x <= this->width)
 			if (y >= 0 && y <= this->height)
 				if (z >= 0 && z <= this->depth)

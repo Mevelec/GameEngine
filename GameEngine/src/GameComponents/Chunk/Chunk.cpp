@@ -19,23 +19,23 @@ namespace GameComponents {
 
 		int chunkW = chunk->getWidth();
 		GameEngine::Noise noise(chunkW, chunkW);
-		noise.loadNoiseAt(this->position.x, this->position.y, this->position.z);
+		noise.loadNoiseAt(this->position.x, this->position.z, 0);
 
 		for (int x = 0; x <= chunkW - 1; x++)
 		{
 			for (int z = 0; z <= chunkW - 1; z++)
 			{
-				float v = noise.get(x, z, 0);
+				float v = noise.get(x, z, 0) ;
+				if (v < 0)
+					v = 0;
 				v = abs(v);
-				float height = v *16 + 8;
+				float height = v * 20 + 8;
 				for (int y = 0 + this->position.y * chunkW; y < height; y++)
 				{
 					chunk->set(GameComponents::BlockType::Grass, x, y, z);
-
 				}
 			}
 		}
-		//noise.save("Chunk");
 
 		chunk->set(GameComponents::BlockType::Stone, 0, 0, 0);
 
@@ -86,7 +86,7 @@ namespace GameComponents {
 			{
 				for (int z = 0; z <= chunkW - 1; z++)
 				{
-					glm::vec3 pos(chunkW - x + this->position.x * chunkW, y + this->position.y * chunkW, z + this->position.z * chunkW);
+					glm::vec3 pos(x + this->position.x * chunkW, y + this->position.y * chunkW, z + this->position.z * chunkW);
 
 					if (this->chunk->get( x, y, z ) == GameComponents::BlockType::Grass)
 					{
