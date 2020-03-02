@@ -63,17 +63,11 @@ namespace GameEngine {
 
 	const float& Noise::get(int x, int y, int z)
 	{
-		if (this->posX != x / this->width)
-			this->loadNoiseFor(x, y ,z);
-		else if (this->posY != y / this->height)
-			this->loadNoiseFor(x, y, z);
-		else if (this->posZ != z / this->depth)
-			this->loadNoiseFor(x, y, z);
-		
-
 		if (x >= 0 && x <= this->width)
 			if (y >= 0 && y <= this->height)
 				if (z >= 0 && z <= this->depth)
+				{
 					return this->noise[x * this->height * this->depth + y * this->depth + z];
+				}
 	}
 }

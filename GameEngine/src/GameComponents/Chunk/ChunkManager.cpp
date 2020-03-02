@@ -4,20 +4,24 @@
 namespace GameComponents {
 	ChunkManager::ChunkManager()
 	{
-		GameEngine::Ref<Chunk> t0 = GameEngine::CreateRef<Chunk>(glm::vec3({0, 0, 0}));
-		GameEngine::Ref<Chunk> t1 = GameEngine::CreateRef<Chunk>(glm::vec3({ 0, 0, 1 }));
-		GameEngine::Ref<Chunk> t2 = GameEngine::CreateRef<Chunk>(glm::vec3({ 0, 0, 2 }));
-		GameEngine::Ref<Chunk> t3 = GameEngine::CreateRef<Chunk>(glm::vec3({ 0, 0, 3 }));
 
-		std::vector<GameEngine::Ref<Chunk>> a;
-		a.push_back(t0);
-		/*a.push_back(t1);
-		a.push_back(t2);
-		a.push_back(t3);*/
+		int nb = 2;
+		for (int x = 0; x < nb; x++)
+		{
+			auto xList = std::vector<std::vector<GameEngine::Ref<Chunk>>>();
+			this->chunks.push_back( xList );
+			for (int y = 0; y < nb; y++)
+			{
+				auto yList = std::vector<GameEngine::Ref<Chunk>>();
+				this->chunks.at(x).push_back(yList);
+				for (int z = 0; z < nb; z++)
+				{
+					GameEngine::Ref<Chunk> t = GameEngine::CreateRef<Chunk>(glm::vec3({ x, y, z }));
+					this->chunks.at(x).at(y).push_back(t);
 
-		std::vector<std::vector<GameEngine::Ref<Chunk>>> b;
-		b.push_back(a);
-		this->chunks.push_back(b);
+				}
+			}
+		}
 	}
 	void ChunkManager::update()
 	{

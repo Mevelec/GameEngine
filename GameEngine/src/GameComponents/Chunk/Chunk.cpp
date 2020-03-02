@@ -19,21 +19,23 @@ namespace GameComponents {
 
 		int chunkW = chunk->getWidth();
 		GameEngine::Noise noise(chunkW, chunkW);
+		noise.loadNoiseAt(this->position.x, this->position.y, this->position.z);
+
 		for (int x = 0; x <= chunkW - 1; x++)
 		{
 			for (int z = 0; z <= chunkW - 1; z++)
 			{
 				float v = noise.get(x, z, 0);
 				v = abs(v);
-				float height = (v * (chunkW - 1) * 1.0f) * 1.0f;
-				for (int y = 0; y < height; y++)
+				float height = v *16 + 8;
+				for (int y = 0 + this->position.y * chunkW; y < height; y++)
 				{
 					chunk->set(GameComponents::BlockType::Grass, x, y, z);
 
 				}
 			}
 		}
-		noise.save("Chunk");
+		//noise.save("Chunk");
 
 		chunk->set(GameComponents::BlockType::Stone, 0, 0, 0);
 

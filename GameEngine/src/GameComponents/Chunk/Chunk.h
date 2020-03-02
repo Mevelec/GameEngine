@@ -22,7 +22,7 @@ namespace GameComponents {
 	private:
 		bool generateVA();
 	private:
-		glm::vec3 position;
+		glm::uvec3 position;
 
 		GameEngine::Scope<OcTree::Octree<BlockType>> chunk;
 		GameEngine::Scope<GameEngine::Geometry> cube;
