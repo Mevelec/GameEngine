@@ -90,7 +90,7 @@ namespace GameComponents {
 
 					if (this->chunk->get( x, y, z ) == GameComponents::BlockType::Grass)
 					{
-						auto ref = GameEngine::Cube::CreateCube(pos, {0.2, 0.9, 0.2, 1.0}, 0.0f);
+						auto ref = GameEngine::Cube::CreateCube(pos, {0.2, 0.9, 0.2, 1.0}, 1.0f);
 						a->add(
 							&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
 							GameEngine::Cube::indices, GameEngine::Cube::iCount
