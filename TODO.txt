@@ -1,4 +1,4 @@
-1. find a way to invert the display of chunk manager on x
+1. find a way to invert the display of chunk manager on x 
 2. complete chunk controller
 	- inffer chunk pos from the manager ? yes or no ?
 	- add menu to mgui for chunkManager

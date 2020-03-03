@@ -20,6 +20,8 @@
 #include "GameComponents/Tiles/Tile.h"
 #include "GameComponents/Chunk/Chunk.h"
 #include "GameComponents/Chunk/ChunkManager.h"
+#include "GameComponents/Chunk/ChunkEvent.h"
+
 
 // -- NOISE ---------------------------
 #include "Noise/Noise.h"

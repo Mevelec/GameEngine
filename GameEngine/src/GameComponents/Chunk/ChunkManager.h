@@ -11,8 +11,24 @@ namespace GameComponents {
 		ChunkManager();
 		void update();
 		void render();
+		void reload();
+
+		void setRenderDistance(uint32_t distance) { this->renderDistance = distance; }
+		uint32_t getRenderDistance() { this->renderDistance; }
 	private:
-		std::vector<std::vector<std::vector<GameEngine::Ref<Chunk>>>> chunks;
+		void init();
+
+	private:
+		std::vector<
+			std::vector<
+				std::vector<
+					GameEngine::Ref<Chunk>
+				>
+			>
+		>*
+			chunks;
+		uint32_t renderDistance = 1;
+
 	};
 }
 

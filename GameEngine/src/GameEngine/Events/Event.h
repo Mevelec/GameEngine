@@ -19,7 +19,8 @@ namespace GameEngine {
 		AppTick, AppUpdate, AppRender,
 		SetedClipboardText,
 		KeyPressed, KeyReleased, KeyTyped,
-		MouseButtonPressed,  MouseButtonReleased, MouseMoved, MouseScrolled
+		MouseButtonPressed,  MouseButtonReleased, MouseMoved, MouseScrolled,
+		ChunkDoReload, ChunkSetRenderView
 	};
 
 	/// Enum of Events categories
