@@ -7,55 +7,60 @@
 #include "GameEngine/Core/Transform/Transform.h"
 
 #include <glm/gtc/type_ptr.hpp>
+#include <functional>
+
 
 namespace GameComponents{
+	
+	struct BlockState {
+		bool visible;
+
+		size_t operator()(void) const {}
+		bool operator()(const BlockState& other) const {}
+	};
+
+	bool operator==(const BlockState& lhs, const BlockState& rhs);
+
+
+	// custom specialization of std::hash can be injected in namespace std
+	
+
+
 	enum class BlockType {
 		BlockType_Default = 0,
 
-		Grass,
-		Dirt,
-		Stone
+		Grass = 100,
+		Dirt  = 200,
+		Stone = 300
 	};
 
 	class Block
 	{
 	public:
-		Block();
-		~Block();
+		Block(BlockType blockType, BlockState state) { 
+			this->blockType = blockType;
+			this->state = state; 
+		};
+		~Block() {};
 
-		inline const bool isActive() const { return this->active; };
-		inline void setActive(bool active) { this->active = active; };
+		inline const bool isVisible() const { return this->state.visible; };
+		inline void setVisible(bool visible) { this->state.visible = visible; };
+
+		inline const BlockType& getType() { return this->blockType; };
 	private:
-		bool active;
+		BlockState state;
 		BlockType blockType;
 	};
-	
-	class BlockRegistery
+}
+
+namespace std
+{
+	template<> struct std::hash<GameComponents::BlockState>
 	{
-	public:
-		void renderBlock(BlockType type, glm::vec3 position);
-
-	private:
-		GameEngine::ShaderLibrary shaderLib;
-		GameEngine::MaterialLibrary materialLib;
-
-		GameEngine::Ref<GameEngine::Geometry> cube;
-		GameEngine::Ref<GameEngine::Transform> cubeTransform;
-	public:
-		static BlockRegistery& getInstance()
+		std::size_t operator()(GameComponents::BlockState const& s) const noexcept
 		{
-			static BlockRegistery    instance;
-			return instance;
+			std::size_t h1 = std::hash<bool>{}(s.visible);
+			return h1; // or use boost::hash_combine (see Discussion)
 		}
-	private:
-		BlockRegistery();
-
-		// C++ 11
-		// =======
-		// We can use the better technique of deleting the methods
-		// we don't want.
-	public:
-		BlockRegistery(BlockRegistery const&) = delete;
-		void operator=(BlockRegistery const&) = delete;
 	};
 }

@@ -2,7 +2,8 @@
 
 #include <glm/glm.hpp>
 
-#include "GameComponents/Blocks/Block.h"
+#include "GameComponents/Blocks/BlockManager.h"
+
 #include "OcTree/OcTree.h"
 #include "GameEngine/Renderer/Renderable.h"
 
@@ -13,8 +14,8 @@ namespace GameComponents {
 	public:
 		Chunk(const glm::vec3& position);
 
-		BlockType& get(int posx, int posy, int posz);
-		void set(BlockType value, int posx, int posy, int posz);
+		GameEngine::Ref<Block> get(int posx, int posy, int posz);
+		void set(GameEngine::Ref<Block> value, int posx, int posy, int posz);
 
 		inline const glm::vec3& getPostion() const { return this->position; }
 
@@ -24,7 +25,7 @@ namespace GameComponents {
 	private:
 		glm::vec3 position;
 
-		GameEngine::Scope<OcTree::Octree<BlockType>> chunk;
+		GameEngine::Scope<OcTree::Octree< GameEngine::Ref<Block> >> chunk;
 		GameEngine::Scope<GameEngine::Geometry> cube;
 		GameEngine::Ref<GameEngine::VertexArray> VA;
 

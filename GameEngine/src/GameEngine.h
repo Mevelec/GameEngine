@@ -17,6 +17,8 @@
 #include "GameEngine/Core/Transform/Transform.h"
 
 #include "GameComponents/Blocks/Block.h"
+#include "GameComponents/Blocks/BlockManager.h"
+
 #include "GameComponents/Tiles/Tile.h"
 #include "GameComponents/Chunk/Chunk.h"
 #include "GameComponents/Chunk/ChunkManager.h"

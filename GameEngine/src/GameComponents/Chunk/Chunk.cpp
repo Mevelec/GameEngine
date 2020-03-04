@@ -15,7 +15,8 @@ namespace GameComponents {
 
 		this->position = position;
 
-		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault<BlockType>>(4);
+		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault< GameEngine::Ref<Block> >>(4);
+
 
 		int chunkW = chunk->getWidth();
 		GameEngine::Noise noise(chunkW, chunkW);
@@ -32,12 +33,19 @@ namespace GameComponents {
 				float height = v * 20 + 8;
 				for (int y = 0 + this->position.y * chunkW; y < height; y++)
 				{
-					chunk->set(GameComponents::BlockType::Grass, x, y, z);
+					auto state = GameComponents::BlockState();
+					state.visible = true;
+					auto bl = BlockManager::getInstance().getBlock(GameComponents::BlockType::Grass, state);
+
+					chunk->set(bl, x, y, z);
 				}
 			}
 		}
 
-		chunk->set(GameComponents::BlockType::Stone, 0, 0, 0);
+		auto state = GameComponents::BlockState();
+		state.visible = false;
+		auto bl = BlockManager::getInstance().getBlock(GameComponents::BlockType::Stone, state);
+		chunk->set(bl, 0, 0, 0);
 
 		this->generateVA();
 
@@ -87,8 +95,8 @@ namespace GameComponents {
 				for (int z = 0; z <= chunkW - 1; z++)
 				{
 					glm::vec3 pos(x + this->position.x * chunkW, y + this->position.y * chunkW, z + this->position.z * chunkW);
-
-					if (this->chunk->get( x, y, z ) == GameComponents::BlockType::Grass)
+					auto block = this->chunk->get(x, y, z);
+					if ( block != nullptr && block->getType() == GameComponents::BlockType::Grass)
 					{
 						auto ref = GameEngine::Cube::CreateCube(pos, {0.2, 0.9, 0.2, 1.0}, 1.0f);
 						a->add(
@@ -96,7 +104,7 @@ namespace GameComponents {
 							GameEngine::Cube::indices, GameEngine::Cube::iCount
 						);
 					}
-					else if(this->chunk->get(x, y, z) == GameComponents::BlockType::Stone)
+					else if(block != nullptr && block->getType() == GameComponents::BlockType::Stone)
 					{
 						auto ref = GameEngine::Cube::CreateCube(pos, { 0.6, 0.6, 0.6, 1.0 }, 0.0f);
 						a->add(
@@ -113,12 +121,12 @@ namespace GameComponents {
 		return true;
 	}
 
-	BlockType& Chunk::get(int posx, int posy, int posz) {
+	GameEngine::Ref<Block> Chunk::get(int posx, int posy, int posz) {
 		GE_PROFILE_FUNCTION();
 
 		return this->chunk->get(posx, posy, posz);
 	};
-	void Chunk::set(BlockType value, int posx, int posy, int posz) {
+	void Chunk::set(GameEngine::Ref<Block> value, int posx, int posy, int posz) {
 		GE_PROFILE_FUNCTION();
 
 		this->chunk->set(value, posx, posy, posz);
