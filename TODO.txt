@@ -1,5 +1,11 @@
-1. find a way to invert the display of chunk manager on x 
-2. complete chunk controller
-	- inffer chunk pos from the manager ? yes or no ?
-	- add menu to mgui for chunkManager
-	- expose controlls to edit chunkManager parameters
+  1. find a way to invert the display of chunk manager on x 
+x 2. complete chunk controller
+x 	- inffer chunk pos from the manager ? yes or no ? -> no
+x 	- add menu to mgui for chunkManager
+x 	- expose controlls to edit chunkManager parameters
+  3. block Manager
+	- use block manager to save block instance and share them
+  4. update chunk VA generate
+	- add visible and active bool to blocks
+	- use visible to generate chunk VA ( to not generate hidenn blocks)
+	- do not display hiden faces of blocks
