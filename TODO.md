@@ -9,7 +9,12 @@
 [x]	- use block manager to save block instance and share them
 [ ]	- optimize create when not existing ( separate create a new blocktype and create a new sdtate)
 
-[ ] 4. update chunk VA generate
+[ ] 4. update chunk
+[ ] - create generate() : genereate octree content
+[ ] - create load()     : set visibilities inside octree
+[ ] - create build()    : create VA
+[ ] - create optimized reload()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
+
 [x]	- add visible and active bool to blocks
 [ ]	- add function to get neightboor Block ( with optional load from neightboor chunk ) by defaul if get out of bound return to display
 [ ]	- use visible to generate chunk VA ( to not generate hiden blocks)
