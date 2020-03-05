@@ -15,39 +15,9 @@ namespace GameComponents {
 
 		this->position = position;
 
-		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault< GameEngine::Ref<Block> >>(4);
+		this->generate();
+		this->build();
 
-
-		int chunkW = chunk->getWidth();
-		GameEngine::Noise noise(chunkW, chunkW);
-		noise.loadNoiseAt(this->position.x, this->position.z, 0);
-
-		for (int x = 0; x <= chunkW - 1; x++)
-		{
-			for (int z = 0; z <= chunkW - 1; z++)
-			{
-				float v = noise.get(x, z, 0) ;
-				if (v < 0)
-					v = 0;
-				v = abs(v);
-				float height = v * 20 + 8;
-				for (int y = 0 + this->position.y * chunkW; y < height; y++)
-				{
-					auto state = GameComponents::BlockState();
-					state.visible = true;
-					auto bl = BlockManager::getInstance().getBlock(GameComponents::BlockType::Grass, state);
-
-					chunk->set(bl, x, y, z);
-				}
-			}
-		}
-
-		auto state = GameComponents::BlockState();
-		state.visible = false;
-		auto bl = BlockManager::getInstance().getBlock(GameComponents::BlockType::Stone, state);
-		chunk->set(bl, 0, 0, 0);
-
-		this->generateVA();
 
 		// SHADERS
 		this->shaderLib.load("default", "assets/shaders/Default.glsl");
@@ -80,13 +50,55 @@ namespace GameComponents {
 		this->materialLib.add(mat);
 	}
 
-	bool Chunk::generateVA()
+	void Chunk::generate()
+	{
+		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault< GameEngine::Ref<Block> >>(4);
+
+
+		int chunkW = chunk->getWidth();
+		GameEngine::Noise noise(chunkW, chunkW);
+		noise.loadNoiseAt(this->position.x, this->position.z, 0);
+
+		for (int x = 0; x <= chunkW - 1; x++)
+		{
+			for (int z = 0; z <= chunkW - 1; z++)
+			{
+				float v = noise.get(x, z, 0);
+				if (v < 0)
+					v = 0;
+				v = abs(v);
+				float height = v * 20 + 8;
+				for (int y = 0 + this->position.y * chunkW; y < height; y++)
+				{
+					auto state = GameComponents::BlockState();
+					if ((x - 1 >= 0 && x + 1 <= chunkW) && (y - 1 >= 0 && y + 1 <= chunkW) && (z - 1 >= 0 && z + 1 <= chunkW)) //if neightboor in range
+					{
+
+						state.visible = true;
+					}
+					else
+					{
+						state.visible = true;
+					}
+					auto bl = BlockManager::getInstance().getBlock(GameComponents::BlockType::Grass, state);
+					chunk->set(bl, x, y, z);
+				}
+			}
+		}
+
+		auto state = GameComponents::BlockState();
+		state.visible = false;
+		auto bl = BlockManager::getInstance().getBlock(GameComponents::BlockType::Stone, state);
+		chunk->set(bl, 0, 0, 0);
+	}
+
+	void Chunk::build()
 	{
 		GE_PROFILE_FUNCTION();
 
 		// VertexBuffer
 		GameEngine::Scope<GameEngine::DynamicGeometry> a = GameEngine::CreateScope<GameEngine::DynamicGeometry>();
-		
+
 		int chunkW = chunk->getWidth();
 		for (int x = 0; x <= chunkW - 1; x++)
 		{
@@ -118,7 +130,6 @@ namespace GameComponents {
 
 		a->createVA();
 		this->VA = a->getVA();
-		return true;
 	}
 
 	GameEngine::Ref<Block> Chunk::get(int posx, int posy, int posz) {

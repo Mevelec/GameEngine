@@ -21,7 +21,10 @@ namespace GameComponents {
 
 		virtual void render() override;
 	private:
-		bool generateVA();
+		void generate();
+		void load();
+		void build();
+		void unload();
 	private:
 		glm::vec3 position;
 

@@ -10,9 +10,9 @@
 [ ]	- optimize create when not existing ( separate create a new blocktype and create a new sdtate)
 
 [ ] 4. update chunk
-[ ] - create generate() : genereate octree content
+[x] - create generate() : genereate octree content
 [ ] - create load()     : set visibilities inside octree
-[ ] - create build()    : create VA
+[x] - create build()    : create VA
 [ ] - create optimized reload()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
 
 [x]	- add visible and active bool to blocks
