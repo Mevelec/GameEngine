@@ -10,7 +10,7 @@
 [x]		- use block manager to save block instance and share them
 [x]		- optimize create when not existing ( separate create a new blocktype and create a new state) => no because performance gain is small
 
-[ ] 4. update chunk
+[x] 4. update chunk
 [x]		- create generate() : genereate octree content
 [x]		- create load()     : set visibilities inside octree
 [x]		- create build()    : create VA
@@ -19,7 +19,7 @@
 [x]		- add visible and active bool to blocks
 [x]		- use visible to generate chunk VA ( to not generate hiden blocks)
 
-[ ]		- correct error when a chunk is empty (no VA -> generating error)
+[x]		- correct error when a chunk is empty (no VA -> generating error)
 
 [ ] 6. Add profiler to new functions
 

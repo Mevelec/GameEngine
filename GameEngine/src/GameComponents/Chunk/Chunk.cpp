@@ -19,7 +19,6 @@ namespace GameComponents {
 		this->load();
 		this->build();
 
-
 		// SHADERS
 		this->shaderLib.load("default", "assets/shaders/Default.glsl");
 
@@ -78,11 +77,6 @@ namespace GameComponents {
 				}
 			}
 		}
-
-		auto state = GameComponents::BlockState();
-		state.visible = false;
-		auto bl = BlockManager::getInstance().getBlock(GameComponents::BlockType::Stone, state);
-		chunk->set(bl, 0, 0, 0);
 	}
 
 	void Chunk::load()
@@ -172,6 +166,11 @@ namespace GameComponents {
 
 	}
 
+	void Chunk::unload()
+	{
+		this->VA = nullptr;
+	}
+
 	void Chunk::build()
 	{
 		GE_PROFILE_FUNCTION();
@@ -230,9 +229,12 @@ namespace GameComponents {
 	{
 		GE_PROFILE_FUNCTION();
 
-		GameEngine::IRenderer::Submit(
-			this->materialLib.get("default"),
-			this->VA
-		);
+		if (this->VA != nullptr)
+		{
+			GameEngine::IRenderer::Submit(
+				this->materialLib.get("default"),
+				this->VA
+			);
+		}
 	}
 }

@@ -38,6 +38,11 @@ namespace GameEngine {
 
 	void DynamicGeometry::createVA()
 	{
+		if (this->vertices.empty() || this->indices.empty())
+		{
+			this->VA = nullptr;
+			return;
+		}
 		auto a = this->getVertices();
 		auto b = this->vertices.size();
 		auto c = sizeof(float);
