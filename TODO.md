@@ -10,8 +10,6 @@
 [x]	- use block manager to save block instance and share them
 [x]	- optimize create when not existing ( separate create a new blocktype and create a new state) => no because performance gain is small
 
-[ ] 5. update geometry to load specified faces 
-
 [ ] 4. update chunk
 [x] - create generate() : genereate octree content
 [x] - create load()     : set visibilities inside octree
@@ -22,6 +20,8 @@
 [x]	- use visible to generate chunk VA ( to not generate hiden blocks)
 
 [ ] - correct error when a chunk is empty (no VA -> generating error)
+
+## Create Geometry Loader
 
 ## Upgrade of Chunk 2
 [ ] 1. update geometry to load specified faces 
