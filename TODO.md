@@ -19,3 +19,5 @@
 [ ]	- add function to get neightboor Block ( with optional load from neightboor chunk ) by defaul if get out of bound return to display
 [ ]	- use visible to generate chunk VA ( to not generate hiden blocks)
 [ ] - do not display hiden faces of blocks
+
+[ ] - correct error when a chunk is empty (no VA -> generating error)
