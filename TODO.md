@@ -1,3 +1,4 @@
+## Upgrade of Chunk 1
 [ ] 1. find a way to invert the display of chunk manager on x 
 
 [x] 2. complete chunk controller
@@ -20,7 +21,12 @@
 
 [x]	- add visible and active bool to blocks
 [x]	- use visible to generate chunk VA ( to not generate hiden blocks)
-[ ] - do not display hiden faces of blocks
 
 [ ] - correct error when a chunk is empty (no VA -> generating error)
 
+## Upgrade of Chunk 2
+[ ] 1. update geometry to load specified faces 
+
+[ ] 2. update chunk
+[ ] - update build()    : create VA using direction to display ( top, left ...) faces only
+[ ] - create optimized reload()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
