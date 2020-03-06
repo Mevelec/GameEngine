@@ -16,7 +16,6 @@
 [x] - create generate() : genereate octree content
 [x] - create load()     : set visibilities inside octree
 [x] - create build()    : create VA
-[ ] - optimize build()  : using specified face
 [ ] - create optimized reload()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
 
 [x]	- add visible and active bool to blocks
