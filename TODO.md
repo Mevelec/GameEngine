@@ -11,12 +11,10 @@
 [x]		- optimize create when not existing ( separate create a new blocktype and create a new state) => no because performance gain is small
 
 [ ] 4. update chunk
-[ ]		- add struct chunkState (loaded, builded, etc ...) see : https://sites.google.com/site/letsmakeavoxelengine/home/chunk-management
 [x]		- create generate() : genereate octree content
 [x]		- create load()     : set visibilities inside octree
 [x]		- create build()    : create VA
 [x]		- create unload()
-[ ]		- create optimized rebuild()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
 
 [x]		- add visible and active bool to blocks
 [x]		- use visible to generate chunk VA ( to not generate hiden blocks)
@@ -33,3 +31,4 @@
 [ ] 2. update chunk
 [ ] - update build()    : create VA using direction to display ( top, left ...) faces only
 [ ] - create optimized reload()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
+[ ]	- create optimized rebuild()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
