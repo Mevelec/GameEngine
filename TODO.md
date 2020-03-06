@@ -7,17 +7,20 @@
 
 [x] 3. block Manager
 [x]	- use block manager to save block instance and share them
-[ ]	- optimize create when not existing ( separate create a new blocktype and create a new sdtate)
+[x]	- optimize create when not existing ( separate create a new blocktype and create a new state) => no because performance gain is small
+
+[ ] 5. update geometry to load specified faces 
 
 [ ] 4. update chunk
 [x] - create generate() : genereate octree content
-[ ] - create load()     : set visibilities inside octree
+[x] - create load()     : set visibilities inside octree
 [x] - create build()    : create VA
+[ ] - optimize build()  : using specified face
 [ ] - create optimized reload()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
 
 [x]	- add visible and active bool to blocks
-[ ]	- add function to get neightboor Block ( with optional load from neightboor chunk ) by defaul if get out of bound return to display
-[ ]	- use visible to generate chunk VA ( to not generate hiden blocks)
+[x]	- use visible to generate chunk VA ( to not generate hiden blocks)
 [ ] - do not display hiden faces of blocks
 
 [ ] - correct error when a chunk is empty (no VA -> generating error)
+

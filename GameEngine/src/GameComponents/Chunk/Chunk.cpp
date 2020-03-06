@@ -16,6 +16,7 @@ namespace GameComponents {
 		this->position = position;
 
 		this->generate();
+		this->load();
 		this->build();
 
 
@@ -71,15 +72,7 @@ namespace GameComponents {
 				for (int y = 0 + this->position.y * chunkW; y < height; y++)
 				{
 					auto state = GameComponents::BlockState();
-					if ((x - 1 >= 0 && x + 1 <= chunkW) && (y - 1 >= 0 && y + 1 <= chunkW) && (z - 1 >= 0 && z + 1 <= chunkW)) //if neightboor in range
-					{
-
-						state.visible = true;
-					}
-					else
-					{
-						state.visible = true;
-					}
+					state.visible = false;
 					auto bl = BlockManager::getInstance().getBlock(GameComponents::BlockType::Grass, state);
 					chunk->set(bl, x, y, z);
 				}
@@ -90,6 +83,93 @@ namespace GameComponents {
 		state.visible = false;
 		auto bl = BlockManager::getInstance().getBlock(GameComponents::BlockType::Stone, state);
 		chunk->set(bl, 0, 0, 0);
+	}
+
+	void Chunk::load()
+	{
+		//find a not empty block start from 0,0,0 
+		//check if this block have an empty neighboor
+		//if yes set visible if not set unvisible
+
+		//iterate over chunck
+		//ifblock != empty
+		// if have an empty neighboor display
+
+		int chunkW = chunk->getWidth() -1;
+		for (int x = 0; x <= chunkW; x++)
+		{
+			for (int y = 0; y <= chunkW; y++)
+			{
+				for (int z = 0; z <= chunkW; z++)
+				{
+					auto block = this->chunk->get(x, y, z);
+
+					if (block != nullptr)
+					{
+						auto state = GameComponents::BlockState();
+						state.visible = true;
+						GameEngine::Ref<Block> ref = BlockManager::getInstance().getBlock(block->getType(), state);
+
+						if ( (x == 0 || x == chunkW) || (y == 0 || y == chunkW) || (z == 0 || z == chunkW)) //if is at border
+						{
+							this->chunk->set(ref,
+								x, y, z);
+						}
+						else
+						{
+							bool isSet = false;
+							// X
+							auto tmp = this->chunk->get(x -1, y, z);
+							if ( tmp == nullptr && !isSet)
+							{
+								this->chunk->set(ref,
+									x, y, z);
+								isSet = true;
+							}
+							tmp = this->chunk->get(x +1, y, z);
+							if (tmp == nullptr && !isSet)
+							{
+								this->chunk->set(ref,
+									x, y, z);
+								isSet = true;
+							}
+							// Y
+							tmp = this->chunk->get(x, y -1, z);
+							if (tmp == nullptr && !isSet)
+							{
+								this->chunk->set(ref,
+									x, y, z);
+								isSet = true;
+							}
+							tmp = this->chunk->get(x, y +1, z);
+							if (tmp == nullptr && !isSet)
+							{
+								this->chunk->set(ref,
+									x, y, z);
+								isSet = true;
+							}
+							// Z
+							tmp = this->chunk->get(x, y, z -1);
+							if (tmp == nullptr && !isSet)
+							{
+								this->chunk->set(ref,
+									x, y, z);
+								isSet = true;
+							}
+							tmp = this->chunk->get(x, y, z +1);
+							if (tmp == nullptr && !isSet)
+							{
+								this->chunk->set(ref,
+									x, y, z);
+								isSet = true;
+							}
+
+						}
+					}
+				}
+			}
+		}
+
 	}
 
 	void Chunk::build()
@@ -108,21 +188,24 @@ namespace GameComponents {
 				{
 					glm::vec3 pos(x + this->position.x * chunkW, y + this->position.y * chunkW, z + this->position.z * chunkW);
 					auto block = this->chunk->get(x, y, z);
-					if ( block != nullptr && block->getType() == GameComponents::BlockType::Grass)
+					if(block != nullptr && block->isVisible())
 					{
-						auto ref = GameEngine::Cube::CreateCube(pos, {0.2, 0.9, 0.2, 1.0}, 1.0f);
-						a->add(
-							&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
-							GameEngine::Cube::indices, GameEngine::Cube::iCount
-						);
-					}
-					else if(block != nullptr && block->getType() == GameComponents::BlockType::Stone)
-					{
-						auto ref = GameEngine::Cube::CreateCube(pos, { 0.6, 0.6, 0.6, 1.0 }, 0.0f);
-						a->add(
-							&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
-							GameEngine::Cube::indices, GameEngine::Cube::iCount
-						);
+						if (  block->getType() == GameComponents::BlockType::Grass)
+						{
+							auto ref = GameEngine::Cube::CreateCube(pos, {0.2, 0.9, 0.2, 1.0}, 1.0f);
+							a->add(
+								&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
+								GameEngine::Cube::indices, GameEngine::Cube::iCount
+							);
+						}
+						else if(block->getType() == GameComponents::BlockType::Stone)
+						{
+							auto ref = GameEngine::Cube::CreateCube(pos, { 0.6, 0.6, 0.6, 1.0 }, 0.0f);
+							a->add(
+								&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
+								GameEngine::Cube::indices, GameEngine::Cube::iCount
+							);
+						}
 					}
 				}
 			}
