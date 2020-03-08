@@ -52,6 +52,8 @@ namespace GameComponents {
 
 	void Chunk::generate()
 	{
+		GE_PROFILE_FUNCTION();
+
 		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault< GameEngine::Ref<Block> >>(4);
 
 
@@ -81,6 +83,8 @@ namespace GameComponents {
 
 	void Chunk::load()
 	{
+		GE_PROFILE_FUNCTION();
+
 		//find a not empty block start from 0,0,0 
 		//check if this block have an empty neighboor
 		//if yes set visible if not set unvisible
