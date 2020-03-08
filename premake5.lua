@@ -24,11 +24,14 @@ IncludeDir["imgui"] = "GameEngine/vendor/imgui"
 IncludeDir["glm"] = "GameEngine/vendor/glm"
 IncludeDir["stb_image"] = "GameEngine/vendor/stb_image"
 IncludeDir["rapidjson"] = "GameEngine/vendor/rapidjson/include"
+IncludeDir["FastNoiseSIMD"] = "GameEngine/vendor/FastNoiseSIMD"
 
 group "Dependencies"
 	include "GameEngine/vendor/GLFW" -- copy GLFW premake config
 	include "GameEngine/vendor/Glad" -- copy GLAD premake config
 	include "GameEngine/vendor/imgui" -- copy imgui premake config
+	include "GameEngine/vendor/FastNoiseSIMD" -- copy imgui premake config
+
 
 group ""
 
@@ -76,6 +79,8 @@ project "GameEngine"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.rapidjson}",
+		"%{IncludeDir.FastNoiseSIMD}",
+
 		"%{prj.name}/vendor/libmorton/libmorton/include",
 	}
 
@@ -84,6 +89,7 @@ project "GameEngine"
 		"GLFW",
 		"Glad",
 		"imgui",
+		"FastNoiseSIMD",
 		"opengl32.lib",
 	}
 

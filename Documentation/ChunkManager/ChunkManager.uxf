@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>780</x>
+      <y>310</y>
+      <w>290</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>ChunkManager
+--
+- Vector&lt;Vector&lt;Vector&lt;Chunk&gt;&gt;&gt;
+
+- loadList    //list of chunks to load
+- unloadList  // list of chunks to unload
+- buildList   // list of chunks to build
+- rebuildList // list of chunks to rebuild
+
+
++ udate(deltaTime, camera)
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1420</x>
+      <y>330</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Chunk
+--
+- octree chunk
+
+- position</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1060</x>
+      <y>340</y>
+      <w>380</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>360.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

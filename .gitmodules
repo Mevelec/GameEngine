@@ -20,3 +20,6 @@
 [submodule "GameEngine/vendor/libmorton"]
 	path = GameEngine/vendor/libmorton
 	url = https://github.com/Forceflow/libmorton
+[submodule "GameEngine/vendor/FastNoiseSIMD"]
+	path = GameEngine/vendor/FastNoiseSIMD
+	url = https://github.com/Mevelec/FastNoiseSIMD.git

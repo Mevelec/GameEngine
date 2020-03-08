@@ -1,6 +1,8 @@
 #pragma once
 #include <GameEngine.h>
 
+#include "ImGui/SandBoxMenu.h"
+
 class SandBox3D : public GameEngine::Layer
 {
 public:
@@ -16,12 +18,15 @@ public:
 
 	bool onWindowResized(GameEngine::WindowResizeEvent& event);
 	bool onKeyPressedEvent(GameEngine::KeyPressedEvent& event);
-
+	bool onChunkDoReload(GameEngine::ChunkDoReload& event);
+	bool SandBox3D::onChunkSetRenderView(GameEngine::ChunkSetRenderView& event);
 
 private:
 	GameEngine::Camera* camera;
 	float cameraMoveSpeed = 5.0f;
 	float cmaraRotateSpeed = 10.0f;
-	GameComponents::Chunk chunk;
+	GameComponents::ChunkManager chunkManager;
+
+	GameEngine::Scope<SandBoxMenu> menu;
 };
 

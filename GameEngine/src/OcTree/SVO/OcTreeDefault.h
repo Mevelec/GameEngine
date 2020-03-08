@@ -55,7 +55,7 @@ namespace OcTree {
 
 		void setNode(T value, uint_fast16_t posx, uint_fast16_t posy, uint_fast16_t posz, int depthSeek)
 		{
-			uint_fast32_t mortonCode = libmorton::morton3D_32_encode(posx, posy, posz);
+			uint_fast32_t mortonCode = libmorton::morton3D_32_encode(this->getWidth() - posx, posy, posz);
 
 			int depth = this->depth;
 			Node<T>* node = &this->root;
@@ -69,7 +69,7 @@ namespace OcTree {
 
 		Node<T>& getNode(uint_fast16_t posx, uint_fast16_t posy, uint_fast16_t posz, int depthSeek)
 		{
-			uint_fast32_t mortonCode = libmorton::morton3D_32_encode(posx, posy, posz);
+			uint_fast32_t mortonCode = libmorton::morton3D_32_encode(this->getWidth() - posx, posy, posz);
 
 			int depth = this->depth;
 			Node<T>* node = &this->root;

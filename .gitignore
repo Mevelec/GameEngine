@@ -370,6 +370,7 @@ bin-int/
 # GameEngine
 !Log*
 !vendor/bin/premake/
+!vendor/FastNoiseSIMD/premake.lua
 !Debug/
 
 # SandBox
