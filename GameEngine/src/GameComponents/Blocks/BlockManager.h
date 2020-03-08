@@ -3,6 +3,9 @@
 #include "GameComponents/Blocks/Block.h"
 #include <map>
 
+#include "GameEngine/Renderer/Geometry/Loader.h"
+
+
 namespace GameComponents
 {
 	class BlockManager
@@ -27,6 +30,13 @@ namespace GameComponents
 		}
 	private:
 		BlockManager() {
+
+			std::vector < glm::vec3 > out_vertices;
+			std::vector < glm::vec2 > out_uvs;
+			std::vector < glm::vec3 > out_normals;
+			std::vector < int > out_indices;
+
+			bool a = GameEngine::Loader::loadOBJ("assets/Models/test.obj", out_vertices, out_uvs, out_normals, out_indices);
 		}
 
 	public:
