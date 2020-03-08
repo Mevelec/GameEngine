@@ -9,8 +9,8 @@ SandBoxMenu::SandBoxMenu()
 void SandBoxMenu::render()
 {
 	// Menu Bar
-	ImGuWindowFlags window_flags = 0;
-	window_flags |= ImGuWindowFlags_MenuBar;
+	ImGuiWindowFlags window_flags = 0;
+	window_flags |= ImGuiWindowFlags_MenuBar;
 
 	ImGui::Begin("GameEngine", NULL, window_flags);
 	{
