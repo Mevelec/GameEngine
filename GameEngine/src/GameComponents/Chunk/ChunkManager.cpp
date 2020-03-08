@@ -4,6 +4,8 @@
 namespace GameComponents {
 	ChunkManager::ChunkManager()
 	{
+		GE_PROFILE_FUNCTION();
+
 		this->chunks = new std::vector<
 			std::vector<
 				std::vector<
@@ -16,6 +18,8 @@ namespace GameComponents {
 
 	void ChunkManager::init()
 	{
+		GE_PROFILE_FUNCTION();
+
 		for (int x = 0; x < renderDistance; x++)
 		{
 			auto xList = std::vector<std::vector<GameEngine::Ref<Chunk>>>();
@@ -38,6 +42,8 @@ namespace GameComponents {
 
 	void ChunkManager::reload()
 	{
+		GE_PROFILE_FUNCTION();
+
 		delete this->chunks;
 		this->chunks = new std::vector<
 			std::vector<
@@ -52,10 +58,14 @@ namespace GameComponents {
 
 	void ChunkManager::update()
 	{
+		GE_PROFILE_FUNCTION();
+
 	}
 
 	void ChunkManager::render()
 	{
+		GE_PROFILE_FUNCTION();
+
 		for (auto const& x : *this->chunks) {
 			for (auto const& y : x) {
 				for (auto const& chunk : y) {
