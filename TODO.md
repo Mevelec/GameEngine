@@ -21,7 +21,7 @@
 
 [x]		- correct error when a chunk is empty (no VA -> generating error)
 
-[ ] 6. Add profiler to new functions
+[x] 6. Add profiler to new functions
 
 ## Create Geometry Loader
 
