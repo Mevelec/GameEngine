@@ -78,9 +78,6 @@ namespace GameEngine {
 
 
 			}
-
-			// Close File
-			file.close();
 		}
 		else
 		{
