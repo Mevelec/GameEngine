@@ -22,8 +22,6 @@ namespace GameEngine {
 		// If so continue
 		if (loadout)
 		{
-			// Create/Open e1Out.txt
-			std::ofstream file("e1Out.txt");
 
 			// Go through each loaded mesh and out its contents
 			for (int i = 0; i < Loader.LoadedMeshes.size(); i++)

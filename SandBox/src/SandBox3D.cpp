@@ -40,7 +40,7 @@ SandBox3D::SandBox3D()
 	geo.add(&out_vertices[0], out_vertices.size(), sizeof(float) * 3, &out_indices[0], out_indices.size());
 
 	GameEngine::IRenderer::Submit(
-		this->materialLib.get("default"),
+		this->mat,
 		geo.getVA()
 	);
 }
