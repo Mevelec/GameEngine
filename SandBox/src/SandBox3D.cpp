@@ -21,13 +21,11 @@ SandBox3D::SandBox3D()
 	// SHADERS
 	this->shaderLib.load("default", "assets/shaders/Default.glsl");
 	//mat
-	GameEngine::Ref<GameEngine::Material> mat;
+	this->mat = GameEngine::MaterialParser::getInstance().loadJson("assets/Materials/sample/configuration.json");
 
-	mat = GameEngine::MaterialParser::getInstance().loadJson("assets/Materials/sample/configuration.json");
-
-	mat = GameEngine::CreateRef<GameEngine::Material>("default", this->shaderLib.get("default"));
-	mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
-	mat->addComponent("u_TilingFactor", 1.0f);
+	this->mat = GameEngine::CreateRef<GameEngine::Material>("default", this->shaderLib.get("default"));
+	this->mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
+	this->mat->addComponent("u_TilingFactor", 1.0f);
 
 	// obj
 	std::vector < float > out_vertices;
@@ -38,11 +36,8 @@ SandBox3D::SandBox3D()
 	bool a = GameEngine::Loader::loadOBJ("assets/Models/test/box_stack.obj", out_vertices, out_uvs, out_normals, out_indices);
 	GameEngine::DynamicGeometry geo;
 	geo.add(&out_vertices[0], out_vertices.size(), sizeof(float) * 3, &out_indices[0], out_indices.size());
-
-	GameEngine::IRenderer::Submit(
-		this->mat,
-		geo.getVA()
-	);
+	geo.createVA();
+	this->VA = geo.getVA();
 }
 
 void SandBox3D::onAttach()
@@ -94,7 +89,12 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 	GameEngine::IRenderer::BeginScene(*this->camera);
 	{
 		GE_PROFILE_SCOPE("Sandbox3D Render");
-		this->chunkManager.render();
+		//this->chunkManager.render();
+
+		GameEngine::IRenderer::Submit(
+			this->mat,
+			this->VA
+		);
 	}
 	GameEngine::IRenderer::EndScene();
 }

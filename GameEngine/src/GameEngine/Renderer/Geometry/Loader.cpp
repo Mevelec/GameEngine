@@ -37,6 +37,17 @@ namespace GameEngine {
 					out_vertices.push_back(curMesh.Vertices[j].Position.X);
 					out_vertices.push_back(curMesh.Vertices[j].Position.Y);
 					out_vertices.push_back(curMesh.Vertices[j].Position.Z);
+
+					out_vertices.push_back(1);
+					out_vertices.push_back(1);
+					out_vertices.push_back(1);
+					out_vertices.push_back(1);
+
+					out_vertices.push_back(1);
+					out_vertices.push_back(1);
+
+					out_vertices.push_back(1);
+
 					/*
 					// Vertice Normal
 					out_vertices.push_back(curMesh.Vertices[j].Position.X);

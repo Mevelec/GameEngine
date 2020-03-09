@@ -8,6 +8,7 @@ class SandBox3D : public GameEngine::Layer
 public:
 	GameEngine::ShaderLibrary shaderLib;
 	GameEngine::Ref<GameEngine::Material> mat;
+	GameEngine::Ref<GameEngine::VertexArray> VA;
 public:
 	SandBox3D();
 	virtual ~SandBox3D() = default;
