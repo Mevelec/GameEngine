@@ -62,6 +62,8 @@ project "GameEngine"
 		"%{prj.name}/vendor/glm/glm/**.inl",
 
 		"%{prj.name}/vendor/libmorton/libmorton/include/**.h",
+		"%{prj.name}/vendor/objl/Source/**.h",
+
 	}
 
 	defines
@@ -82,6 +84,8 @@ project "GameEngine"
 		"%{IncludeDir.FastNoiseSIMD}",
 
 		"%{prj.name}/vendor/libmorton/libmorton/include",
+		"%{prj.name}/vendor/objl/Source",
+
 	}
 
 	links
