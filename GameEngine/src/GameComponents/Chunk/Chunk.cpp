@@ -197,7 +197,7 @@ namespace GameComponents {
 						{
 							auto ref = GameEngine::Cube::CreateCube(pos, {0.2, 0.9, 0.2, 1.0}, 1.0f);
 							a->add(
-								&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
+								&ref[0], GameEngine::Cube::vCount,
 								GameEngine::Cube::indices, GameEngine::Cube::iCount
 							);
 						}
@@ -205,7 +205,7 @@ namespace GameComponents {
 						{
 							auto ref = GameEngine::Cube::CreateCube(pos, { 0.6, 0.6, 0.6, 1.0 }, 0.0f);
 							a->add(
-								&ref[0], GameEngine::Cube::vCount, GameEngine::Cube::vStride / sizeof(float),
+								&ref[0], GameEngine::Cube::vCount,
 								GameEngine::Cube::indices, GameEngine::Cube::iCount
 							);
 						}

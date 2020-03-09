@@ -6,12 +6,7 @@ namespace GameEngine
 	class Loader
 	{
 	public:
-		static const bool loadOBJ(const char* path,
-			std::vector <float >& out_vertices,
-			std::vector < glm::vec2 >& out_uvs,
-			std::vector < glm::vec3 >& out_normals,
-			std::vector < uint32_t >& out_indices
-		);
+		static GameEngine::DynamicGeometry loadOBJ(const char* path);
 
 		// Singleton + constructor
 	public:

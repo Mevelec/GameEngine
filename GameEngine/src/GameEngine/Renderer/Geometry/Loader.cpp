@@ -4,13 +4,10 @@
 #include <OBJ_Loader.h>
 
 namespace GameEngine {
-	const bool Loader::loadOBJ(const char* path,
-		std::vector < float >& out_vertices,
-		std::vector < glm::vec2 >& out_uvs,
-		std::vector < glm::vec3 >& out_normals,
-		std::vector < uint32_t >& out_indices
-	)
+	GameEngine::DynamicGeometry Loader::loadOBJ(const char* path)
 	{
+		GameEngine::DynamicGeometry geo(true);
+
 		// Initialize Loader
 		objl::Loader Loader;
 
@@ -22,12 +19,16 @@ namespace GameEngine {
 		// If so continue
 		if (loadout)
 		{
-
 			// Go through each loaded mesh and out its contents
 			for (int i = 0; i < Loader.LoadedMeshes.size(); i++)
 			{
 				// Copy one of the loaded meshes to be our current mesh
 				objl::Mesh curMesh = Loader.LoadedMeshes[i];
+
+				std::vector < float > out_vertices;
+				std::vector < glm::vec2 > out_uvs;
+				std::vector < glm::vec3 > out_normals;
+				std::vector < uint32_t > out_indices;
 
 				// Go through each vertex and print its number,
 				//  position, normal, and texture coordinate
@@ -88,12 +89,13 @@ namespace GameEngine {
 				*/
 
 
+				geo.add(&out_vertices[0], out_vertices.size(), &out_indices[0], out_indices.size());
 			}
 		}
 		else
 		{
 			GE_ASSERT(false, "Could not parse file : {0}", path)
 		}
-		return true;
+		return geo;
 	}
 }

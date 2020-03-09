@@ -27,15 +27,9 @@ SandBox3D::SandBox3D()
 	this->mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
 	this->mat->addComponent("u_TilingFactor", 1.0f);
 
-	// obj
-	std::vector < float > out_vertices;
-	std::vector < glm::vec2 > out_uvs;
-	std::vector < glm::vec3 > out_normals;
-	std::vector < uint32_t > out_indices;
 
-	bool a = GameEngine::Loader::loadOBJ("assets/Models/test/box_stack.obj", out_vertices, out_uvs, out_normals, out_indices);
-	GameEngine::DynamicGeometry geo;
-	geo.add(&out_vertices[0], out_vertices.size(), sizeof(float) * 3, &out_indices[0], out_indices.size());
+	//obj
+	auto geo = GameEngine::Loader::loadOBJ("assets/Models/test/box_stack.obj");
 	geo.createVA();
 	this->VA = geo.getVA();
 }
@@ -89,7 +83,7 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 	GameEngine::IRenderer::BeginScene(*this->camera);
 	{
 		GE_PROFILE_SCOPE("Sandbox3D Render");
-		//this->chunkManager.render();
+		this->chunkManager.render();
 
 		GameEngine::IRenderer::Submit(
 			this->mat,

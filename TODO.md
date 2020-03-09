@@ -24,6 +24,17 @@
 [x] 6. Add profiler to new functions
 
 ## Create Geometry Loader
+[x] 1. implement loader OBJ
+[x]     - add library 
+
+[x] 2. update Geometry
+[x]     - ability to  specify a layout
+[x]     - offset indices ability to desactivate
+
+[ ] 3. handle OBJ material 
+[ ] 3. handle OBJ textures
+[ ]     - coordinates
+[ ] 5. handle normals
 
 ## Upgrade of Chunk 2
 [ ] 1. update geometry to load specified faces 

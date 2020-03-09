@@ -103,6 +103,8 @@ namespace GameEngine {
 		std::vector<BufferElement>::const_iterator begin() const { return this->elements.begin(); }
 		std::vector<BufferElement>::const_iterator end() const { return this->elements.end(); }
 
+		bool inline empty() { return this->elements.empty(); };
+
 	private:
 		void CalculatOffsetAndStride()
 		{
