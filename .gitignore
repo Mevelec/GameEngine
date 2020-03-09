@@ -374,6 +374,7 @@ bin-int/
 !Debug/
 
 # SandBox
-SandBox/profiling/**
+Sandbox/profiling/**
 !profileSave/**
 !.gitignore
+!/Sandbox/asset/*
