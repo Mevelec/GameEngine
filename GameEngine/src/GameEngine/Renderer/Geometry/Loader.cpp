@@ -1,78 +1,93 @@
 #include "hzpch.h"
 #include "Loader.h"
 
+#include <OBJ_Loader.h>
+
 namespace GameEngine {
 	const bool Loader::loadOBJ(const char* path,
-		std::vector < glm::vec3 >& out_vertices,
+		std::vector < float >& out_vertices,
 		std::vector < glm::vec2 >& out_uvs,
 		std::vector < glm::vec3 >& out_normals,
-		std::vector < int >& out_indices
-
+		std::vector < uint32_t >& out_indices
 	)
 	{
-		std::ifstream in(path, std::ios::in);
-		if (!in)
+		// Initialize Loader
+		objl::Loader Loader;
+
+		// Load .obj File
+		bool loadout = Loader.LoadFile(path);
+
+		// Check to see if it loaded
+
+		// If so continue
+		if (loadout)
 		{
-			GE_ASSERT(false, "Could not open the file {0}", path)
-				return false;
+			// Create/Open e1Out.txt
+			std::ofstream file("e1Out.txt");
 
+			// Go through each loaded mesh and out its contents
+			for (int i = 0; i < Loader.LoadedMeshes.size(); i++)
+			{
+				// Copy one of the loaded meshes to be our current mesh
+				objl::Mesh curMesh = Loader.LoadedMeshes[i];
+
+				// Go through each vertex and print its number,
+				//  position, normal, and texture coordinate
+				for (int j = 0; j < curMesh.Vertices.size(); j++)
+				{
+					// Vertice Postion
+					out_vertices.push_back(curMesh.Vertices[j].Position.X);
+					out_vertices.push_back(curMesh.Vertices[j].Position.Y);
+					out_vertices.push_back(curMesh.Vertices[j].Position.Z);
+					/*
+					// Vertice Normal
+					out_vertices.push_back(curMesh.Vertices[j].Position.X);
+					out_vertices.push_back(curMesh.Vertices[j].Position.Y);
+					out_vertices.push_back(curMesh.Vertices[j].Position.Z);
+
+					// Vertice TexCoordinate
+					out_vertices.push_back(curMesh.Vertices[j].Position.X);
+					out_vertices.push_back(curMesh.Vertices[j].Position.Y);
+					out_vertices.push_back(curMesh.Vertices[j].Position.Z);
+					*/
+				}
+
+				// Go through every 3rd index and print the
+				//	triangle that these indices represent
+				for (int j = 0; j < curMesh.Indices.size(); j += 3)
+				{
+					// indices
+					out_indices.push_back(curMesh.Indices[j]);
+					out_indices.push_back(curMesh.Indices[j+1]);
+					out_indices.push_back(curMesh.Indices[j+2]);
+				}
+				/*
+				// Print Material
+				file << "Material: " << curMesh.MeshMaterial.name << "\n";
+				file << "Ambient Color: " << curMesh.MeshMaterial.Ka.X << ", " << curMesh.MeshMaterial.Ka.Y << ", " << curMesh.MeshMaterial.Ka.Z << "\n";
+				file << "Diffuse Color: " << curMesh.MeshMaterial.Kd.X << ", " << curMesh.MeshMaterial.Kd.Y << ", " << curMesh.MeshMaterial.Kd.Z << "\n";
+				file << "Specular Color: " << curMesh.MeshMaterial.Ks.X << ", " << curMesh.MeshMaterial.Ks.Y << ", " << curMesh.MeshMaterial.Ks.Z << "\n";
+				file << "Specular Exponent: " << curMesh.MeshMaterial.Ns << "\n";
+				file << "Optical Density: " << curMesh.MeshMaterial.Ni << "\n";
+				file << "Dissolve: " << curMesh.MeshMaterial.d << "\n";
+				file << "Illumination: " << curMesh.MeshMaterial.illum << "\n";
+				file << "Ambient Texture Map: " << curMesh.MeshMaterial.map_Ka << "\n";
+				file << "Diffuse Texture Map: " << curMesh.MeshMaterial.map_Kd << "\n";
+				file << "Specular Texture Map: " << curMesh.MeshMaterial.map_Ks << "\n";
+				file << "Alpha Texture Map: " << curMesh.MeshMaterial.map_d << "\n";
+				file << "Bump Map: " << curMesh.MeshMaterial.map_bump << "\n";
+				*/
+
+
+			}
+
+			// Close File
+			file.close();
 		}
-
-		std::string line;
-		while (std::getline(in, line))
+		else
 		{
-			//check v for vertices
-			if (line.substr(0, 2) == "v ") {
-				std::istringstream v(line.substr(2));
-				glm::vec3 vert;
-				double x, y, z;
-				v >> x; v >> y; v >> z;
-				vert = glm::vec3(x, y, z);
-				out_vertices.push_back(vert);
-			}
-			//check for texture co-ordinate
-			else if (line.substr(0, 2) == "vt") {
-
-				std::istringstream v(line.substr(3));
-				glm::vec2 tex;
-				int U, V;
-				v >> U; v >> V;
-				tex = glm::vec2(U, V);
-				out_uvs.push_back(tex);
-			}
-			//check for normals
-			else if (line.substr(0, 2) == "vn") {
-
-				std::istringstream v(line.substr(2));
-				glm::vec3 norm;
-				double x, y, z;
-				v >> x; v >> y; v >> z;
-				norm = glm::vec3(x, y, z);
-				out_normals.push_back(norm);
-			}
-			//check for faces
-			else if (line.substr(0, 2) == "f ") {
-				int S1a, S1b, S1c, S2a, S2b, S2c, S3a, S3b, S3c;
-
-				const char* chh = line.c_str();
-				sscanf(chh, "f %i/%i/%i %i/%i/%i %i/%i/%i", &S1a, &S1b, &S1c, &S2a, &S2b, &S2c, &S3a, &S3b, &S3c); //here it read the line start with f and store the corresponding values in the variables
-
-				S1a--; S1b--; S1c--;
-				S2a--; S2b--; S2c--;
-				S3a--; S3b--; S3c--;
-
-				out_indices.push_back(S1a);
-				out_indices.push_back(S1b);
-				out_indices.push_back(S1c);
-
-				out_indices.push_back(S2a);
-				out_indices.push_back(S2b);
-				out_indices.push_back(S2c);
-
-				out_indices.push_back(S3a);
-				out_indices.push_back(S3b);
-				out_indices.push_back(S3c);
-			}
+			GE_ASSERT(false, "Could not parse file : {0}", path)
 		}
+		return true;
 	}
 }

@@ -1,6 +1,7 @@
 #include "SandBox3D.h"
 
 #include <glm/gtc/type_ptr.hpp>
+#include "GameEngine/Renderer/Geometry/Loader.h"
 
 SandBox3D::SandBox3D()
 	: Layer("SandBox3D")
@@ -17,6 +18,31 @@ SandBox3D::SandBox3D()
 	);
 
 	this->menu = GameEngine::CreateScope<SandBoxMenu>();
+	// SHADERS
+	this->shaderLib.load("default", "assets/shaders/Default.glsl");
+	//mat
+	GameEngine::Ref<GameEngine::Material> mat;
+
+	mat = GameEngine::MaterialParser::getInstance().loadJson("assets/Materials/sample/configuration.json");
+
+	mat = GameEngine::CreateRef<GameEngine::Material>("default", this->shaderLib.get("default"));
+	mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
+	mat->addComponent("u_TilingFactor", 1.0f);
+
+	// obj
+	std::vector < float > out_vertices;
+	std::vector < glm::vec2 > out_uvs;
+	std::vector < glm::vec3 > out_normals;
+	std::vector < uint32_t > out_indices;
+
+	bool a = GameEngine::Loader::loadOBJ("assets/Models/test/box_stack.obj", out_vertices, out_uvs, out_normals, out_indices);
+	GameEngine::DynamicGeometry geo;
+	geo.add(&out_vertices[0], out_vertices.size(), sizeof(float) * 3, &out_indices[0], out_indices.size());
+
+	GameEngine::IRenderer::Submit(
+		this->materialLib.get("default"),
+		geo.getVA()
+	);
 }
 
 void SandBox3D::onAttach()
