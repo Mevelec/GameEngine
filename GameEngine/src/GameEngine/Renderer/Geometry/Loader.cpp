@@ -44,8 +44,8 @@ namespace GameEngine {
 					out_vertices.push_back(1);
 					out_vertices.push_back(1);
 
-					out_vertices.push_back(1);
-					out_vertices.push_back(1);
+					out_vertices.push_back(curMesh.Vertices[j].TextureCoordinate.X);
+					out_vertices.push_back(curMesh.Vertices[j].TextureCoordinate.Y);
 
 					out_vertices.push_back(1);
 

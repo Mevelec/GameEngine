@@ -33,7 +33,8 @@
 
 [ ] 3. handle OBJ material 
 [ ] 3. handle OBJ textures
-[ ]     - coordinates
+[x]     - coordinates
+[ }		- import map (texture)
 [ ] 5. handle normals
 
 ## Upgrade of Chunk 2

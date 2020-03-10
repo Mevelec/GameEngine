@@ -26,6 +26,14 @@ SandBox3D::SandBox3D()
 	this->mat = GameEngine::CreateRef<GameEngine::Material>("default", this->shaderLib.get("default"));
 	this->mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
 	this->mat->addComponent("u_TilingFactor", 1.0f);
+	GameEngine::Ref<GameEngine::Texture> grass = GameEngine::Texture2D::Create("assets/textures/Blocks/grass.png");
+	GameEngine::Ref<GameEngine::Texture> stone = GameEngine::Texture2D::Create("assets/textures/Blocks/stone.png");
+
+	GameEngine::Ref<GameEngine::Sampler> sampler = GameEngine::Sampler::Create();
+	sampler->add(grass, 0);
+	sampler->add(stone, 1);
+
+	this->mat->addComponent("u_Textures", sampler);
 
 
 	//obj
