@@ -11,8 +11,6 @@ namespace GameEngine {
 		this->vertices = std::vector<float>();
 		this->indices = std::vector<uint32_t>();
 
-		this->indicesSize = sizeof(uint32_t) * this->indices.size();
-
 		if (this->layout.empty())
 		{
 			GameEngine::BufferLayout layout = {
@@ -24,14 +22,6 @@ namespace GameEngine {
 
 			this->setLayout(layout);
 		}
-	}
-
-	float* DynamicGeometry::getVertices() {
-		return &this->vertices[0];
-	}
-
-	uint32_t* DynamicGeometry::getIndices() {
-		return &this->indices[0];
 	}
 
 	void DynamicGeometry::add(float* vertices, const uint32_t countV, const uint32_t* indices, const uint32_t countI)
@@ -50,7 +40,6 @@ namespace GameEngine {
 		{
 			this->verticesOffset += countV;
 		}
-		this->indicesSize = sizeof(uint32_t) * this->indices.size();
 	}
 
 
@@ -62,14 +51,14 @@ namespace GameEngine {
 			return;
 		}
 
-		GameEngine::Ref<GameEngine::IVertexBuffer> VB = GameEngine::IVertexBuffer::Create(this->getVertices(), this->vertices.size() * sizeof(float));
+		GameEngine::Ref<GameEngine::IVertexBuffer> VB = GameEngine::IVertexBuffer::Create(&this->vertices[0], this->vertices.size() * sizeof(float));
 		
 		VB->setLayout(this->layout);
 
 		this->VA = GameEngine::VertexArray::Create();
 		this->VA->addVertexBuffer(VB);
 
-		GameEngine::Ref<GameEngine::IIndexBuffer> IB = GameEngine::IIndexBuffer::Create(this->getIndices(), this->indices.size());
+		GameEngine::Ref<GameEngine::IIndexBuffer> IB = GameEngine::IIndexBuffer::Create(&this->indices[0], this->indices.size());
 		this->VA->setIndexBuffer(IB);
 	}
 
