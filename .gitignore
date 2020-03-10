@@ -70,7 +70,6 @@ StyleCopReport.xml
 *_h.h
 *.ilk
 *.meta
-*.obj
 *.iobj
 *.pch
 *.pdb
@@ -374,6 +373,7 @@ bin-int/
 !Debug/
 
 # SandBox
-SandBox/profiling/**
+Sandbox/profiling/**
 !profileSave/**
 !.gitignore
+!/Sandbox/assets/*

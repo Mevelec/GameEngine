@@ -23,3 +23,6 @@
 [submodule "GameEngine/vendor/FastNoiseSIMD"]
 	path = GameEngine/vendor/FastNoiseSIMD
 	url = https://github.com/Mevelec/FastNoiseSIMD.git
+[submodule "GameEngine/vendor/objl"]
+	path = GameEngine/vendor/objl
+	url = https://github.com/Mevelec/OBJ-Loader.git

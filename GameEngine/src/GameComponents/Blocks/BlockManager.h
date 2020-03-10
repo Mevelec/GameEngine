@@ -32,6 +32,5 @@ namespace GameComponents
 	public:
 		BlockManager(BlockManager const&) = delete;
 		void operator=(BlockManager const&) = delete;
-
 	};
 }

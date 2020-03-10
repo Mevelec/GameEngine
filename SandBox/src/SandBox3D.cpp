@@ -1,6 +1,7 @@
 #include "SandBox3D.h"
 
 #include <glm/gtc/type_ptr.hpp>
+#include "GameEngine/Renderer/Geometry/Loader.h"
 
 SandBox3D::SandBox3D()
 	: Layer("SandBox3D")
@@ -17,6 +18,28 @@ SandBox3D::SandBox3D()
 	);
 
 	this->menu = GameEngine::CreateScope<SandBoxMenu>();
+	// SHADERS
+	this->shaderLib.load("default", "assets/shaders/Default.glsl");
+	//mat
+	this->mat = GameEngine::MaterialParser::getInstance().loadJson("assets/Materials/sample/configuration.json");
+
+	this->mat = GameEngine::CreateRef<GameEngine::Material>("default", this->shaderLib.get("default"));
+	this->mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
+	this->mat->addComponent("u_TilingFactor", 1.0f);
+	GameEngine::Ref<GameEngine::Texture> grass = GameEngine::Texture2D::Create("assets/textures/Blocks/grass.png");
+	GameEngine::Ref<GameEngine::Texture> stone = GameEngine::Texture2D::Create("assets/textures/Blocks/stone.png");
+
+	GameEngine::Ref<GameEngine::Sampler> sampler = GameEngine::Sampler::Create();
+	sampler->add(grass, 0);
+	sampler->add(stone, 1);
+
+	this->mat->addComponent("u_Textures", sampler);
+
+
+	//obj
+	auto geo = GameEngine::Loader::loadOBJ("assets/Models/test/box_stack.obj");
+	geo.createVA();
+	this->VA = geo.getVA();
 }
 
 void SandBox3D::onAttach()
@@ -69,6 +92,11 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 	{
 		GE_PROFILE_SCOPE("Sandbox3D Render");
 		this->chunkManager.render();
+
+		GameEngine::IRenderer::Submit(
+			this->mat,
+			this->VA
+		);
 	}
 	GameEngine::IRenderer::EndScene();
 }
