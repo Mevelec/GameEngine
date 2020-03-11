@@ -93,10 +93,10 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 		GE_PROFILE_SCOPE("Sandbox3D Render");
 		this->chunkManager.render();
 
-		GameEngine::IRenderer::Submit(
+		/*GameEngine::IRenderer::Submit(
 			this->mat,
 			this->VA
-		);
+		);*/
 	}
 	GameEngine::IRenderer::EndScene();
 }

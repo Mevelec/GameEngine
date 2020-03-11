@@ -180,7 +180,13 @@ namespace GameComponents {
 		GE_PROFILE_FUNCTION();
 
 		// VertexBuffer
-		GameEngine::Scope<GameEngine::DynamicGeometry> a = GameEngine::CreateScope<GameEngine::DynamicGeometry>();
+		GameEngine::BufferLayout layout = {
+			{ GameEngine::ShaderDataType::Float3, "a_Position"},
+			{ GameEngine::ShaderDataType::Float4, "a_Color"},
+			{ GameEngine::ShaderDataType::Float2, "a_TexCoord"},
+			{ GameEngine::ShaderDataType::Float, "a_TexId"},
+		};
+		GameEngine::Scope<GameEngine::Geometry> a = GameEngine::CreateScope<GameEngine::Geometry>(layout);
 
 		int chunkW = chunk->getWidth();
 		for (int x = 0; x <= chunkW - 1; x++)
@@ -195,18 +201,16 @@ namespace GameComponents {
 					{
 						if (  block->getType() == GameComponents::BlockType::Grass)
 						{
-							auto ref = GameEngine::CubeSimple::CreateCube(pos, {0.2, 0.9, 0.2, 1.0}, 1.0f);
+							auto ref = GameEngine::CreateCube(pos, {0.2, 0.9, 0.2, 1.0}, 1.0f);
 							a->add(
-								&ref[0], GameEngine::CubeSimple::vCount,
-								GameEngine::CubeSimple::indices, GameEngine::CubeSimple::iCount
+								ref
 							);
 						}
 						else if(block->getType() == GameComponents::BlockType::Stone)
 						{
-							auto ref = GameEngine::CubeSimple::CreateCube(pos, { 0.6, 0.6, 0.6, 1.0 }, 0.0f);
+							auto ref = GameEngine::CreateCube(pos, { 0.6, 0.6, 0.6, 1.0 }, 0.0f);
 							a->add(
-								&ref[0], GameEngine::CubeSimple::vCount,
-								GameEngine::CubeSimple::indices, GameEngine::CubeSimple::iCount
+								ref
 							);
 						}
 					}
