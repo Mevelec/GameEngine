@@ -9,6 +9,15 @@
 
 namespace GameEngine {
 
+	struct Faces {
+		bool left = false;
+		bool right = false;
+		bool bottom = false;
+		bool top = false;
+		bool front = false;
+		bool back = false;
+	};
+
 	class Geometry
 	{
 	public:
