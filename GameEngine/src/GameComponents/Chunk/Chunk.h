@@ -14,7 +14,8 @@ namespace GameComponents {
 	public:
 		Chunk(const glm::vec3& position);
 
-		GameEngine::Ref<Block> get(int posx, int posy, int posz);
+		GameEngine::Ref<Block> get(int posx, int posy, int posz, bool checkNeighboors);
+
 		void set(GameEngine::Ref<Block> value, int posx, int posy, int posz);
 
 		inline const glm::vec3& getPostion() const { return this->position; }

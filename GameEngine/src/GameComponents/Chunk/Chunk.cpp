@@ -107,61 +107,52 @@ namespace GameComponents {
 						auto state = GameComponents::BlockState();
 						state.visible = true;
 						GameEngine::Ref<Block> ref = BlockManager::getInstance().getBlock(block->getType(), state);
-
-						if ( (x == 0 || x == chunkW) || (y == 0 || y == chunkW) || (z == 0 || z == chunkW)) //if is at border
+						
+						bool isSet = false;
+						// X
+						auto tmp = this->get(x -1, y, z, false);
+						if ( tmp == nullptr && !isSet)
 						{
 							this->chunk->set(ref,
 								x, y, z);
+							isSet = true;
 						}
-						else
+						tmp = this->get(x +1, y, z, false);
+						if (tmp == nullptr && !isSet)
 						{
-							bool isSet = false;
-							// X
-							auto tmp = this->chunk->get(x -1, y, z);
-							if ( tmp == nullptr && !isSet)
-							{
-								this->chunk->set(ref,
-									x, y, z);
-								isSet = true;
-							}
-							tmp = this->chunk->get(x +1, y, z);
-							if (tmp == nullptr && !isSet)
-							{
-								this->chunk->set(ref,
-									x, y, z);
-								isSet = true;
-							}
-							// Y
-							tmp = this->chunk->get(x, y -1, z);
-							if (tmp == nullptr && !isSet)
-							{
-								this->chunk->set(ref,
-									x, y, z);
-								isSet = true;
-							}
-							tmp = this->chunk->get(x, y +1, z);
-							if (tmp == nullptr && !isSet)
-							{
-								this->chunk->set(ref,
-									x, y, z);
-								isSet = true;
-							}
-							// Z
-							tmp = this->chunk->get(x, y, z -1);
-							if (tmp == nullptr && !isSet)
-							{
-								this->chunk->set(ref,
-									x, y, z);
-								isSet = true;
-							}
-							tmp = this->chunk->get(x, y, z +1);
-							if (tmp == nullptr && !isSet)
-							{
-								this->chunk->set(ref,
-									x, y, z);
-								isSet = true;
-							}
-
+							this->chunk->set(ref,
+								x, y, z);
+							isSet = true;
+						}
+						// Y
+						tmp = this->get(x, y -1, z, false);
+						if (tmp == nullptr && !isSet)
+						{
+							this->chunk->set(ref,
+								x, y, z);
+							isSet = true;
+						}
+						tmp = this->get(x, y +1, z, false);
+						if (tmp == nullptr && !isSet)
+						{
+							this->chunk->set(ref,
+								x, y, z);
+							isSet = true;
+						}
+						// Z
+						tmp = this->get(x, y, z -1, false);
+						if (tmp == nullptr && !isSet)
+						{
+							this->chunk->set(ref,
+								x, y, z);
+							isSet = true;
+						}
+						tmp = this->get(x, y, z +1, false);
+						if (tmp == nullptr && !isSet)
+						{
+							this->chunk->set(ref,
+								x, y, z);
+							isSet = true;
 						}
 					}
 				}
@@ -222,9 +213,15 @@ namespace GameComponents {
 		this->VA = a->getVA();
 	}
 
-	GameEngine::Ref<Block> Chunk::get(int posx, int posy, int posz) {
-		GE_PROFILE_FUNCTION();
-
+	GameEngine::Ref<Block> Chunk::get(int posx, int posy, int posz, bool checkNeighboors)  {
+		if (!checkNeighboors)
+		{
+			int chunkW = this->chunk->getWidth() - 1;
+			if ( (posx < 0 || posx > chunkW) || (posy < 0 || posy > chunkW) || (posz < 0 || posz > chunkW) ) //if is at border
+			{
+				return nullptr;
+			}
+		}
 		return this->chunk->get(posx, posy, posz);
 	};
 	void Chunk::set(GameEngine::Ref<Block> value, int posx, int posy, int posz) {

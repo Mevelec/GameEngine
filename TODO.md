@@ -38,9 +38,9 @@
 [ ] 5. handle normals
 
 ## Upgrade of Chunk 2
-[ ] 1. update geometry to load specified faces 
+[x] 1. update geometry to load specified faces 
 [x]		- adapt geometry struct
-[ ]		- update loader to return Geometry ( use satic geo to buld) : create static geo and can add them to geometry
+[x]		- update loader to return Geometry ( use satic geo to buld) : create static geo and can add them to geometry
 [x]		- create primitive Cube creation with specified faces
 
 [ ] 2. update chunk
