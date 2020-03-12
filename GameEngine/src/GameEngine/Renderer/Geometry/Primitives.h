@@ -14,34 +14,57 @@ namespace GameEngine {
 		};
 
 		std::vector<float> vertices = {
-			-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
-				0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
-				0.5f + position.x, 0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
-				-0.5f + position.x, 0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
-				-0.5f + position.x, -0.5f + position.y, 0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
-				0.5f + position.x, -0.5f + position.y, 0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
-				0.5f + position.x, 0.5f + position.y, 0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
-				-0.5f + position.x, 0.5f + position.y, 0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			//left
+				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+				-0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			//Right
+				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+				-0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			//Bottom
+				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+				00.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+				00.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+				-0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			//Top
+				-0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+				00.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+				00.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			//Front	
+				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+				00.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+				00.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			//Back
+				-0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+				00.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+				00.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
 		};
 
 		std::vector<uint32_t> indices = {
+			//Left
 			0, 1, 2,
 			2, 3, 0,
-
+			//Right
 			4, 5, 6,
 			6, 7, 4,
-
-			4, 0, 3,
-			3, 7, 4,
-
-			5, 1, 2,
-			2, 6, 5,
-
-			0, 1, 5,
-			5, 4, 0,
-
-			3, 2, 6,
-			6, 7, 3,
+			//Bottom
+			8, 9, 10,
+			10, 11, 8,
+			//Top
+			12, 13, 14, 
+			14, 15, 12,
+			//Front
+			16, 17, 18,
+			18, 19, 16,
+			//Back
+			20, 21, 22,
+			22, 23, 20
 		};
 
 		StaticGeometry geo(layout, vertices, indices);
