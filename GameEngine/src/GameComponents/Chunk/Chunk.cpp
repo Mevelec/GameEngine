@@ -61,6 +61,21 @@ namespace GameComponents {
 		GameEngine::Noise noise(chunkW, chunkW);
 		noise.loadNoiseAt(this->position.x, this->position.z, 0);
 
+		auto state = GameComponents::BlockState();
+		state.visible = false;
+		auto bl = BlockManager::getInstance().getBlock(GameComponents::BlockType::Grass, state);
+		chunk->set(bl, 0, 0, 0);
+		chunk->set(bl, 1, 0, 0);
+		chunk->set(bl, 0, 1, 0);
+		chunk->set(bl, 1, 1, 0);
+
+		chunk->set(bl, 0, 0, 1);
+		chunk->set(bl, 1, 0, 1);
+		chunk->set(bl, 0, 1, 1);
+		chunk->set(bl, 1, 1, 1);
+
+
+		/*
 		for (int x = 0; x <= chunkW - 1; x++)
 		{
 			for (int z = 0; z <= chunkW - 1; z++)
@@ -79,6 +94,7 @@ namespace GameComponents {
 				}
 			}
 		}
+		*/
 	}
 
 	void Chunk::load()
@@ -190,16 +206,38 @@ namespace GameComponents {
 					auto block = this->chunk->get(x, y, z);
 					if(block != nullptr && block->isVisible())
 					{
+						GameEngine::Faces faces{ 0, 1, 1, 1, 1, 1 };
+						{/*
+							auto tmp = this->chunk->get(x - 1, y, z);
+							if(tmp == nullptr)
+								faces.left = true;
+							tmp = this->chunk->get(x + 1, y, z);
+							if (tmp == nullptr)
+								faces.right = true;
+							tmp = this->chunk->get(x, y - 1, z);
+							if (tmp == nullptr || !tmp->isVisible())
+								faces.bottom = true;
+							tmp = this->chunk->get(x, y + 1, z);
+							if (tmp == nullptr || !tmp->isVisible())
+								faces.top = true;
+							tmp = this->chunk->get(x, y, z - 1);
+							if (tmp == nullptr || !tmp->isVisible())
+								faces.front = true;
+							tmp = this->chunk->get(x, y, z + 1);
+							if (tmp == nullptr || !tmp->isVisible())
+								faces.back = true;*/
+						}
+
 						if (  block->getType() == GameComponents::BlockType::Grass)
 						{
-							auto ref = GameEngine::CreateCube(pos, {0.2, 0.9, 0.2, 1.0}, 1.0f);
+							auto ref = GameEngine::CreateCube(faces, pos, { 0.2, 0.9, 0.2, 1.0 }, 1.0f);
 							a->add(
 								ref
 							);
 						}
 						else if(block->getType() == GameComponents::BlockType::Stone)
 						{
-							auto ref = GameEngine::CreateCube(pos, { 0.6, 0.6, 0.6, 1.0 }, 0.0f);
+							auto ref = GameEngine::CreateCube(faces, pos, { 0.6, 0.6, 0.6, 1.0 }, 0.0f);
 							a->add(
 								ref
 							);
