@@ -1,6 +1,8 @@
 #include "hzpch.h"
 
 #include "Material.h"
+#include "MaterialLibrary.h"
+
 #include "../Renderer.h"
 
 #include "Plateform/OpenGl/OpenGLShader.h"
@@ -24,13 +26,11 @@ namespace GameEngine {
 	{
 	}
 
-	void Material::bind(glm::mat4 viewProjectionMatrix, glm::mat4 transform) 
+	void Material::bind() 
 	{
 		GE_PROFILE_FUNCTION();
 
 		this->shader->bind();
-		this->shader->setMat4("u_ViewProjectionMatrix", viewProjectionMatrix);
-		this->shader->setMat4("u_Transform", transform);
 
 		for each (Ref<MaterialComponent> comp in this->components)
 		{

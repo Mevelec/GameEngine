@@ -18,36 +18,6 @@ namespace GameComponents {
 		this->generate();
 		this->load();
 		this->build();
-
-		// SHADERS
-		this->shaderLib.load("default", "assets/shaders/Default.glsl");
-
-		// MATERIALS
-		GameEngine::Ref<GameEngine::Material> mat;
-
-		mat = GameEngine::MaterialParser::getInstance().loadJson("assets/Materials/sample/configuration.json");
-		this->materialLib.add("sample", mat);
-
-		mat = GameEngine::CreateRef<GameEngine::Material>("default", this->shaderLib.get("default"));
-		mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
-		mat->addComponent("u_TilingFactor", 1.0f);
-
-		GameEngine::Ref<GameEngine::Texture> dirt = GameEngine::Texture2D::Create(1, 1);
-		uint32_t a = 0xffffffff;
-		dirt->setData(&a, sizeof(uint32_t));
-		GameEngine::Ref<GameEngine::Texture> grass = GameEngine::Texture2D::Create("assets/textures/Blocks/grass.png");
-		GameEngine::Ref<GameEngine::Texture> stone = GameEngine::Texture2D::Create("assets/textures/Blocks/stone.png");
-
-		GameEngine::Ref<GameEngine::Sampler> sampler = GameEngine::Sampler::Create();
-		sampler->add(dirt, 0);
-		sampler->add(grass, 1);
-		sampler->add(stone, 1);
-
-
-		mat->addComponent("u_Textures", sampler);
-
-
-		this->materialLib.add(mat);
 	}
 
 	void Chunk::generate()
@@ -61,21 +31,8 @@ namespace GameComponents {
 		GameEngine::Noise noise(chunkW, chunkW);
 		noise.loadNoiseAt(this->position.x, this->position.z, 0);
 
-		auto state = GameComponents::BlockState();
-		state.visible = false;
-		auto bl = BlockManager::getInstance().getBlock(GameComponents::BlockType::Grass, state);
-		chunk->set(bl, 0, 0, 0);
-		chunk->set(bl, 1, 0, 0);
-		chunk->set(bl, 0, 1, 0);
-		chunk->set(bl, 1, 1, 0);
 
-		chunk->set(bl, 0, 0, 1);
-		chunk->set(bl, 1, 0, 1);
-		chunk->set(bl, 0, 1, 1);
-		chunk->set(bl, 1, 1, 1);
-
-
-		/*
+		
 		for (int x = 0; x <= chunkW - 1; x++)
 		{
 			for (int z = 0; z <= chunkW - 1; z++)
@@ -94,7 +51,7 @@ namespace GameComponents {
 				}
 			}
 		}
-		*/
+		
 	}
 
 	void Chunk::load()
@@ -203,29 +160,29 @@ namespace GameComponents {
 				for (int z = 0; z <= chunkW - 1; z++)
 				{
 					glm::vec3 pos(x + this->position.x * chunkW, y + this->position.y * chunkW, z + this->position.z * chunkW);
-					auto block = this->chunk->get(x, y, z);
+					auto block = this->get(x, y, z, false);
 					if(block != nullptr && block->isVisible())
 					{
-						GameEngine::Faces faces{ 0, 1, 1, 1, 1, 1 };
-						{/*
-							auto tmp = this->chunk->get(x - 1, y, z);
+						GameEngine::Faces faces{ 0, 0, 0, 0, 0, 0};
+						{
+							auto tmp = this->get(x - 1, y, z, false);
 							if(tmp == nullptr)
 								faces.left = true;
-							tmp = this->chunk->get(x + 1, y, z);
+							tmp = this->get(x + 1, y, z, false);
 							if (tmp == nullptr)
 								faces.right = true;
-							tmp = this->chunk->get(x, y - 1, z);
-							if (tmp == nullptr || !tmp->isVisible())
+							tmp = this->get(x, y - 1, z, false);
+							if (tmp == nullptr)
 								faces.bottom = true;
-							tmp = this->chunk->get(x, y + 1, z);
-							if (tmp == nullptr || !tmp->isVisible())
+							tmp = this->get(x, y + 1, z, false);
+							if (tmp == nullptr)
 								faces.top = true;
-							tmp = this->chunk->get(x, y, z - 1);
-							if (tmp == nullptr || !tmp->isVisible())
+							tmp = this->get(x, y, z - 1, false);
+							if (tmp == nullptr)
 								faces.front = true;
-							tmp = this->chunk->get(x, y, z + 1);
-							if (tmp == nullptr || !tmp->isVisible())
-								faces.back = true;*/
+							tmp = this->get(x, y, z + 1, false);
+							if (tmp == nullptr)
+								faces.back = true;
 						}
 
 						if (  block->getType() == GameComponents::BlockType::Grass)
@@ -272,10 +229,10 @@ namespace GameComponents {
 	{
 		GE_PROFILE_FUNCTION();
 
-		if (this->VA != nullptr)
+		if (this->VA != nullptr && this->active)
 		{
 			GameEngine::IRenderer::Submit(
-				this->materialLib.get("default"),
+				GameEngine::MaterialLibrary::getInstance().get("default"),
 				this->VA
 			);
 		}

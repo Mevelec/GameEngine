@@ -81,6 +81,7 @@ namespace GameEngine {
 
 		std::vector<float> vertices;
 		std::vector<uint32_t> indices;
+		uint32_t verticesOffset = 0;
 		if (faces.left)
 		{
 			std::vector<float> tmp = {
@@ -92,27 +93,27 @@ namespace GameEngine {
 			};
 			vertices.insert(vertices.end(), tmp.begin(), tmp.end());
 			std::vector<uint32_t> tmpI = {
-				//Left
-				0, 1, 2,
-				2, 3, 0,
+				0 + verticesOffset, 1 + verticesOffset, 2 + verticesOffset,
+				2 + verticesOffset, 3 + verticesOffset, 0 + verticesOffset,
 			};
+			verticesOffset += 4;
 			indices.insert(indices.end(), tmpI.begin(), tmpI.end());
 		}
 		if (faces.right)
 		{
 			std::vector<float> tmp = {
 				//Right
-					-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
-					-0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
-					-0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
-					-0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+					0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+					0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+					0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+					0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
 			};
 			vertices.insert(vertices.end(), tmp.begin(), tmp.end());
 			std::vector<uint32_t> tmpI = {
-				//Right
-				4, 5, 6,
-				6, 7, 4,
+				0 + verticesOffset, 1 + verticesOffset, 2 + verticesOffset,
+				2 + verticesOffset, 3 + verticesOffset, 0 + verticesOffset,
 			};
+			verticesOffset += 4;
 			indices.insert(indices.end(), tmpI.begin(), tmpI.end());
 		}
 		if (faces.bottom)
@@ -126,10 +127,10 @@ namespace GameEngine {
 			};
 			vertices.insert(vertices.end(), tmp.begin(), tmp.end());
 			std::vector<uint32_t> tmpI = {
-				//Bottom
-				8, 9, 10,
-				10, 11, 8,
+				0 + verticesOffset, 1 + verticesOffset, 2 + verticesOffset,
+				2 + verticesOffset, 3 + verticesOffset, 0 + verticesOffset,
 			};
+			verticesOffset += 4;
 			indices.insert(indices.end(), tmpI.begin(), tmpI.end());
 		}
 		if (faces.top)
@@ -143,10 +144,10 @@ namespace GameEngine {
 			};
 			vertices.insert(vertices.end(), tmp.begin(), tmp.end());
 			std::vector<uint32_t> tmpI = {
-				//Top
-				12, 13, 14,
-				14, 15, 12,
+				0 + verticesOffset, 1 + verticesOffset, 2 + verticesOffset,
+				2 + verticesOffset, 3 + verticesOffset, 0 + verticesOffset,
 			};
+			verticesOffset += 4;
 			indices.insert(indices.end(), tmpI.begin(), tmpI.end());
 		}
 		if (faces.front)
@@ -160,10 +161,10 @@ namespace GameEngine {
 			};
 			vertices.insert(vertices.end(), tmp.begin(), tmp.end());
 			std::vector<uint32_t> tmpI = {
-				//Front
-				16, 17, 18,
-				18, 19, 16,
+				0 + verticesOffset, 1 + verticesOffset, 2 + verticesOffset,
+				2 + verticesOffset, 3 + verticesOffset, 0 + verticesOffset,
 			};
+			verticesOffset += 4;
 			indices.insert(indices.end(), tmpI.begin(), tmpI.end());
 		}
 		if (faces.back)
@@ -177,10 +178,10 @@ namespace GameEngine {
 			};
 			vertices.insert(vertices.end(), tmp.begin(), tmp.end());
 			std::vector<uint32_t> tmpI = {
-				//Back
-				20, 21, 22,
-				22, 23, 20
+				0 + verticesOffset, 1 + verticesOffset, 2 + verticesOffset,
+				2 + verticesOffset, 3 + verticesOffset, 0 + verticesOffset,
 			};
+			verticesOffset += 4;
 			indices.insert(indices.end(), tmpI.begin(), tmpI.end());
 		}
 

@@ -28,13 +28,11 @@ namespace GameComponents {
 		void unload();
 	private:
 		glm::vec3 position;
+		bool active = false;
 
 		GameEngine::Scope<OcTree::Octree< GameEngine::Ref<Block> >> chunk;
 		GameEngine::Scope<GameEngine::Geometry> cube;
 		GameEngine::Ref<GameEngine::VertexArray> VA;
-
-		GameEngine::ShaderLibrary shaderLib;
-		GameEngine::MaterialLibrary materialLib;
 	};
 }
 

@@ -20,20 +20,33 @@ SandBox3D::SandBox3D()
 	this->menu = GameEngine::CreateScope<SandBoxMenu>();
 	// SHADERS
 	this->shaderLib.load("default", "assets/shaders/Default.glsl");
-	//mat
-	this->mat = GameEngine::MaterialParser::getInstance().loadJson("assets/Materials/sample/configuration.json");
 
-	this->mat = GameEngine::CreateRef<GameEngine::Material>("default", this->shaderLib.get("default"));
-	this->mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
-	this->mat->addComponent("u_TilingFactor", 1.0f);
+	// MATERIALS
+	GameEngine::Ref<GameEngine::Material> mat;
+
+	mat = GameEngine::MaterialParser::getInstance().loadJson("assets/Materials/sample/configuration.json");
+	GameEngine::MaterialLibrary::getInstance().add("sample", mat);
+
+	mat = GameEngine::CreateRef<GameEngine::Material>("default", this->shaderLib.get("default"));
+	mat->addComponent("u_Color", glm::vec4(255, 255, 255, 255) / glm::vec4(255));
+	mat->addComponent("u_TilingFactor", 1.0f);
+
+	GameEngine::Ref<GameEngine::Texture> dirt = GameEngine::Texture2D::Create(1, 1);
+	uint32_t a = 0xffffffff;
+	dirt->setData(&a, sizeof(uint32_t));
 	GameEngine::Ref<GameEngine::Texture> grass = GameEngine::Texture2D::Create("assets/textures/Blocks/grass.png");
 	GameEngine::Ref<GameEngine::Texture> stone = GameEngine::Texture2D::Create("assets/textures/Blocks/stone.png");
 
 	GameEngine::Ref<GameEngine::Sampler> sampler = GameEngine::Sampler::Create();
-	sampler->add(grass, 0);
+	sampler->add(dirt, 0);
+	sampler->add(grass, 1);
 	sampler->add(stone, 1);
 
-	this->mat->addComponent("u_Textures", sampler);
+
+	mat->addComponent("u_Textures", sampler);
+
+
+	GameEngine::MaterialLibrary::getInstance().add(mat);
 
 
 	//obj

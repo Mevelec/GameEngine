@@ -39,7 +39,6 @@ namespace GameComponents {
 
 	private:
 		GameEngine::ShaderLibrary shaderLib;
-		GameEngine::MaterialLibrary materialLib;
 
 		GameEngine::Ref<GameEngine::Texture> uv_texture;
 

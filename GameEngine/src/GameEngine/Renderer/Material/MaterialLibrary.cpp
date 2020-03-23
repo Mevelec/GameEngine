@@ -33,14 +33,33 @@ namespace GameEngine {
 		return this->materials[name];
 	}
 
+	void MaterialLibrary::bind(const std::string& name, glm::mat4 viewProjectionMatrix, glm::mat4 transform)
+	{
+		auto material = this->get(name);
+		this->bind(material, viewProjectionMatrix, transform);
+	}
+
+	void MaterialLibrary::bind(Ref<Material> mat, glm::mat4 viewProjectionMatrix, glm::mat4 transform)
+	{
+		if (mat->getName() != this->binded)
+		{
+			mat->bind();
+			this->binded = mat->getName();
+		}
+		mat->getShader()->setMat4("u_ViewProjectionMatrix", viewProjectionMatrix);
+		mat->getShader()->setMat4("u_Transform", transform);
+	}
+
+
 	bool MaterialLibrary::exists(const std::string& name)
 	{
 		GE_PROFILE_FUNCTION();
 
 		return this->materials.find(name) != this->materials.end();
 	}
+}
 
-
+namespace GameEngine {
 
 
 	static const std::string pathMaterialFolder = "assets/Materials";

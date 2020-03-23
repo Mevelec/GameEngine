@@ -22,7 +22,7 @@ namespace GameEngine {
 
 		const inline Ref<Shader> getShader() { return this->shader; };
 
-		void bind(glm::mat4 viewProjectionMatrix, glm::mat4 transform);
+		void bind();
 
 		template<typename  T>
 		void addComponent(const std::string& name, const T& value, uint32_t slot = 0)

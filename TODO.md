@@ -44,6 +44,15 @@
 [x]		- create primitive Cube creation with specified faces
 
 [ ] 2. update chunk
-[ ] - update build()    : create VA using direction to display ( top, left ...) faces only
+[x] - update build()    : create VA using direction to display ( top, left ...) faces only
 [ ] - create optimized reload()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
 [ ]	- create optimized rebuild()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
+
+[ ] 3. optimize chunkManager rendering (material load at each render of chunk is heavy)
+[ ]     - use chunk visibility 
+[x]     - static material lib
+[x]     - better bind of materials
+[x]     - better create lib of materials 
+
+[ ] 4. better handle shaders
+[ ]     - create a staic lib, connected to mateial lib
