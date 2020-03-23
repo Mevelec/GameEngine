@@ -49,8 +49,8 @@
 [ ]     - create optimized reload()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
 [ ]	    - create optimized rebuild()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
 
-[ ] 3. optimize chunkManager rendering (material load at each render of chunk is heavy)
-[ ]     - use chunk visibility 
+[x] 3. optimize chunkManager rendering (material load at each render of chunk is heavy)
+[x]     - use chunk visibility 
 [x]     - static material lib
 [x]     - better bind of materials
 [x]     - better create lib of materials 

@@ -41,6 +41,8 @@ namespace GameEngine {
 
 	void MaterialLibrary::bind(Ref<Material> mat, glm::mat4 viewProjectionMatrix, glm::mat4 transform)
 	{
+		GE_PROFILE_FUNCTION();
+
 		if (mat->getName() != this->binded)
 		{
 			mat->bind();

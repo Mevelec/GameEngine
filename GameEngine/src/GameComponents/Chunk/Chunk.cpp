@@ -66,6 +66,9 @@ namespace GameComponents {
 		//ifblock != empty
 		// if have an empty neighboor display
 
+		//check if this chunk is hidden then set its hidden to false
+		this->hidden = true;
+
 		int chunkW = chunk->getWidth() -1;
 		for (int x = 0; x <= chunkW; x++)
 		{
@@ -209,6 +212,8 @@ namespace GameComponents {
 	}
 
 	GameEngine::Ref<Block> Chunk::get(int posx, int posy, int posz, bool checkNeighboors)  {
+		GE_PROFILE_FUNCTION();
+
 		if (!checkNeighboors)
 		{
 			int chunkW = this->chunk->getWidth() - 1;
@@ -229,7 +234,7 @@ namespace GameComponents {
 	{
 		GE_PROFILE_FUNCTION();
 
-		if (this->VA != nullptr && this->active)
+		if (this->VA != nullptr && this->hidden)
 		{
 			GameEngine::IRenderer::Submit(
 				GameEngine::MaterialLibrary::getInstance().get("default"),
