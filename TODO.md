@@ -32,7 +32,8 @@
 [x]     - offset indices ability to desactivate
 
 [ ] 3. handle OBJ material 
-[ ] 3. handle OBJ textures
+
+[ ] 4. handle OBJ textures
 [x]     - coordinates
 [ }		- import map (texture)
 [ ] 5. handle normals
@@ -44,9 +45,9 @@
 [x]		- create primitive Cube creation with specified faces
 
 [ ] 2. update chunk
-[x] - update build()    : create VA using direction to display ( top, left ...) faces only
-[ ] - create optimized reload()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
-[ ]	- create optimized rebuild()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
+[x]     - update build()    : create VA using direction to display ( top, left ...) faces only
+[ ]     - create optimized reload()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
+[ ]	    - create optimized rebuild()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
 
 [ ] 3. optimize chunkManager rendering (material load at each render of chunk is heavy)
 [ ]     - use chunk visibility 
