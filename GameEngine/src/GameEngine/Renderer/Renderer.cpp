@@ -1,6 +1,8 @@
 #include "hzpch.h"
 #include "Renderer.h"
 
+#include "Material/MaterialLibrary.h"
+
 namespace GameEngine {
 	
 	Scope<IRenderer::SceneData> IRenderer::sceneData = CreateScope<IRenderer::SceneData>();
@@ -48,8 +50,7 @@ namespace GameEngine {
 	void IRenderer::Submit(const Ref<Material>& mat, const Ref<VertexArray>& vertexArray, const glm::mat4 transform)
 	{
 		GE_PROFILE_FUNCTION();
-
-		mat->bind(sceneData->viewProjectionMat, transform);
+		GameEngine::MaterialLibrary::getInstance().bind(mat, sceneData->viewProjectionMat, transform);
 
 		vertexArray->bind();
 		RenderCommand::DrawIndexed(vertexArray);

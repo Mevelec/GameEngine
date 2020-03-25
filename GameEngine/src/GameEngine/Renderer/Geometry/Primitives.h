@@ -3,106 +3,191 @@
 #include "GameEngine/Renderer/Geometry/Geometry.h"
 
 namespace GameEngine {
-
-
-	class Square
-	{
-
-	public:
-		static const uint32_t indices[2 * 3];
-		static const uint32_t iCount = 2 * 3;
-
-		static const uint32_t vCount = 4;
-		static const uint32_t vStride = sizeof(float) * 3;
-
-		static float* CreateQuad() {
-
-			float* array = new float[3*4] {
-				-0.5f, -0.5f, 0.0f,       // position
-
-				0.5f, -0.5f, 0.0f,       // position
-
-				0.5f, 0.5f, 0.0f,       // position
-
-				-0.5f, 0.5f, 0.0f,       // position
-			};
 	
-			return array;
-		}
-	};
-	
-	class CubeSimple
-	{
 
-	public:
-		static const uint32_t indices[12 * 3];
-		static const uint32_t iCount = 12 * 3;
+	static Geometry CreateCube(glm::fvec3 position, glm::fvec4 color = glm::fvec4(1.0f, 1.0f, 1.0f, 1.0f), float texId = 0.0f) {
+		GameEngine::BufferLayout layout = {
+			{ GameEngine::ShaderDataType::Float3, "a_Position"},
+			{ GameEngine::ShaderDataType::Float4, "a_Color"},
+			{ GameEngine::ShaderDataType::Float2, "a_TexCoord"},
+			{ GameEngine::ShaderDataType::Float, "a_TexId"},
+		};
 
-		static const uint32_t vStride = sizeof(float) * (3 + 4 + 2 + 1);
-		static const uint32_t vCount = 8;
+		std::vector<float> vertices = {
+			//left
+				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+				-0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			//Right
+				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+				-0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			//Bottom
+				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+				00.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+				00.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+				-0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			//Top
+				-0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+				00.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+				00.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			//Front	
+				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+				00.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+				00.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			//Back
+				-0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+				00.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+				00.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+				-0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+		};
 
-		static std::vector<float> CreateCube(glm::fvec3 position, glm::fvec4 color = glm::fvec4(1.0f, 1.0f, 1.0f, 1.0f), float texId = 0.0f) {
-			return std::vector<float>{
-				-0.5f + position.x, -0.5f + position.y, -0.5f + position.z,      color.r, color.g, color.b, color.a,        0.0f, 0.0f,       texId,
-				 0.5f + position.x, -0.5f + position.y, -0.5f + position.z,	     color.r, color.g, color.b, color.a,        1.0f, 0.0f,       texId,
-				 0.5f + position.x,  0.5f + position.y, -0.5f + position.z,	     color.r, color.g, color.b, color.a,        1.0f, 1.0f,       texId,
-				-0.5f + position.x,  0.5f + position.y, -0.5f + position.z,	     color.r, color.g, color.b, color.a,        0.0f, 1.0f,       texId,
-				-0.5f + position.x, -0.5f + position.y,  0.5f + position.z,	     color.r, color.g, color.b, color.a,        0.0f, 0.0f,       texId,
-				 0.5f + position.x, -0.5f + position.y,  0.5f + position.z,	     color.r, color.g, color.b, color.a,        1.0f, 0.0f,       texId,
-				 0.5f + position.x,  0.5f + position.y,  0.5f + position.z,	     color.r, color.g, color.b, color.a,        1.0f, 1.0f,       texId,
-				-0.5f + position.x,  0.5f + position.y,  0.5f + position.z,	     color.r, color.g, color.b, color.a,        0.0f, 1.0f,       texId,
-			}; 
-		}
-	};
+		std::vector<uint32_t> indices = {
+			//Left
+			0, 1, 2,
+			2, 3, 0,
+			//Right
+			4, 5, 6,
+			6, 7, 4,
+			//Bottom
+			8, 9, 10,
+			10, 11, 8,
+			//Top
+			12, 13, 14, 
+			14, 15, 12,
+			//Front
+			16, 17, 18,
+			18, 19, 16,
+			//Back
+			20, 21, 22,
+			22, 23, 20
+		};
 
-	class Cube
-	{
+		StaticGeometry geo(layout, vertices, indices);
 
-	public:
-		static const uint32_t indices[12 * 3];
-		static const uint32_t iCount = 12 * 3;
+		return geo;
+	}
+	static Geometry CreateCube(Faces faces, glm::fvec3 position, glm::fvec4 color = glm::fvec4(1.0f, 1.0f, 1.0f, 1.0f), float texId = 0.0f) {
+		GameEngine::BufferLayout layout = {
+			{ GameEngine::ShaderDataType::Float3, "a_Position"},
+			{ GameEngine::ShaderDataType::Float4, "a_Color"},
+			{ GameEngine::ShaderDataType::Float2, "a_TexCoord"},
+			{ GameEngine::ShaderDataType::Float, "a_TexId"},
+		};
 
-		static const uint32_t vStride = sizeof(float) * (3 + 4 + 2 + 1);
-		static const uint32_t vCount = 24;
-
-		static std::vector<float> CreateCube(glm::fvec3 position, glm::fvec4 color = glm::fvec4(1.0f, 1.0f, 1.0f, 1.0f), float texId = 0.0f) {
-			return std::vector<float>{
-					// Face avant
-				-0.5f + position.x, -0.5f + position.y, 00.5f + position.z,         color.r, color.g, color.b, color.a,        0.0f, 0.0f,       texId,
-					00.5f + position.x, -0.5f + position.y, 00.5f + position.z,     color.r, color.g, color.b, color.a,        1.0f, 0.0f,       texId,
-					00.5f + position.x, 00.5f + position.y, 00.5f + position.z,     color.r, color.g, color.b, color.a,        1.0f, 1.0f,       texId,
-					-0.5f + position.x, 00.5f + position.y, 00.5f + position.z,     color.r, color.g, color.b, color.a,        0.0f, 1.0f,       texId,
-
-					// Face arrière
-					-0.5f + position.x, -0.5f + position.y, -0.5f + position.z,     color.r, color.g, color.b, color.a,        0.0f, 0.0f,       texId,
-					-0.5f + position.x, 00.5f + position.y, -0.5f + position.z,     color.r, color.g, color.b, color.a,        1.0f, 0.0f,       texId,
-					00.5f + position.x, 00.5f + position.y, -0.5f + position.z,     color.r, color.g, color.b, color.a,        1.0f, 1.0f,       texId,
-					00.5f + position.x, -0.5f + position.y, -0.5f + position.z,     color.r, color.g, color.b, color.a,        0.0f, 1.0f,       texId,
-
-					// Face supérieure
-					-0.5f + position.x, 00.5f + position.y, -0.5f + position.z,     color.r, color.g, color.b, color.a,        0.0f, 0.0f,       texId,
-					-0.5f + position.x, 00.5f + position.y, 00.5f + position.z,     color.r, color.g, color.b, color.a,        1.0f, 0.0f,       texId,
-					00.5f + position.x, 00.5f + position.y, 00.5f + position.z,     color.r, color.g, color.b, color.a,        1.0f, 1.0f,       texId,
-					00.5f + position.x, 00.5f + position.y, -0.5f + position.z,     color.r, color.g, color.b, color.a,        0.0f, 1.0f,       texId,
-
-					// Face inférieure
-					-0.5f + position.x, -0.5f + position.y, -0.5f + position.z,     color.r, color.g, color.b, color.a,        0.0f, 0.0f,       texId,
-					00.5f + position.x, -0.5f + position.y, -0.5f + position.z,     color.r, color.g, color.b, color.a,        1.0f, 0.0f,       texId,
-					00.5f + position.x, -0.5f + position.y, 00.5f + position.z,     color.r, color.g, color.b, color.a,        1.0f, 1.0f,       texId,
-					-0.5f + position.x, -0.5f + position.y, 00.5f + position.z,     color.r, color.g, color.b, color.a,        0.0f, 1.0f,       texId,
-
-					// Face droite
-					00.5f + position.x, -0.5f + position.y, -0.5f + position.z,     color.r, color.g, color.b, color.a,        0.0f, 0.0f,       texId,
-					00.5f + position.x, 00.5f + position.y, -0.5f + position.z,     color.r, color.g, color.b, color.a,        1.0f, 0.0f,       texId,
-					00.5f + position.x, 00.5f + position.y, 00.5f + position.z,     color.r, color.g, color.b, color.a,        1.0f, 1.0f,       texId,
-					00.5f + position.x, -0.5f + position.y, 00.5f + position.z,     color.r, color.g, color.b, color.a,        0.0f, 1.0f,       texId,
-
-					// Face gauche
-					-0.5f + position.x, -0.5f + position.y, -0.5f + position.z,     color.r, color.g, color.b, color.a,        0.0f, 0.0f,       texId,
-					-0.5f + position.x, -0.5f + position.y, 00.5f + position.z,     color.r, color.g, color.b, color.a,        1.0f, 0.0f,       texId,
-					-0.5f + position.x, 00.5f + position.y, 00.5f + position.z,     color.r, color.g, color.b, color.a,        1.0f, 1.0f,       texId,
-					-0.5f + position.x, 00.5f + position.y, -0.5f + position.z,     color.r, color.g, color.b, color.a,        0.0f, 1.0f,       texId,
+		std::vector<float> vertices;
+		std::vector<uint32_t> indices;
+		uint32_t verticesOffset = 0;
+		if (faces.left)
+		{
+			std::vector<float> tmp = {
+				//left
+					-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+					-0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+					-0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+					-0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
 			};
+			vertices.insert(vertices.end(), tmp.begin(), tmp.end());
+			std::vector<uint32_t> tmpI = {
+				0 + verticesOffset, 1 + verticesOffset, 2 + verticesOffset,
+				2 + verticesOffset, 3 + verticesOffset, 0 + verticesOffset,
+			};
+			verticesOffset += 4;
+			indices.insert(indices.end(), tmpI.begin(), tmpI.end());
 		}
-	};
+		if (faces.right)
+		{
+			std::vector<float> tmp = {
+				//Right
+					0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+					0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+					0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+					0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			};
+			vertices.insert(vertices.end(), tmp.begin(), tmp.end());
+			std::vector<uint32_t> tmpI = {
+				0 + verticesOffset, 1 + verticesOffset, 2 + verticesOffset,
+				2 + verticesOffset, 3 + verticesOffset, 0 + verticesOffset,
+			};
+			verticesOffset += 4;
+			indices.insert(indices.end(), tmpI.begin(), tmpI.end());
+		}
+		if (faces.bottom)
+		{
+			std::vector<float> tmp = {
+				//Bottom
+					-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+					00.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+					00.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+					-0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			};
+			vertices.insert(vertices.end(), tmp.begin(), tmp.end());
+			std::vector<uint32_t> tmpI = {
+				0 + verticesOffset, 1 + verticesOffset, 2 + verticesOffset,
+				2 + verticesOffset, 3 + verticesOffset, 0 + verticesOffset,
+			};
+			verticesOffset += 4;
+			indices.insert(indices.end(), tmpI.begin(), tmpI.end());
+		}
+		if (faces.top)
+		{
+			std::vector<float> tmp = {
+				//Top
+					-0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+					00.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+					00.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+					-0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			};
+			vertices.insert(vertices.end(), tmp.begin(), tmp.end());
+			std::vector<uint32_t> tmpI = {
+				0 + verticesOffset, 1 + verticesOffset, 2 + verticesOffset,
+				2 + verticesOffset, 3 + verticesOffset, 0 + verticesOffset,
+			};
+			verticesOffset += 4;
+			indices.insert(indices.end(), tmpI.begin(), tmpI.end());
+		}
+		if (faces.front)
+		{
+			std::vector<float> tmp = {
+				//Front	
+					-0.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+					00.5f + position.x, -0.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+					00.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+					-0.5f + position.x, 00.5f + position.y, -0.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			};
+			vertices.insert(vertices.end(), tmp.begin(), tmp.end());
+			std::vector<uint32_t> tmpI = {
+				0 + verticesOffset, 1 + verticesOffset, 2 + verticesOffset,
+				2 + verticesOffset, 3 + verticesOffset, 0 + verticesOffset,
+			};
+			verticesOffset += 4;
+			indices.insert(indices.end(), tmpI.begin(), tmpI.end());
+		}
+		if (faces.back)
+		{
+			std::vector<float> tmp = {
+				//Back
+					-0.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 0.0f, texId,
+					00.5f + position.x, -0.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 0.0f, texId,
+					00.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 1.0f, 1.0f, texId,
+					-0.5f + position.x, 00.5f + position.y, 00.5f + position.z, color.r, color.g, color.b, color.a, 0.0f, 1.0f, texId,
+			};
+			vertices.insert(vertices.end(), tmp.begin(), tmp.end());
+			std::vector<uint32_t> tmpI = {
+				0 + verticesOffset, 1 + verticesOffset, 2 + verticesOffset,
+				2 + verticesOffset, 3 + verticesOffset, 0 + verticesOffset,
+			};
+			verticesOffset += 4;
+			indices.insert(indices.end(), tmpI.begin(), tmpI.end());
+		}
+
+
+		StaticGeometry geo(layout, vertices, indices);
+
+		return geo;
+	}
 }

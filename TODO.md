@@ -32,15 +32,39 @@
 [x]     - offset indices ability to desactivate
 
 [ ] 3. handle OBJ material 
-[ ] 3. handle OBJ textures
+
+[ ] 4. handle OBJ textures
 [x]     - coordinates
 [ }		- import map (texture)
 [ ] 5. handle normals
 
 ## Upgrade of Chunk 2
-[ ] 1. update geometry to load specified faces 
+[x] 1. update geometry to load specified faces 
+[x]		- adapt geometry struct
+[x]		- update loader to return Geometry ( use satic geo to buld) : create static geo and can add them to geometry
+[x]		- create primitive Cube creation with specified faces
 
-[ ] 2. update chunk
-[ ] - update build()    : create VA using direction to display ( top, left ...) faces only
-[ ] - create optimized reload()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
-[ ]	- create optimized rebuild()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
+[x] 2. update chunk
+[x]     - update build()    : create VA using direction to display ( top, left ...) faces only
+
+[x] 3. optimize chunkManager rendering (material load at each render of chunk is heavy)
+[x]     - use chunk visibility 
+[x]     - static material lib
+[x]     - better bind of materials
+[x]     - better create lib of materials 
+
+[ ] 4. better handle shaders
+[ ]     - create a static lib, connected to mateial lib
+
+## Upgrade of chunk Manager
+[ ] 1. Allow dynamic generation
+[ ]     - the user can move and corresponding chunks are generated according to render view
+[ ]     - better handle memory
+
+## Upgrade of Chunk 3
+[ ] 1. update chunk
+[ ]     - Update Octree lib to have differents levels/depth of division to reduce memory usages (keep old way for later profiling and stats)
+[ ]     - create optimized reload()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
+[ ]	    - create optimized rebuild()     : set visibilities inside octree and generate VA at the same time (on loob for the two)
+
+

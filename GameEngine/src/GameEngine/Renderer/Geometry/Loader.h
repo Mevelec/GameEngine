@@ -6,7 +6,7 @@ namespace GameEngine
 	class Loader
 	{
 	public:
-		static GameEngine::DynamicGeometry loadOBJ(const char* path);
+		static GameEngine::Geometry loadOBJ(const char* path);
 
 		// Singleton + constructor
 	public:

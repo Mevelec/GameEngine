@@ -4,9 +4,17 @@
 #include <OBJ_Loader.h>
 
 namespace GameEngine {
-	GameEngine::DynamicGeometry Loader::loadOBJ(const char* path)
+	GameEngine::Geometry Loader::loadOBJ(const char* path)
 	{
-		GameEngine::DynamicGeometry geo(true);
+
+		GameEngine::BufferLayout layout = {
+				{ GameEngine::ShaderDataType::Float3, "a_Position"},
+				{ GameEngine::ShaderDataType::Float4, "a_Color"},
+				{ GameEngine::ShaderDataType::Float2, "a_TexCoord"},
+				{ GameEngine::ShaderDataType::Float, "a_TexId"},
+		};
+
+		GameEngine::Geometry geo(layout);
 
 		// Initialize Loader
 		objl::Loader Loader;
@@ -89,7 +97,7 @@ namespace GameEngine {
 				*/
 
 
-				geo.add(&out_vertices[0], out_vertices.size(), &out_indices[0], out_indices.size());
+				//geo.add(&out_vertices[0], out_vertices.size(), &out_indices[0], out_indices.size());
 			}
 		}
 		else

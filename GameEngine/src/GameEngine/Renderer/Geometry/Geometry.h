@@ -9,51 +9,43 @@
 
 namespace GameEngine {
 
-	struct Vertex
-	{
-		glm::vec3 position;
-		glm::vec4 color;
-		glm::vec2 texCoords;
-		float texId;
+	struct Faces {
+		bool left = false;
+		bool right = false;
+		bool bottom = false;
+		bool top = false;
+		bool front = false;
+		bool back = false;
 	};
 
 	class Geometry
 	{
 	public:
-		virtual float* getVertices() = 0;
-		virtual uint32_t* getIndices() = 0;
-
-	protected:
-		uint32_t indicesSize;
-	};
-
-
-
-	class DynamicGeometry : Geometry
-	{
-	public:
-		DynamicGeometry(bool indicesOffset_auto = true);
-
-		virtual float* getVertices() override;
-		virtual uint32_t* getIndices() override;
-
-		void add(float* vertices, const uint32_t countV, const uint32_t* indices, const uint32_t countI);
-		void inline setLayout(const BufferLayout& layout) { this->layout = layout; };
+		Geometry(BufferLayout layout);
 
 		void createVA();
+		const GameEngine::Ref<GameEngine::VertexArray>& getVA() { this->createVA(); return this->VA; };
 
-		GameEngine::Ref<GameEngine::VertexArray> getVA();
+		const BufferLayout& getLayout() { return this->layout; };
 
+		bool add(Geometry& geo);
+
+		const std::vector<float>& getVertices() { return this->vertices; };
+		const std::vector<uint32_t>& getIndices() { return this->indices; };
 	protected:
 		BufferLayout layout;
 
 		GameEngine::Ref<GameEngine::VertexArray> VA;
 
-		bool indicesOffset_auto;
-
 		std::vector<float> vertices;
 		std::vector<uint32_t> indices;
 
 		uint32_t verticesOffset = 0;
+	};
+
+	class StaticGeometry : public Geometry
+	{
+	public:
+		StaticGeometry::StaticGeometry(BufferLayout layout, std::vector<float> vertices, std::vector<uint32_t> indices);
 	};
 }

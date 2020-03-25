@@ -39,15 +39,15 @@ namespace GameComponents {
 
 		shader = this->shaderLib.load("flat",               "assets/shaders/FlatColor.glsl");
 		mat = GameEngine::CreateRef<GameEngine::Material>(shader);
-		this->materialLib.add(mat);
+		GameEngine::MaterialLibrary::getInstance().add(mat);
 
 		shader = this->shaderLib.load("textureCoordinates", "assets/shaders/TextureCoordinates.glsl");
 		mat = GameEngine::CreateRef<GameEngine::Material>("textureCoordinates", shader);
-		this->materialLib.add(mat);
+		GameEngine::MaterialLibrary::getInstance().add(mat);
 
 		shader = this->shaderLib.load("texture2D",          "assets/shaders/Texture2D.glsl");
 		mat = GameEngine::CreateRef<GameEngine::Material>("texture2D", shader);
-		this->materialLib.add(mat);
+		GameEngine::MaterialLibrary::getInstance().add(mat);
 
 
 
