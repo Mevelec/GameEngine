@@ -59,6 +59,7 @@
 ## Upgrade of chunk Manager
 [ ] 1. Allow dynamic generation
 [ ]     - the user can move and corresponding chunks are generated according to render view
+[ ]     - frustrum culling
 [ ]     - better handle memory
 
 ## Upgrade of Chunk 3
