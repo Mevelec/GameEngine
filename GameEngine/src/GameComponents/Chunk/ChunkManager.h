@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <list>
 
 #include"GameComponents/Chunk/Chunk.h"
 
@@ -19,15 +20,9 @@ namespace GameComponents {
 		void init();
 
 	private:
-		std::vector<
-			std::vector<
-				std::vector<
-					GameEngine::Ref<Chunk>
-				>
-			>
-		>*
-			chunks;
-		uint32_t renderDistance = 1;
+		std::list<Chunk> chunks;
+
+		uint32_t renderDistance = 5;
 
 	};
 }

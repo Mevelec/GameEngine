@@ -12,7 +12,7 @@ namespace GameComponents {
 	class Chunk : public GameEngine::Renderable
 	{
 	public:
-		Chunk(const glm::vec3& position);
+		Chunk(const glm::vec3& position = { 0, 0, 0 });
 
 		GameEngine::Ref<Block> get(int posx, int posy, int posz, bool checkNeighboors);
 
