@@ -10,6 +10,10 @@ namespace GameComponents {
 		this->init();
 	}
 
+	void ChunkManager::onEvent(GameEngine::Event& e)
+	{
+		GameEngine::EventDispatcher dispatcher(e);
+	}
 
 	void ChunkManager::init()
 	{
@@ -18,6 +22,11 @@ namespace GameComponents {
 		{
 			this->chunks.push_back(Chunk({i, 0, 0}));
 		}
+	}
+
+	void ChunkManager::load(glm::vec3 center) 
+	{
+			int i = 0;
 	}
 
 	void ChunkManager::reload()

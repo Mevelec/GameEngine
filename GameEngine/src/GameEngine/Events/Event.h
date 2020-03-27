@@ -20,7 +20,7 @@ namespace GameEngine {
 		SetedClipboardText,
 		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed,  MouseButtonReleased, MouseMoved, MouseScrolled,
-		ChunkDoReload, ChunkSetRenderView
+		ChunkDoReload, ChunkSetRenderView, ChunkLoad
 	};
 
 	/// Enum of Events categories
@@ -90,4 +90,9 @@ namespace GameEngine {
 	{
 		return os << e.ToString();
 	}
+
+	class EventHandler
+	{
+		virtual void onEvent(Event& e) = 0;
+	};
 }

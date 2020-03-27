@@ -72,6 +72,9 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 	// MOVE
 	if (GameEngine::Input::IsKeyPressed(GE_KEY_A)) {
 		this->camera->translate({ this->cameraMoveSpeed * ts *-1, 0, 0 });
+
+		auto e = GameEngine::ChunkLoad(this->camera->getPosition());
+		GameEngine::Application::get().onEvent(e);
 	}
 	else if (GameEngine::Input::IsKeyPressed(GE_KEY_D)) {
 		this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0 });
@@ -122,7 +125,7 @@ void SandBox3D::onEvent(GameEngine::Event& e)
 	dispatcher.Dispatch<GameEngine::ChunkDoReload>(GE_BIND_EVENT_FN(SandBox3D::onChunkDoReload));
 	dispatcher.Dispatch<GameEngine::ChunkSetRenderView>(GE_BIND_EVENT_FN(SandBox3D::onChunkSetRenderView));
 
-
+	this->chunkManager.onEvent(e);
 }
 
 bool SandBox3D::onKeyPressedEvent(GameEngine::KeyPressedEvent& event)
