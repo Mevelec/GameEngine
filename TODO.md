@@ -63,6 +63,8 @@
 [ ]         - on y
 [ ]         - on z
 
+[ ] 3. better chunk manager event edit variable (chunkSize and renderdistance) maybe a dynamic method separated of model 
+
 [ ] 2. the user can move and corresponding chunks are generated according to render view
 
 [ ]     - frustrum culling

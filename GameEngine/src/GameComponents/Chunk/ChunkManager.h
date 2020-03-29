@@ -10,23 +10,36 @@ namespace GameComponents {
 	class ChunkManager : public GameEngine::EventHandler
 	{
 	public:
-		ChunkManager();
+		ChunkManager(glm::uvec3 pos = { 0, 0, 0 });
 
-		virtual void onEvent(GameEngine::Event& e) override;
 		void update();
 		void render();
 		void reload();
-		void load(glm::vec3 center);
+		bool load();
+
+
+	public :
+		virtual void onEvent(GameEngine::Event& e) override;
+		bool onChunkDoReload(GameEngine::ChunkDoReloadEvent& event);
+		bool onChunkSetRenderView(GameEngine::ChunkSetRenderViewEvent& event);
+		bool onChunkMoveCenter(GameEngine::ChunkMoveCenterEvent& event);
+
+	public:
+		uint32_t getChunkSize() { return pow(2, this->chunkDepth); }
 
 		void setRenderDistance(uint32_t distance) { this->renderDistance = distance; }
-		uint32_t getRenderDistance() { this->renderDistance; }
+		const uint32_t& getRenderDistance() { return this->renderDistance; }
+
+		const glm::uvec3& getCenter() { return this->center; }
 	private:
 		void init();
 
 	private:
 		std::list<Chunk> chunks;
+		glm::uvec3 center;
 
-		uint32_t renderDistance = 3;
+		uint32_t renderDistance = 1;
+		uint32_t chunkDepth = 4;
 
 	};
 }

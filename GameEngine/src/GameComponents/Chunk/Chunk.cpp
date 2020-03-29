@@ -9,11 +9,12 @@
 #include "Chunk.h"
 
 namespace GameComponents {
-	Chunk::Chunk(const glm::vec3& position)
+	Chunk::Chunk(const uint32_t& depth, const glm::vec3& position)
 	{
 		GE_PROFILE_FUNCTION();
 
 		this->position = position;
+		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault< GameEngine::Ref<Block> >>(depth);
 
 		this->generate();
 		this->load();
@@ -23,9 +24,6 @@ namespace GameComponents {
 	void Chunk::generate()
 	{
 		GE_PROFILE_FUNCTION();
-
-		this->chunk = GameEngine::CreateScope<OcTree::OcTreeDefault< GameEngine::Ref<Block> >>(4);
-
 
 		int chunkW = chunk->getWidth();
 		GameEngine::Noise noise(chunkW, chunkW);

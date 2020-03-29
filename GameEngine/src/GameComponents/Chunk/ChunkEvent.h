@@ -3,10 +3,10 @@
 
 namespace GameEngine {
 
-	class ChunkDoReload : public Event
+	class ChunkDoReloadEvent : public Event
 	{
 	public:
-		ChunkDoReload() = default;
+		ChunkDoReloadEvent() = default;
 
 		EVENT_CLASS_TYPE(ChunkDoReload)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
@@ -14,27 +14,27 @@ namespace GameEngine {
 	};
 
 
-	class ChunkSetRenderView : public Event
+	class ChunkSetRenderViewEvent : public Event
 	{
 	public:
 		inline int GetValue() const { return distance; }
 
 		EVENT_CLASS_TYPE(ChunkSetRenderView)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
-		ChunkSetRenderView(int distance) : distance(distance) {}
+		ChunkSetRenderViewEvent(int distance) : distance(distance) {}
 	private:
 		int distance;
 	};
 
-	class ChunkLoad : public Event
+	class ChunkMoveCenterEvent : public Event
 	{
 	public:
-		inline const glm::vec3& GetValue() const { return center; }
+		inline const glm::uvec3& GetValue() const { return center; }
 
 		EVENT_CLASS_TYPE(ChunkLoad)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
-		ChunkLoad(glm::vec3& center) : center(center) {}
+		ChunkMoveCenterEvent(glm::uvec3& center) : center(center) {}
 	private:
-		const glm::vec3 center;
+		const glm::uvec3 center;
 	};
 }

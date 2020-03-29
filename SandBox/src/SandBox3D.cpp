@@ -53,6 +53,14 @@ SandBox3D::SandBox3D()
 	auto geo = GameEngine::Loader::loadOBJ("assets/Models/test/box_stack.obj");
 	geo.createVA();
 	this->VA = geo.getVA();
+
+	// ChunkManager
+	auto camPos = this->camera->getPosition();
+	this->chunkManager = GameComponents::ChunkManager({
+		(int)camPos.x / (int)this->chunkManager.getChunkSize(),
+		(int)camPos.y / (int)this->chunkManager.getChunkSize(),
+		(int)camPos.z / (int)this->chunkManager.getChunkSize(),
+		});
 }
 
 void SandBox3D::onAttach()
@@ -73,8 +81,7 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 	if (GameEngine::Input::IsKeyPressed(GE_KEY_A)) {
 		this->camera->translate({ this->cameraMoveSpeed * ts *-1, 0, 0 });
 
-		auto e = GameEngine::ChunkLoad(this->camera->getPosition());
-		GameEngine::Application::get().onEvent(e);
+
 	}
 	else if (GameEngine::Input::IsKeyPressed(GE_KEY_D)) {
 		this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0 });
@@ -90,6 +97,29 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 	}
 	else if (GameEngine::Input::IsKeyPressed(GE_KEY_LEFT_CONTROL)) {
 		this->camera->translate({ 0, this->cameraMoveSpeed * ts * -1, 0 });
+	}
+
+	//check if must launch event chunkMoveCenter
+	{
+		GE_PROFILE_SCOPE("check::launch::chunkMoveCenter");
+
+		auto camPos = this->camera->getPosition();
+		auto x = (int)camPos.x / (int)this->chunkManager.getChunkSize();
+		auto y = (int)camPos.y / (int)this->chunkManager.getChunkSize();
+		auto z = (int)camPos.z / (int)this->chunkManager.getChunkSize();
+
+		auto center = glm::uvec3(x, y, z);
+		if (  center != this->chunkManager.getCenter())
+		{
+			auto a = 1;
+			auto e = GameEngine::ChunkMoveCenterEvent(center);
+			GameEngine::Application::get().onEvent(e);
+		}
+
+		GE_CORE_INFO("chunk size {0}", (int)this->chunkManager.getChunkSize());
+		GE_CORE_INFO("campos {0} {1} {2}", (int)camPos.x, (int)camPos.y, (int)camPos.z);
+		GE_CORE_INFO("ChunkLoad {0} {1} {2}", x, y, z);
+
 	}
 
 	// ROTATE
@@ -122,8 +152,6 @@ void SandBox3D::onEvent(GameEngine::Event& e)
 	GameEngine::EventDispatcher dispatcher(e);
 	dispatcher.Dispatch<GameEngine::KeyPressedEvent>(GE_BIND_EVENT_FN(SandBox3D::onKeyPressedEvent));
 	dispatcher.Dispatch<GameEngine::WindowResizeEvent>(GE_BIND_EVENT_FN(SandBox3D::onWindowResized));
-	dispatcher.Dispatch<GameEngine::ChunkDoReload>(GE_BIND_EVENT_FN(SandBox3D::onChunkDoReload));
-	dispatcher.Dispatch<GameEngine::ChunkSetRenderView>(GE_BIND_EVENT_FN(SandBox3D::onChunkSetRenderView));
 
 	this->chunkManager.onEvent(e);
 }
@@ -140,17 +168,6 @@ bool SandBox3D::onWindowResized(GameEngine::WindowResizeEvent& event)
 	return false;
 }
 
-bool SandBox3D::onChunkDoReload(GameEngine::ChunkDoReload& event)
-{
-	this->chunkManager.reload();
-	return false;
-}
-
-bool SandBox3D::onChunkSetRenderView(GameEngine::ChunkSetRenderView& event)
-{
-	this->chunkManager.setRenderDistance(event.GetValue());
-	return false;
-}
 
 void SandBox3D::onImGuiRender()
 {

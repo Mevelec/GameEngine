@@ -2,7 +2,8 @@
 #include "ChunkManager.h"
 
 namespace GameComponents {
-	ChunkManager::ChunkManager()
+	ChunkManager::ChunkManager(glm::uvec3 pos)
+		: center(pos)
 	{
 		GE_PROFILE_FUNCTION();
 		this->chunks = std::list<Chunk>();
@@ -10,23 +11,20 @@ namespace GameComponents {
 		this->init();
 	}
 
-	void ChunkManager::onEvent(GameEngine::Event& e)
-	{
-		GameEngine::EventDispatcher dispatcher(e);
-	}
 
 	void ChunkManager::init()
 	{
 		GE_PROFILE_FUNCTION();
-		for (int i = 0; i < this->renderDistance; i++)
+		for (int i = this->renderDistance *-1; i < (int)this->renderDistance; i++)
 		{
-			this->chunks.push_back(Chunk({i, 0, 0}));
+			this->chunks.push_back(Chunk(this->chunkDepth, {i, 0, 0}));
 		}
 	}
 
-	void ChunkManager::load(glm::vec3 center) 
+	bool ChunkManager::load() 
 	{
 			int i = 0;
+			return false;
 	}
 
 	void ChunkManager::reload()
@@ -66,4 +64,36 @@ namespace GameComponents {
 			}*/
 		}
 	}
+
+
+	// EVENTS //
+
+	void ChunkManager::onEvent(GameEngine::Event& e)
+	{
+		GameEngine::EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<GameEngine::ChunkDoReloadEvent>(GE_BIND_EVENT_FN(ChunkManager::onChunkDoReload));
+		dispatcher.Dispatch<GameEngine::ChunkSetRenderViewEvent>(GE_BIND_EVENT_FN(ChunkManager::onChunkSetRenderView));
+		dispatcher.Dispatch<GameEngine::ChunkMoveCenterEvent>(GE_BIND_EVENT_FN(ChunkManager::onChunkMoveCenter));
+
+	}
+
+	bool ChunkManager::onChunkDoReload(GameEngine::ChunkDoReloadEvent& event)
+	{
+		this->reload();
+		return false;
+	}
+
+	bool ChunkManager::onChunkSetRenderView(GameEngine::ChunkSetRenderViewEvent& event)
+	{
+		this->setRenderDistance(event.GetValue());
+		return false;
+	}
+
+	bool ChunkManager::onChunkMoveCenter(GameEngine::ChunkMoveCenterEvent& event)
+	{
+		auto a = event.GetValue();
+		this->center = a;
+		return false;
+	}
 }
+

@@ -70,13 +70,13 @@ void SandBoxMenu::showChunkManager(bool* p_open)
 	static uint32_t i1 = 1;
 	if (ImGui::DragScalar("drag s8", ImGuiDataType_U32, &i1, 1, 0, NULL))
 	{
-		auto e = GameEngine::ChunkSetRenderView(i1);
+		auto e = GameEngine::ChunkSetRenderViewEvent(i1);
 		GameEngine::Application::get().onEvent(e);
 	}
 
 	if (ImGui::Button("Apply"))
 	{
-		auto e = GameEngine::ChunkDoReload();
+		auto e = GameEngine::ChunkDoReloadEvent();
 		GameEngine::Application::get().onEvent(e);
 	}
 }

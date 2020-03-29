@@ -22,8 +22,7 @@ public:
 
 	bool onWindowResized(GameEngine::WindowResizeEvent& event);
 	bool onKeyPressedEvent(GameEngine::KeyPressedEvent& event);
-	bool onChunkDoReload(GameEngine::ChunkDoReload& event);
-	bool SandBox3D::onChunkSetRenderView(GameEngine::ChunkSetRenderView& event);
+
 
 private:
 	GameEngine::Camera* camera;
