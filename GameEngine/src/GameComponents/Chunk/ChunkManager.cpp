@@ -92,6 +92,23 @@ namespace GameComponents {
 	bool ChunkManager::onChunkMoveCenter(GameEngine::ChunkMoveCenterEvent& event)
 	{
 		auto a = event.GetValue();
+
+		int xMove = a.x - this->center.x;
+		if (abs(xMove) > this->renderDistance)
+		{
+
+		}
+		else 
+		{
+			if (xMove > 0)
+			{
+
+			}
+			else if(xMove < 0)
+			{ }
+			this->chunks.splice(destination, chunks, source);
+		}
+
 		this->center = a;
 		return false;
 	}

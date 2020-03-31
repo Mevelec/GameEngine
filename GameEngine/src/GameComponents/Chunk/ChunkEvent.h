@@ -33,8 +33,8 @@ namespace GameEngine {
 
 		EVENT_CLASS_TYPE(ChunkLoad)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
-		ChunkMoveCenterEvent(glm::uvec3& center) : center(center) {}
+		ChunkMoveCenterEvent(glm::vec3& center) : center(center) {}
 	private:
-		const glm::uvec3 center;
+		const glm::vec3 center;
 	};
 }

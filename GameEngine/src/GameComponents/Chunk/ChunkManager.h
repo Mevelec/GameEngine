@@ -30,13 +30,13 @@ namespace GameComponents {
 		void setRenderDistance(uint32_t distance) { this->renderDistance = distance; }
 		const uint32_t& getRenderDistance() { return this->renderDistance; }
 
-		const glm::uvec3& getCenter() { return this->center; }
+		const glm::vec3& getCenter() { return this->center; }
 	private:
 		void init();
 
 	private:
 		std::list<Chunk> chunks;
-		glm::uvec3 center;
+		glm::vec3 center;
 
 		uint32_t renderDistance = 1;
 		uint32_t chunkDepth = 4;

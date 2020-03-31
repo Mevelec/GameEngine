@@ -80,8 +80,6 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 	// MOVE
 	if (GameEngine::Input::IsKeyPressed(GE_KEY_A)) {
 		this->camera->translate({ this->cameraMoveSpeed * ts *-1, 0, 0 });
-
-
 	}
 	else if (GameEngine::Input::IsKeyPressed(GE_KEY_D)) {
 		this->camera->translate({ this->cameraMoveSpeed * ts , 0, 0 });
@@ -108,7 +106,7 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 		auto y = (int)camPos.y / (int)this->chunkManager.getChunkSize();
 		auto z = (int)camPos.z / (int)this->chunkManager.getChunkSize();
 
-		auto center = glm::uvec3(x, y, z);
+		auto center = glm::vec3(x, y, z);
 		if (  center != this->chunkManager.getCenter())
 		{
 			auto a = 1;
@@ -116,8 +114,6 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 			GameEngine::Application::get().onEvent(e);
 		}
 
-		GE_CORE_INFO("chunk size {0}", (int)this->chunkManager.getChunkSize());
-		GE_CORE_INFO("campos {0} {1} {2}", (int)camPos.x, (int)camPos.y, (int)camPos.z);
 		GE_CORE_INFO("ChunkLoad {0} {1} {2}", x, y, z);
 
 	}
