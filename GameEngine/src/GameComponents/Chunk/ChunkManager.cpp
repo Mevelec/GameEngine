@@ -96,17 +96,25 @@ namespace GameComponents {
 		int xMove = a.x - this->center.x;
 		if (abs(xMove) > this->renderDistance)
 		{
-
+			GE_CORE_ASSERT(false, "TODO");
 		}
 		else 
 		{
 			if (xMove > 0)
 			{
-
+				// should move first element at end
+				this->chunks.splice(
+					this->chunks.end(),        // destination position
+					this->chunks,              // source list
+					this->chunks.begin(),      // source position begin
+					this->chunks.begin()     // source position last
+				);
 			}
 			else if(xMove < 0)
-			{ }
-			this->chunks.splice(destination, chunks, source);
+			{ 
+			
+			}
+			//this->chunks.splice(destination, chunks, source);
 		}
 
 		this->center = a;

@@ -38,7 +38,7 @@ namespace GameComponents {
 		std::list<Chunk> chunks;
 		glm::vec3 center;
 
-		uint32_t renderDistance = 1;
+		uint32_t renderDistance = 2;
 		uint32_t chunkDepth = 4;
 
 	};
