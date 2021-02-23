@@ -22,8 +22,8 @@ namespace GameEngine {
 		GE_PROFILE_FUNCTION();
 
 		this->transform = glm::lookAt(this->position, this->position + this->forward, this->up);
-		/*
-		this->transform = glm::mat4_cast(this->rotation) *
+		
+		/*this->transform = glm::mat4_cast(this->rotation) *
 			glm::translate(glm::mat4(1.0f), this->position) *
 			glm::scale(glm::mat4(1.0f), this->scale);*/
 	}
@@ -33,9 +33,6 @@ namespace GameEngine {
 	void Transform::translate(glm::vec3 direction)
 	{
 		GE_PROFILE_FUNCTION();
-
-		//this->position += direction * this->forward;
-
 		if (direction.x)
 			this->position += direction.x * this->right;
 		if (direction.y)

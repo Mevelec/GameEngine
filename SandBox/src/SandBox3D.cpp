@@ -106,16 +106,12 @@ void SandBox3D::onUpdate(GameEngine::TimeStep ts)
 		auto y = (int)camPos.y / (int)this->chunkManager.getChunkSize();
 		auto z = (int)camPos.z / (int)this->chunkManager.getChunkSize();
 
-		auto center = glm::vec3(x, y, z);
+		auto center = glm::uvec3(x, y, z);
 		if (  center != this->chunkManager.getCenter())
 		{
-			auto a = 1;
 			auto e = GameEngine::ChunkMoveCenterEvent(center);
 			GameEngine::Application::get().onEvent(e);
 		}
-
-		GE_CORE_INFO("ChunkLoad {0} {1} {2}", x, y, z);
-
 	}
 
 	// ROTATE

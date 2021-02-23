@@ -4,8 +4,6 @@
 #include "GameEngine/Renderer/Geometry/Geometry.h"
 #include "GameEngine/Renderer/Geometry/Primitives.h"
 
-#include "GameEngine/Core/Transform/Transform.h"
-
 #include <glm/gtc/type_ptr.hpp>
 #include <functional>
 
