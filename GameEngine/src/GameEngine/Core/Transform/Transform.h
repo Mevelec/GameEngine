@@ -13,13 +13,13 @@ namespace GameEngine {
 		Transform();
 
 		//GETTERS
-		inline glm::mat4 getTransform() { return this->transform; };
-		inline glm::vec3 getPosition() { return this->position; };
-		inline glm::vec3 getScale() { return this->scale; };
+		inline glm::mat4 getTransform() const { return this->transform; };
+		inline glm::vec3 getPosition() const { return this->position; };
+		inline glm::vec3 getScale() const { return this->scale; };
 		//Rotation
-		inline glm::vec3 getRotation() {return glm::degrees(glm::eulerAngles(this->rotation)); };
-		inline glm::vec3 getEulerAngles() { return glm::eulerAngles(this->rotation); };
-		inline glm::fquat getQuaternions() { return this->rotation; };
+		inline glm::vec3 getRotation() const {return glm::degrees(glm::eulerAngles(this->rotation)); };
+		inline glm::vec3 getEulerAngles() const { return glm::eulerAngles(this->rotation); };
+		inline glm::fquat getQuaternions() const { return this->rotation; };
 		//Scale
 		inline void setScale(glm::vec3 scale) { this->scale = scale; this->update(); };
 		inline void setScale(float scale) { this->scale = glm::vec3(scale); this->update(); };

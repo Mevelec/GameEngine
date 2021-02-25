@@ -26,3 +26,6 @@
 [submodule "GameEngine/vendor/objl"]
 	path = GameEngine/vendor/objl
 	url = https://github.com/Mevelec/OBJ-Loader.git
+[submodule "GameEngine/vendor/GlindingList"]
+	path = GameEngine/vendor/GlindingList
+	url = https://github.com/Mevelec/GlindingList.git

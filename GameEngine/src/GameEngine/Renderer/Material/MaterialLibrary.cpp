@@ -33,13 +33,13 @@ namespace GameEngine {
 		return this->materials[name];
 	}
 
-	void MaterialLibrary::bind(const std::string& name, glm::mat4 viewProjectionMatrix, glm::mat4 transform)
+	void MaterialLibrary::bind(const std::string& name, const glm::mat4& viewProjectionMatrix, const glm::mat4& transform)
 	{
 		auto material = this->get(name);
 		this->bind(material, viewProjectionMatrix, transform);
 	}
 
-	void MaterialLibrary::bind(Ref<Material> mat, glm::mat4 viewProjectionMatrix, glm::mat4 transform)
+	void MaterialLibrary::bind(Ref<Material> mat, const glm::mat4& viewProjectionMatrix, const glm::mat4& transform)
 	{
 		GE_PROFILE_FUNCTION();
 
@@ -53,7 +53,7 @@ namespace GameEngine {
 	}
 
 
-	bool MaterialLibrary::exists(const std::string& name)
+	bool MaterialLibrary::exists(const std::string& name) const
 	{
 		GE_PROFILE_FUNCTION();
 
@@ -67,7 +67,7 @@ namespace GameEngine {
 	static const std::string pathMaterialFolder = "assets/Materials";
 
 
-	Ref<Material> MaterialParser::loadJson(const std::string& path)
+	Ref<Material> MaterialParser::loadJson(const std::string& path) const
 	{
 		GE_PROFILE_FUNCTION();
 
@@ -179,7 +179,7 @@ namespace GameEngine {
 		return material;
 	}
 		
-	PathType MaterialParser::stringToPathType(const std::string& type)
+	PathType MaterialParser::stringToPathType(const std::string& type) const
 	{
 		if (type == "absolute")
 		{
@@ -195,7 +195,7 @@ namespace GameEngine {
 		}
 	}
 
-	std::string MaterialParser::createPath(const std::string& pathType, const std::string& path, const std::string& folderPath)
+	std::string MaterialParser::createPath(const std::string& pathType, const std::string& path, const std::string& folderPath) const
 	{
 		return this->createPath(
 			this->stringToPathType(pathType),
@@ -204,7 +204,7 @@ namespace GameEngine {
 		);
 	}
 
-	std::string MaterialParser::createPath(const PathType& pathType, const std::string& path, const std::string& folderPath)
+	std::string MaterialParser::createPath(const PathType& pathType, const std::string& path, const std::string& folderPath) const
 	{
 		if (pathType == PathType::relative)
 		{

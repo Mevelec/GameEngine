@@ -11,10 +11,10 @@ namespace GameEngine {
 		void add(const std::string& name, const Ref<Material>& material);
 
 		Ref<Material> get(const std::string& name);
-		void bind(const std::string& name, glm::mat4 viewProjectionMatrix, glm::mat4 transform);
-		void bind(Ref<Material> mat, glm::mat4 viewProjectionMatrix, glm::mat4 transform);
+		void bind(const std::string& name, const glm::mat4& viewProjectionMatrix, const glm::mat4& transform);
+		void bind(Ref<Material> mat, const glm::mat4& viewProjectionMatrix, const glm::mat4& transform);
 
-		bool exists(const std::string& name);
+		bool exists(const std::string& name) const;
 
 	private:
 		std::unordered_map<std::string, Ref<Material>> materials;
@@ -57,13 +57,13 @@ namespace GameEngine {
 	class MaterialParser
 	{
 	public :
-		Ref<Material> loadJson(const std::string& path);
-		PathType stringToPathType(const std::string& type);
+		Ref<Material> loadJson(const std::string& path) const;
+		PathType stringToPathType(const std::string& type) const;
 	private :
 		static const std::string pathMaterialFolder;
 
-		std::string createPath(const std::string& pathType, const std::string& path, const std::string& folderPath = "");
-		std::string createPath(const PathType& pathType, const std::string& path, const std::string& folderPath = "");
+		std::string createPath(const std::string& pathType, const std::string& path, const std::string& folderPath = "") const;
+		std::string createPath(const PathType& pathType, const std::string& path, const std::string& folderPath = "") const;
 
 	public:
 		static MaterialParser& getInstance()
@@ -77,7 +77,6 @@ namespace GameEngine {
 	public:
 		MaterialParser(MaterialParser const&) = delete;
 		void operator=(MaterialParser const&) = delete;
-
 	};
 }
 

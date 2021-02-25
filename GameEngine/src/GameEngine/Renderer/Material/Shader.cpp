@@ -83,7 +83,7 @@ namespace GameEngine {
 		return this->shaders[name];
 	}
 
-	bool ShaderLibrary::exists(const std::string& name)
+	bool ShaderLibrary::exists(const std::string& name) const
 	{
 		return this->shaders.find(name) != this->shaders.end();
 	}

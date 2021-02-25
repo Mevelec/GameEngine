@@ -20,7 +20,7 @@ namespace GameEngine {
 
 		const inline std::string& getName() const { return this->name; };
 
-		const inline Ref<Shader> getShader() { return this->shader; };
+		const inline Ref<Shader> getShader() const { return this->shader; };
 
 		void bind();
 
